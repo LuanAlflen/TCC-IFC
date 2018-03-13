@@ -1,0 +1,38 @@
+<?php session_start(); ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">">>
+	<link rel="stylesheet" href="../../../assets/css/main.css">
+
+	<title>Formulario</title>
+
+</head>
+<body>
+
+
+
+
+<div class="container">
+		<div class="form__top">
+			<h2>Formulario <span>Cadastro</span></h2>
+		</div>
+
+
+		<form class="form__reg"  method="post"   action="../../Models/processacadastro.php" >
+			<!--<input class="input" type="file"                     placeholder=""         required> ////////////////////////////////////////////////////////////////////////-->
+			<input class="input" type="text"     name="nome"     placeholder="Nome"     required>
+			<input class="input" type="password" name="senha"    placeholder="Senha"    required>
+            <input class="input" type="email"    name="email"    placeholder="Email"    required>
+            <input class="input" type="text"     name="telefone" placeholder="Telefone">
+			<input class="input" type="text"     name="cpf"      placeholder="CPF"      required>
+            <input class="input" type="text"     name="endereco" placeholder="Endereço" required>
+            <div class="btn__form">
+				<input class="btn__reset" type="reset" value="Limpar">
+			 	<input class="btn__submit" type="submit" value="Salvar" >
+            </div>
+		</form>
+	</div>
+	
+</body>
+</html>
