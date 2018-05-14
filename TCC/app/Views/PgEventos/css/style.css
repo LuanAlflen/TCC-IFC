@@ -1,0 +1,38 @@
+/*# sourceMappingURL=bootstrap.css.map */
+
+#exemplo{
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+    background-color: white;
+    border: 1px solid #ddd;
+    margin-right: 20px;
+    padding-left: 8px;
+}
+
+#reservarQuadra{
+    width: 260px;
+
+}
+
+#thumbimg{
+    margin-left: 8px;
+}
+
+.img-embrulho {
+    width: 260px;
+    height: 190px;
+    overflow: hidden;
+}
+
+.thumbnail .img-embrulho img {
+    width: 150%;
+    height: auto;
+}
+
+#imgeventos{
+    width: 850px;
+    height: 150px;
+}
+
