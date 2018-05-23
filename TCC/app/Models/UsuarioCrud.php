@@ -21,10 +21,8 @@ class UsuarioCrud
             if ($resultado < 1){
                 //EFETUA A CONEXAO
                 $this->conexao = DBConnection::getConexao();
-                //MONTA O TEXTO DA INSTRUÇÂO SQL
                 $sql = "insert into usuarios (nome, login, senha, endereco, telefone, email, cpf, tipuser)
                 values ('{$user->getNome()}','{$user->getLogin()}','{$user->getSenha()}','{$user->getEndereco()}','{$user->getTelefone()}','{$user->getEmail()}','{$user->getCpf()}',1)";
-
                 try {//TENTA EXECUTAR A INSTRUCAO
 
                     $this->conexao->exec($sql);
