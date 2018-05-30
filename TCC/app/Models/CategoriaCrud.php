@@ -1,5 +1,8 @@
 <?php
 
+require_once 'DBConnection.php';
+require_once 'Categoria.php';
+
 class CategoriaCrud
 {
     private $conexao;
@@ -21,7 +24,7 @@ class CategoriaCrud
         $categoria = $resultado->fetch(PDO::FETCH_ASSOC);
 
         //CRIAR OBJETO DO TIPO CATEGORIA - USANDO OS VALORES DA CONSULTA
-        $objetoLocal = new Local(
+        $objetoLocal = new Categoria(
             $categoria['nome'],
             $categoria['id_categoria']);
 
@@ -43,7 +46,7 @@ class CategoriaCrud
             $nome = $categoria['nome'];
             $idcategoria = $categoria['id_categoria'];
 
-            $obj = new Local($nome,$idcategoria);
+            $obj = new Categoria($nome,$idcategoria);
             $Listacategoria[] = $obj;
         }
         return $Listacategoria;

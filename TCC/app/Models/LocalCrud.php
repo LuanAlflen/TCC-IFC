@@ -24,7 +24,7 @@ class LocalCrud
         $local = $resultado->fetch(PDO::FETCH_ASSOC);
 
         //CRIAR OBJETO DO TIPO CATEGORIA - USANDO OS VALORES DA CONSULTA
-        $objetoLocal = new Local($local['nome'], $local['email'], $local['endereco'], $local['telefone'], $local['descricao'], $local['categoria'], $local['id_usuario'], $local['id_local']);
+        $objetoLocal = new Local($local['nome'], $local['email'], $local['endereco'], $local['telefone'], $local['descricao'], $local['id_categoria'], $local['id_usuario'], $local['id_local']);
 
         //RETORNAR UM OBJETO CATEGORIA COM OS VALORES
         return $objetoLocal;
@@ -47,10 +47,10 @@ class LocalCrud
             $endereco = $local['endereco'];
             $telefone = $local['telefone'];
             $descricao = $local['descricao'];
-            $categoria = $local['categoria'];
+            $idcategoria = $local['id_categoria'];
             $iduser = $local['id_usuario'];
 
-            $obj = new Local($nome, $email, $endereco, $telefone, $descricao, $categoria, $iduser, $idlocal);
+            $obj = new Local($nome, $email, $endereco, $telefone, $descricao, $idcategoria, $iduser, $idlocal);
             $Listalocal[] = $obj;
         }
         return $Listalocal;
@@ -58,7 +58,7 @@ class LocalCrud
 
     public function insertLocal(Local $local){
         $sql = "insert into locais (nome, email, endereco, telefone, descricao, categoria, id_usuario)
-                values ('{$local->getNome()}','{$local->getEmail()}','{$local->getEndereco()}','{$local->getTelefone()}','{$local->getDescricao()}','{$local->getCategoria()}','{$local->getIdUsuario()}')";
+                values ('{$local->getNome()}','{$local->getEmail()}','{$local->getEndereco()}','{$local->getTelefone()}','{$local->getDescricao()}','{$local->getIdCategoria()}','{$local->getIdUsuario()}')";
 
         try {//TENTA EXECUTAR A INSTRUCAO
 
@@ -83,11 +83,11 @@ class LocalCrud
             $endereco = $local['endereco'];
             $telefone = $local['telefone'];
             $descricao = $local['descricao'];
-            $categoria = $local['categoria'];
+            $idcategoria = $local['id_categoria'];
             $idusuarios = $local['id_usuario'];
 
 
-            $obj = new Local($nome,$email,$endereco,$telefone,$descricao,$categoria,$idusuarios,$idlocal);
+            $obj = new Local($nome,$email,$endereco,$telefone,$descricao,$idcategoria,$idusuarios,$idlocal);
             $listaLocais[] = $obj;
         }
         return $listaLocais;
@@ -105,7 +105,7 @@ class LocalCrud
                 endereco = '{$local->getEndereco()}',
                 telefone = '{$local->getTelefone()}',
                 descricao = '{$local->getDescricao()}',
-                categoria = '{$local->categoria}',
+                categoria = '{$local->getIdCategoria()}',
                 id_usuario = '{$local->getIdUsuario()}'
                 WHERE id_local = '{$local->getIdLocal()}'";
 

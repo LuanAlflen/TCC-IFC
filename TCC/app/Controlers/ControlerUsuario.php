@@ -1,6 +1,7 @@
 <?php
     require '../../app/Models/UsuarioCrud.php';
     require '../../app/Models/LocalCrud.php';
+    require '../../app/Models/CategoriaCrud.php';
 
     if (isset($_GET['acao'])){
         $action = $_GET['acao'];
@@ -47,6 +48,7 @@ switch ($action) {
         if (!isset($_POST['gravar'])){
             include "../Views/Usuario/login.php";
         }else {
+
             $user = new Usuario(null, $_POST['login'], $_POST['senha']);
             $crud = new UsuarioCrud();
             $resultado = $crud->LoginUsuario($user);
@@ -65,6 +67,11 @@ switch ($action) {
                 $_SESSION['email'] = $user->getEmail();
                 $_SESSION['cpf'] = $user->getCpf();
                 $_SESSION['tipuser'] = $user->getTipuser();
+                $crudLocal = new LocalCrud();
+                $locais = $crudLocal->getLocais();
+                $crudCat = new CategoriaCrud();
+                $categorias = $crudCat->getCategorias();
+
                 include "../Views/Template/Cabecalho.php";
                 include "../Views/PaginaPrincipal/index.php";
                 include "../Views/Template/Rodape.php";

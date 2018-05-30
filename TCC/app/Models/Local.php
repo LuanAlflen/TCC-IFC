@@ -14,16 +14,16 @@ class Local
     public $endereco;
     public $telefone;
     public $descricao;
-    public $categoria;
+    public $id_categoria;
     public $id_usuario;
 
-    public function __construct($nome=null,$email=null,$endereco=null,$telefone=null,$descricao=null,$categoria=null, $id_usuario=null,$id_local=null){
+    public function __construct($nome=null,$email=null,$endereco=null,$telefone=null,$descricao=null,$id_categoria=null, $id_usuario=null,$id_local=null){
         $this->nome = $nome;
         $this->email = $email;
         $this->endereco = $endereco;
         $this->telefone = $telefone;
         $this->descricao = $descricao;
-        $this->categoria = $categoria;
+        $this->id_categoria = $id_categoria;
         $this->id_usuario = $id_usuario;
         $this->id_local = $id_local;
     }
@@ -77,14 +77,14 @@ class Local
         $this->descricao = $descricao;
     }
 
-    public function getCategoria()
+    public function getIdCategoria()
     {
-        return $this->categoria;
+        return $this->id_categoria;
     }
 
-    public function setCategoria($categoria)
+    public function setIdCategoria($id_categoria)
     {
-        $this->categoria = $categoria;
+        $this->id_categoria = $id_categoria;
     }
 
     public function getIdLocal()

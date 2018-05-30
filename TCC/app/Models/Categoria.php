@@ -14,7 +14,7 @@ class Categoria
     {
         return $this->id_categoria;
     }
-    public function setIdCategoria($id_categoria): void
+    public function setIdCategoria($id_categoria)
     {
         $this->id_categoria = $id_categoria;
     }
@@ -22,7 +22,7 @@ class Categoria
     {
         return $this->nome;
     }
-    public function setNome($nome): void
+    public function setNome($nome)
     {
         $this->nome = $nome;
     }

@@ -1,12 +1,3 @@
-<?php
-
-include "../Models/restrito.php";
-require_once "../Models/LocalCrud.php";
-$crud = new LocalCrud();
-
-$locais = $crud->getLocais();
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,6 +21,7 @@ $locais = $crud->getLocais();
     <link href="../../assets/css/shop-homepage.css" rel="stylesheet">
 
     <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/abas.css">
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -37,6 +29,19 @@ $locais = $crud->getLocais();
     <!--[if lt IE 9]>
 
     <![endif]-->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function (){
+            $("#abas ul li").addClass("selecionado");
+            $("#abas ul li").click(function () {
+                $(this).toggleClass("selecionado");
+                //$(".conteudo").toggle();
+                var meuId = $(this).attr("id");
+                $("."+meuId).fadeToggle();
+            });
+        });
+    </script>
 
 </head>
 
@@ -49,16 +54,21 @@ $locais = $crud->getLocais();
 
     <div class="row">
 
+
+
         <div class="col-md-3">
             <p class="lead">Categorias</p>
-            <div class="list-group">
-                <a href="#" class="list-group-item">Futebol</a>
-                <a href="#" class="list-group-item">Society</a>
-                <a href="#" class="list-group-item">Volei</a>
-                <a href="#" class="list-group-item">Tênis</a>
-                <a href="#" class="list-group-item">Basquete</a>
-                <a href="#" class="list-group-item">Mais...</a>
-            </div>
+                <div class="list-group" id="abas">
+                    <ul>
+                        <?php foreach ($categorias as $categoria):?>
+
+                            <li class="list-group-item" id="<?= $categoria->id_categoria ?>"><?= $categoria->nome ?></li>
+
+                        <?php endforeach ?>
+                    </ul>
+                </div>
+            <p class="lead">Localização</p>
+            <p>Fazer os selects de acordo com o banco e mostrar os locais de acordo com selecionado</p>
         </div>
 
 
@@ -97,40 +107,44 @@ $locais = $crud->getLocais();
 
             </div>
 
-            <?php foreach($locais as $local): ?>
 
             <div class="row">
+                    <div id="conteudos">
+                        <?php foreach($locais as $local): ?>
+                            <div class="<?= $local->id_categoria ?>">
+                                <div class="col-sm-4 col-lg-4 col-md-4">
+                                    <div class="thumbnail">
 
-                <div class="col-sm-4 col-lg-4 col-md-4">
-                    <div class="thumbnail">
+                                        <div class="img-embrulho">
+                                            <img src="../../assets/img/320x320.jpeg" alt="">
+                                        </div>
 
-                        <div class="img-embrulho">
-                            <img src="../../assets/img/320x320.jpeg" alt="">
-                        </div>
-
-                        <div class="caption">
-                            <h4>
-                                <?= $local->nome?>
-                                <button class="btn btn-primary pull-right" href="#">Ver +</button>
-                            </h4>
-                            <p><b>Categoria: </b> <?= $local->categoria ?>.<br>
-                                <b>Cidade:</b> Cupuaçu.<br>
-                                <b>Bairro:</b> Horizonte.<br>
-                                <b>Endereço: </b><?= $local->endereco?></p>
-                        </div>
-                        <div class="ratings">
-                            <p class="pull-right">15 avaliações</p>
-                            <p>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                            </p>
-                        </div>
+                                        <div class="caption">
+                                            <h4>
+                                                <?= $local->nome?>
+                                                <button class="btn btn-primary pull-right" href="#">Ver +</button>
+                                            </h4>
+                                            <p><b>Categoria: </b> <?= $local->id_categoria ?>.<br>
+                                                <b>Cidade:</b> Cupuaçu.<br>
+                                                <b>Bairro:</b> Horizonte.<br>
+                                                <b>Endereço: </b><?= $local->endereco?></p>
+                                        </div>
+                                        <div class="ratings">
+                                            <p class="pull-right">15 avaliações</p>
+                                            <p>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach;?>
                     </div>
-                </div>
-                <?php endforeach; ?>
+            </div>
 
                 <div class="col-sm-4 col-lg-4 col-md-4">
                     <h4>Cadastre a sua quadra!</h4>
