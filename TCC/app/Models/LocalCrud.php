@@ -133,4 +133,21 @@ class LocalCrud
         }
     }
 
+    public function deleteLocalUser($iduser){
+        //VERIFICA SE O USUARIO POSSUI LOCAIS, SE SIM, EXCLUI TODOS E RETORNA TRUE, SE NAO, RETORNA FALSE
+        $sql = $this->conexao->prepare("SELECT * FROM locais WHERE id_usuario = '{$iduser}'");
+        $sql->execute();
+        $resultado = $sql->rowCount();
+
+        if ($resultado == 0){
+            echo "nenhum";
+            return false;
+        }else{
+            $sql = "DELETE FROM locais WHERE id_usuario = '{$iduser}'";
+            $this->conexao->exec($sql);
+            echo "exclui";
+            return true;
+        }
+    }
+
 }

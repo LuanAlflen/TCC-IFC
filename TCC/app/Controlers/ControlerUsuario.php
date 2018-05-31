@@ -72,6 +72,7 @@ switch ($action) {
                 $crudCat = new CategoriaCrud();
                 $categorias = $crudCat->getCategorias();
 
+                //include "../Models/restrito.php";
                 include "../Views/Template/Cabecalho.php";
                 include "../Views/PaginaPrincipal/index.php";
                 include "../Views/Template/Rodape.php";
@@ -115,9 +116,13 @@ switch ($action) {
 
     case 'excluir':
 
-        $id = $_GET['id'];
-        $crud = new UsuarioCrud();
-        $resultado = $crud->deleteUsuario($id);
+        $iduser = $_GET['id'];
+        //EXCLUI LOCAIS, CASO TENHA
+        $crudLocal = new LocalCrud();
+        $crudLocal->deleteLocalUser($iduser);
+        //EXCLUI USUARIO
+        $cruduser = new UsuarioCrud();
+        $resultado = $cruduser->deleteUsuario($iduser);
         header("Location: ControlerUsuario.php");
 
             break;
@@ -131,9 +136,3 @@ switch ($action) {
 
         }
 
-
-    //TESTE UpdateUsuario BASEADO NO TRABALHO LOJA ANO PASSADO, AINDA NAO FUNCIONANDO
-//    $crud = new UsuarioCrud();
-//    $produto = new Usuario($_ POST["nome"], $_POST["senha"], $_POST["email"], $_POST["telefone"], $_POST['cpf'], $_POST['endereco']);
-//    $crud->updateUsuario($crud);
-//    header("location: ../Views/PaginaPrincipal/index.php");

@@ -32,12 +32,15 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
     <script>
+        //FILTRO DAS CATEGORIAS
         $(document).ready(function (){
+            //JA DEIXA TODAS SELECIONADAS
             $("#abas ul li").addClass("selecionado");
             $("#abas ul li").click(function () {
                 $(this).toggleClass("selecionado");
                 //$(".conteudo").toggle();
                 var meuId = $(this).attr("id");
+                //COMPARA O ID DAS CATEGORIAS COM A CLASSE DOS LOCAIS
                 $("."+meuId).fadeToggle();
             });
         });
