@@ -18,8 +18,8 @@
 		</div>
 
 
-		<form class="form__reg"  method="post"   action="?acao=cadastrar" >
-			<!--<input class="input" type="file"     name="foto"     placeholder="Foto"         required>-->
+		<form class="form__reg"  method="post"   action="?acao=cadastrar" enctype="multipart/form-data">
+			<input class="input" type="file"     name="foto"     placeholder="Foto"         required>
 			<input class="input" type="text"     name="nome"     placeholder="Nome"     required>
 			<input class="input" type="text"     name="login"    placeholder="Login"     required>
 			<input class="input" type="password" name="senha"    placeholder="Senha"    required>

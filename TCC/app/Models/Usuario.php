@@ -3,6 +3,7 @@
 class Usuario
 {
     private $id;
+    private $foto;
     private $nome;
     private $login;
     private $senha;
@@ -12,7 +13,8 @@ class Usuario
     private $endereco;
     private $tipuser;
 
-    public function __construct($nome=null,$login=null,$senha=null, $email=null,$telefone=null,$cpf=null,$endereco=null,$tipuser=null,$id=null){
+    public function __construct($foto=null, $nome=null, $login=null, $senha=null, $email=null, $telefone=null, $cpf=null, $endereco=null, $tipuser=null, $id=null){
+        $this->foto = $foto;
         $this->nome = $nome;
         $this->login = $login ;
         $this->senha = $senha;
@@ -23,6 +25,15 @@ class Usuario
         $this->tipuser = $tipuser;
         $this->id = $id;
 
+    }
+
+    public function getFoto()
+    {
+        return $this->foto;
+    }
+    public function setFoto($foto)
+    {
+        $this->foto = $foto;
     }
 
     public function getId()

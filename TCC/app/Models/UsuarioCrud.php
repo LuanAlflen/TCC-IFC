@@ -21,8 +21,8 @@ class UsuarioCrud
             if ($resultado < 1){
                 //EFETUA A CONEXAO
                 $this->conexao = DBConnection::getConexao();
-                $sql = "insert into usuarios (nome, login, senha, endereco, telefone, email, cpf, tipuser)
-                values ('{$user->getNome()}','{$user->getLogin()}','{$user->getSenha()}','{$user->getEndereco()}','{$user->getTelefone()}','{$user->getEmail()}','{$user->getCpf()}',1)";
+                $sql = "insert into usuarios (foto, nome, login, senha, endereco, telefone, email, cpf, tipuser)
+                values ('{$user->getFoto()}','{$user->getNome()}','{$user->getLogin()}','{$user->getSenha()}','{$user->getEndereco()}','{$user->getTelefone()}','{$user->getEmail()}','{$user->getCpf()}',1)";
                 try {//TENTA EXECUTAR A INSTRUCAO
 
                     $this->conexao->exec($sql);
@@ -31,6 +31,7 @@ class UsuarioCrud
                 }
             }else{
                 header("Location: ?acao=cadastrar&erro=1");
+                die();
             }
         }catch (PDOException $e){
             return $e->getMessage();
@@ -58,6 +59,7 @@ class UsuarioCrud
 
         //CRIAR OBJETO DO TIPO CATEGORIA - USANDO OS VALORES DA CONSULTA
         $objetoUsuario = new Usuario(
+            $usuario['foto'],
             $usuario['nome'],
             $usuario['login'],
             $usuario['senha'],
@@ -84,6 +86,7 @@ class UsuarioCrud
         $usuarios = $resultado->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($usuarios as $usuario) {
+            $foto = $usuario['foto'];
             $nome = $usuario['nome'];
             $login = $usuario['login'];
             $senha = $usuario['senha'];
@@ -93,7 +96,7 @@ class UsuarioCrud
             $endereco = $usuario['endereco'];
             $tipuser = $usuario['tipuser'];
 
-            $obj = new Usuario($nome, $login, $senha, $email, $telefone, $cpf, $endereco, $tipuser);
+            $obj = new Usuario($foto, $nome, $login, $senha, $email, $telefone, $cpf, $endereco, $tipuser);
             $listaUsuario[] = $obj;
         }
         return $listaUsuario;
