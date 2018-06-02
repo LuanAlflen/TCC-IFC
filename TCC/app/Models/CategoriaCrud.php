@@ -32,6 +32,26 @@ class CategoriaCrud
         return $objetoLocal;
 
     }
+    public function getCategoriaNome($nome)
+    {
+        //RETORNA UMA CATEGORIA, DADO UM ID
+
+        //FAZER A CONSULTA
+        $sql = "select * from categoria where nome='{$nome}'";
+        $resultado = $this->conexao->query($sql);
+
+        //FETCH - TRANSFORMA O RESULTADO EM UM ARRAY ASSOCIATIVO
+        $categoria = $resultado->fetch(PDO::FETCH_ASSOC);
+
+        //CRIAR OBJETO DO TIPO CATEGORIA - USANDO OS VALORES DA CONSULTA
+        $objetoLocal = new Categoria(
+            $categoria['nome'],
+            $categoria['id_categoria']);
+
+        //RETORNAR UM OBJETO CATEGORIA COM OS VALORES
+        return $objetoLocal;
+
+    }
 
 
     public function getCategorias()

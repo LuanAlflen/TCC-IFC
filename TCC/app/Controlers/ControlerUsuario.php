@@ -19,6 +19,7 @@ switch ($action) {
 
     case 'show':
 
+
         $id = $_GET['id'];
         $crud = new LocalCrud();
         $locais = $crud->getLocalUser($id);
@@ -53,7 +54,7 @@ switch ($action) {
             include "../Views/Usuario/login.php";
         }else {
 
-            $user = new Usuario(null, $_POST['login'], $_POST['senha']);
+            $user = new Usuario(null,null, $_POST['login'], $_POST['senha']);
             $crud = new UsuarioCrud();
             $resultado = $crud->LoginUsuario($user);
             $login = $user->getLogin();

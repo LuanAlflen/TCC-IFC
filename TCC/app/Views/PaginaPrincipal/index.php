@@ -127,7 +127,12 @@
                                                 <?= $local->nome?>
                                                 <button class="btn btn-primary pull-right" href="#">Ver +</button>
                                             </h4>
-                                            <p><b>Categoria: </b> <?= $local->id_categoria ?>.<br>
+                                            <p><b>Categoria: </b> <?php
+                                                $idcat = $local->id_categoria;
+                                                $crudCat   = new CategoriaCrud();
+                                                $categoria = $crudCat->getCategoria($idcat);
+                                                echo $categoria->nome;
+                                                ?>.<br>
                                                 <b>Cidade:</b> Cupuaçu.<br>
                                                 <b>Bairro:</b> Horizonte.<br>
                                                 <b>Endereço: </b><?= $local->endereco?></p>

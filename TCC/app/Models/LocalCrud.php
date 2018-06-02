@@ -24,7 +24,16 @@ class LocalCrud
         $local = $resultado->fetch(PDO::FETCH_ASSOC);
 
         //CRIAR OBJETO DO TIPO CATEGORIA - USANDO OS VALORES DA CONSULTA
-        $objetoLocal = new Local($local['nome'], $local['email'], $local['endereco'], $local['telefone'], $local['descricao'], $local['id_categoria'], $local['id_usuario'], $local['id_local']);
+        $objetoLocal = new Local(
+            $local['foto']
+            ,$local['nome'],
+            $local['email'],
+            $local['endereco'],
+            $local['telefone'],
+            $local['descricao'],
+            $local['id_categoria'],
+            $local['id_usuario'],
+            $local['id_local']);
 
         //RETORNAR UM OBJETO CATEGORIA COM OS VALORES
         return $objetoLocal;
@@ -41,7 +50,7 @@ class LocalCrud
         $locais = $resultado->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($locais as $local) {
-            $idlocal = $local['id_local'];
+            $foto = $local['foto'];
             $nome = $local['nome'];
             $email = $local['email'];
             $endereco = $local['endereco'];
@@ -49,17 +58,18 @@ class LocalCrud
             $descricao = $local['descricao'];
             $idcategoria = $local['id_categoria'];
             $iduser = $local['id_usuario'];
+            $idlocal = $local['id_local'];
 
-            $obj = new Local($nome, $email, $endereco, $telefone, $descricao, $idcategoria, $iduser, $idlocal);
+            $obj = new Local($foto,$nome, $email, $endereco, $telefone, $descricao, $idcategoria, $iduser, $idlocal);
             $Listalocal[] = $obj;
         }
         return $Listalocal;
     }
 
     public function insertLocal(Local $local){
-        $sql = "insert into locais (nome, email, endereco, telefone, descricao, categoria, id_usuario)
-                values ('{$local->getNome()}','{$local->getEmail()}','{$local->getEndereco()}','{$local->getTelefone()}','{$local->getDescricao()}','{$local->getIdCategoria()}','{$local->getIdUsuario()}')";
-
+        $sql = "insert into locais (foto, nome, email, endereco, telefone, descricao, id_categoria, id_usuario)
+                values ('{$local->getFoto()}','{$local->getNome()}','{$local->getEmail()}','{$local->getEndereco()}','{$local->getTelefone()}','{$local->getDescricao()}','{$local->getIdCategoria()}','{$local->getIdUsuario()}')";
+        echo $sql;
         try {//TENTA EXECUTAR A INSTRUCAO
 
             $this->conexao->exec($sql);
@@ -77,7 +87,7 @@ class LocalCrud
         $locais = $result->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($locais as $local){
-            $idlocal = $local['id_local'];
+            $foto = $local['foto'];
             $nome = $local['nome'];
             $email = $local['email'];
             $endereco = $local['endereco'];
@@ -85,9 +95,10 @@ class LocalCrud
             $descricao = $local['descricao'];
             $idcategoria = $local['id_categoria'];
             $idusuarios = $local['id_usuario'];
+            $idlocal = $local['id_local'];
 
 
-            $obj = new Local($nome,$email,$endereco,$telefone,$descricao,$idcategoria,$idusuarios,$idlocal);
+            $obj = new Local($foto,$nome,$email,$endereco,$telefone,$descricao,$idcategoria,$idusuarios,$idlocal);
             $listaLocais[] = $obj;
         }
         return $listaLocais;

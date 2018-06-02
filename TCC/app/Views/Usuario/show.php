@@ -19,7 +19,13 @@
             <td><?= $local->email?> </td>
             <td><?= $local->endereco ?> </td>
             <td><?= $local->descricao ?> </td>
-            <td><?= $local->categoria ?> </td>
+            <td><?php
+                $idcat = $local->id_categoria;
+                $crudCat   = new CategoriaCrud();
+                $categoria = $crudCat->getCategoria($idcat);
+                echo $categoria->nome;
+                ?>
+            </td>
             <td><?= $local->id_usuario ?> </td>
             <td><a href="ControlerLocal.php?acao=show&idlocal=<?=$local->id_local?>&iduser=<?=  $local->id_usuario ?>">Ver</a> |
                 <a href="ControlerLocal.php?acao=editar&idlocal=<?=$local->id_local?>&iduser=<?=  $local->id_usuario ?>">Editar</a> |

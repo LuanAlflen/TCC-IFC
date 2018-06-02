@@ -1,14 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Pichau
- * Date: 26/03/2018
- * Time: 14:33
- */
 
 class Local
 {
     public $id_local;
+    public $foto;
     public $nome;
     public $email;
     public $endereco;
@@ -17,7 +12,8 @@ class Local
     public $id_categoria;
     public $id_usuario;
 
-    public function __construct($nome=null,$email=null,$endereco=null,$telefone=null,$descricao=null,$id_categoria=null, $id_usuario=null,$id_local=null){
+    public function __construct($foto=null, $nome=null,$email=null,$endereco=null,$telefone=null,$descricao=null,$id_categoria=null, $id_usuario=null,$id_local=null){
+        $this->foto = $foto;
         $this->nome = $nome;
         $this->email = $email;
         $this->endereco = $endereco;
@@ -28,6 +24,15 @@ class Local
         $this->id_local = $id_local;
     }
 
+    public function getFoto()
+    {
+        return $this->foto;
+    }
+
+    public function setFoto($foto)
+    {
+        $this->foto = $foto;
+    }
     public function getNome()
     {
         return $this->nome;

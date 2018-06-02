@@ -1,6 +1,7 @@
 <?php
 
     require_once __DIR__."/../Models/LocalCrud.php";
+    require_once __DIR__."/../Models/CategoriaCrud.php";
 
     $crud = new LocalCrud();
     $listaLocais = $crud->getLocais();
@@ -28,11 +29,19 @@
     case 'cadastrar':
 
         if (!isset($_POST['gravar'])) {
+            //Pra mostrar os selects das categoria que possuem no banco
+            $crudCat = new CategoriaCrud();
+            $categorias = $crudCat->getCategorias();
             include "../Views/Local/cadastrar.php";
         } else {
-            $local = new Local($_POST['nome'],  $_POST['email'], $_POST['endereco'], $_POST['telefone'], $_POST['descricao'], $_POST['categoria'], $_POST['iduser']);
-            $test = new LocalCrud();
-            $resultado = $test->insertLocal($local);
+            $crudCat = new CategoriaCrud();
+            $categoria = $crudCat->getCategoriaNome($_POST['categoria']);
+            $idcategoria = $categoria->id_categoria;
+            $nomeArquivo = date('dmYhis').$_FILES['foto']['name'];
+            $local = new Local($nomeArquivo, $_POST['nome'],  $_POST['email'], $_POST['endereco'], $_POST['telefone'], $_POST['descricao'], $idcategoria, $_POST['iduser']);
+            $crudLocal = new LocalCrud();
+            move_uploaded_file($_FILES['foto']['tmp_name'], '../../assets/img/'.$nomeArquivo);
+            $crudLocal->insertLocal($local);
             $id = $_POST['iduser'];
             header("Location: ControlerUsuario.php?acao=show&id=$id");
         }
