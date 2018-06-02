@@ -14,12 +14,12 @@
 
 <div class="container">
 		<div class="form__top">
-			<h2>Formulario <span>Cadastro</span></h2>
+			<h2>Formulario de <span>editar</span></h2>
 		</div>
 
 
-		<form class="form__reg"  method="post"   action="?acao=editar&id=<?= $usuario->getId(); ?>" >
-			<!--<input class="input" type="file"                     placeholder=""         required> ////////////////////////////////////////////////////////////////////////-->
+		<form class="form__reg"  method="post"   action="?acao=editar&id=<?= $usuario->getId(); ?>" enctype="multipart/form-data">
+            <input class="input" value="<?= $usuario->getFoto() ?>" type="file"     name="foto"    >
 			<input class="input" value="<?= $usuario->getNome() ?>" type="text"     name="nome"  required>
 			<input class="input" value="<?= $usuario->getLogin() ?>" type="text"     name="login"    required>
 			<input class="input" value="<?= $usuario->getSenha() ?>" type="password" name="senha"  required>

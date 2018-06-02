@@ -123,6 +123,7 @@ class UsuarioCrud
         //MONTA O TEXTO DA INSTRUÇÃO SQL DE INSERT
         $sql = "UPDATE usuarios 
                 SET id_usuario = '{$user->getId()}', 
+                foto = '{$user->getFoto()}', 
                 nome = '{$user->getNome()}', 
                 login = '{$user->getLogin()}', 
                 senha = '{$user->getSenha()}',
