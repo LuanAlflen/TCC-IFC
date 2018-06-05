@@ -116,7 +116,7 @@ switch ($action) {
             $tipuser= $_POST['tipuser'];
             $id = $_GET['id'];
 
-            move_uploaded_file($_FILES['foto']['tmp_name'], '../../assets/img/'.$nomeArquivo);
+            move_uploaded_file($_FILES['foto']['tmp_name'], '../../assets/img/Usuario/'.$nomeArquivo);
             $user = new Usuario($nomeArquivo,$nome, $login, $senha,$email,$telefone, $cpf,  $endereco,  $tipuser, $id);
             $crud = new UsuarioCrud();
             $crud->updateUsuario($user);

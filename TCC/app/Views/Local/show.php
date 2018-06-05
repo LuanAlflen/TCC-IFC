@@ -11,12 +11,12 @@
     <title>TCC- Luan e Bryan</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="../../../assets/css/bootstrap.css" rel="stylesheet">
+    <link href="../../assets/css/bootstrap.css" rel="stylesheet">
 
     <!-- site de custumização do bootstrap -->
     <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">-->
     <!-- Custom CSS -->
-    <link href="../../../assets/css/shop-homepage.css" rel="stylesheet">
+    <link href="../../assets/css/shop-homepage.css" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/css/style.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -97,10 +97,10 @@
     <!-- Icones -->
     <script src="https://use.fontawesome.com/6114c79283.js"></script>
     <!-- jQuery -->
-    <script src="../../../assets/js/jquery.js"></script>
+    <script src="../../assets/js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="../../../assets/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/bootstrap.min.js"></script>
 
 
 </body>
