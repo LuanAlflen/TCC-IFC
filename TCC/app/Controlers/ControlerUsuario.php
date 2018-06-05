@@ -41,7 +41,7 @@ switch ($action) {
             $nomeArquivo = date('dmYhis').$_FILES['foto']['name'];
             $user = new Usuario($nomeArquivo, $_POST['nome'], $_POST['login'], $_POST['senha'], $_POST['email'], $_POST['telefone'], $_POST['cpf'], $_POST['endereco'], $_POST['tipuser']);
             $crud = new UsuarioCrud();
-            move_uploaded_file($_FILES['foto']['tmp_name'], '../../assets/img/'.$nomeArquivo);
+            move_uploaded_file($_FILES['foto']['tmp_name'], '../../assets/img/Usuario/'.$nomeArquivo);
             $crud->insertUsuario($user);
             header("Location: ?acao=login");
 
@@ -101,10 +101,15 @@ switch ($action) {
             $usuario = $crud->getUsuario($login);
             include "../Views/Usuario/editar.php";
         }else{ // já passou no form e fez submit
-            if (isset($_FILES['foto'])){
+            if ($_FILES['foto']['error'] == 0){
                 $nomeArquivo = date('dmYhis').$_FILES['foto']['name'];
+                move_uploaded_file($_FILES['foto']['tmp_name'], '../../assets/img/Usuario/'.$nomeArquivo);
+
             }else{
-                $nomeArquivo = null;
+                $login = $_POST['login'];
+                $crud = new UsuarioCrud();
+                $user = $crud->getUsuario($login);
+                $nomeArquivo = $user->getFoto();
             }
             $nome = $_POST['nome'];
             $login = $_POST['login'];
@@ -115,9 +120,7 @@ switch ($action) {
             $cpf= $_POST['cpf'];
             $tipuser= $_POST['tipuser'];
             $id = $_GET['id'];
-
-            move_uploaded_file($_FILES['foto']['tmp_name'], '../../assets/img/Usuario/'.$nomeArquivo);
-            $user = new Usuario($nomeArquivo,$nome, $login, $senha,$email,$telefone, $cpf,  $endereco,  $tipuser, $id);
+            $user = new Usuario($nomeArquivo, $nome, $login, $senha, $email, $telefone, $cpf,  $endereco,  $tipuser, $id);
             $crud = new UsuarioCrud();
             $crud->updateUsuario($user);
             header("Location: ?acao=login&erro=3"); // chama o controlador
@@ -130,7 +133,7 @@ switch ($action) {
         $iduser = $_GET['id'];
         //EXCLUI LOCAIS, CASO TENHA
         $crudLocal = new LocalCrud();
-        $crudLocal->deleteLocalUser($iduser);
+        $crudLoxcal->deleteLocalUser($iduser);
         //EXCLUI USUARIO
         $cruduser = new UsuarioCrud();
         $resultado = $cruduser->deleteUsuario($iduser);

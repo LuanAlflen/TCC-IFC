@@ -40,7 +40,7 @@
             $nomeArquivo = date('dmYhis').$_FILES['foto']['name'];
             $local = new Local($nomeArquivo, $_POST['nome'],  $_POST['email'], $_POST['endereco'], $_POST['telefone'], $_POST['descricao'], $idcategoria, $_POST['iduser']);
             $crudLocal = new LocalCrud();
-            move_uploaded_file($_FILES['foto']['tmp_name'], '../../assets/img/'.$nomeArquivo);
+            move_uploaded_file($_FILES['foto']['tmp_name'], '../../assets/img/Local/'.$nomeArquivo);
             $crudLocal->insertLocal($local);
             $id = $_POST['iduser'];
             header("Location: ControlerUsuario.php?acao=show&id=$id");
@@ -62,11 +62,16 @@
             include "../Views/Local/editar.php";
         }else{ // já passou no form e fez submit
 
-            if (isset($_POST['foto'])){
+            if ($_FILES['foto']['error'] == 0){
                 $nomeArquivo = date('dmYhis').$_FILES['foto']['name'];
+                move_uploaded_file($_FILES['foto']['tmp_name'], '../../assets/img/Local/'.$nomeArquivo);
             }else{
-                $nomeArquivo = null;
+                $idlocal = $_GET['id'];
+                $crud = new UsuarioCrud();
+                $local = $crud->getLocal($id);
+                $nomeArquivo = $user->getFoto();
             }
+
             $nome = $_POST['nome'];
             $email = $_POST['email'];
             $endereco = $_POST['endereco'];
@@ -76,15 +81,14 @@
             $iduser= $_POST['iduser'];
             $idlocal = $_GET['id'];
 
-            //move_uploaded_file($_FILES['foto']['tmp_name'], '../../assets/img/'.$nomeArquivo);
             $local = new Local($nomeArquivo,$nome, $email, $endereco,$telefone,$descricao, $categoria,  $iduser,  $idlocal);
-            print_r($local);
-//            $crud = new LocalCrud();
-//            $crud->updateLocal($local);
-//            $locais = $crud->getLocalUser($iduser);
-//            include "../Views/Template/Cabecalho.php";
-//            include "../Views/Usuario/show.php";
-//            include "../Views/Template/Rodape.php";
+            $crud = new LocalCrud();
+            $crud->updateLocal($local);
+
+            $locais = $crud->getLocalUser($iduser);
+            include "../Views/Template/Cabecalho.php";
+            include "../Views/Usuario/show.php";
+            include "../Views/Template/Rodape.php";
         }
 
         break;

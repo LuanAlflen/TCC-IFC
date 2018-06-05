@@ -111,6 +111,7 @@ class LocalCrud
         //MONTA O TEXTO DA INSTRUÇÃO SQL DE INSERT
         $sql = "UPDATE locais 
                 SET id_local = '{$local->getIdLocal()}', 
+                foto = '{$local->getFoto()}', 
                 nome = '{$local->getNome()}', 
                 email = '{$local->getEmail()}', 
                 endereco = '{$local->getEndereco()}',
@@ -119,7 +120,6 @@ class LocalCrud
                 categoria = '{$local->getIdCategoria()}',
                 id_usuario = '{$local->getIdUsuario()}'
                 WHERE id_local = '{$local->getIdLocal()}'";
-
 
         try {//TENTA EXECUTAR A INSTRUCAO
 
