@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 02-Jun-2018 às 21:07
+-- Generation Time: 07-Jun-2018 às 00:32
 -- Versão do servidor: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -70,7 +70,8 @@ INSERT INTO `locais` (`id_local`, `foto`, `nome`, `email`, `endereco`, `telefone
 (10, NULL, 'Quadra de basquete', 'teste@mail.com', 'algum endereco', 2147483647, 'bhla2', 2, 24),
 (13, NULL, 'Vila Belmiro', 'luan.alflen4@gmail.com', 'Rua Princesa Isabel', 2147483647, 'Agora quem da bola Ã© o santos, o santos Ã© o novo campeÃ£o...', 1, 15),
 (18, NULL, 'Allianz Parque', 'kBryan.matheus@gmail.com', ' Av. Francisco Matarazzo, 1705', 2147483647, 'Bando de pau no cu', 1, 24),
-(19, NULL, 'Quadra do Volei', 'volei@volei', 'volei', 0, 'volei do volei, bem vindo ao volei', 3, 16);
+(19, NULL, 'Quadra do Volei', 'volei@volei', 'volei', 0, 'volei do volei, bem vindo ao volei', 3, 16),
+(20, '0706201812044213k.jpg', 'Eletrodomestico', 'o@k', 'testes', 732, 'hello word', 2, 26);
 
 -- --------------------------------------------------------
 
@@ -84,7 +85,6 @@ CREATE TABLE `usuarios` (
   `nome` varchar(50) NOT NULL,
   `login` varchar(150) NOT NULL,
   `senha` varchar(50) NOT NULL,
-  `endereco` varchar(100) NOT NULL,
   `telefone` int(15) NOT NULL,
   `email` varchar(50) NOT NULL,
   `cpf` int(14) NOT NULL,
@@ -95,13 +95,15 @@ CREATE TABLE `usuarios` (
 -- Extraindo dados da tabela `usuarios`
 --
 
-INSERT INTO `usuarios` (`id_usuario`, `foto`, `nome`, `login`, `senha`, `endereco`, `telefone`, `email`, `cpf`, `tipuser`) VALUES
-(15, NULL, 'Luan', 'LuanAlflen', 'IFCARAQUARI2017', 'Adolfo da Veiga 2611', 2147483647, 'luan.alflen4@gmail.com', 2147483647, 1),
-(16, NULL, 'Bryan', 'BryanKruger', '321', 'Perto do Condor 2071', 2147483647, 'kBryan.matheus@gmail.com', 2147483647, 1),
-(24, NULL, 'teste', 'login', '12', 'bla', 31256415, 'teste@mail.com', 1561515, 1),
-(26, NULL, 'oi', 'oi', '123', 'jgvgh', 654654, 'gfgf@sdfgsd', 651468416, 1),
-(27, '', 'Limpeza', 'limpo', '1', 'cheiroso', 989596595, 'limpo@limpo.com', 959595, 1),
-(28, '02062018090119profile.png', 'oi1', 'ooii', '1', 'ola', 8987, 'oi@oi.com', 987897897, 1);
+INSERT INTO `usuarios` (`id_usuario`, `foto`, `nome`, `login`, `senha`, `telefone`, `email`, `cpf`, `tipuser`) VALUES
+(15, '', 'Luan', 'LuanAlflen', '123', 2147483647, 'luan.alflen4@gmail.com', 2147483647, 1),
+(16, NULL, 'Bryan', 'BryanKruger', '321', 2147483647, 'kBryan.matheus@gmail.com', 2147483647, 1),
+(24, NULL, 'teste', 'login', '12', 31256415, 'teste@mail.com', 1561515, 1),
+(26, NULL, 'oi', 'oi', '123', 654654, 'gfgf@sdfgsd', 651468416, 1),
+(27, '', 'Limpeza', 'limpo', '1', 989596595, 'limpo@limpo.com', 959595, 1),
+(28, '02062018090119profile.png', 'oi1', 'ooii', '1', 8987, 'oi@oi.com', 987897897, 1),
+(30, '0606201811153712k.jpg', 'teste0', 'teste0', '1', 9898, 'teste@mail.com', 989898, 1),
+(31, '', 'oi', 'teste2', '1', 4545, 'sdf@asdad', 545, 1);
 
 --
 -- Indexes for dumped tables
@@ -141,13 +143,13 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT for table `locais`
 --
 ALTER TABLE `locais`
-  MODIFY `id_local` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_local` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- Constraints for dumped tables
