@@ -188,7 +188,6 @@
                     $nome = $_SESSION['nome'];
                     $login = $_SESSION['login'];
                     $senha = $_SESSION['senha'];
-                    $endereco = $_SESSION['endereco'];
                     $telefone = $_SESSION['telefone'];
                     $email = $_SESSION['email'];
                     $cpf = $_SESSION['cpf'];
@@ -199,7 +198,6 @@
                     nome = $nome,
                     login = $login,
                     senha = $senha,
-                    endereco = $endereco,
                     telefone = $telefone,                 
                     email = $email,
                     cpf = $cpf,

@@ -5,9 +5,9 @@
         <th>Nome</th>
         <th>Email</th>
         <th>Endereço</th>
+        <th>Telefone</th>
         <th>Descrição</th>
         <th>Categoria</th>
-        <th>IdUser</th>
         <th>Ações</th>
     </tr>
     </thead>
@@ -18,6 +18,7 @@
             <td><?= $local->nome ?> </td>
             <td><?= $local->email?> </td>
             <td><?= $local->endereco ?> </td>
+            <td><?= $local->telefone ?> </td>
             <td><?= $local->descricao ?> </td>
             <td><?php
                 $idcat = $local->id_categoria;
@@ -26,7 +27,6 @@
                 echo $categoria->nome;
                 ?>
             </td>
-            <td><?= $local->id_usuario ?> </td>
             <td><a href="ControlerLocal.php?acao=show&idlocal=<?=$local->id_local?>&iduser=<?=  $local->id_usuario ?>">Ver</a> |
                 <a href="ControlerLocal.php?acao=editar&idlocal=<?=$local->id_local?>&iduser=<?=  $local->id_usuario ?>">Editar</a> |
                 <a href="ControlerLocal.php?acao=excluir&idlocal=<?=$local->id_local?>&iduser=<?=  $local->id_usuario ?>">Remover</a>

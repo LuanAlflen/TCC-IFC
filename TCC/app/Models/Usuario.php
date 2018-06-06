@@ -10,10 +10,9 @@ class Usuario
     private $email;
     private $telefone;
     private $cpf;
-    private $endereco;
     private $tipuser;
 
-    public function __construct($foto=null, $nome=null, $login=null, $senha=null, $email=null, $telefone=null, $cpf=null, $endereco=null, $tipuser=null, $id=null){
+    public function __construct($foto=null, $nome=null, $login=null, $senha=null, $email=null, $telefone=null, $cpf=null, $tipuser=null, $id=null){
         $this->foto = $foto;
         $this->nome = $nome;
         $this->login = $login ;
@@ -21,7 +20,6 @@ class Usuario
         $this->email = $email;
         $this->telefone = $telefone;
         $this->cpf = $cpf;
-        $this->endereco= $endereco;
         $this->tipuser = $tipuser;
         $this->id = $id;
 
@@ -114,19 +112,6 @@ class Usuario
     {
         $this->cpf = $cpf;
     }
-
-    public function getEndereco()
-    {
-        return $this->endereco;
-    }
-
-    public function setEndereco($endereco)
-    {
-        $this->endereco = $endereco;
-    }
-
-
-
 }
 
 

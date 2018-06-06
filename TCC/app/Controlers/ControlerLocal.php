@@ -67,9 +67,9 @@
                 move_uploaded_file($_FILES['foto']['tmp_name'], '../../assets/img/Local/'.$nomeArquivo);
             }else{
                 $idlocal = $_GET['id'];
-                $crud = new UsuarioCrud();
-                $local = $crud->getLocal($id);
-                $nomeArquivo = $user->getFoto();
+                $crud = new LocalCrud();
+                $local = $crud->getLocal($idlocal);
+                $nomeArquivo = $local->getFoto();
             }
 
             $nome = $_POST['nome'];

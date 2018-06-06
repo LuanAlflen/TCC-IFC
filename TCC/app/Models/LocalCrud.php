@@ -78,31 +78,38 @@ class LocalCrud
             }
         }
 
-    public function getLocalUser($id)
-    {
-        $sql = "SELECT * FROM locais WHERE id_usuario = $id";
+    public function getLocalUser($id){
+        $sql = $this->conexao->prepare("SELECT * FROM locais WHERE id_usuario = $id");
+        $sql->execute();
+        $resultado = $sql->rowCount();
 
-        $result = $this->conexao->query($sql);
+        if($resultado == 0){
+            header("Location: ?acao=login&erro=4");
+            die;
+        }else{
+            $sql = "SELECT * FROM locais WHERE id_usuario = $id";
 
-        $locais = $result->fetchAll(PDO::FETCH_ASSOC);
+            $result = $this->conexao->query($sql);
 
-        foreach ($locais as $local){
-            $foto = $local['foto'];
-            $nome = $local['nome'];
-            $email = $local['email'];
-            $endereco = $local['endereco'];
-            $telefone = $local['telefone'];
-            $descricao = $local['descricao'];
-            $idcategoria = $local['id_categoria'];
-            $idusuarios = $local['id_usuario'];
-            $idlocal = $local['id_local'];
+            $locais = $result->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach ($locais as $local) {
+                $foto = $local['foto'];
+                $nome = $local['nome'];
+                $email = $local['email'];
+                $endereco = $local['endereco'];
+                $telefone = $local['telefone'];
+                $descricao = $local['descricao'];
+                $idcategoria = $local['id_categoria'];
+                $idusuarios = $local['id_usuario'];
+                $idlocal = $local['id_local'];
 
 
-            $obj = new Local($foto,$nome,$email,$endereco,$telefone,$descricao,$idcategoria,$idusuarios,$idlocal);
-            $listaLocais[] = $obj;
+                $obj = new Local($foto, $nome, $email, $endereco, $telefone, $descricao, $idcategoria, $idusuarios, $idlocal);
+                $listaLocais[] = $obj;
+            }
+            return $listaLocais;
         }
-        return $listaLocais;
-
     }
 
     public function updateLocal(Local $local)
@@ -117,10 +124,9 @@ class LocalCrud
                 endereco = '{$local->getEndereco()}',
                 telefone = '{$local->getTelefone()}',
                 descricao = '{$local->getDescricao()}',
-                categoria = '{$local->getIdCategoria()}',
+                id_categoria = '{$local->getIdCategoria()}',
                 id_usuario = '{$local->getIdUsuario()}'
                 WHERE id_local = '{$local->getIdLocal()}'";
-
         try {//TENTA EXECUTAR A INSTRUCAO
 
             $this->conexao->exec($sql);

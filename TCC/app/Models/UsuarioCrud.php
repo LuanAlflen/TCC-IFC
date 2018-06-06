@@ -21,10 +21,9 @@ class UsuarioCrud
             if ($resultado < 1){
                 //EFETUA A CONEXAO
                 $this->conexao = DBConnection::getConexao();
-                $sql = "insert into usuarios (foto, nome, login, senha, endereco, telefone, email, cpf, tipuser)
-                values ('{$user->getFoto()}','{$user->getNome()}','{$user->getLogin()}','{$user->getSenha()}','{$user->getEndereco()}','{$user->getTelefone()}','{$user->getEmail()}','{$user->getCpf()}',1)";
+                $sql = "insert into usuarios (foto, nome, login, senha, telefone, email, cpf, tipuser)
+                values ('{$user->getFoto()}','{$user->getNome()}','{$user->getLogin()}','{$user->getSenha()}','{$user->getTelefone()}','{$user->getEmail()}','{$user->getCpf()}',1)";
                 try {//TENTA EXECUTAR A INSTRUCAO
-
                     $this->conexao->exec($sql);
                 } catch (PDOException $e) {//EM CASO DE ERRO, CAPTURA A MENSAGEM
                     return $e->getMessage();
@@ -66,7 +65,6 @@ class UsuarioCrud
             $usuario['email'],
             $usuario['telefone'],
             $usuario['cpf'],
-            $usuario['endereco'],
             $usuario['tipuser'],
             $usuario['id_usuario']
         );
@@ -93,10 +91,9 @@ class UsuarioCrud
             $email = $usuario['email'];
             $telefone = $usuario['telefone'];
             $cpf = $usuario['cpf'];
-            $endereco = $usuario['endereco'];
             $tipuser = $usuario['tipuser'];
 
-            $obj = new Usuario($foto, $nome, $login, $senha, $email, $telefone, $cpf, $endereco, $tipuser);
+            $obj = new Usuario($foto, $nome, $login, $senha, $email, $telefone, $cpf, $tipuser);
             $listaUsuario[] = $obj;
         }
         return $listaUsuario;
@@ -127,7 +124,6 @@ class UsuarioCrud
                 nome = '{$user->getNome()}', 
                 login = '{$user->getLogin()}', 
                 senha = '{$user->getSenha()}',
-                endereco = '{$user->getEndereco()}',
                 telefone = '{$user->getTelefone()}',
                 email = '{$user->getEmail()}',
                 cpf = '{$user->getCpf()}',

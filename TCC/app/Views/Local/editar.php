@@ -18,10 +18,10 @@
         <input value="<?= $local->endereco ?>"    class="input" type="text" name="endereco" required>
         <input value="<?= $local->telefone ?>"    class="input" type="text" name="telefone" required>
         <textarea rows="5" cols="40" maxlength="500" name="descricao"><?= $local->descricao ?></textarea>
-            <select name="categoria" class="form-control"">
+            <select name="categoria" class="form-control">
             <?php foreach ($categorias as $categoria):?>
 
-                <option <?php if($nomeCat == $categoria->nome) echo"selected"; ?> ><?= $categoria->nome ?></option>
+                <option value="<?= $categoria->id_categoria ?>" <?php if($nomeCat == $categoria->nome) echo"selected"; ?> ><?= $categoria->nome ?></option>
             <?php endforeach ?>
             </select>
         <input class="input" value="<?= $local->id_usuario ?>" type="hidden" name="iduser" placeholder="Id_user" required>

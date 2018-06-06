@@ -28,6 +28,10 @@
             if (@$_GET['erro'] == 3){?>
                 <div class="error-text" style="color: red">Por favor, confirme suas alterações</div>
             <?php } ?>
+            <?php
+            if (@$_GET['erro'] == 4){?>
+            <div class="error-text" style="color: red">Você não possui locais cadastrados! (Erro temporario, mandar pra pagina principal dnv, não para o formulario.) </div>
+            <?php } ?>
             <div class="btn__form">
             	<input class="btn__submit" type="reset" value="Limpar">
             	<input class="btn__reset" type="submit" name="gravar" value="Login">

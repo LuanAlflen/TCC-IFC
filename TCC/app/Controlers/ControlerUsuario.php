@@ -38,10 +38,16 @@ switch ($action) {
         if (!isset($_POST['gravar'])) {
             include "../Views/Usuario/cadastrar.php";
         } else {
-            $nomeArquivo = date('dmYhis').$_FILES['foto']['name'];
-            $user = new Usuario($nomeArquivo, $_POST['nome'], $_POST['login'], $_POST['senha'], $_POST['email'], $_POST['telefone'], $_POST['cpf'], $_POST['endereco'], $_POST['tipuser']);
+            if ($_FILES['foto']['error'] == 0){
+                $nomeArquivo = date('dmYhis').$_FILES['foto']['name'];
+                move_uploaded_file($_FILES['foto']['tmp_name'], '../../assets/img/Usuario/'.$nomeArquivo);
+
+            }else{
+                $nomeArquivo =null;
+            }
+
+            $user = new Usuario($nomeArquivo, $_POST['nome'], $_POST['login'], $_POST['senha'], $_POST['email'], $_POST['telefone'], $_POST['cpf'], $_POST['tipuser']);
             $crud = new UsuarioCrud();
-            move_uploaded_file($_FILES['foto']['tmp_name'], '../../assets/img/Usuario/'.$nomeArquivo);
             $crud->insertUsuario($user);
             header("Location: ?acao=login");
 
@@ -67,7 +73,6 @@ switch ($action) {
                 $_SESSION['nome'] = $user->getNome();
                 $_SESSION['login'] = $user->getLogin();
                 $_SESSION['senha'] = $user->getSenha();
-                $_SESSION['endereco'] = $user->getEndereco();
                 $_SESSION['telefone'] = $user->getTelefone();
                 $_SESSION['email'] = $user->getEmail();
                 $_SESSION['cpf'] = $user->getCpf();
@@ -114,13 +119,12 @@ switch ($action) {
             $nome = $_POST['nome'];
             $login = $_POST['login'];
             $senha= $_POST['senha'];
-            $endereco= $_POST['endereco'];
             $telefone= $_POST['telefone'];
             $email= $_POST['email'];
             $cpf= $_POST['cpf'];
             $tipuser= $_POST['tipuser'];
             $id = $_GET['id'];
-            $user = new Usuario($nomeArquivo, $nome, $login, $senha, $email, $telefone, $cpf,  $endereco,  $tipuser, $id);
+            $user = new Usuario($nomeArquivo, $nome, $login, $senha, $email, $telefone, $cpf,  $tipuser, $id);
             $crud = new UsuarioCrud();
             $crud->updateUsuario($user);
             header("Location: ?acao=login&erro=3"); // chama o controlador
@@ -133,7 +137,7 @@ switch ($action) {
         $iduser = $_GET['id'];
         //EXCLUI LOCAIS, CASO TENHA
         $crudLocal = new LocalCrud();
-        $crudLoxcal->deleteLocalUser($iduser);
+        $crudLocal->deleteLocalUser($iduser);
         //EXCLUI USUARIO
         $cruduser = new UsuarioCrud();
         $resultado = $cruduser->deleteUsuario($iduser);
