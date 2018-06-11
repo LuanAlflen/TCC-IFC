@@ -41,6 +41,7 @@ h2 span {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	margin-bottom: 4%;
 }
 
 .btn__form {
@@ -56,6 +57,7 @@ h2 span {
 	border: none;
 	border-bottom: solid #C8C8C8 .2rem;
 	transition: all .5s;
+	width: 92%;
 }
 
 .input:focus {
@@ -100,4 +102,13 @@ p{
 	border: none;
 	border-bottom: solid #C8C8C8 .2rem;
 	transition: all .5s;
+	width: 95%;
+}
+#endereco{
+	display: inline;
+	width: 74%;
+}
+#numero{
+	display: inline;
+	width: 11%;
 }
