@@ -17,8 +17,6 @@
             $('#estados').change(function(){
                 if( $(this).val() ) {
                     $('#municipios').hide();
-                    $('.carregando').show();
-
 
                     //http://localhost/tcc/app/controllers/controladorTab.php?marca=$(this).val()
 
@@ -30,7 +28,6 @@
                                 j[i].nome + '</option>';
                         }
                         $('#municipios').html(options).show();
-                        $('.carregando').hide();
                     });
                 } else {
                     $('#municipios').html(
@@ -39,25 +36,49 @@
                 }
             });
 
-            $('#municipios').change(function(){
-                if( $(this).val() ) {
-                    $('.carregando').show();
-                    $.getJSON(
-                        'https://servicodados.ibge.gov.br/api/v1/localidades/municipios'+$('#estados').val()+'/'+$(this).val()+'.json', function(j){
-                            var options = '<option value="">Selecione...</option>';
-                            for (var i = 0; i < j.length; i++) {
-                                options += '<option value="' +
-                                    j[i].id + '">' +
-                                    j[i].nome + '</option>';
-                            }
-                            $('.carregando').hide();
-                        });
-                } else {
-                    $('#carregando').html(
-                        '<option value="">-- Selecione um municipio --</option>'
-                    );
-                }
+            // $('#municipios').change(function(){
+            //     if( $(this).val() ) {
+            //         $.getJSON(
+            //             'https://servicodados.ibge.gov.br/api/v1/localidades/municipios'+$('#estados').val()+'/'+$(this).val()+'.json', function(j){
+            //                 var options = '<option value="">Selecione...</option>';
+            //                 for (var i = 0; i < j.length; i++) {
+            //                     options += '<option value="' +
+            //                         j[i].id + '">' +
+            //                         j[i].nome + '</option>';
+            //                 }
+            //                 $('.carregando').hide();
+            //             });
+            //     } else {
+            //         $('#carregando').html(
+            //             '<option value="">-- Selecione um municipio --</option>'
+            //         );
+            //     }
+            // });
+
+            //DIVIDINDO O FORMULARIO EM DOIS
+
+            $("#anterior").hide();
+            $(".etapa2").hide();
+            $(".btn__form").hide();
+
+            $('#proximo').click(function () {
+                $(".etapa1").hide();
+                $(".etapa2").fadeIn();
+                $("#proximo").hide();
+                $("#anterior").show();
+                $(".btn__form").fadeIn();
+
             });
+
+            $('#anterior').click(function () {
+                $(".etapa1").fadeIn();
+                $(".etapa2").hide();
+                $("#proximo").show();
+                $("#anterior").hide();
+                $(".btn__form").hide();
+            })
+
+
         })
 
     </script>
@@ -72,6 +93,7 @@
 			<h2>Cadastro  <span>Local</span></h2>
 		</div>		
 		<form class="form__reg"  method="post"  action="?acao=cadastrar" enctype="multipart/form-data">
+            <div class="etapa1">
             <input class="input" value="<?= $_GET['id'] ?>" type="hidden" name="iduser" placeholder="Id_user" required>
             <input class="input" type="file"  name="foto">
 			<input class="input" type="text"  name="nome"     placeholder="Nome"     required>
@@ -85,6 +107,9 @@
                 <option><?= $categoria->nome ?></option>
             <?php endforeach ?>
             </select>
+            </div>
+
+            <div class="etapa2">
             <p>Estados:</p>
 <!--            Aqui começa o endereco(Estados e municipios)-->
             <?php
@@ -113,8 +138,10 @@
 
             <p>Endereco:</p>
 
-                <input class="input" type="text"  name="endereco" placeholder="Endereço" required>
+                <input id="endereco" class="input" type="text"  name="endereco" placeholder="Endereço" required>
+                <input id="numero" class="input" type="text"  name="numero" placeholder="Nº" required>
 
+            </div>
 
             <i id="proximo" class="fa fa-arrow-circle-right" style="font-size:36px; color: yellow; margin-left:90%;  "></i>
             <i id="anterior" class="fa fa-arrow-circle-left" style="font-size:36px; color: yellow;"></i>
