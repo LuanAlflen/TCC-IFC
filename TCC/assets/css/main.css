@@ -87,4 +87,17 @@ a{
 	color: white;
 	margin: 20px;
 }
-
+p{
+	color: white;
+	margin: 0%;
+	margin-top: 10px;
+	font-size: 15px;
+}
+.select{
+	background-color: #EFEFEF;
+	padding: .5rem;
+	margin: .5rem 0;
+	border: none;
+	border-bottom: solid #C8C8C8 .2rem;
+	transition: all .5s;
+}
