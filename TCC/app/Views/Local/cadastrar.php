@@ -3,7 +3,10 @@
 <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 	<title>Formulario</title>
+
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script type="text/javascript">
         //ao carregar a pagina, fica sempre pronto pra executar
@@ -69,7 +72,8 @@
 			<h2>Cadastro  <span>Local</span></h2>
 		</div>		
 		<form class="form__reg"  method="post"  action="?acao=cadastrar" enctype="multipart/form-data">
-			<input class="input" type="file"  name="foto">
+            <input class="input" value="<?= $_GET['id'] ?>" type="hidden" name="iduser" placeholder="Id_user" required>
+            <input class="input" type="file"  name="foto">
 			<input class="input" type="text"  name="nome"     placeholder="Nome"     required>
             <input class="input" type="email" name="email"    placeholder="Email"    required>
             <input class="input" type="text"  name="telefone" placeholder="Telefone" required>
@@ -111,8 +115,10 @@
 
                 <input class="input" type="text"  name="endereco" placeholder="Endereço" required>
 
-            <input class="input" value="<?= $_GET['id'] ?>" type="hidden" name="iduser" placeholder="Id_user" required>
-			<div class="btn__form">
+
+            <i id="proximo" class="fa fa-arrow-circle-right" style="font-size:36px; color: yellow; margin-left:90%;  "></i>
+            <i id="anterior" class="fa fa-arrow-circle-left" style="font-size:36px; color: yellow;"></i>
+            <div class="btn__form">
             	<input class="btn__submit" type="reset" value="Limpar">
             	<input class="btn__reset" type="submit" name="gravar" value="Salvar">  >
             </div>
