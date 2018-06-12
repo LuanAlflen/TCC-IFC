@@ -20,9 +20,9 @@
         $id = $_GET['idlocal'];
         $crud = new LocalCrud();
         $local = $crud->getLocal($id);
-        //include "../Views/template/Cabecalho.php";
+        include "../Views/template/Cabecalho.php";
         include "../Views/Local/show.php";
-        //include "../Views/template/Rodape.php";
+        include "../Views/template/Rodape.php";
 
         break;
 
@@ -34,13 +34,32 @@
             $categorias = $crudCat->getCategorias();
             include "../Views/Local/cadastrar.php";
         } else {
+            if ($_FILES['foto']['error'] == 0){
+                $nomeArquivo = date('dmYhis').$_FILES['foto']['name'];
+                move_uploaded_file($_FILES['foto']['tmp_name'], '../../assets/img/Local/'.$nomeArquivo);
+
+            }else{
+                $nomeArquivo = null;
+            }
+
             $crudCat = new CategoriaCrud();
             $categoria = $crudCat->getCategoriaNome($_POST['categoria']);
             $idcategoria = $categoria->id_categoria;
-            $nomeArquivo = date('dmYhis').$_FILES['foto']['name'];
-            $local = new Local($nomeArquivo, $_POST['nome'],  $_POST['email'], $_POST['endereco'], $_POST['telefone'], $_POST['descricao'], $idcategoria, $_POST['iduser']);
+
+            $local = new Local(
+                $nomeArquivo,
+                $_POST['nome'],
+                $_POST['email'],
+                $_POST['endereco'],
+                $_POST['numero'],
+                $_POST['telefone'],
+                $_POST['descricao'],
+                $_POST['estados'],
+                $_POST['municipios'],
+                $idcategoria,
+                $_POST['iduser']);
+
             $crudLocal = new LocalCrud();
-            move_uploaded_file($_FILES['foto']['tmp_name'], '../../assets/img/Local/'.$nomeArquivo);
             $crudLocal->insertLocal($local);
             $id = $_POST['iduser'];
             header("Location: ControlerUsuario.php?acao=show&id=$id");

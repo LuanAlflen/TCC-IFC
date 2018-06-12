@@ -41,10 +41,9 @@
                  <div class="col-md-4">
                     <p class="lead">Informações</p>
                          <div class="list-group">
-                             <a class="list-group-item"><b>Estado: </b>Mata Fino</a>
-                             <a class="list-group-item"><b>Cidade: </b>Cupuaçu</a>
-                             <a class="list-group-item"><b>Bairro: </b>Horizonte</a>
-                             <a class="list-group-item"><b>Endereço: </b> <?= $local->getEndereco();?></a>
+                             <a class="list-group-item"><b>Estado: </b><?= $local->id_estado ?></a>
+                             <a class="list-group-item"><b>Cidade: </b><?= $local->id_municipio ?></a>
+                             <a class="list-group-item"><b>Endereço: </b> <?= $local->endereco ?> <?= $local->numero ?></a>
                          </div>
                     <p class="lead">Contato</p>
                     <div class="list-group">

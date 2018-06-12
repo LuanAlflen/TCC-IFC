@@ -43,7 +43,7 @@ switch ($action) {
                 move_uploaded_file($_FILES['foto']['tmp_name'], '../../assets/img/Usuario/'.$nomeArquivo);
 
             }else{
-                $nomeArquivo =null;
+                $nomeArquivo = null;
             }
 
             $user = new Usuario($nomeArquivo, $_POST['nome'], $_POST['login'], $_POST['senha'], $_POST['email'], $_POST['telefone'], $_POST['cpf'], $_POST['tipuser']);

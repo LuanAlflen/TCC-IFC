@@ -7,6 +7,8 @@
         <th>Endereço</th>
         <th>Telefone</th>
         <th>Descrição</th>
+        <th>Id estado</th>
+        <th>Id municipio</th>
         <th>Categoria</th>
         <th>Ações</th>
     </tr>
@@ -17,9 +19,11 @@
             <th><?= $local->id_local ?> </th>
             <td><?= $local->nome ?> </td>
             <td><?= $local->email?> </td>
-            <td><?= $local->endereco ?> </td>
+            <td><?= $local->endereco ?> <?= $local->numero ?> </td>
             <td><?= $local->telefone ?> </td>
             <td><?= $local->descricao ?> </td>
+            <td><?= $local->id_estado ?> </td>
+            <td><?= $local->id_municipio ?> </td>
             <td><?php
                 $idcat = $local->id_categoria;
                 $crudCat   = new CategoriaCrud();

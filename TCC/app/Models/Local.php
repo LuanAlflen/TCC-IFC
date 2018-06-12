@@ -7,18 +7,24 @@ class Local
     public $nome;
     public $email;
     public $endereco;
+    public $numero;
     public $telefone;
     public $descricao;
+    public $id_estado;
+    public $id_municipio;
     public $id_categoria;
     public $id_usuario;
 
-    public function __construct($foto=null, $nome=null,$email=null,$endereco=null,$telefone=null,$descricao=null,$id_categoria=null, $id_usuario=null,$id_local=null){
+    public function __construct($foto=null, $nome=null,$email=null,$endereco=null,$numero=null,$telefone=null,$descricao=null,$id_estado=null,$id_municipio=null,$id_categoria=null, $id_usuario=null,$id_local=null){
         $this->foto = $foto;
         $this->nome = $nome;
         $this->email = $email;
         $this->endereco = $endereco;
+        $this->numero = $numero;
         $this->telefone = $telefone;
         $this->descricao = $descricao;
+        $this->id_estado = $id_estado;
+        $this->id_municipio = $id_municipio;
         $this->id_categoria = $id_categoria;
         $this->id_usuario = $id_usuario;
         $this->id_local = $id_local;
@@ -111,6 +117,31 @@ class Local
     {
         $this->id_usuario = $id_usuario;
     }
+    public function getNumero()
+    {
+        return $this->numero;
+    }
+    public function setNumero($numero)
+    {
+        $this->numero = $numero;
+    }
+    public function getIdEstado()
+    {
+        return $this->id_estado;
+    }
+    public function setIdEstado($id_estado)
+    {
+        $this->id_estado = $id_estado;
+    }
+    public function getIdMunicipio()
+    {
+        return $this->id_municipio;
+    }
+    public function setIdMunicipio($id_municipio)
+    {
+        $this->id_municipio = $id_municipio;
+    }
+
 
 
 
