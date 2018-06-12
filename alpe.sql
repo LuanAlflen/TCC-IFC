@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 07-Jun-2018 às 00:32
+-- Generation Time: 12-Jun-2018 às 22:15
 -- Versão do servidor: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -55,8 +55,11 @@ CREATE TABLE `locais` (
   `nome` varchar(150) NOT NULL,
   `email` varchar(150) NOT NULL,
   `endereco` varchar(150) NOT NULL,
+  `numero` int(11) NOT NULL,
   `telefone` int(15) NOT NULL,
   `descricao` varchar(300) NOT NULL,
+  `id_estado` int(11) NOT NULL,
+  `id_municipio` int(11) NOT NULL,
   `id_categoria` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -65,13 +68,14 @@ CREATE TABLE `locais` (
 -- Extraindo dados da tabela `locais`
 --
 
-INSERT INTO `locais` (`id_local`, `foto`, `nome`, `email`, `endereco`, `telefone`, `descricao`, `id_categoria`, `id_usuario`) VALUES
-(9, NULL, 'Fonte nova', 'teste@mail.com', 'Ladeira da Fonte das Pedras ', 2147483647, 'Pelo menos tem que ser uma descricao mais longa, ja que o bryan caga com o front end e eu tenho que improvisar', 1, 24),
-(10, NULL, 'Quadra de basquete', 'teste@mail.com', 'algum endereco', 2147483647, 'bhla2', 2, 24),
-(13, NULL, 'Vila Belmiro', 'luan.alflen4@gmail.com', 'Rua Princesa Isabel', 2147483647, 'Agora quem da bola Ã© o santos, o santos Ã© o novo campeÃ£o...', 1, 15),
-(18, NULL, 'Allianz Parque', 'kBryan.matheus@gmail.com', ' Av. Francisco Matarazzo, 1705', 2147483647, 'Bando de pau no cu', 1, 24),
-(19, NULL, 'Quadra do Volei', 'volei@volei', 'volei', 0, 'volei do volei, bem vindo ao volei', 3, 16),
-(20, '0706201812044213k.jpg', 'Eletrodomestico', 'o@k', 'testes', 732, 'hello word', 2, 26);
+INSERT INTO `locais` (`id_local`, `foto`, `nome`, `email`, `endereco`, `numero`, `telefone`, `descricao`, `id_estado`, `id_municipio`, `id_categoria`, `id_usuario`) VALUES
+(9, NULL, 'Fonte nova', 'teste@mail.com', 'Ladeira da Fonte das Pedras ', 0, 2147483647, 'Pelo menos tem que ser uma descricao mais longa, ja que o bryan caga com o front end e eu tenho que improvisar', 0, 0, 1, 24),
+(10, NULL, 'Quadra de basquete', 'teste@mail.com', 'algum endereco', 0, 2147483647, 'bhla2', 0, 0, 2, 24),
+(13, NULL, 'Vila Belmiro', 'luan.alflen4@gmail.com', 'Rua Princesa Isabel', 0, 2147483647, 'Agora quem da bola Ã© o santos, o santos Ã© o novo campeÃ£o...', 0, 0, 1, 15),
+(18, NULL, 'Allianz Parque', 'kBryan.matheus@gmail.com', ' Av. Francisco Matarazzo, 1705', 0, 2147483647, 'Bando de ', 0, 0, 1, 24),
+(19, NULL, 'Quadra do Volei', 'volei@volei', 'volei', 0, 0, 'volei do volei, bem vindo ao volei', 0, 0, 3, 16),
+(20, '0706201812044213k.jpg', 'Eletrodomestico', 'o@k', 'testes', 0, 732, 'hello word', 0, 0, 2, 26),
+(21, '', 'teste', 'teste@mail.com', 'Adolfo da Veiga ', 2611, 54, 'w', 31, 0, 1, 24);
 
 -- --------------------------------------------------------
 
@@ -143,7 +147,7 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT for table `locais`
 --
 ALTER TABLE `locais`
-  MODIFY `id_local` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_local` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `usuarios`
