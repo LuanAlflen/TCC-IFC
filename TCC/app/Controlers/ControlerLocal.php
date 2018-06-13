@@ -12,17 +12,34 @@
         $action = 'index';
     }
 
-    switch ($action) {
+function getEstado($id){
+    $url = 'https://servicodados.ibge.gov.br/api/v1/localidades/estados/'.$id; // dados de um estado
 
+    $data = file_get_contents($url); // put the contents of the file into a variable
+    $estado = json_decode($data); // decode the JSON feed
+    return $estado;
+}
+
+function getMunicipio($id){
+    $url = 'https://servicodados.ibge.gov.br/api/v1/localidades/municipios/'.$id; // dados de um estado
+
+    $data = file_get_contents($url); // put the contents of the file into a variable
+    $municipio = json_decode($data); // decode the JSON feed
+    return $municipio;
+}
+
+
+
+switch ($action) {
 
     case 'show':
 
         $id = $_GET['idlocal'];
         $crud = new LocalCrud();
         $local = $crud->getLocal($id);
-        include "../Views/template/Cabecalho.php";
+        include "../Views/Template/Cabecalho.php";
         include "../Views/Local/show.php";
-        include "../Views/template/Rodape.php";
+        include "../Views/Template/Rodape.php";
 
         break;
 
@@ -34,35 +51,46 @@
             $categorias = $crudCat->getCategorias();
             include "../Views/Local/cadastrar.php";
         } else {
-            if ($_FILES['foto']['error'] == 0){
-                $nomeArquivo = date('dmYhis').$_FILES['foto']['name'];
-                move_uploaded_file($_FILES['foto']['tmp_name'], '../../assets/img/Local/'.$nomeArquivo);
+            if ($_FILES['foto']['error'] == 0) {
+                $nomeArquivo = date('dmYhis') . $_FILES['foto']['name'];
+                move_uploaded_file($_FILES['foto']['tmp_name'], '../../assets/img/Local/' . $nomeArquivo);
 
-            }else{
+            } else {
                 $nomeArquivo = null;
             }
 
-            $crudCat = new CategoriaCrud();
-            $categoria = $crudCat->getCategoriaNome($_POST['categoria']);
-            $idcategoria = $categoria->id_categoria;
+            print_r($_POST);
 
-            $local = new Local(
-                $nomeArquivo,
-                $_POST['nome'],
-                $_POST['email'],
-                $_POST['endereco'],
-                $_POST['numero'],
-                $_POST['telefone'],
-                $_POST['descricao'],
-                $_POST['estados'],
-                $_POST['municipios'],
-                $idcategoria,
-                $_POST['iduser']);
+            if (is_string($_POST['categoria']) == true OR is_string($_POST['estados']) == true OR is_string($_POST['municipios']) == true) {
+                $idlocal = $_POST['iduser'];
+//                header("Location: ControlerLocal.php?acao=cadastrar&erro=1&id=$idlocal");
+//                die;
+            } else {
 
-            $crudLocal = new LocalCrud();
-            $crudLocal->insertLocal($local);
-            $id = $_POST['iduser'];
-            header("Location: ControlerUsuario.php?acao=show&id=$id");
+                $crudCat = new CategoriaCrud();
+                $categoria = $crudCat->getCategoriaNome($_POST['categoria']);
+                $idcategoria = $categoria->id_categoria;
+
+                $local = new Local(
+                    $nomeArquivo,
+                    $_POST['nome'],
+                    $_POST['email'],
+                    $_POST['endereco'],
+                    $_POST['numero'],
+                    $_POST['telefone'],
+                    $_POST['descricao'],
+                    $_POST['estados'],
+                    $_POST['municipios'],
+                    $idcategoria,
+                    $_POST['iduser']);
+
+                print_r($local);
+                die;
+                $crudLocal = new LocalCrud();
+                $crudLocal->insertLocal($local);
+                $id = $_POST['iduser'];
+                header("Location: ControlerUsuario.php?acao=show&id=$id");
+            }
         }
 
         break;

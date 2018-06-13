@@ -125,7 +125,7 @@
                                         <div class="caption">
                                             <h4>
                                                 <?= $local->nome?>
-                                                <button class="btn btn-primary pull-right" href="#">Ver +</button>
+                                                <a class="btn btn-primary pull-right" href="ControlerLocal.php?acao=show&idlocal=<?= $local->id_local ?>">Ver +</a>
                                             </h4>
                                             <p><b>Categoria: </b> <?php
                                                 $idcat = $local->id_categoria;

@@ -12,7 +12,7 @@
         //ao carregar a pagina, fica sempre pronto pra executar
         $(function(){
 
-            ///////////////////AQUI COMEÇA O CARRO 1////////////////////////////
+            /////////////////// FORMULARIO ESTADOS SENDO PREENCHIDO VIA API////////////////////////////
 
             $('#estados').change(function(){
                 if( $(this).val() ) {
@@ -20,8 +20,8 @@
 
                     //http://localhost/tcc/app/controllers/controladorTab.php?marca=$(this).val()
 
-                    $.getJSON('https://servicodados.ibge.gov.br/api/v1/localidades/estados/'+$(this).val()+'.json', function(j){
-                        var options = '<option value="">0</option>';
+                    $.getJSON('https://servicodados.ibge.gov.br/api/v1/localidades/estados/'+$(this).val()+'/municipios', function(j){
+                        var options = '<option value="">Selecione...</option>';
                         for (var i = 0; i < j.length; i++) {
                             options += '<option value="' +
                                 j[i].id + '">' +
@@ -120,7 +120,7 @@
             $data = file_get_contents($url); // put the contents of the file into a variable
             $estados = json_decode($data); // decode the JSON feed
             echo '<select name="estados" class="select" id="estados" >';
-            echo '<option value="0" selected>Selecione...</option>';
+            echo '<option value="" selected>Selecione...</option>';
 
             foreach ($estados as $estado) {
 
@@ -133,7 +133,7 @@
             <p>Municipios:</p>
 
                 <select name="municipios" class="select" id="municipios">
-                    <option value="0">Selecione...</option>
+                    <option value="">Selecione...</option>
                 </select>
 
             <p>Endereco:</p>
@@ -142,7 +142,10 @@
                 <input id="numero" class="input" type="text"  name="numero" placeholder="Nº" required>
 
             </div>
-
+            <?php
+            if (@$_GET['erro'] == 1){?>
+            <div class="error-text" style="color: red">Todos os campos devem ser preenchidos!</div>
+            <?php } ?>
             <i id="proximo" class="fa fa-arrow-circle-right" style="font-size:36px; color: yellow; margin-left:90%;  "></i>
             <i id="anterior" class="fa fa-arrow-circle-left" style="font-size:36px; color: yellow;"></i>
             <div class="btn__form">
