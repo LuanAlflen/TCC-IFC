@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 12-Jun-2018 às 22:15
+-- Generation Time: 16-Jun-2018 às 05:23
 -- Versão do servidor: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -69,13 +69,9 @@ CREATE TABLE `locais` (
 --
 
 INSERT INTO `locais` (`id_local`, `foto`, `nome`, `email`, `endereco`, `numero`, `telefone`, `descricao`, `id_estado`, `id_municipio`, `id_categoria`, `id_usuario`) VALUES
-(9, NULL, 'Fonte nova', 'teste@mail.com', 'Ladeira da Fonte das Pedras ', 0, 2147483647, 'Pelo menos tem que ser uma descricao mais longa, ja que o bryan caga com o front end e eu tenho que improvisar', 0, 0, 1, 24),
-(10, NULL, 'Quadra de basquete', 'teste@mail.com', 'algum endereco', 0, 2147483647, 'bhla2', 0, 0, 2, 24),
-(13, NULL, 'Vila Belmiro', 'luan.alflen4@gmail.com', 'Rua Princesa Isabel', 0, 2147483647, 'Agora quem da bola Ã© o santos, o santos Ã© o novo campeÃ£o...', 0, 0, 1, 15),
-(18, NULL, 'Allianz Parque', 'kBryan.matheus@gmail.com', ' Av. Francisco Matarazzo, 1705', 0, 2147483647, 'Bando de ', 0, 0, 1, 24),
-(19, NULL, 'Quadra do Volei', 'volei@volei', 'volei', 0, 0, 'volei do volei, bem vindo ao volei', 0, 0, 3, 16),
-(20, '0706201812044213k.jpg', 'Eletrodomestico', 'o@k', 'testes', 0, 732, 'hello word', 0, 0, 2, 26),
-(21, '', 'teste', 'teste@mail.com', 'Adolfo da Veiga ', 2611, 54, 'w', 31, 0, 1, 24);
+(22, '1606201801490812kWin.jpg', 'Quadra de volei', 'teste@mail.com', 'Adolfo da Veiga', 2611, 898989989, 'bem-vindo a essa quadra maravilhosa que vai ser cadastrada', 42, 4209102, 3, 24),
+(23, '15062018072901PrimeiraWinFPP.jpg', 'Vila Belmiro', 'luan.alflen4@gmail.com', 'Rua Princesa Isabel', 501, 9899595, 'Agora quem da bola Ã© o santos', 35, 3548500, 1, 15),
+(24, '1606201805051920180516183741_1.jpg', 'casa do hugo', 'a@a', 'Zozimo de oliveira', 117, 98959, 'bla', 42, 4209102, 4, 24);
 
 -- --------------------------------------------------------
 
@@ -147,7 +143,7 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT for table `locais`
 --
 ALTER TABLE `locais`
-  MODIFY `id_local` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_local` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `usuarios`
