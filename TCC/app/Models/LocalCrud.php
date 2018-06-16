@@ -151,7 +151,6 @@ class LocalCrud
                 id_usuario = '{$local->getIdUsuario()}'
                 WHERE id_local = '{$local->getIdLocal()}'";
         try {//TENTA EXECUTAR A INSTRUCAO
-
             $this->conexao->exec($sql);
         } catch (PDOException $e) {//EM CASO DE ERRO, CAPTURA A MENSAGEM
             return $e->getMessage();

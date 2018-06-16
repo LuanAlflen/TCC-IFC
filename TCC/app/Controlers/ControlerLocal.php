@@ -51,6 +51,8 @@ switch ($action) {
             $categorias = $crudCat->getCategorias();
             include "../Views/Local/cadastrar.php";
         } else {
+
+            //VERIFICA SE EXISTE FOTO, SE NÃO RETORNA COMO NULL
             if ($_FILES['foto']['error'] == 0) {
                 $nomeArquivo = date('dmYhis') . $_FILES['foto']['name'];
                 move_uploaded_file($_FILES['foto']['tmp_name'], '../../assets/img/Local/' . $nomeArquivo);
@@ -59,18 +61,17 @@ switch ($action) {
                 $nomeArquivo = null;
             }
 
-            print_r($_POST);
+            //TRANSFORMA O NOME DA CATEGORIA EM ID PARA CADASTRAR
+            $crudCat = new CategoriaCrud();
+            $categoria = $crudCat->getCategoriaNome($_POST['categoria']);
+            $idcategoria = $categoria->id_categoria;
 
-            if (is_string($_POST['categoria']) == true OR is_string($_POST['estados']) == true OR is_string($_POST['municipios']) == true) {
-                $idlocal = $_POST['iduser'];
-//                header("Location: ControlerLocal.php?acao=cadastrar&erro=1&id=$idlocal");
-//                die;
+            //VERIFICA SE OS CAMPOS DE SELECT FORAM PREENCHIDOS
+            if (!isset($idcategoria) || $_POST['estados'] == 0 || $_POST['municipios'] == 0){
+                echo "Todos os campos devem ser preenchidos";
             } else {
 
-                $crudCat = new CategoriaCrud();
-                $categoria = $crudCat->getCategoriaNome($_POST['categoria']);
-                $idcategoria = $categoria->id_categoria;
-
+                echo "tudo certo";
                 $local = new Local(
                     $nomeArquivo,
                     $_POST['nome'],
@@ -84,8 +85,6 @@ switch ($action) {
                     $idcategoria,
                     $_POST['iduser']);
 
-                print_r($local);
-                die;
                 $crudLocal = new LocalCrud();
                 $crudLocal->insertLocal($local);
                 $id = $_POST['iduser'];
@@ -109,33 +108,43 @@ switch ($action) {
             include "../Views/Local/editar.php";
         }else{ // já passou no form e fez submit
 
-            if ($_FILES['foto']['error'] == 0){
-                $nomeArquivo = date('dmYhis').$_FILES['foto']['name'];
-                move_uploaded_file($_FILES['foto']['tmp_name'], '../../assets/img/Local/'.$nomeArquivo);
-            }else{
-                $idlocal = $_GET['id'];
+            //VERIFICA SE EXISTE FOTO, SE NÃO RETORNA COMO NULL
+            if ($_FILES['foto']['error'] == 0) {
+                $nomeArquivo = date('dmYhis') . $_FILES['foto']['name'];
+                move_uploaded_file($_FILES['foto']['tmp_name'], '../../assets/img/Local/' . $nomeArquivo);
+
+            } else {
+                //Pega a foto ja existente do banco;
+                $idlocal = $_GET['idlocal'];
                 $crud = new LocalCrud();
                 $local = $crud->getLocal($idlocal);
                 $nomeArquivo = $local->getFoto();
             }
 
-            $nome = $_POST['nome'];
-            $email = $_POST['email'];
-            $endereco = $_POST['endereco'];
-            $telefone = $_POST['telefone'];
-            $descricao = $_POST['descricao'];
-            $categoria= $_POST['categoria'];
-            $iduser= $_POST['iduser'];
-            $idlocal = $_GET['id'];
+            //VERIFICA SE OS CAMPOS DE SELECT FORAM PREENCHIDOS
+            if ($_POST['categoria'] == 0 || $_POST['estados'] == 0 || $_POST['municipios'] == 0){
+                echo "Todos os campos devem ser preenchidos";
+            } else {
 
-            $local = new Local($nomeArquivo,$nome, $email, $endereco,$telefone,$descricao, $categoria,  $iduser,  $idlocal);
-            $crud = new LocalCrud();
-            $crud->updateLocal($local);
+                $local = new Local(
+                    $nomeArquivo,
+                    $_POST['nome'],
+                    $_POST['email'],
+                    $_POST['endereco'],
+                    $_POST['numero'],
+                    $_POST['telefone'],
+                    $_POST['descricao'],
+                    $_POST['estados'],
+                    $_POST['municipios'],
+                    $_POST['categoria'],
+                    $_POST['iduser'],
+                    $_GET['idlocal']);
 
-            $locais = $crud->getLocalUser($iduser);
-            include "../Views/Template/Cabecalho.php";
-            include "../Views/Usuario/show.php";
-            include "../Views/Template/Rodape.php";
+                $crudLocal = new LocalCrud();
+                $crudLocal->updateLocal($local);
+                $id = $_POST['iduser'];
+                header("Location: ControlerUsuario.php?acao=show&id=$id");
+            }
         }
 
         break;

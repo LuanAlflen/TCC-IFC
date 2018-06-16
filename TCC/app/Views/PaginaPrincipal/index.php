@@ -32,18 +32,54 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
     <script>
-        //FILTRO DAS CATEGORIAS
+        /////////////////////////////FILTRO DAS CATEGORIAS/////////////////////////////////////////
         $(document).ready(function (){
             //JA DEIXA TODAS SELECIONADAS
             $("#abas ul li").addClass("selecionado");
+
             $("#abas ul li").click(function () {
                 $(this).toggleClass("selecionado");
-                //$(".conteudo").toggle();
                 var meuId = $(this).attr("id");
                 //COMPARA O ID DAS CATEGORIAS COM A CLASSE DOS LOCAIS
                 $("."+meuId).fadeToggle();
             });
         });
+
+        /////////////////////////FILTRO DE LOCALIZACAO///////////////////////////////////////////////////
+        $(document).ready(function (){
+            $("#localizacao form select option").click(function () {
+                var meuId = $("#estados option:selected").val();
+                //COMPARA O ID_ESTADO DOS LOCAIS COM A CLASSE DOS LOCAIS
+                //$("."+meuId).fadeToggle();
+            });
+        });
+
+        $(function(){
+
+            /////////////////// ESTADOS E MUNICIPIOS SENDO PREENCHIDO VIA API////////////////////////////
+
+            $('#estados').change(function(){
+                if( $(this).val() ) {
+                    $('#municipios').hide();
+
+                    $.getJSON('https://servicodados.ibge.gov.br/api/v1/localidades/estados/'+$(this).val()+'/municipios', function(j){
+                        var options = '<option value="0">Selecione...</option>';
+                        for (var i = 0; i < j.length; i++) {
+                            options += '<option value="' +
+                                j[i].id + '">' +
+                                j[i].nome + '</option>';
+                        }
+                        $('#municipios').html(options).show();
+                    });
+                } else {
+                    $('#municipios').html(
+                        '<option value="0">-- Selecione um estado --</option>'
+                    );
+                }
+            });
+
+        })
+
     </script>
 
 </head>
@@ -71,7 +107,32 @@
                     </ul>
                 </div>
             <p class="lead">Localização</p>
-            <p>Fazer os selects de acordo com o banco e mostrar os locais de acordo com selecionado</p>
+            <div class="list-group" id="localizacao">
+
+                <form>
+                    <p>Estados:</p>
+                    <!--            Aqui começa a localizacao(Estados e municipios)-->
+                    <?php
+                    $url = 'https://servicodados.ibge.gov.br/api/v1/localidades/estados'; // marcas
+
+                    $data = file_get_contents($url); // put the contents of the file into a variable
+                    $estados = json_decode($data); // decode the JSON feed
+                    echo '<select name="estados" class="select" id="estados" >';
+                    echo '<option selected value="0">Selecione...</option>';
+
+                    foreach ($estados as $estado) {
+                        echo '<option value="'.$estado->id.'">'.$estado->nome.'</option>';
+                    }
+                    echo '</select>';
+                    ?>
+                    <p>Municipios:</p>
+
+                    <select name="municipios" class="select" id="municipios">
+                        <option value="0">Selecione...</option>
+                    </select>
+                </form>
+
+            </div>
         </div>
 
 
@@ -114,38 +175,40 @@
             <div class="row">
                     <div id="conteudos">
                         <?php foreach($locais as $local): ?>
-                            <div class="<?= $local->id_categoria ?>">
-                                <div class="col-sm-4 col-lg-4 col-md-4">
-                                    <div class="thumbnail">
+                            <div class="<?= $local->id_estado ?>">
+                                <div class="<?= $local->id_categoria ?>">
+                                    <div class="col-sm-4 col-lg-4 col-md-4">
+                                        <div class="thumbnail">
 
-                                        <div class="img-embrulho">
-                                            <img src="../../assets/img/320x320.jpeg" alt="">
-                                        </div>
+                                            <div class="img-embrulho">
+                                                <img src="../../assets/img/320x320.jpeg" alt="">
+                                            </div>
 
-                                        <div class="caption">
-                                            <h4>
-                                                <?= $local->nome?>
-                                                <a class="btn btn-primary pull-right" href="ControlerLocal.php?acao=show&idlocal=<?= $local->id_local ?>">Ver +</a>
-                                            </h4>
-                                            <p><b>Categoria: </b> <?php
-                                                $idcat = $local->id_categoria;
-                                                $crudCat   = new CategoriaCrud();
-                                                $categoria = $crudCat->getCategoria($idcat);
-                                                echo $categoria->nome;
-                                                ?>.<br>
-                                                <b>Cidade:</b> Cupuaçu.<br>
-                                                <b>Bairro:</b> Horizonte.<br>
-                                                <b>Endereço: </b><?= $local->endereco?></p>
-                                        </div>
-                                        <div class="ratings">
-                                            <p class="pull-right">15 avaliações</p>
-                                            <p>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                            </p>
+                                            <div class="caption">
+                                                <h4>
+                                                    <?= $local->nome?>
+                                                    <a class="btn btn-primary pull-right" href="ControlerLocal.php?acao=show&idlocal=<?= $local->id_local ?>">Ver +</a>
+                                                </h4>
+                                                <p><b>Categoria: </b> <?php
+                                                    $idcat = $local->id_categoria;
+                                                    $crudCat   = new CategoriaCrud();
+                                                    $categoria = $crudCat->getCategoria($idcat);
+                                                    echo $categoria->nome;
+                                                    ?>.<br>
+                                                    <b>Cidade:</b> <?= $local->id_estado ?><br>
+                                                    <b>Bairro:</b> <?= $local->id_municipio ?><br>
+                                                    <b>Endereço: </b><?= $local->endereco?> <?= $local->numero?></p>
+                                            </div>
+                                            <div class="ratings">
+                                                <p class="pull-right">15 avaliações</p>
+                                                <p>
+                                                    <span class="glyphicon glyphicon-star"></span>
+                                                    <span class="glyphicon glyphicon-star"></span>
+                                                    <span class="glyphicon glyphicon-star"></span>
+                                                    <span class="glyphicon glyphicon-star"></span>
+                                                    <span class="glyphicon glyphicon-star"></span>
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

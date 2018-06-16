@@ -22,6 +22,35 @@
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <![endif]-->
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+    <script>
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {zoom: 16});
+            var geocoder = new google.maps.Geocoder;
+            var endereco = "<?= $local->endereco ?>";
+            var numero = "<?= $local->numero ?>";
+            geocoder.geocode({'address': endereco+numero}, function(results, status) {
+                if (status === 'OK') {
+                    map.setCenter(results[0].geometry.location);
+                    new google.maps.Marker({
+                        map: map,
+                        position: results[0].geometry.location
+                    });
+                } else {
+                    window.alert('Geocode was not successful for the following reason: ' +
+                        status);
+                }
+            });
+        }
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMLgYYvxAQASsjllKV-AF8nC-3HeKjxNs&callback=initMap">
+    </script>
 </head>
 <body>
     <div class="container">
@@ -41,8 +70,13 @@
                  <div class="col-md-4">
                     <p class="lead">Informações</p>
                          <div class="list-group">
-                             <a class="list-group-item"><b>Estado: </b><?= $local->id_estado ?></a>
-                             <a class="list-group-item"><b>Cidade: </b><?= $local->id_municipio ?></a>
+                             <a class="list-group-item"><b>Estado: </b><?php $id = $local->id_estado;
+                                                                             $estado = getEstado($id);
+                                                                             print_r($estado);
+                                                                        ?></a>
+                             <a class="list-group-item"><b>Cidade: </b><?php $id = $local->id_municipio;
+                                                                             $municipio = getMunicipio($id);
+                                                                             print_r($municipio); ?></a>
                              <a class="list-group-item"><b>Endereço: </b> <?= $local->endereco ?> <?= $local->numero ?></a>
                          </div>
                     <p class="lead">Contato</p>
@@ -56,23 +90,12 @@
 
                     <div class="col-md-4">
 
-                        <img href="#" src="#" height="400" width="400">
+                        <div id="map"></div>
 
                     </div>
             </div>
 
-        <p class="lead">Avaliações</p>
-
-        <div class="ratings">
-            <p>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star-empty"></span>
-           (12 avaliações)</p>
-
-        </div>
+        <h2>Avaliações</h2>
 
             <br>
             <i style="float: left" class="fa fa-user-circle" aria-hidden="true"></i>

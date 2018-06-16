@@ -18,10 +18,8 @@
                 if( $(this).val() ) {
                     $('#municipios').hide();
 
-                    //http://localhost/tcc/app/controllers/controladorTab.php?marca=$(this).val()
-
                     $.getJSON('https://servicodados.ibge.gov.br/api/v1/localidades/estados/'+$(this).val()+'/municipios', function(j){
-                        var options = '<option value="">Selecione...</option>';
+                        var options = '<option value="0">Selecione...</option>';
                         for (var i = 0; i < j.length; i++) {
                             options += '<option value="' +
                                 j[i].id + '">' +
@@ -31,29 +29,10 @@
                     });
                 } else {
                     $('#municipios').html(
-                        '<option value="">-- Selecione um estado --</option>'
+                        '<option value="0">-- Selecione um estado --</option>'
                     );
                 }
             });
-
-            // $('#municipios').change(function(){
-            //     if( $(this).val() ) {
-            //         $.getJSON(
-            //             'https://servicodados.ibge.gov.br/api/v1/localidades/municipios'+$('#estados').val()+'/'+$(this).val()+'.json', function(j){
-            //                 var options = '<option value="">Selecione...</option>';
-            //                 for (var i = 0; i < j.length; i++) {
-            //                     options += '<option value="' +
-            //                         j[i].id + '">' +
-            //                         j[i].nome + '</option>';
-            //                 }
-            //                 $('.carregando').hide();
-            //             });
-            //     } else {
-            //         $('#carregando').html(
-            //             '<option value="">-- Selecione um municipio --</option>'
-            //         );
-            //     }
-            // });
 
             //DIVIDINDO O FORMULARIO EM DOIS
 
@@ -111,16 +90,14 @@
 
             <div class="etapa2">
             <p>Estados:</p>
-<!--            Aqui começa o endereco(Estados e municipios)-->
+<!--            Aqui começa o endereco(Estados, municipios, endereço e numero)-->
             <?php
             $url = 'https://servicodados.ibge.gov.br/api/v1/localidades/estados'; // marcas
-
-            //http://fipeapi.appspot.com/api/1/carros/veiculos/21.json // veiculos da marca 21
 
             $data = file_get_contents($url); // put the contents of the file into a variable
             $estados = json_decode($data); // decode the JSON feed
             echo '<select name="estados" class="select" id="estados" >';
-            echo '<option value="" selected>Selecione...</option>';
+            echo '<option selected value="0">Selecione...</option>';
 
             foreach ($estados as $estado) {
 
@@ -133,7 +110,7 @@
             <p>Municipios:</p>
 
                 <select name="municipios" class="select" id="municipios">
-                    <option value="">Selecione...</option>
+                    <option value="0">Selecione...</option>
                 </select>
 
             <p>Endereco:</p>
