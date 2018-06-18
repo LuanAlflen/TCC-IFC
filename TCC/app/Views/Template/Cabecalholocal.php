@@ -46,7 +46,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" style="font-size: 20px" href="ControlerUsuario.php?acao=login">ALPE</a>
+            <a class="navbar-brand" style="font-size: 20px" href="#">ALPE</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -61,10 +61,13 @@
                     <a href="#" class="dropdown-toggle pull-right" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <!-- ícone do user --> <i class="fa fa-user-o" aria-hidden="true"></i>
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="?acao=contato">Contato</a></li>
-                        <li><a href="?acao=show&id=<?= $_SESSION['id'] ?>">Minhas quadras</a></li>
-                        <li><a href="?acao=editar&login=<?= $_SESSION['login'] ?>">Editar</a></li>
-                        <li><a href="?acao=excluir&id=<?= $_SESSION['id'] ?>">Excluir conta</a></li>
+                        <li><a href="ControlerUsuario.php?acao=contato">Contato</a></li>
+                        <li><a href="ControlerUsuario.php?acao=show&id=<?php    $crud = new LocalCrud();
+                                                                                $local = $crud->getLocal($idlocal);
+                                                                                $iduser = $local->id_usuario;
+                                                                                echo $iduser;?>">Minhas quadras</a></li>
+                        <li><a href="ControlerLocal.php?acao=editar&idlocal=<?= $idlocal ?>">Editar</a></li>
+                        <li><a href="ControlerLocal.php?acao=excluir&idlocal=<?= $idlocal ?>">Excluir estabelecimento</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="?acao=logout">Sair</a></li>
                     </ul>

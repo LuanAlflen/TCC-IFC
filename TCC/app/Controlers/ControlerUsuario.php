@@ -70,13 +70,6 @@ switch ($action) {
             } else {
                 session_start();
                 $_SESSION['id'] = $user->getId();
-                $_SESSION['nome'] = $user->getNome();
-                $_SESSION['login'] = $user->getLogin();
-                $_SESSION['senha'] = $user->getSenha();
-                $_SESSION['telefone'] = $user->getTelefone();
-                $_SESSION['email'] = $user->getEmail();
-                $_SESSION['cpf'] = $user->getCpf();
-                $_SESSION['tipuser'] = $user->getTipuser();
                 $crudLocal = new LocalCrud();
                 $locais = $crudLocal->getLocais();
                 $crudCat = new CategoriaCrud();

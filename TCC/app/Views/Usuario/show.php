@@ -1,3 +1,4 @@
+<p class="lead">Minhas quadras</p>
 <table class="table table-bordered" >
     <thead>
     <tr>

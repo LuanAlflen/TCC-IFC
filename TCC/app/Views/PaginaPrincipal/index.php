@@ -109,7 +109,7 @@
             <p class="lead">Localização</p>
             <div class="list-group" id="localizacao">
 
-                <form>
+                <div id="localizacao">
                     <p>Estados:</p>
                     <!--            Aqui começa a localizacao(Estados e municipios)-->
                     <?php
@@ -130,7 +130,7 @@
                     <select name="municipios" class="select" id="municipios">
                         <option value="0">Selecione...</option>
                     </select>
-                </form>
+                </div>
 
             </div>
         </div>
@@ -246,26 +246,8 @@
     <footer>
         <div class="row">
             <div class="col-lg-12" style="margin-left: 25%">
-              <?php
-                    $id = $_SESSION['id'];
-                    $nome = $_SESSION['nome'];
-                    $login = $_SESSION['login'];
-                    $senha = $_SESSION['senha'];
-                    $telefone = $_SESSION['telefone'];
-                    $email = $_SESSION['email'];
-                    $cpf = $_SESSION['cpf'];
-                    $tipuser = $_SESSION['tipuser'];
-                    ?>
-                    <br><p> Você esta logado com <?php echo "
-                    id = $id, 
-                    nome = $nome,
-                    login = $login,
-                    senha = $senha,
-                    telefone = $telefone,                 
-                    email = $email,
-                    cpf = $cpf,
-                    tipuser = $tipuser. 
-                    "; ?></p>
+              <?php $id = $_SESSION['id']; ?>
+                    <br><p> Você esta logado com <?php echo "id = $id."; ?></p>
             </div>
         </div>
     </footer>

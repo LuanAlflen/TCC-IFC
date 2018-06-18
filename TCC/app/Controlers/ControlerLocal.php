@@ -34,10 +34,10 @@ switch ($action) {
 
     case 'show':
 
-        $id = $_GET['idlocal'];
+        $idlocal = $_GET['idlocal'];
         $crud = new LocalCrud();
-        $local = $crud->getLocal($id);
-        include "../Views/Template/Cabecalho.php";
+        $local = $crud->getLocal($idlocal);
+        include "../Views/Template/Cabecalholocal.php";
         include "../Views/Local/show.php";
         include "../Views/Template/Rodape.php";
 
