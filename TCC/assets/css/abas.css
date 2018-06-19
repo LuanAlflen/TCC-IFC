@@ -1,17 +1,36 @@
 #abas{
-    margin-bottom: 1%;
+    margin-bottom: 0%;
 }
 #abas ul li{
     margin: 2%;
     border: 1px solid black;
     border-radius: 10px 10px 10px 0;
     padding: 7px;
-}
-#conteudos{
-    border: 1px solid black;
+    width: 100%;
 }
 .selecionado{
     background-color: black;
-    color: #EEEE00;
+    color: yellow;
     box-shadow: 3px 3px 3px gray;
+}
+.select{
+	margin: 2%;
+    border: 1px solid black;
+    border-radius: 10px 10px 10px 0;
+    padding: 7px;
+    background-color: black;
+    color: yellow;
+    margin-left: 16%;
+    box-shadow: 3px 3px 3px gray;
+}
+p{
+	margin-left: 16%;
+	margin-bottom: 0%;
+	margin-top: 5%;
+}
+#municipios{
+	width: 84%;
+}
+#estados{
+	width: 84%;
 }
