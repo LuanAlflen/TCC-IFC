@@ -63,6 +63,7 @@
                     <ul class="dropdown-menu">
                         <li><a href="?acao=contato">Contato</a></li>
                         <li><a href="?acao=show&id=<?= $_SESSION['id'] ?>">Minhas quadras</a></li>
+                        <li><a href="ControlerLocal.php?acao=cadastrar&id=<?= $_SESSION['id'] ?>">Cadastrar quadra</a></li>
                         <li><a href="?acao=editar&login=<?= $_SESSION['login'] ?>">Editar</a></li>
                         <li><a href="?acao=excluir&id=<?= $_SESSION['id'] ?>">Excluir conta</a></li>
                         <li role="separator" class="divider"></li>

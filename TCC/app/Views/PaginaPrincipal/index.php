@@ -47,9 +47,10 @@
 
         /////////////////////////FILTRO DE LOCALIZACAO///////////////////////////////////////////////////
         $(document).ready(function (){
-            $("#localizacao form select option").click(function () {
+            $("#localizacao form select").click(function () {
                 var meuId = $("#estados option:selected").val();
                 //COMPARA O ID_ESTADO DOS LOCAIS COM A CLASSE DOS LOCAIS
+                alert(meuId);
                 //$("."+meuId).fadeToggle();
             });
         });
@@ -60,6 +61,10 @@
 
             $('#estados').change(function(){
                 if( $(this).val() ) {
+                    $(".local").hide();
+                    var id_estado = $(this).val();
+                    $("."+id_estado).toggle();
+
                     $('#municipios').hide();
 
                     $.getJSON('https://servicodados.ibge.gov.br/api/v1/localidades/estados/'+$(this).val()+'/municipios', function(j){
@@ -71,13 +76,24 @@
                         }
                         $('#municipios').html(options).show();
                     });
+
+
                 } else {
                     $('#municipios').html(
                         '<option value="0">-- Selecione um estado --</option>'
                     );
                 }
-            });
 
+
+
+            });
+            $('#municipios').change(function() {
+                if ($(this).val()) {
+                    $(".local").hide();
+                    var id_municipio = $(this).val();
+                    $("." + id_municipio).toggle();
+                }
+            });
         })
 
     </script>
@@ -175,13 +191,12 @@
             <div class="row">
                     <div id="conteudos">
                         <?php foreach($locais as $local): ?>
-                            <div class="<?= $local->id_estado ?>">
-                                <div class="<?= $local->id_categoria ?>">
+                                <div class="local <?= $local->id_categoria ?> <?= $local->id_estado ?> <?= $local->id_municipio ?>">
                                     <div class="col-sm-4 col-lg-4 col-md-4">
                                         <div class="thumbnail">
 
                                             <div class="img-embrulho">
-                                                <img src="../../assets/img/320x320.jpeg" alt="">
+                                                <img src="../../assets/img/Local/<?= $local->foto ?>" alt="">
                                             </div>
 
                                             <div class="caption">
@@ -189,39 +204,52 @@
                                                     <?= $local->nome?>
                                                     <a class="btn btn-primary pull-right" href="ControlerLocal.php?acao=show&idlocal=<?= $local->id_local ?>">Ver +</a>
                                                 </h4>
-                                                <p><b>Categoria: </b> <?php
+                                                <p>
+                                                    <b>Categoria: </b> <?php
                                                     $idcat = $local->id_categoria;
                                                     $crudCat   = new CategoriaCrud();
                                                     $categoria = $crudCat->getCategoria($idcat);
                                                     echo $categoria->nome;
                                                     ?>.<br>
-                                                    <b>Cidade:</b> <?= $local->id_estado ?><br>
-                                                    <b>Bairro:</b> <?= $local->id_municipio ?><br>
-                                                    <b>Endereço: </b><?= $local->endereco?> <?= $local->numero?></p>
-                                            </div>
-                                            <div class="ratings">
-                                                <p class="pull-right">15 avaliações</p>
-                                                <p>
-                                                    <span class="glyphicon glyphicon-star"></span>
-                                                    <span class="glyphicon glyphicon-star"></span>
-                                                    <span class="glyphicon glyphicon-star"></span>
-                                                    <span class="glyphicon glyphicon-star"></span>
-                                                    <span class="glyphicon glyphicon-star"></span>
+                                                    <b>Estado:</b> <?php $id = $local->id_estado;
+                                                                        $estado = getEstado($id);
+                                                                        echo $estado->nome;
+                                                    ?><br>
+                                                    <?php
+                                                    $id = $local->id_municipio;
+                                                    $municipio = getMunicipio($id);
+
+                                                    ?>
+                                                    <b>Cidade:</b> <?= $municipio->nome ?><br>
+                                                    <b>Endereço: </b><?= $local->endereco?> <?= $local->numero?>
                                                 </p>
+                                            </div>
+                                            <div class="ratings" style="margin-bottom: 4%;">
+                                                <p>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                <span class="pull-right">Avaliações</span>
+                                                </p>
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                         <?php endforeach;?>
                     </div>
             </div>
-
-                <div class="col-sm-4 col-lg-4 col-md-4">
-                    <h4>Cadastre a sua quadra!</h4>
-                    <p>Para o cadastro d sua quadra é precisa que você tenha informações validas como, CNPJ e endereço do local</p>
-                    <a class="btn btn-primary" href="ControlerLocal.php?acao=cadastrar&id=<?= $_SESSION['id'] ?>">Cadastrar</a>
-                </div>
+            <div id="paninacao"style="text-align: center;">
+                <ul class="pagination">
+                    <li class="active"><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                </ul>
+            </div>
 
             </div>
 
@@ -231,12 +259,6 @@
 
 </div>
 <!-- /.container -->
-
-<div class="col-md-12">
-
-    <a href="PgEventos"> <img id="imgeventos" src="../../assets/img/eventos.png" style="margin-left: 35%;" href="https://www.youtube.com/">
-    </a>
-</div>
 
 <div class="container">
 

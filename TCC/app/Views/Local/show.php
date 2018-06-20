@@ -60,7 +60,7 @@
                      <div id="exemplo" class="col-md-3">
                          <p class="lead"><?= $local->getNome();?></p>
                          <div class="img-embrulho">
-                             <img src="#" height="320" width="320">
+                             <img src="../../assets/img/Local/<?= $local->foto ?>" height="320" width="320">
                          </div>
                          <br>
                          <p><?= $local->getDescricao();?></p>
@@ -72,11 +72,10 @@
                          <div class="list-group">
                              <a class="list-group-item"><b>Estado: </b><?php $id = $local->id_estado;
                                                                              $estado = getEstado($id);
-                                                                             print_r($estado);
-                                                                        ?></a>
+                                                                             echo $estado->nome ?></a>
                              <a class="list-group-item"><b>Cidade: </b><?php $id = $local->id_municipio;
                                                                              $municipio = getMunicipio($id);
-                                                                             print_r($municipio); ?></a>
+                                                                             echo $municipio->nome ?></a>
                              <a class="list-group-item"><b>Endereço: </b> <?= $local->endereco ?> <?= $local->numero ?></a>
                          </div>
                     <p class="lead">Contato</p>
@@ -110,12 +109,7 @@
                 <input type="text"  placeholder="Digite seu comentario">
                 <button type="submit" class="btn-success">Comentar</button>
             </form>
-            <br>
-        <div class="col-md-3">
 
-            <a href="../PgEventos"> <img id="imgeventos" src="../../assets/img/eventos.png" style="margin-left: 35%;" href="">
-            </a>
-        </div>
     <!-- Icones -->
     <script src="https://use.fontawesome.com/6114c79283.js"></script>
     <!-- jQuery -->
