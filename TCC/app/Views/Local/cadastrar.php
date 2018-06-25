@@ -116,7 +116,7 @@
             <p>Endereco:</p>
 
                 <input id="endereco" class="input" type="text"  name="endereco" placeholder="Endereço" required>
-                <input id="numero" class="input" type="text"  name="numero" placeholder="Nº" required>
+                <input id="numero" class="input" type="text"  name="numero" placeholder="Nº">
 
             </div>
             <?php

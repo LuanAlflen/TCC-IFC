@@ -71,7 +71,6 @@ switch ($action) {
                 echo "Todos os campos devem ser preenchidos";
             } else {
 
-                echo "tudo certo";
                 $local = new Local(
                     $nomeArquivo,
                     $_POST['nome'],

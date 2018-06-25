@@ -86,7 +86,6 @@ class LocalCrud
                 '{$local->getIdMunicipio()}', 
                 '{$local->getIdCategoria()}',
                 '{$local->getIdUsuario()}')";
-        echo $sql;
         try {//TENTA EXECUTAR A INSTRUCAO
 
             $this->conexao->exec($sql);

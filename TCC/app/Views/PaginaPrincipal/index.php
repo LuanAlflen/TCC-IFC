@@ -45,25 +45,16 @@
             });
         });
 
-        /////////////////////////FILTRO DE LOCALIZACAO///////////////////////////////////////////////////
-        $(document).ready(function (){
-            $("#localizacao form select").click(function () {
-                var meuId = $("#estados option:selected").val();
-                //COMPARA O ID_ESTADO DOS LOCAIS COM A CLASSE DOS LOCAIS
-                alert(meuId);
-                //$("."+meuId).fadeToggle();
-            });
-        });
+
+        /////////////////// ESTADOS E MUNICIPIOS SENDO PREENCHIDO VIA API////////////////////////////
 
         $(function(){
-
-            /////////////////// ESTADOS E MUNICIPIOS SENDO PREENCHIDO VIA API////////////////////////////
 
             $('#estados').change(function(){
                 if( $(this).val() ) {
                     $(".local").hide();
                     var id_estado = $(this).val();
-                    $("."+id_estado).toggle();
+                    $("."+id_estado).fadeToggle();
 
                     $('#municipios').hide();
 
@@ -95,7 +86,6 @@
                 }
             });
         })
-
     </script>
 
 </head>
