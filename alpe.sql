@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
--- https://www.phpmyadmin.net/
+-- version 4.5.4.1deb2ubuntu2
+-- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: 16-Jun-2018 às 05:23
--- Versão do servidor: 10.1.29-MariaDB
--- PHP Version: 7.2.0
+-- Host: localhost
+-- Tempo de geração: 25/06/2018 às 16:51
+-- Versão do servidor: 5.7.21-0ubuntu0.16.04.1
+-- Versão do PHP: 7.0.22-0ubuntu0.16.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -19,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `alpe`
+-- Banco de dados: `alpe`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `categoria`
+-- Estrutura para tabela `categoria`
 --
 
 CREATE TABLE `categoria` (
@@ -34,7 +32,7 @@ CREATE TABLE `categoria` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `categoria`
+-- Fazendo dump de dados para tabela `categoria`
 --
 
 INSERT INTO `categoria` (`id_categoria`, `nome`) VALUES
@@ -46,7 +44,21 @@ INSERT INTO `categoria` (`id_categoria`, `nome`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `locais`
+-- Estrutura para tabela `comentarios`
+--
+
+CREATE TABLE `comentarios` (
+  `id_comentario` int(11) NOT NULL,
+  `data` datetime NOT NULL,
+  `texto` varchar(1000) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `id_local` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `locais`
 --
 
 CREATE TABLE `locais` (
@@ -55,7 +67,7 @@ CREATE TABLE `locais` (
   `nome` varchar(150) NOT NULL,
   `email` varchar(150) NOT NULL,
   `endereco` varchar(150) NOT NULL,
-  `numero` int(11) NOT NULL,
+  `numero` int(11) DEFAULT NULL,
   `telefone` int(15) NOT NULL,
   `descricao` varchar(300) NOT NULL,
   `id_estado` int(11) NOT NULL,
@@ -65,18 +77,20 @@ CREATE TABLE `locais` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `locais`
+-- Fazendo dump de dados para tabela `locais`
 --
 
 INSERT INTO `locais` (`id_local`, `foto`, `nome`, `email`, `endereco`, `numero`, `telefone`, `descricao`, `id_estado`, `id_municipio`, `id_categoria`, `id_usuario`) VALUES
 (22, '1606201801490812kWin.jpg', 'Quadra de volei', 'teste@mail.com', 'Adolfo da Veiga', 2611, 898989989, 'bem-vindo a essa quadra maravilhosa que vai ser cadastrada', 42, 4209102, 3, 24),
 (23, '15062018072901PrimeiraWinFPP.jpg', 'Vila Belmiro', 'luan.alflen4@gmail.com', 'Rua Princesa Isabel', 501, 9899595, 'Agora quem da bola Ã© o santos', 35, 3548500, 1, 15),
-(24, '1606201805051920180516183741_1.jpg', 'casa do hugo', 'a@a', 'Zozimo de oliveira', 117, 98959, 'bla', 42, 4209102, 4, 24);
+(24, '1606201805051920180516183741_1.jpg', 'casa do hugo', 'a@a', 'Zozimo de oliveira', 117, 98959, 'bla', 42, 4209102, 4, 24),
+(25, '', 'MansÃ£o Leonardo(ruivo)', 'pagodenamansao@gmail.com', 'Rua JoÃ£o Costa Junior', 22, 11111111, 'mansao beeem grandeee', 42, 4209102, 1, 32),
+(27, '25062018040630robo.png', 'Quadra IFC', 'ifc@ifc.edu.br', 'Rodovia BR 280, km 27 - CÃ¢mpus Araquari, Araquari - SC, 89245-000', 27, 87864684, 'bla bland kdjndk ', 42, 4201307, 4, 24);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `usuarios`
+-- Estrutura para tabela `usuarios`
 --
 
 CREATE TABLE `usuarios` (
@@ -92,7 +106,7 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `usuarios`
+-- Fazendo dump de dados para tabela `usuarios`
 --
 
 INSERT INTO `usuarios` (`id_usuario`, `foto`, `nome`, `login`, `senha`, `telefone`, `email`, `cpf`, `tipuser`) VALUES
@@ -103,20 +117,29 @@ INSERT INTO `usuarios` (`id_usuario`, `foto`, `nome`, `login`, `senha`, `telefon
 (27, '', 'Limpeza', 'limpo', '1', 989596595, 'limpo@limpo.com', 959595, 1),
 (28, '02062018090119profile.png', 'oi1', 'ooii', '1', 8987, 'oi@oi.com', 987897897, 1),
 (30, '0606201811153712k.jpg', 'teste0', 'teste0', '1', 9898, 'teste@mail.com', 989898, 1),
-(31, '', 'oi', 'teste2', '1', 4545, 'sdf@asdad', 545, 1);
+(31, '', 'oi', 'teste2', '1', 4545, 'sdf@asdad', 545, 1),
+(32, '', 'Leonardo THe Gostosso', 'pagode123', 'pagode123', 2222222, 'pagode@god.pa', 22222222, 1);
 
 --
--- Indexes for dumped tables
+-- Índices de tabelas apagadas
 --
 
 --
--- Indexes for table `categoria`
+-- Índices de tabela `categoria`
 --
 ALTER TABLE `categoria`
   ADD PRIMARY KEY (`id_categoria`);
 
 --
--- Indexes for table `locais`
+-- Índices de tabela `comentarios`
+--
+ALTER TABLE `comentarios`
+  ADD PRIMARY KEY (`id_comentario`),
+  ADD KEY `id_usuario` (`id_usuario`),
+  ADD KEY `id_local` (`id_local`);
+
+--
+-- Índices de tabela `locais`
 --
 ALTER TABLE `locais`
   ADD PRIMARY KEY (`id_local`),
@@ -124,44 +147,52 @@ ALTER TABLE `locais`
   ADD KEY `id_categoria` (`id_categoria`);
 
 --
--- Indexes for table `usuarios`
+-- Índices de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id_usuario`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de tabelas apagadas
 --
 
 --
--- AUTO_INCREMENT for table `categoria`
+-- AUTO_INCREMENT de tabela `categoria`
 --
 ALTER TABLE `categoria`
   MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
--- AUTO_INCREMENT for table `locais`
+-- AUTO_INCREMENT de tabela `comentarios`
+--
+ALTER TABLE `comentarios`
+  MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de tabela `locais`
 --
 ALTER TABLE `locais`
-  MODIFY `id_local` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
-
+  MODIFY `id_local` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 --
--- AUTO_INCREMENT for table `usuarios`
+-- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+--
+-- Restrições para dumps de tabelas
+--
 
 --
--- Constraints for dumped tables
+-- Restrições para tabelas `comentarios`
 --
+ALTER TABLE `comentarios`
+  ADD CONSTRAINT `comentarios_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`),
+  ADD CONSTRAINT `comentarios_ibfk_2` FOREIGN KEY (`id_local`) REFERENCES `locais` (`id_local`);
 
 --
--- Limitadores para a tabela `locais`
+-- Restrições para tabelas `locais`
 --
 ALTER TABLE `locais`
   ADD CONSTRAINT `locais_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`),
   ADD CONSTRAINT `locais_ibfk_2` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id_categoria`);
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
