@@ -130,4 +130,18 @@ class ComentarioCrud
         return $Listacomentario;
     }
 
+    public function insereComentario(Comentario $comentario){
+        //$data = date_create('now')->format('Y-m-d H:i:s');
+        $sql = "INSERT INTO comentarios (texto, id_usuario,id_local) 
+                values ('{$comentario->getTexto()}','{$comentario->getIdUsuario()}','{$comentario->getIdLocal()}')";
+
+        try {//TENTA EXECUTAR A INSTRUCAO
+
+            echo $sql;
+            $this->conexao->exec($sql);
+        } catch (PDOException $e) {//EM CASO DE ERRO, CAPTURA A MENSAGEM
+            return $e->getMessage();
+        }
+    }
+
 }

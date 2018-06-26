@@ -10,13 +10,11 @@
 class Comentario
 {
     public $id_comentario;
-    public $data;
     public $texto;
     public $id_usuario;
     public $id_local;
 
-    public function __construct($data=null, $texto=null,$id_usuario=null,$id_local=null, $id_comentario=null){
-        $this->data = $data;
+    public function __construct($texto=null,$id_usuario=null,$id_local=null, $id_comentario=null){
         $this->texto = $texto;
         $this->id_usuario = $id_usuario;
         $this->id_local = $id_local;
@@ -37,22 +35,6 @@ class Comentario
     public function setId($id)
     {
         $this->id = $id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getData()
-    {
-        return $this->data;
-    }
-
-    /**
-     * @param mixed $data
-     */
-    public function setData($data)
-    {
-        $this->data = $data;
     }
 
     /**

@@ -2,6 +2,8 @@
 
     require_once __DIR__."/../Models/LocalCrud.php";
     require_once __DIR__."/../Models/CategoriaCrud.php";
+    require_once __DIR__."/../Models/UsuarioCrud.php";
+    require_once __DIR__."/../Models/ComentarioCrud.php";
 
     $crud = new LocalCrud();
     $listaLocais = $crud->getLocais();

@@ -192,7 +192,7 @@
                                             <div class="caption">
                                                 <h4>
                                                     <?= $local->nome?>
-                                                    <a class="btn btn-primary pull-right" href="ControlerLocal.php?acao=show&idlocal=<?= $local->id_local ?>">Ver +</a>
+                                                    <a class="btn btn-primary pull-right" href="ControlerLocal.php?acao=show&idlocal=<?= $local->id_local ?>&iduser=<?= $_SESSION['id'] ?>">Ver +</a>
                                                 </h4>
                                                 <p>
                                                     <b>Categoria: </b> <?php

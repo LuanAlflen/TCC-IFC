@@ -96,6 +96,7 @@
 
         <h2>Avaliações</h2>
 
+        <!-- ////////////////////FAZER UM FOREACH EXIBINDO TODOS OS COMENTARIOS DESSE LOCAL//////////////////////////// -->
             <br>
             <i style="float: left" class="fa fa-user-circle" aria-hidden="true"></i>
             <p style="float: left"><b>João:</b></p>
@@ -105,8 +106,10 @@
             <p style="float: left"><b>Pedro:</b></p>
             <br><p>Quadra boa, mas a falta de estacionamento atrapalha!  <i class="fa fa-thumbs-o-up" aria-hidden="true"></i><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></p>
 
-            <form>
-                <input type="text"  placeholder="Digite seu comentario">
+            <form method="post" action="ControlerComentario.php?acao=cadastrar">
+                <input type="text" name="texto" placeholder="Digite seu comentario">
+                <input type="hidden" name="iduser" value="<?= $_GET['iduser']; ?>">
+                <input type="hidden" name="idlocal" value="<?= $local->id_local; ?>">
                 <button type="submit" class="btn-success">Comentar</button>
             </form>
 

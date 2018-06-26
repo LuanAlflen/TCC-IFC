@@ -2,6 +2,7 @@
     require '../../app/Models/UsuarioCrud.php';
     require '../../app/Models/LocalCrud.php';
     require '../../app/Models/CategoriaCrud.php';
+    require '../../app/Models/ComentarioCrud.php';
 
     if (isset($_GET['acao'])){
         $action = $_GET['acao'];
