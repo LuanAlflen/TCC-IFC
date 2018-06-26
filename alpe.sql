@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Tempo de geração: 25/06/2018 às 16:51
+-- Tempo de geração: 26/06/2018 às 09:27
 -- Versão do servidor: 5.7.21-0ubuntu0.16.04.1
 -- Versão do PHP: 7.0.22-0ubuntu0.16.04.1
 
@@ -49,11 +49,20 @@ INSERT INTO `categoria` (`id_categoria`, `nome`) VALUES
 
 CREATE TABLE `comentarios` (
   `id_comentario` int(11) NOT NULL,
-  `data` datetime NOT NULL,
+  `data` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `texto` varchar(1000) NOT NULL,
   `id_usuario` int(11) NOT NULL,
   `id_local` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Fazendo dump de dados para tabela `comentarios`
+--
+
+INSERT INTO `comentarios` (`id_comentario`, `data`, `texto`, `id_usuario`, `id_local`) VALUES
+(1, '2018-06-26 12:18:44', 'teste', 24, 27),
+(2, '2018-06-26 12:23:46', 'outro teste', 24, 27),
+(3, '2018-06-26 12:24:04', 'outro teste', 24, 27);
 
 -- --------------------------------------------------------
 
@@ -165,7 +174,7 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de tabela `comentarios`
 --
 ALTER TABLE `comentarios`
-  MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de tabela `locais`
 --
