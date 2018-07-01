@@ -67,9 +67,9 @@
                                                                                 $iduser = $local->id_usuario;
                                                                                 echo $iduser;?>">Minhas quadras</a></li>
                         <li><a href="ControlerLocal.php?acao=editar&idlocal=<?= $idlocal ?>">Editar</a></li>
-                        <li><a href="ControlerLocal.php?acao=excluir&idlocal=<?= $idlocal ?>">Excluir estabelecimento</a></li>
+                        <li><a href="ControlerLocal.php?acao=excluir&idlocal=<?= $idlocal ?>">Excluir quadra</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="?acao=logout">Sair</a></li>
+                        <li><a href="ControlerUsuario.php?acao=logout">Sair</a></li>
                     </ul>
                     <form class="navbar-form pull-right">
                         <div class="form-group">

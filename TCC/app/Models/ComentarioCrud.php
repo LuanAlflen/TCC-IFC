@@ -120,7 +120,7 @@ class ComentarioCrud
         foreach ($comentarios as $comentario) {
             $data = $comentario['data'];
             $texto = $comentario['texto'];
-            $id_user = $comentario['id_user'];
+            $id_user = $comentario['id_usuario'];
             $id_local = $comentario['id_local'];
             $id_comentario = $comentario['id_comentario'];
 
@@ -138,6 +138,18 @@ class ComentarioCrud
         try {//TENTA EXECUTAR A INSTRUCAO
 
             echo $sql;
+            $this->conexao->exec($sql);
+        } catch (PDOException $e) {//EM CASO DE ERRO, CAPTURA A MENSAGEM
+            return $e->getMessage();
+        }
+    }
+
+
+    public function deleteComentario($idcomentario){
+
+        $sql = "DELETE FROM comentarios WHERE id_comentario = '{$idcomentario}'";
+        try {//TENTA EXECUTAR A INSTRUCAO
+
             $this->conexao->exec($sql);
         } catch (PDOException $e) {//EM CASO DE ERRO, CAPTURA A MENSAGEM
             return $e->getMessage();

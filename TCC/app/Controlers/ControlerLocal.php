@@ -37,8 +37,8 @@ switch ($action) {
     case 'show':
 
         $idlocal = $_GET['idlocal'];
-        $crud = new LocalCrud();
-        $local = $crud->getLocal($idlocal);
+        $crudLocal = new LocalCrud();
+        $local = $crudLocal->getLocal($idlocal);
         include "../Views/Template/Cabecalholocal.php";
         include "../Views/Local/show.php";
         include "../Views/Template/Rodape.php";

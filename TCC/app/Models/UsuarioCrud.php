@@ -74,6 +74,34 @@ class UsuarioCrud
 
     }
 
+    public function getUsuarioId($iduser)
+    {
+        //RETORNA UMA CATEGORIA, DADO UM ID
+
+        //FAZER A CONSULTA
+        $sql = "select * from usuarios where id_usuario='{$iduser}'";
+        $resultado = $this->conexao->query($sql);
+
+        //FETCH - TRANSFORMA O RESULTADO EM UM ARRAY ASSOCIATIVO
+        $usuario = $resultado->fetch(PDO::FETCH_ASSOC);
+
+        //CRIAR OBJETO DO TIPO CATEGORIA - USANDO OS VALORES DA CONSULTA
+        $objetoUsuario = new Usuario(
+            $usuario['foto'],
+            $usuario['nome'],
+            $usuario['login'],
+            $usuario['senha'],
+            $usuario['email'],
+            $usuario['telefone'],
+            $usuario['cpf'],
+            $usuario['tipuser'],
+            $usuario['id_usuario']
+        );
+
+        //RETORNAR UM OBJETO CATEGORIA COM OS VALORES
+        return $objetoUsuario;
+
+    }
 
     public function getUsuarios()
     {

@@ -188,5 +188,12 @@ class LocalCrud
         }
     }
 
+    public function existeComentarios($idlocal){
+        $sql = $this->conexao->prepare("SELECT * FROM comentarios WHERE id_local = '{$idlocal}'");
+        $sql->execute();
+        $resultado = $sql->rowCount();
+        return $resultado;
+    }
+
 
 }

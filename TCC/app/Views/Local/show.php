@@ -16,6 +16,7 @@
     <!-- site de custumização do bootstrap -->
     <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">-->
     <!-- Custom CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link href="../../assets/css/shop-homepage.css" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/css/style.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -46,6 +47,7 @@
                         status);
                 }
             });
+
         }
     </script>
     <script async defer
@@ -98,19 +100,45 @@
 
         <!-- ////////////////////FAZER UM FOREACH EXIBINDO TODOS OS COMENTARIOS DESSE LOCAL//////////////////////////// -->
             <br>
-            <i style="float: left" class="fa fa-user-circle" aria-hidden="true"></i>
-            <p style="float: left"><b>João:</b></p>
-            <br><p>Gostei muito da quadra!  <i class="fa fa-thumbs-o-up" aria-hidden="true"></i><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></p>
+        <?php
 
-            <i style="float: left" class="fa fa-user-circle" aria-hidden="true"></i>
-            <p style="float: left"><b>Pedro:</b></p>
-            <br><p>Quadra boa, mas a falta de estacionamento atrapalha!  <i class="fa fa-thumbs-o-up" aria-hidden="true"></i><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></p>
+        $resultado = $crudLocal->existeComentarios($idlocal);
+
+        if ($resultado == 0){
+            echo "<p>Este local não possui comentarios.</p>";
+        }else {
+            $crudComentario = new ComentarioCrud();
+            $comentarios = $crudComentario->getComentariosLocal($idlocal);
+
+            foreach ($comentarios as $comentario):
+                ?>
+                <div class="<?= $comentario->id_usuario ?>" style="border-top: 2px solid #000; margin-bottom: 2%">
+                    <p style="float: left"><i class="fa fa-user-circle"
+                                              aria-hidden="true"></i><b><?php $iduser = $comentario->id_usuario;
+                            $crud = new UsuarioCrud();
+                            $usuario = $crud->getUsuarioId($iduser);
+                            $nome = $usuario->getNome();
+                            echo $nome; ?></b></p>
+                    <br>
+                    <p>
+                        <?= $comentario->texto ?>
+                        <a id="excluir"href="ControlerComentario.php?acao=excluir&idcomentario=<?= $comentario->id_comentario; ?>&idusercomentario=<?= $comentario->id_usuario ?>&iduserlogado=<?= $_GET['iduser'] ?>&idlocal=<?= $_GET['idlocal'] ?>"class="fa fa-trash"></a>
+                    </p>
+                    <?php
+                    if (@$_GET['erro'] == 1){?>
+                        <div class="error-text" style="color: red">Só é possivel excluir seus prórios comentarios</div>
+                    <?php } ?>
+                </div>
+            <?php
+            endforeach;
+        }
+        ?>
 
             <form method="post" action="ControlerComentario.php?acao=cadastrar">
                 <input type="text" name="texto" placeholder="Digite seu comentario">
                 <input type="hidden" name="iduser" value="<?= $_GET['iduser']; ?>">
                 <input type="hidden" name="idlocal" value="<?= $local->id_local; ?>">
-                <button type="submit" class="btn-success">Comentar</button>
+                <button type="submit" class="bnt btn-success">Comentar</button>
             </form>
 
     <!-- Icones -->
