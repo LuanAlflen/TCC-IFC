@@ -100,7 +100,8 @@ class LocalCrud
         $resultado = $sql->rowCount();
 
         if($resultado == 0){
-            header("Location: ?acao=login&erro=4");
+            $iduser = $_GET['id'];
+            header("Location: ControlerLocal.php?iduser=$iduser&erro=1");
             die;
         }else{
             $sql = "SELECT * FROM locais WHERE id_usuario = $id";
@@ -195,5 +196,38 @@ class LocalCrud
         return $resultado;
     }
 
+    public function validaBusca($busca){
+        $sql = $this->conexao->prepare("SELECT * FROM locais WHERE nome LIKE '%{$busca}%'");
+        $sql->execute();
+        $resultado = $sql->rowCount();
+        return $resultado;
+    }
+
+    public function buscaLocais($busca){
+        $sql = "SELECT * FROM locais WHERE nome LIKE '%{$busca}%'";
+
+        $resultado = $this->conexao->query($sql);
+
+        $locais = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($locais as $local) {
+            $foto = $local['foto'];
+            $nome = $local['nome'];
+            $email = $local['email'];
+            $endereco = $local['endereco'];
+            $numero = $local['numero'];
+            $telefone = $local['telefone'];
+            $descricao = $local['descricao'];
+            $estados = $local['id_estado'];
+            $municipios = $local['id_municipio'];
+            $idcategoria = $local['id_categoria'];
+            $iduser = $local['id_usuario'];
+            $idlocal = $local['id_local'];
+
+            $obj = new Local($foto,$nome, $email, $endereco, $numero, $telefone, $descricao, $estados, $municipios, $idcategoria, $iduser, $idlocal);
+            $Listalocal[] = $obj;
+        }
+        return $Listalocal;
+    }
 
 }

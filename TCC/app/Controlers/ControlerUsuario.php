@@ -85,17 +85,8 @@ switch ($action) {
             if ($resultado == 0) {
                 header("Location: ?acao=login&erro=1");
             } else {
-                session_start();
-                $_SESSION['id'] = $user->getId();
-                $crudLocal = new LocalCrud();
-                $locais = $crudLocal->getLocais();
-                $crudCat = new CategoriaCrud();
-                $categorias = $crudCat->getCategorias();
-
-                //include "../Models/restrito.php";
-                include "../Views/Template/Cabecalho.php";
-                include "../Views/PaginaPrincipal/index.php";
-                include "../Views/Template/Rodape.php";
+                $iduser = $user->getId();
+                header("Location: ControlerLocal.php?iduser=$iduser");
             }
         }
             break;

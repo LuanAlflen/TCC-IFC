@@ -71,12 +71,7 @@
                         <li role="separator" class="divider"></li>
                         <li><a href="ControlerUsuario.php?acao=logout">Sair</a></li>
                     </ul>
-                    <form class="navbar-form pull-right">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Buscar">
-                        </div>
-                        <button type="submit" class="btn btn-default">Pesquisar</button>
-                    </form>
+
 
             </ul>
         </div>

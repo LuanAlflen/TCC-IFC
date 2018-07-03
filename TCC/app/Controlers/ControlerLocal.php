@@ -34,6 +34,57 @@ function getMunicipio($id){
 
 switch ($action) {
 
+    case 'index':
+
+        if (isset($_POST['busca'])){
+            //FAZ A BUSCA POR NOME DOS LOCAIS
+            $busca = $_POST['busca'];
+            $crudLocal = new LocalCrud();
+            $resultado = $crudLocal->validaBusca($busca);
+            //VERIFICA SE A BUSCA DO LOCAL EXISTE, SE NÃO, EXIBE UMA MENSAGEM DE ERRO, SE SIM, MOSTRA APENAS OS LOCAIS PROCURADOS
+            if ($resultado == 0){
+                session_start();
+                $_SESSION['id'] = $_GET['iduser'];
+                $crudCat = new CategoriaCrud();
+                $categorias = $crudCat->getCategorias();
+
+                //include "../Models/restrito.php";
+                include "../Views/Template/Cabecalho.php";
+                include "../Views/PaginaPrincipal/index.php";
+                include "../Views/Template/Rodape.php";
+            }else{
+                session_start();
+                $_SESSION['id'] = $_GET['iduser'];
+                //PARA EXIBIR TODOS OS LOCAIS
+                $crudLocal = new LocalCrud();
+                $locais = $crudLocal->buscaLocais($busca);
+                $crudCat = new CategoriaCrud();
+                $categorias = $crudCat->getCategorias();
+
+                //include "../Models/restrito.php";
+                include "../Views/Template/Cabecalho.php";
+                include "../Views/PaginaPrincipal/index.php";
+                include "../Views/Template/Rodape.php";
+            }
+        }else{
+            session_start();
+            $_SESSION['id'] = $_GET['iduser'];
+            //PARA EXIBIR TODOS OS LOCAIS
+            $resultado = 1;
+            $crudLocal = new LocalCrud();
+            $locais = $crudLocal->getLocais();
+            $crudCat = new CategoriaCrud();
+            $categorias = $crudCat->getCategorias();
+
+            //include "../Models/restrito.php";
+            include "../Views/Template/Cabecalho.php";
+            include "../Views/PaginaPrincipal/index.php";
+            include "../Views/Template/Rodape.php";
+        }
+
+
+        break;
+
     case 'show':
 
         $idlocal = $_GET['idlocal'];

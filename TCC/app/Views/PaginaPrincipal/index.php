@@ -91,6 +91,11 @@
 </head>
 
 <body>
+<!-- CASO USUARIO NÃO POSSUI QUADRA E CLIQUE MINHA QUADRAS EXIBE A MENSAGEM DE ERRO-->
+<?php
+if (@$_GET['erro'] == 1){?>
+    <?php echo "<script>alert('Você não possui locais cadastrados!')</script>"; ?>
+<?php } ?>
 <!-- Navigation -->
 
 
@@ -180,55 +185,63 @@
 
             <div class="row">
                     <div id="conteudos">
-                        <?php foreach($locais as $local): ?>
-                                <div class="local <?= $local->id_categoria ?> <?= $local->id_estado ?> <?= $local->id_municipio ?>">
-                                    <div class="col-sm-4 col-lg-4 col-md-4">
-                                        <div class="thumbnail">
+                        <?php
+                            if ($resultado == 0){
+                                echo "<p>Este local não existe!</p>";
+                            }else {
+                                ?>
+                                <?php foreach ($locais as $local): ?>
+                                    <div class="local <?= $local->id_categoria ?> <?= $local->id_estado ?> <?= $local->id_municipio ?>">
+                                        <div class="col-sm-4 col-lg-4 col-md-4">
+                                            <div class="thumbnail">
 
-                                            <div class="img-embrulho">
-                                                <img src="../../assets/img/Local/<?= $local->foto ?>" alt="">
-                                            </div>
+                                                <div class="img-embrulho">
+                                                    <img src="../../assets/img/Local/<?= $local->foto ?>" alt="">
+                                                </div>
 
-                                            <div class="caption">
-                                                <h4>
-                                                    <?= $local->nome?>
-                                                    <a class="btn btn-primary pull-right" href="ControlerLocal.php?acao=show&idlocal=<?= $local->id_local ?>&iduser=<?= $_SESSION['id'] ?>">Ver +</a>
-                                                </h4>
-                                                <p>
-                                                    <b>Categoria: </b> <?php
-                                                    $idcat = $local->id_categoria;
-                                                    $crudCat   = new CategoriaCrud();
-                                                    $categoria = $crudCat->getCategoria($idcat);
-                                                    echo $categoria->nome;
-                                                    ?>.<br>
-                                                    <b>Estado:</b> <?php $id = $local->id_estado;
-                                                                        $estado = getEstado($id);
-                                                                        echo $estado->nome;
-                                                    ?><br>
-                                                    <?php
-                                                    $id = $local->id_municipio;
-                                                    $municipio = getMunicipio($id);
+                                                <div class="caption">
+                                                    <h4>
+                                                        <?= $local->nome ?>
+                                                        <a class="btn btn-primary pull-right"
+                                                           href="ControlerLocal.php?acao=show&idlocal=<?= $local->id_local ?>&iduser=<?= $_SESSION['id'] ?>">Ver
+                                                            +</a>
+                                                    </h4>
+                                                    <p>
+                                                        <b>Categoria: </b> <?php
+                                                        $idcat = $local->id_categoria;
+                                                        $crudCat = new CategoriaCrud();
+                                                        $categoria = $crudCat->getCategoria($idcat);
+                                                        echo $categoria->nome;
+                                                        ?>.<br>
+                                                        <b>Estado:</b> <?php $id = $local->id_estado;
+                                                        $estado = getEstado($id);
+                                                        echo $estado->nome;
+                                                        ?><br>
+                                                        <?php
+                                                        $id = $local->id_municipio;
+                                                        $municipio = getMunicipio($id);
 
-                                                    ?>
-                                                    <b>Cidade:</b> <?= $municipio->nome ?><br>
-                                                    <b>Endereço: </b><?= $local->endereco?> <?= $local->numero?>
-                                                </p>
-                                            </div>
-                                            <div class="ratings" style="margin-bottom: 4%;">
-                                                <p>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="pull-right">Avaliações</span>
-                                                </p>
+                                                        ?>
+                                                        <b>Cidade:</b> <?= $municipio->nome ?><br>
+                                                        <b>Endereço: </b><?= $local->endereco ?> <?= $local->numero ?>
+                                                    </p>
+                                                </div>
+                                                <div class="ratings" style="margin-bottom: 4%;">
+                                                    <p>
+                                                        <span class="glyphicon glyphicon-star"></span>
+                                                        <span class="glyphicon glyphicon-star"></span>
+                                                        <span class="glyphicon glyphicon-star"></span>
+                                                        <span class="glyphicon glyphicon-star"></span>
+                                                        <span class="glyphicon glyphicon-star"></span>
+                                                        <span class="pull-right">Avaliações</span>
+                                                    </p>
 
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                        <?php endforeach;?>
+                                <?php endforeach; ?>
+                            <?php } ?>
                     </div>
             </div>
             <div id="paninacao"style="text-align: center;">

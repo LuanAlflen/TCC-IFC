@@ -61,17 +61,17 @@
                     <a href="#" class="dropdown-toggle pull-right" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <!-- ícone do user --> <i class="fa fa-user-o" aria-hidden="true"></i>
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="?acao=contato">Contato</a></li>
-                        <li><a href="?acao=show&id=<?= $_SESSION['id'] ?>">Minhas quadras</a></li>
+                        <li><a href="ControlerUsuario.php?acao=contato">Contato</a></li>
+                        <li><a href="ControlerUsuario.php?acao=show&id=<?= $_SESSION['id'] ?>">Minhas quadras</a></li>
                         <li><a href="ControlerLocal.php?acao=cadastrar&id=<?= $_SESSION['id'] ?>">Cadastrar quadra</a></li>
-                        <li><a href="?acao=editar&login=<?= $_SESSION['login'] ?>">Editar</a></li>
-                        <li><a href="?acao=excluir&id=<?= $_SESSION['id'] ?>">Excluir conta</a></li>
+                        <li><a href="ControlerUsuario.php?acao=editar&login=<?= $_SESSION['login'] ?>">Editar</a></li>
+                        <li><a href="ControlerUsuario.php?acao=excluir&id=<?= $_SESSION['id'] ?>">Excluir conta</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="?acao=logout">Sair</a></li>
+                        <li><a href="ControlerUsuario.php?acao=logout">Sair</a></li>
                     </ul>
-                    <form class="navbar-form pull-right">
+                    <form class="navbar-form pull-right" method="post" action="ControlerLocal.php?iduser=<?= $_SESSION['id'] ?>">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Buscar">
+                            <input type="text" class="form-control" placeholder="Buscar" name="busca">
                         </div>
                         <button type="submit" class="btn btn-default">Pesquisar</button>
                     </form>
