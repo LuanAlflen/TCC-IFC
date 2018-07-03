@@ -30,12 +30,22 @@
         }
     </style>
     <script>
+        <?php
+        $id = $local->id_estado;
+        $estado = getEstado($id);
+
+        $id = $local->id_municipio;
+        $municipio = getMunicipio($id);
+        ?>
+
         function initMap() {
             var map = new google.maps.Map(document.getElementById('map'), {zoom: 16});
             var geocoder = new google.maps.Geocoder;
+            var estado = "<?= $estado->sigla ?>";
+            var municipio = "<?= $municipio->nome ?>";
             var endereco = "<?= $local->endereco ?>";
             var numero = "<?= $local->numero ?>";
-            geocoder.geocode({'address': endereco+numero}, function(results, status) {
+            geocoder.geocode({'address': endereco + ' ' + numero + ' ' + municipio + ' ' + estado}, function(results, status) {
                 if (status === 'OK') {
                     map.setCenter(results[0].geometry.location);
                     new google.maps.Marker({
@@ -43,8 +53,7 @@
                         position: results[0].geometry.location
                     });
                 } else {
-                    window.alert('Geocode was not successful for the following reason: ' +
-                        status);
+                    window.alert('Não foi encontrado nenhum endereço com: '+ endereco + ' ' + numero +  ', ' + municipio + ' ' + estado);
                 }
             });
 
