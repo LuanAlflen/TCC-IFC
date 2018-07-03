@@ -81,12 +81,8 @@
                  <div class="col-md-4">
                     <p class="lead">Informações</p>
                          <div class="list-group">
-                             <a class="list-group-item"><b>Estado: </b><?php $id = $local->id_estado;
-                                                                             $estado = getEstado($id);
-                                                                             echo $estado->nome ?></a>
-                             <a class="list-group-item"><b>Cidade: </b><?php $id = $local->id_municipio;
-                                                                             $municipio = getMunicipio($id);
-                                                                             echo $municipio->nome ?></a>
+                             <a class="list-group-item"><b>Estado: </b><?= $estado->nome ?></a>
+                             <a class="list-group-item"><b>Cidade: </b><?= $municipio->nome ?></a>
                              <a class="list-group-item"><b>Endereço: </b> <?= $local->endereco ?> <?= $local->numero ?></a>
                          </div>
                     <p class="lead">Contato</p>
@@ -123,7 +119,7 @@
                 ?>
                 <div class="<?= $comentario->id_usuario ?>" style="border-top: 2px solid #000; margin-bottom: 2%">
                     <p style="float: left"><i class="fa fa-user-circle"
-                                              aria-hidden="true"></i><b><?php $iduser = $comentario->id_usuario;
+                                              aria-hidden="true"></i> <b><?php $iduser = $comentario->id_usuario;
                             $crud = new UsuarioCrud();
                             $usuario = $crud->getUsuarioId($iduser);
                             $nome = $usuario->getNome();
@@ -133,16 +129,15 @@
                         <?= $comentario->texto ?>
                         <a id="excluir"href="ControlerComentario.php?acao=excluir&idcomentario=<?= $comentario->id_comentario; ?>&idusercomentario=<?= $comentario->id_usuario ?>&iduserlogado=<?= $_GET['iduser'] ?>&idlocal=<?= $_GET['idlocal'] ?>"class="fa fa-trash"></a>
                     </p>
-                    <?php
-                    if (@$_GET['erro'] == 1){?>
-                        <div class="error-text" style="color: red">Só é possivel excluir seus prórios comentarios</div>
-                    <?php } ?>
                 </div>
             <?php
             endforeach;
         }
         ?>
-
+        <?php
+        if (@$_GET['erro'] == 1){?>
+            <div class="error-text" style="color: red">Só é possivel excluir seus prórios comentarios!</div>
+        <?php } ?>
             <form method="post" action="ControlerComentario.php?acao=cadastrar">
                 <input type="text" name="texto" placeholder="Digite seu comentario">
                 <input type="hidden" name="iduser" value="<?= $_GET['iduser']; ?>">
@@ -158,9 +153,6 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="../../assets/js/bootstrap.min.js"></script>
 
-
 </body>
-
-
 
 </html>

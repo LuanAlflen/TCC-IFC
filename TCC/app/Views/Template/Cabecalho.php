@@ -64,7 +64,7 @@
                         <li><a href="ControlerUsuario.php?acao=contato">Contato</a></li>
                         <li><a href="ControlerUsuario.php?acao=show&id=<?= $_SESSION['id'] ?>">Minhas quadras</a></li>
                         <li><a href="ControlerLocal.php?acao=cadastrar&id=<?= $_SESSION['id'] ?>">Cadastrar quadra</a></li>
-                        <li><a href="ControlerUsuario.php?acao=editar&login=<?= $_SESSION['login'] ?>">Editar</a></li>
+                        <li><a href="ControlerUsuario.php?acao=editar&id=<?= $_SESSION['id'] ?>">Editar</a></li>
                         <li><a href="ControlerUsuario.php?acao=excluir&id=<?= $_SESSION['id'] ?>">Excluir conta</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="ControlerUsuario.php?acao=logout">Sair</a></li>

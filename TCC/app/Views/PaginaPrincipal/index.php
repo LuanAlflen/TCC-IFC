@@ -39,10 +39,28 @@
 
             $("#abas ul li").click(function () {
                 $(this).toggleClass("selecionado");
-                var meuId = $(this).attr("id");
-                //COMPARA O ID DAS CATEGORIAS COM A CLASSE DOS LOCAIS
-                $("."+meuId).fadeToggle();
+
+                var esportes = $(this).parent();
+                var selecionados = $(esportes).find(".selecionado");
+
+
+                var classes = '';
+                for (i=0; i<selecionados.length; i++){
+                    var liAtual = selecionados[i];
+                    if ($(liAtual).hasClass("selecionado")){
+                        classes += "."+$(liAtual).attr("id");
+                        if (i !=(selecionados.length - 1)){
+                            classes += ",";
+                        }
+                    }
+                }
+                alert(classes);
+
+                $(".local").hide();
+                $(classes).show();
             });
+            
+
         });
 
 
@@ -146,7 +164,9 @@ if (@$_GET['erro'] == 1){?>
             </div>
         </div>
 
+        <div id="teste">
 
+        </div>
 
         <div class="col-md-9">
 
@@ -199,7 +219,7 @@ if (@$_GET['erro'] == 1){?>
                                                     <img src="../../assets/img/Local/<?= $local->foto ?>" alt="">
                                                 </div>
 
-                                                <div class="caption">
+                                                <div class="caption" style="margin-bottom: 4%;">
                                                     <h4>
                                                         <?= $local->nome ?>
                                                         <a class="btn btn-primary pull-right"
@@ -226,7 +246,7 @@ if (@$_GET['erro'] == 1){?>
                                                         <b>Endereço: </b><?= $local->endereco ?> <?= $local->numero ?>
                                                     </p>
                                                 </div>
-                                                <div class="ratings" style="margin-bottom: 4%;">
+                                                <!--<div class="ratings" style="margin-bottom: 4%;">
                                                     <p>
                                                         <span class="glyphicon glyphicon-star"></span>
                                                         <span class="glyphicon glyphicon-star"></span>
@@ -236,7 +256,7 @@ if (@$_GET['erro'] == 1){?>
                                                         <span class="pull-right">Avaliações</span>
                                                     </p>
 
-                                                </div>
+                                                </div>-->
                                             </div>
                                         </div>
                                     </div>

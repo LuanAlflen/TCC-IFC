@@ -102,9 +102,9 @@ switch ($action) {
     case 'editar':
 
         if(!isset($_POST['gravar'])){ // vai para o form
-            $login = $_GET['login'];
+            $id = $_GET['id'];
             $crud= new UsuarioCrud();
-            $usuario = $crud->getUsuario($login);
+            $usuario = $crud->getUsuarioId($id);
             include "../Views/Usuario/editar.php";
         }else{ // já passou no form e fez submit
             if ($_FILES['foto']['error'] == 0){
