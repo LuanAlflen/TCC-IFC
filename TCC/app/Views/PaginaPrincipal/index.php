@@ -33,33 +33,49 @@
 
     <script>
         /////////////////////////////FILTRO DAS CATEGORIAS/////////////////////////////////////////
+
+
+        function filtra(){
+            var classEstado = '';
+            var estado = $("#estados").val();
+            var classMunicipios = '';
+            var municipios = $("#municipios").val();
+
+
+            if (estado != 0){
+                classEstado = "."+estado;
+            }
+
+            if (municipios != 0){
+                classMunicipios = "."+municipios;
+            }
+
+            $(".local").hide();
+
+            var esportes = $("#categorias")
+            var selecionados = $(esportes).find(".selecionado");
+
+            var classes = '';
+            for (i=0; i<selecionados.length; i++){
+                var liAtual = selecionados[i];
+                if ($(liAtual).hasClass("selecionado")){
+                    classes += "."+$(liAtual).attr("id") + classEstado + classMunicipios ;
+                    if (i !=(selecionados.length - 1)){
+                        classes += ",";
+                    }
+                }
+            }
+            $(classes).show();
+        }
+
         $(document).ready(function (){
             //JA DEIXA TODAS SELECIONADAS
             $("#abas ul li").addClass("selecionado");
 
             $("#abas ul li").click(function () {
                 $(this).toggleClass("selecionado");
-
-                var esportes = $(this).parent();
-                var selecionados = $(esportes).find(".selecionado");
-
-
-                var classes = '';
-                for (i=0; i<selecionados.length; i++){
-                    var liAtual = selecionados[i];
-                    if ($(liAtual).hasClass("selecionado")){
-                        classes += "."+$(liAtual).attr("id");
-                        if (i !=(selecionados.length - 1)){
-                            classes += ",";
-                        }
-                    }
-                }
-                alert(classes);
-
-                $(".local").hide();
-                $(classes).show();
+                filtra();
             });
-            
 
         });
 
@@ -85,12 +101,13 @@
                         }
                         $('#municipios').html(options).show();
                     });
-
-
                 } else {
+
+
                     $('#municipios').html(
                         '<option value="0">-- Selecione um estado --</option>'
                     );
+                    filtra();
                 }
 
 
@@ -101,6 +118,7 @@
                     $(".local").hide();
                     var id_municipio = $(this).val();
                     $("." + id_municipio).toggle();
+                    filtra();
                 }
             });
         })
@@ -127,7 +145,7 @@ if (@$_GET['erro'] == 1){?>
         <div class="col-md-3">
             <p class="lead">Categorias</p>
                 <div class="list-group" id="abas">
-                    <ul>
+                    <ul id="categorias">
                         <?php foreach ($categorias as $categoria):?>
 
                             <li class="list-group-item" id="<?= $categoria->id_categoria ?>"><?= $categoria->nome ?></li>
