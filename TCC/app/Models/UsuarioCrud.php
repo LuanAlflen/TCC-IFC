@@ -21,8 +21,8 @@ class UsuarioCrud
             if ($resultado < 1){
                 //EFETUA A CONEXAO
                 $this->conexao = DBConnection::getConexao();
-                $sql = "insert into usuarios (foto, nome, login, senha, telefone, email, cpf, tipuser)
-                values ('{$user->getFoto()}','{$user->getNome()}','{$user->getLogin()}','{$user->getSenha()}','{$user->getTelefone()}','{$user->getEmail()}','{$user->getCpf()}',1)";
+                $sql = "insert into usuarios (nome, login, senha, telefone, email, cpf, tipuser)
+                values ('{$user->getNome()}','{$user->getLogin()}','{$user->getSenha()}','{$user->getTelefone()}','{$user->getEmail()}','{$user->getCpf()}','comum')";
 
                 try {//TENTA EXECUTAR A INSTRUCAO
                     $this->conexao->exec($sql);
@@ -59,7 +59,6 @@ class UsuarioCrud
 
         //CRIAR OBJETO DO TIPO CATEGORIA - USANDO OS VALORES DA CONSULTA
         $objetoUsuario = new Usuario(
-            $usuario['foto'],
             $usuario['nome'],
             $usuario['login'],
             $usuario['senha'],
@@ -88,7 +87,6 @@ class UsuarioCrud
 
         //CRIAR OBJETO DO TIPO CATEGORIA - USANDO OS VALORES DA CONSULTA
         $objetoUsuario = new Usuario(
-            $usuario['foto'],
             $usuario['nome'],
             $usuario['login'],
             $usuario['senha'],
@@ -113,7 +111,6 @@ class UsuarioCrud
         $usuarios = $resultado->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($usuarios as $usuario) {
-            $foto = $usuario['foto'];
             $nome = $usuario['nome'];
             $login = $usuario['login'];
             $senha = $usuario['senha'];
@@ -122,7 +119,7 @@ class UsuarioCrud
             $cpf = $usuario['cpf'];
             $tipuser = $usuario['tipuser'];
 
-            $obj = new Usuario($foto, $nome, $login, $senha, $email, $telefone, $cpf, $tipuser);
+            $obj = new Usuario($nome, $login, $senha, $email, $telefone, $cpf, $tipuser);
             $listaUsuario[] = $obj;
         }
         return $listaUsuario;
@@ -149,7 +146,6 @@ class UsuarioCrud
         //MONTA O TEXTO DA INSTRUÇÃO SQL DE INSERT
         $sql = "UPDATE usuarios 
                 SET id_usuario = '{$user->getId()}', 
-                foto = '{$user->getFoto()}', 
                 nome = '{$user->getNome()}', 
                 login = '{$user->getLogin()}', 
                 senha = '{$user->getSenha()}',

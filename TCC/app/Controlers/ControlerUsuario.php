@@ -55,13 +55,7 @@ switch ($action) {
         if (!isset($_POST['gravar'])) {
             include "../Views/Usuario/cadastrar.php";
         } else {
-            if ($_FILES['foto']['error'] == 0){
-                $nomeArquivo = date('dmYhis').$_FILES['foto']['name'];
-                move_uploaded_file($_FILES['foto']['tmp_name'], '../../assets/img/Usuario/'.$nomeArquivo);
 
-            }else{
-                $nomeArquivo = null;
-            }
             $cpf = $_POST['cpf'];
             $crud = new UsuarioCrud();
             $resultado = $crud->existeCPF($cpf);
@@ -70,7 +64,7 @@ switch ($action) {
                 die;
             }
 
-            $user = new Usuario($nomeArquivo, $_POST['nome'], $_POST['login'], $_POST['senha'], $_POST['email'], $_POST['telefone'], $_POST['cpf'], $_POST['tipuser']);
+            $user = new Usuario($_POST['nome'], $_POST['login'], $_POST['senha'], $_POST['email'], $_POST['telefone'], $_POST['cpf'], $_POST['tipuser']);
             $crud = new UsuarioCrud();
             $crud->insertUsuario($user);
             header("Location: ?acao=login");

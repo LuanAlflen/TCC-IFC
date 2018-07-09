@@ -60,7 +60,6 @@
 
 
 		<form class="form__reg"  method="post"   action="?acao=cadastrar" enctype="multipart/form-data" onsubmit="return TestaCPF();">
-			<input class="input" type="file"     name="foto">
 			<input class="input" type="text"     name="nome"     placeholder="Nome"     required>
 			<input class="input" type="text"     name="login"    placeholder="Login"     required>
 			<input class="input" type="password" name="senha"    placeholder="Senha"    required>
