@@ -23,6 +23,7 @@ class UsuarioCrud
                 $this->conexao = DBConnection::getConexao();
                 $sql = "insert into usuarios (foto, nome, login, senha, telefone, email, cpf, tipuser)
                 values ('{$user->getFoto()}','{$user->getNome()}','{$user->getLogin()}','{$user->getSenha()}','{$user->getTelefone()}','{$user->getEmail()}','{$user->getCpf()}',1)";
+
                 try {//TENTA EXECUTAR A INSTRUCAO
                     $this->conexao->exec($sql);
                 } catch (PDOException $e) {//EM CASO DE ERRO, CAPTURA A MENSAGEM
@@ -167,6 +168,14 @@ class UsuarioCrud
         }
     }
 
+    public function existeCPF($cpf){
+        $sql = $this->conexao->prepare("SELECT * FROM usuarios WHERE cpf = '{$cpf}'");
+        $sql->execute();
+        $resultado = $sql->rowCount();
+
+        return $resultado;
+
+    }
 
 
 }

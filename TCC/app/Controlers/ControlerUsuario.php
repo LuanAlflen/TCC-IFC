@@ -30,7 +30,7 @@ switch ($action) {
 
     case 'index':
 
-        include "../Views/Home/index.html";
+        include "../Views/Home/index.php";
 
         break;
 
@@ -61,6 +61,13 @@ switch ($action) {
 
             }else{
                 $nomeArquivo = null;
+            }
+            $cpf = $_POST['cpf'];
+            $crud = new UsuarioCrud();
+            $resultado = $crud->existeCPF($cpf);
+            if ($resultado != 0){
+                echo "já existe";
+                die;
             }
 
             $user = new Usuario($nomeArquivo, $_POST['nome'], $_POST['login'], $_POST['senha'], $_POST['email'], $_POST['telefone'], $_POST['cpf'], $_POST['tipuser']);

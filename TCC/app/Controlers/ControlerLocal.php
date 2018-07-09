@@ -48,7 +48,7 @@ switch ($action) {
                 $crudCat = new CategoriaCrud();
                 $categorias = $crudCat->getCategorias();
 
-                //include "../Models/restrito.php";
+                include "../Models/restrito.php";
                 include "../Views/Template/Cabecalho.php";
                 include "../Views/PaginaPrincipal/index.php";
                 include "../Views/Template/Rodape.php";
@@ -61,7 +61,7 @@ switch ($action) {
                 $crudCat = new CategoriaCrud();
                 $categorias = $crudCat->getCategorias();
 
-                //include "../Models/restrito.php";
+                include "../Models/restrito.php";
                 include "../Views/Template/Cabecalho.php";
                 include "../Views/PaginaPrincipal/index.php";
                 include "../Views/Template/Rodape.php";
@@ -76,7 +76,7 @@ switch ($action) {
             $crudCat = new CategoriaCrud();
             $categorias = $crudCat->getCategorias();
 
-            //include "../Models/restrito.php";
+            include "../Models/restrito.php";
             include "../Views/Template/Cabecalho.php";
             include "../Views/PaginaPrincipal/index.php";
             include "../Views/Template/Rodape.php";

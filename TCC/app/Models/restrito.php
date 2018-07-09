@@ -1,10 +1,10 @@
 <?php
 
     @session_start();
-    if (isset($_SESSION['login'])){
+    if (isset($_SESSION['id']) OR !empty($_SESSION['id'])){
 
     }else{
-        echo "session login não existe, impedido por restrito.php";
+        header("Location: ControlerUsuario.php?erro=1");
         //header("Location: ../Views/Formularios/login.php?erro=2");
     }
     ?>
