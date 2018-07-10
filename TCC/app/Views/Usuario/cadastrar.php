@@ -72,6 +72,10 @@
             if (@$_GET['erro'] == 1){?>
                 <div class="error-text" style="color: red">Este login ja existe, tente novamente.</div>
             <?php } ?>
+            <?php
+            if (@$_GET['erro'] == 'existeCPF'){?>
+                <div class="error-text" style="color: red">CPF ja cadastrado, tente novamente.</div>
+            <?php } ?>
             <div class="btn__form">
 				<input class="btn__reset" type="reset" value="Limpar">
 			 	<input class="btn__submit" type="submit" name="gravar" value="Salvar" >

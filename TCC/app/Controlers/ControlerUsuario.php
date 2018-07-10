@@ -60,7 +60,7 @@ switch ($action) {
             $crud = new UsuarioCrud();
             $resultado = $crud->existeCPF($cpf);
             if ($resultado != 0){
-                echo "já existe";
+                header("Location: ControlerUsuario.php?acao=cadastrar&erro=existeCPF");
                 die;
             }
 
@@ -78,7 +78,7 @@ switch ($action) {
             include "../Views/Usuario/login.php";
         }else {
 
-            $user = new Usuario(null,null, $_POST['login'], $_POST['senha']);
+            $user = new Usuario(null, $_POST['login'], $_POST['senha']);
             $crud = new UsuarioCrud();
             $resultado = $crud->LoginUsuario($user);
             $login = $user->getLogin();

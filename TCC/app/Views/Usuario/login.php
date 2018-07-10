@@ -17,6 +17,11 @@
 			<input class="input" type="text"     name="login"  placeholder="&#128100;  Login" required>
             <input class="input" type="password" name="senha" placeholder="&#9993;  Senha"  required>
             <?php
+            if (@$_GET['erro'] == 'naologado'){
+                echo "<script>alert('Para acessar esta página é preciso estar logado!')</script>";
+            }
+            ?>
+            <?php
             if (@$_GET['erro'] == 1){?>
                 <div class="error-text" style="color: red">Login incorreto. Por favor tente novamente</div>
             <?php } ?>

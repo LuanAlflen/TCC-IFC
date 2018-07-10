@@ -32,12 +32,6 @@
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
 
-    <?php
-    if (@$_GET['erro'] == 1){
-        echo "<script>alert('Para acessar esta página é preciso estar logado!')</script>";
-    }
-    ?>
-
     <!-- Navigation -->
     <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
         <div class="container">

@@ -42,7 +42,6 @@ class UsuarioCrud
         $sql = $this->conexao->prepare("SELECT login,senha FROM usuarios WHERE login = '{$user->getLogin()}' AND senha = '{$user->getSenha()}'");
         $sql->execute();
         $resultado = $sql->rowCount();
-
        return $resultado;
     }
 
