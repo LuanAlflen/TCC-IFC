@@ -1,43 +1,74 @@
-<p class="lead">Minhas quadras</p>
-<table class="table table-bordered" >
-    <thead>
-    <tr>
-        <th>Id</th>
-        <th>Nome</th>
-        <th>Login</th>
-        <th>Senha</th>
-        <th>Telefone</th>
-        <th>Email</th>
-        <th>CPF</th>
-        <th>Tipo Usuario</th>
-    </tr>
-    </thead>
-    <tbody>
-    <?php foreach ($usuarios as $usuario): ?>
+<div id="divusuarios">
+    <table class="table table-bordered" >
+        <thead>
         <tr>
-            <th><?= $usuario->id_usuario?> </th>
-            <td><?= $usuario->nome ?> </td>
-            <td><?= $usuario->login ?> </td>
-            <td><?= $usuario->senha ?> </td>
-            <td><?= $usuario->telefone ?> </td>
-            <td><?= $usuario->email?> </td>
-            <td><?= $usuario->cpf ?> </td>
-            <td><?= $usuario->tipuser?> </td>
-            <td><?php
-                $idcat = $local->id_categoria;
-                $crudCat   = new CategoriaCrud();
-                $categoria = $crudCat->getCategoria($idcat);
-                echo $categoria->nome;
-                ?>
-            </td>
-            <td><a href="ControlerAdm.php?acao=editar&iduser=<?=$usuario->id_usuario?>">Editar</a> |
-                <a href="ControlerAdm.php?acao=excluir&iduser=<?=$usuario->id_usuario?>">Remover</a>
-
-            </td>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Login</th>
+            <th>Senha</th>
+            <th>Telefone</th>
+            <th>Email</th>
+            <th>CPF</th>
+            <th>Tipo Usuario</th>
         </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($usuarios as $usuario): ?>
+            <tr>
+                <th><?= $usuario->id?> </th>
+                <td><?= $usuario->nome ?> </td>
+                <td><?= $usuario->login ?> </td>
+                <td><?= $usuario->senha ?> </td>
+                <td><?= $usuario->telefone ?> </td>
+                <td><?= $usuario->email?> </td>
+                <td><?= $usuario->cpf ?> </td>
+                <td><?= $usuario->tipuser?> </td>
+                <td><a href="ControlerUsuario.php?acao=editar&id=<?=$usuario->id?>">Editar</a> |
+                    <a href="ControlerUsuario.php?acao=excluir&id=<?=$usuario->id?>">Remover</a>
+
+                </td>
+            </tr>
 
 
-    <?php endforeach; ?>
+        <?php endforeach; ?>
 
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</div>
+<div id="divlocais">
+    <table class="table table-bordered" >
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Endereco</th>
+            <th>Numero</th>
+            <th>Telefone</th>
+            <th>Descricao</th>
+            <th>Dono</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($locais as $local): ?>
+            <tr>
+                <th><?= $local->id_local?> </th>
+                <td><?= $local->nome ?> </td>
+                <td><?= $local->email?> </td>
+                <td><?= $local->endereco?> </td>
+                <td><?= $local->numero ?> </td>
+                <td><?= $local->telefone?> </td>
+                <td><?= $local->descricao ?> </td>
+                <td><?= $local->id_usuario?> </td>
+                <td><a href="ControlerLocal.php?acao=editar&iduser=<?=$usuario->id?>&idlocal=<?= $local->id_local ?>">Editar</a> |
+                    <a href="ControlerLocal.php?acao=excluir&iduser=<?=$usuario->id?>&idlocal=<?= $local->id_local ?>">Remover</a>
+
+                </td>
+            </tr>
+
+
+        <?php endforeach; ?>
+
+        </tbody>
+    </table>
+</div>

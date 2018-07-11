@@ -30,8 +30,11 @@ switch ($action){
         $idUserComentario = $_GET['idusercomentario'];
         $idUserLogado = $_GET['iduserlogado'];
         $idlocal = $_GET['idlocal'];
+        $crudUser = new UsuarioCrud();
+        $user = $crudUser->getUsuarioId($idUserLogado);
+        $tipuser = $user->getTipuser();
 
-        if ($idUserComentario == $idUserLogado){
+        if ($idUserComentario == $idUserLogado OR $tipuser == 'admin'){
             $crud = new ComentarioCrud();
             $crud->deleteComentario($idcomentario);
             header("Location: ControlerLocal.php?acao=show&idlocal=$idlocal&iduser=$idUserLogado");

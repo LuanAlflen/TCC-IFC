@@ -2,14 +2,14 @@
 
 class Usuario
 {
-    private $id;
-    private $nome;
-    private $login;
-    private $senha;
-    private $email;
-    private $telefone;
-    private $cpf;
-    private $tipuser;
+    public $id;
+    public $nome;
+    public $login;
+    public $senha;
+    public $email;
+    public $telefone;
+    public $cpf;
+    public $tipuser;
 
     public function __construct($nome=null, $login=null, $senha=null, $email=null, $telefone=null, $cpf=null, $tipuser=null, $id=null){
         $this->nome = $nome;

@@ -195,7 +195,7 @@ switch ($action) {
                 $crudLocal = new LocalCrud();
                 $crudLocal->updateLocal($local);
                 $id = $_POST['iduser'];
-                header("Location: ControlerUsuario.php?acao=show&id=$id");
+                header("Location: ControlerUsuario.php");
             }
         }
 

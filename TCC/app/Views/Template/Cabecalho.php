@@ -34,7 +34,11 @@
 </head>
 
 <body>
-
+<?php
+$iduserlogado = $_SESSION['id'];
+$crudUser = new UsuarioCrud();
+$user = $crudUser->getUsuarioId($iduserlogado);
+?>
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
@@ -58,11 +62,17 @@
                     <a href="#">Em destaque</a>
                 </li>
                 <li class="dropdown pull-right">
-                    <a href="#" class="dropdown-toggle pull-right" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <!-- ícone do user --> <i class="fa fa-user-o" aria-hidden="true"></i>
-                        <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle pull-right" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <!-- ícone do user --><?= $user->getNome() ?><span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="ControlerUsuario.php?acao=contato">Contato</a></li>
-                        <li><a href="ControlerUsuario.php?acao=show&id=<?= $_SESSION['id'] ?>">Minhas quadras</a></li>
+                        <?php
+                        $tipuser = $user->getTipuser();
+                        if ($tipuser == 'admin'){
+                            echo "<li><a href=\"ControlerAdmin.php?id=$iduserlogado\">Área do admin</a></li>";
+                        }else{
+                            echo "<li><a href=\"ControlerUsuario.php?iduser=$iduserlogado\">Minhas quadras</a></li>";
+                        }
+                        ?>
                         <li><a href="ControlerLocal.php?acao=cadastrar&id=<?= $_SESSION['id'] ?>">Cadastrar quadra</a></li>
                         <li><a href="ControlerUsuario.php?acao=editar&id=<?= $_SESSION['id'] ?>">Editar</a></li>
                         <li><a href="ControlerUsuario.php?acao=excluir&id=<?= $_SESSION['id'] ?>">Excluir conta</a></li>

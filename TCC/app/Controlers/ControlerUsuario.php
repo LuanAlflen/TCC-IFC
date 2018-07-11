@@ -96,7 +96,7 @@ switch ($action) {
 
         session_start();
         session_destroy();
-        header("Location: ControlerUsuario.php");
+        header("Location: ControlerUsuario.php?acao=login");
 
             break;
 
@@ -108,16 +108,6 @@ switch ($action) {
             $usuario = $crud->getUsuarioId($id);
             include "../Views/Usuario/editar.php";
         }else{ // já passou no form e fez submit
-            if ($_FILES['foto']['error'] == 0){
-                $nomeArquivo = date('dmYhis').$_FILES['foto']['name'];
-                move_uploaded_file($_FILES['foto']['tmp_name'], '../../assets/img/Usuario/'.$nomeArquivo);
-
-            }else{
-                $login = $_POST['login'];
-                $crud = new UsuarioCrud();
-                $user = $crud->getUsuario($login);
-                $nomeArquivo = $user->getFoto();
-            }
             $nome = $_POST['nome'];
             $login = $_POST['login'];
             $senha= $_POST['senha'];
@@ -126,7 +116,7 @@ switch ($action) {
             $cpf= $_POST['cpf'];
             $tipuser= $_POST['tipuser'];
             $id = $_GET['id'];
-            $user = new Usuario($nomeArquivo, $nome, $login, $senha, $email, $telefone, $cpf,  $tipuser, $id);
+            $user = new Usuario($nome, $login, $senha, $email, $telefone, $cpf,  $tipuser, $id);
             $crud = new UsuarioCrud();
             $crud->updateUsuario($user);
             header("Location: ?acao=login&erro=3"); // chama o controlador

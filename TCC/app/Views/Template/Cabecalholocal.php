@@ -34,18 +34,16 @@
 </head>
 
 <body>
-
+<?php
+$iduserlogado = $_SESSION['id'];
+$crudUser = new UsuarioCrud();
+$user = $crudUser->getUsuarioId($iduserlogado);
+?>
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
             <a class="navbar-brand" style="font-size: 20px" href="ControlerLocal.php?iduser=<?= $_GET['iduser'] ?>">ALPE</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -58,16 +56,31 @@
                     <a href="#">Em destaque</a>
                 </li>
                 <li class="dropdown pull-right">
-                    <a href="#" class="dropdown-toggle pull-right" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <!-- ícone do user --> <i class="fa fa-user-o" aria-hidden="true"></i>
-                        <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle pull-right" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?= $user->getNome() ?><span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="ControlerUsuario.php?acao=contato">Contato</a></li>
-                        <li><a href="ControlerUsuario.php?acao=show&id=<?php    $crud = new LocalCrud();
-                                                                                $local = $crud->getLocal($idlocal);
-                                                                                $iduser = $local->id_usuario;
-                                                                                echo $iduser;?>">Minhas quadras</a></li>
-                        <li><a href="ControlerLocal.php?acao=editar&idlocal=<?= $idlocal ?>">Editar</a></li>
-                        <li><a href="ControlerLocal.php?acao=excluir&idlocal=<?= $idlocal ?>">Excluir quadra</a></li>
+                        <?php
+                        $crud = new LocalCrud();
+                        $local = $crud->getLocal($idlocal);
+                        $iduserlocal = $local->id_usuario;
+                        $iduserlogado = $_GET['iduser'];
+                        $crudUser = new UsuarioCrud();
+                        $user = $crudUser->getUsuarioId($iduserlogado);
+                        $tipuser = $user->getTipuser();
+                        if ($iduserlocal == $iduserlogado OR $tipuser == 'admin'){
+                            echo "<li><a href=\"ControlerLocal.php?acao=editar&idlocal=$idlocal\">Editar</a></li>";
+                            echo "<li><a href=\"ControlerLocal.php?acao=excluir&idlocal=$idlocal\">Excluir quadra</a></li>";
+                        }
+                        ?>
+                        <?php
+                        if ($tipuser == 'admin'){
+                            echo "<li><a href=\"ControlerAdmin.php?id=$iduserlogado\">Área do admin</a></li>";
+                        }else{
+                            echo "<li><a href=\"ControlerUsuario.php?iduser=$iduserlogado\">Minhas quadras</a></li>";
+                        }
+                        ?>
+
+
                         <li role="separator" class="divider"></li>
                         <li><a href="ControlerUsuario.php?acao=logout">Sair</a></li>
                     </ul>

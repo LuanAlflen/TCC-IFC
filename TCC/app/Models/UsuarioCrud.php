@@ -117,8 +117,9 @@ class UsuarioCrud
             $telefone = $usuario['telefone'];
             $cpf = $usuario['cpf'];
             $tipuser = $usuario['tipuser'];
+            $id = $usuario['id_usuario'];
 
-            $obj = new Usuario($nome, $login, $senha, $email, $telefone, $cpf, $tipuser);
+            $obj = new Usuario($nome, $login, $senha, $email, $telefone, $cpf, $tipuser,$id);
             $listaUsuario[] = $obj;
         }
         return $listaUsuario;
