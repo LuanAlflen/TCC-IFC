@@ -30,8 +30,6 @@ function getMunicipio($id){
     return $municipio;
 }
 
-
-
 switch ($action) {
 
     case 'index':

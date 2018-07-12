@@ -18,8 +18,7 @@
 		</div>
 
 
-		<form class="form__reg"  method="post"   action="?acao=editar&id=<?= $usuario->getId(); ?>" enctype="multipart/form-data">
-            <input class="input" value="<?= $usuario->getFoto() ?>" type="file"     name="foto">
+		<form class="form__reg"  method="post"   action="ControlerUsuario.php?acao=editar&id=<?= $usuario->id_usuario ?>" enctype="multipart/form-data">
 			<input class="input" value="<?= $usuario->getNome() ?>" type="text"     name="nome"  required>
 			<input class="input" value="<?= $usuario->getLogin() ?>" type="text"     name="login"    required>
 			<input class="input" value="<?= $usuario->getSenha() ?>" type="password" name="senha"  required>

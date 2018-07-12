@@ -70,7 +70,7 @@ $user = $crudUser->getUsuarioId($iduserlogado);
                         if ($tipuser == 'admin'){
                             echo "<li><a href=\"ControlerAdmin.php?id=$iduserlogado\">Área do admin</a></li>";
                         }else{
-                            echo "<li><a href=\"ControlerUsuario.php?iduser=$iduserlogado\">Minhas quadras</a></li>";
+                            echo "<li><a href=\"ControlerUsuario.php?acao=show&iduser=$iduserlogado\">Minhas quadras</a></li>";
                         }
                         ?>
                         <li><a href="ControlerLocal.php?acao=cadastrar&id=<?= $_SESSION['id'] ?>">Cadastrar quadra</a></li>

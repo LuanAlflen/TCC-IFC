@@ -37,9 +37,14 @@ switch ($action) {
     case 'show':
 
 
-        $id = $_GET['id'];
+        $id = $_GET['iduser'];
+        session_start();
+        $_SESSION['id'] = $id;
         $crud = new LocalCrud();
         $locais = $crud->getLocalUser($id);
+        $cruduser = new UsuarioCrud();
+        $user = $cruduser->getUsuarioId($id);
+        include "../Models/restrito.php";
         include "../Views/Template/Cabecalho.php";
         include "../Views/Usuario/show.php";
         include "../Views/Template/Rodape.php";
