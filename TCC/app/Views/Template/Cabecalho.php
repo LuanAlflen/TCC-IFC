@@ -77,7 +77,7 @@ $user = $crudUser->getUsuarioId($iduserlogado);
                         <li><a href="ControlerUsuario.php?acao=editar&id=<?= $_SESSION['id'] ?>">Editar</a></li>
                         <li><a href="ControlerUsuario.php?acao=excluir&id=<?= $_SESSION['id'] ?>">Excluir conta</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="ControlerUsuario.php?acao=logout">Sair</a></li>
+                        <li><a href="ControlerUsuario.php">Sair</a></li>
                     </ul>
                     <form class="navbar-form pull-right" method="post" action="ControlerLocal.php?iduser=<?= $_SESSION['id'] ?>">
                         <div class="form-group">

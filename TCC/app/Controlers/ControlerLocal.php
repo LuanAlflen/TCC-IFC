@@ -118,7 +118,7 @@ switch ($action) {
             $idcategoria = $categoria->id_categoria;
 
             //VERIFICA SE OS CAMPOS DE SELECT FORAM PREENCHIDOS
-            if (!isset($idcategoria) || $_POST['estados'] == 0 || $_POST['municipios'] == 0){
+            if (!isset($idcategoria) || $_POST['estados'] == 0 || $_POST['Municipio'] == 0){
                 echo "Todos os campos devem ser preenchidos";
             } else {
 
@@ -131,7 +131,7 @@ switch ($action) {
                     $_POST['telefone'],
                     $_POST['descricao'],
                     $_POST['estados'],
-                    $_POST['municipios'],
+                    $_POST['Municipio'],
                     $idcategoria,
                     $_POST['iduser']);
 
@@ -172,7 +172,7 @@ switch ($action) {
             }
 
             //VERIFICA SE OS CAMPOS DE SELECT FORAM PREENCHIDOS
-            if ($_POST['categoria'] == 0 || $_POST['estados'] == 0 || $_POST['municipios'] == 0){
+            if ($_POST['categoria'] == 0 || $_POST['estados'] == 0 || $_POST['Municipio'] == 0){
                 echo "Todos os campos devem ser preenchidos";
             } else {
 
@@ -185,7 +185,7 @@ switch ($action) {
                     $_POST['telefone'],
                     $_POST['descricao'],
                     $_POST['estados'],
-                    $_POST['municipios'],
+                    $_POST['Municipio'],
                     $_POST['categoria'],
                     $_POST['iduser'],
                     $_GET['idlocal']);

@@ -82,7 +82,7 @@ $user = $crudUser->getUsuarioId($iduserlogado);
 
 
                         <li role="separator" class="divider"></li>
-                        <li><a href="ControlerUsuario.php?acao=logout">Sair</a></li>
+                        <li><a href="ControlerUsuario.php">Sair</a></li>
                     </ul>
 
 

@@ -17,8 +17,8 @@
             $('#estados').change(function(){
                 if( $(this).val() ) {
                     $('#municipios').hide();
-
-                    $.getJSON('https://servicodados.ibge.gov.br/api/v1/localidades/estados/'+$(this).val()+'/municipios', function(j){
+                    var url = 'http://localhost/3info1/TCC/app/Controlers/ControlerMunicipio.php?id='+$(this).val();
+                    $.getJSON(url, function(j){
                         var options = '<option value="0">Selecione...</option>';
                         for (var i = 0; i < j.length; i++) {
                             options += '<option value="' +
@@ -92,7 +92,7 @@
             <p>Estados:</p>
 <!--            Aqui começa o endereco(Estados, municipios, endereço e numero)-->
             <?php
-            $url = 'https://servicodados.ibge.gov.br/api/v1/localidades/estados'; // marcas
+            $url = 'http://localhost/3info1/TCC/app/Controlers/ControlerEstado.php'; // marcas
 
             $data = file_get_contents($url); // put the contents of the file into a variable
             $estados = json_decode($data); // decode the JSON feed

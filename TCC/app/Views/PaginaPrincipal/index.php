@@ -64,7 +64,9 @@
                         classes += ",";
                     }
                 }
+                alert(classes);
             }
+
             $(classes).show();
         }
 
@@ -73,7 +75,6 @@
             $("#abas ul li").addClass("selecionado");
 
             $("#abas ul li").click(function () {
-                $("#abas ul li").removeClass("selecionado");
                 $(this).toggleClass("selecionado");
                 filtra();
             });
@@ -92,8 +93,8 @@
                     $("."+id_estado).fadeToggle();
 
                     $('#municipios').hide();
-
-                    $.getJSON('https://servicodados.ibge.gov.br/api/v1/localidades/estados/'+$(this).val()+'/municipios', function(j){
+                    var url = 'http://localhost/3info1/TCC/app/Controlers/ControlerMunicipio.php?id='+$(this).val();
+                    $.getJSON(url, function(j){
                         var options = '<option value="0">Selecione...</option>';
                         for (var i = 0; i < j.length; i++) {
                             options += '<option value="' +
@@ -161,7 +162,7 @@ if (@$_GET['erro'] == 1){?>
                     <p>Estados:</p>
                     <!--            Aqui começa a localizacao(Estados e municipios)-->
                     <?php
-                    $url = 'https://servicodados.ibge.gov.br/api/v1/localidades/estados'; // marcas
+                    $url = 'http://localhost/3info1/TCC/app/Controlers/ControlerEstado.php'; // marcas
 
                     $data = file_get_contents($url); // put the contents of the file into a variable
                     $estados = json_decode($data); // decode the JSON feed

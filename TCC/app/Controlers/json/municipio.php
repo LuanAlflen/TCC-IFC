@@ -15,7 +15,7 @@ $res = $con->getConexao();
 
 // Consulta SQL e Pesquisa na tabela FIPE para cada modelo em montadora
 
-$query = 'SELECT id_estado FROM estados ';
+$query = 'SELECT id_estado FROM estados where id_estado = 35 limit 1';
 $resultado = $res->query($query)->fetchAll(PDO::FETCH_ASSOC);
 //print_r($resultado);
 
@@ -40,4 +40,4 @@ foreach ($resultado as $rst) {
 //foreach ($resultado as $rst) {
 
 //}
-//NOSSO BANCO TEM 5545 MUNICIPIOS, DEVERIA TER 5571, EU PROVAVELMENTE PERDI ALGUNS DO PARANA OU DE SAO PAULO, BOA SORTE BRYAN, QUE OS JOGOS COMECEM
+//NOSSO BANCO TEM 5545 MUNICIPIOS, DEVERIA TER 5571, EU PROVAVELMENTE PERDI ALGUNS DO PARANA OU DE SAO PAULO, BOA SORTE BRYAN
