@@ -64,7 +64,6 @@
                         classes += ",";
                     }
                 }
-                alert(classes);
             }
 
             $(classes).show();
