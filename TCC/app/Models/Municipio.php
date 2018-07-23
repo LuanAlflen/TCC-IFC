@@ -10,14 +10,14 @@ require_once 'DBConnection.php';
 
 class Municipio
 {
-    public $id;
+    public $id_municipio;
     public $nome;
     public $id_estado;
 
-    public function __construct($nome=null,$id_estado=null,$id=null){
+    public function __construct($nome=null,$id_estado=null,$id_municipio=null){
         $this->nome = $nome;
         $this->id_estado = $id_estado;
-        $this->id = $id;
+        $this->id = $id_municipio;
     }
 
     /**

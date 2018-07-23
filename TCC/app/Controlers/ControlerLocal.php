@@ -86,6 +86,7 @@ switch ($action) {
     case 'show':
 
         $idlocal = $_GET['idlocal'];
+        $_SESSION['id'] = $idlocal;
         $crudLocal = new LocalCrud();
         $local = $crudLocal->getLocal($idlocal);
         include "../Views/Template/Cabecalholocal.php";

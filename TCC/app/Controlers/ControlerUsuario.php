@@ -124,6 +124,7 @@ switch ($action) {
             $user = new Usuario($nome, $login, $senha, $email, $telefone, $cpf,  $tipuser, $id);
             $crud = new UsuarioCrud();
             $crud->updateUsuario($user);
+
             header("Location: ?acao=login&erro=3"); // chama o controlador
         }
 

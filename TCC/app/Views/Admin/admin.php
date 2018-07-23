@@ -23,8 +23,8 @@
                 <td><?= $usuario->email?> </td>
                 <td><?= $usuario->cpf ?> </td>
                 <td><?= $usuario->tipuser?> </td>
-                <td><a href="ControlerUsuario.php?acao=editar&id=<?=$usuario->id?>">Editar</a> |
-                    <a href="ControlerUsuario.php?acao=excluir&id=<?=$usuario->id?>">Remover</a>
+                <td><a href="ControlerAdmin.php?acao=editarUsuario&id=<?=$usuario->id?>&idAdm=<?= $_SESSION['id'] ?>">Editar</a> |
+                    <a href="ControlerAdmin.php?acao=excluirUsuario&id=<?=$usuario->id?>&idAdm=<?= $_SESSION['id'] ?>">Remover</a>
 
                 </td>
             </tr>

@@ -33,7 +33,7 @@ class EstadoCrud
         $objetoEstado = new Estado(
             $estado['sigla'],
             $estado['nome'],
-            $estado['id']
+            $estado['id_municipio']
         );
 
         //RETORNAR UM OBJETO CATEGORIA COM OS VALORES
@@ -52,7 +52,7 @@ class EstadoCrud
         foreach ($estados as $estado) {
             $sigla = $estado['sigla'];
             $nome = utf8_encode($estado['nome']);
-            $id = $estado['id'];
+            $id = $estado['id_estado'];
 
             $obj = new Estado($sigla, $nome, $id);
             $listaEstado[] = $obj;

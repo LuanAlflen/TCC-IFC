@@ -50,9 +50,9 @@ class MunicipioCrud
         foreach ($municipios as $municipio) {
             $nome = utf8_encode($municipio['nome']);
             $id_estado = $municipio['id_estado'];
-            $id = $municipio['id'];
+            $id_municipio = $municipio['id_municipio'];
 
-            $obj = new Municipio($nome, $id_estado,$id);
+            $obj = new Municipio($nome, $id_estado,$id_municipio);
             $listaMunicipio[] = $obj;
         }
         return $listaMunicipio;
@@ -75,4 +75,5 @@ class MunicipioCrud
         }
         return $listaMunicipio;
     }
+
 }
