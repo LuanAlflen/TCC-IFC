@@ -94,7 +94,7 @@
                     $("."+id_estado).fadeToggle();
 
                     $('#municipios').hide();
-                    var url = 'http://localhost/TCC/TCC/app/Controlers/ControlerMunicipio.php?id='+$(this).val();
+                    var url = 'http://localhost/3info1/TCC/app/Controlers/ControlerMunicipio.php?id='+$(this).val();
                     $.getJSON(url, function(j){
                         var options = '<option value="0">Selecione...</option>';
                         for (var i = 0; i < j.length; i++) {
@@ -164,7 +164,7 @@ if (@$_GET['erro'] == 1){?>
                     <p>Estados:</p>
                     <!--            Aqui começa a localizacao(Estados e municipios)-->
                     <?php
-                    $url = 'http://localhost/TCC/TCC/app/Controlers/ControlerEstado.php'; // marcas
+                    $url = 'http://localhost/3info1/TCC/app/Controlers/ControlerEstado.php'; // marcas
 
                     $data = file_get_contents($url); // put the contents of the file into a variable
                     $estados = json_decode($data); // decode the JSON feed
