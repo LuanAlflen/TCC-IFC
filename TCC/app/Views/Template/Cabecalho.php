@@ -38,6 +38,9 @@
 $iduserlogado = $_SESSION['id'];
 $crudUser = new UsuarioCrud();
 $user = $crudUser->getUsuarioId($iduserlogado);
+if (empty($user->getId())){
+    header("Location: ControlerUsuario.php?acao=login&erro=naologado");
+}
 ?>
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
