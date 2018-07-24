@@ -8,7 +8,7 @@ if (isset($_GET['acao'])){
     $action = 'index';
 }
 
-switch ($action){
+switch ($action) {
     case 'index':
 
         $id = $_GET['id'];
@@ -18,6 +18,16 @@ switch ($action){
         header('Cotent-type:application/json');
         echo json_encode($municipios);
         break;
-}
 
+    case 'porId':
+
+        $id = $_GET['id'];
+        $crud = new MunicipioCrud();
+        $municipios = $crud->getMunicipio($id);
+
+        header('Cotent-type:application/json');
+        echo json_encode($municipios);
+
+        break;
+}
 ?>

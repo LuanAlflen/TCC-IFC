@@ -18,6 +18,15 @@ switch ($action){
         echo json_encode($estados);
 
         break;
+    case 'porId':
+
+        $id = $_GET['id'];
+        $crud = new EstadoCrud();
+        $estado = $crud->getEstado($id);
+        header('Cotent-type:application/json');
+        echo json_encode($estado);
+        break;
+
 }
 
 ?>

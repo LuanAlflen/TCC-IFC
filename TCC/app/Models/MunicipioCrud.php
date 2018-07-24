@@ -21,7 +21,7 @@ class MunicipioCrud
         //RETORNA UMA CATEGORIA, DADO UM ID
 
         //FAZER A CONSULTA
-        $sql = "select * from municipios where id=' {$id}'";
+        $sql = "select * from municipios where id_municipio=' {$id}'";
         $resultado = $this->conexao->query($sql);
 
         //FETCH - TRANSFORMA O RESULTADO EM UM ARRAY ASSOCIATIVO
@@ -29,9 +29,9 @@ class MunicipioCrud
 
         //CRIAR OBJETO DO TIPO CATEGORIA - USANDO OS VALORES DA CONSULTA
         $objetoMunicipio = new Municipio(
-            $municipio['nome'],
+            utf8_encode($municipio['nome']),
             $municipio['id_estado'],
-            $municipio['id']
+            $municipio['id_municipio']
         );
 
         //RETORNAR UM OBJETO CATEGORIA COM OS VALORES
@@ -42,7 +42,6 @@ class MunicipioCrud
     public function getMunicipiosPorEstado($id)
     {
         $sql = "SELECT * FROM municipios where id_estado=".$id;
-
         $resultado = $this->conexao->query($sql);
 
         $municipios = $resultado->fetchAll(PDO::FETCH_ASSOC);

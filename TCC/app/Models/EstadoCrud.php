@@ -23,7 +23,7 @@ class EstadoCrud
         //RETORNA UMA CATEGORIA, DADO UM ID
 
         //FAZER A CONSULTA
-        $sql = "select * from estados where id_estados='{$id_estado}'";
+        $sql = "select * from estados where id_estado='{$id_estado}'";
         $resultado = $this->conexao->query($sql);
 
         //FETCH - TRANSFORMA O RESULTADO EM UM ARRAY ASSOCIATIVO
@@ -32,8 +32,8 @@ class EstadoCrud
         //CRIAR OBJETO DO TIPO CATEGORIA - USANDO OS VALORES DA CONSULTA
         $objetoEstado = new Estado(
             $estado['sigla'],
-            $estado['nome'],
-            $estado['id_municipio']
+            utf8_encode($estado['nome']),
+            $estado['id_estado']
         );
 
         //RETORNAR UM OBJETO CATEGORIA COM OS VALORES

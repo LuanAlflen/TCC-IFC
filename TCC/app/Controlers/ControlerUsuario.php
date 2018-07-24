@@ -11,7 +11,7 @@
     }
 
 function getEstado($id){
-    $url = 'https://servicodados.ibge.gov.br/api/v1/localidades/estados/'.$id; // dados de um estado
+    $url = 'http://localhost/3info1/TCC/app/Controlers/ControlerEstado.php?acao=porId&id='.$id; // dados de um estado
 
     $data = file_get_contents($url); // put the contents of the file into a variable
     $estado = json_decode($data); // decode the JSON feed
@@ -19,7 +19,7 @@ function getEstado($id){
 }
 
 function getMunicipio($id){
-    $url = 'https://servicodados.ibge.gov.br/api/v1/localidades/municipios/'.$id; // dados de um estado
+    $url = 'http://localhost/3info1/TCC/app/Controlers/ControlerMunicipio.php?acao=porId&id='.$id; // dados de um estado
 
     $data = file_get_contents($url); // put the contents of the file into a variable
     $municipio = json_decode($data); // decode the JSON feed

@@ -10,6 +10,21 @@ if (isset($_GET['acao'])){
 }else{
     $action = 'index';
 }
+function getEstado($id){
+    $url = 'http://localhost/3info1/TCC/app/Controlers/ControlerEstado.php?acao=porId&id='.$id; // dados de um estado
+
+    $data = file_get_contents($url); // put the contents of the file into a variable
+    $estado = json_decode($data); // decode the JSON feed
+    return $estado;
+}
+
+function getMunicipio($id){
+    $url = 'http://localhost/3info1/TCC/app/Controlers/ControlerMunicipio.php?acao=porId&id='.$id; // dados de um estado
+
+    $data = file_get_contents($url); // put the contents of the file into a variable
+    $municipio = json_decode($data); // decode the JSON feed
+    return $municipio;
+}
 switch ($action){
     case 'index':
 

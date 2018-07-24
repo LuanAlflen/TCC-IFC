@@ -226,14 +226,16 @@ if (@$_GET['erro'] == 1){?>
                                                         $categoria = $crudCat->getCategoria($idcat);
                                                         echo $categoria->nome;
                                                         ?>.<br>
-                                                        <b>Estado:</b> <?php $id = $local->id_estado;
+                                                        <?php
+                                                        $id = $local->id_estado;
                                                         $estado = getEstado($id);
-                                                        echo $estado->nome;
+                                                        ?>
+                                                        <b>Estado:</b> <?= $estado->nome;
                                                         ?><br>
+
                                                         <?php
                                                         $id = $local->id_municipio;
                                                         $municipio = getMunicipio($id);
-
                                                         ?>
                                                         <b>Cidade:</b> <?= $municipio->nome ?><br>
                                                         <b>Endereço: </b><?= $local->endereco ?> <?= $local->numero ?>
