@@ -199,6 +199,12 @@ if (@$_GET['erro'] == 1){?>
                                 echo "<p>Este local não existe!</p>";
                             }else {
                                 ?>
+                                <?php
+                                if (!isset($locais)){
+                                    echo "<h4 style='text-align: center'>Não existe locais</h4>";
+                                    die;
+                                }
+                                ?>
                                 <?php foreach ($locais as $local): ?>
                                     <div class="local <?= $local->id_categoria ?> <?= $local->id_estado ?> <?= $local->id_municipio ?>">
                                         <div class="col-sm-4 col-lg-4 col-md-4">

@@ -127,14 +127,21 @@ class UsuarioCrud
 
     public function deleteUsuario($id)
     {
-
-        //EFETUA A CONEXAO
         $this->conexao = DBConnection::getConexao();
-        //MONTA O TEXTO DA INSTRUÇÂO SQL
-        $sql = "DELETE FROM usuarios WHERE id_usuario = '{$id}'";
+        //VERIFICA SE EXISTE COMENTARIOS, SE SIM, EXCLUI
+        $sql = $this->conexao->prepare("SELECT * FROM comentarios WHERE id_usuario = '{$id}'");
+        $sql->execute();
+        $resultado = $sql->rowCount();
+        if ($resultado != 0){
+            $sql = "DELETE FROM comentarios WHERE id_usuario = '{$id}'";
+            $this->conexao->exec($sql);
+        }
+
+        //EXCLUI O USUARIO
+        $sqluser = "DELETE FROM usuarios WHERE id_usuario = '{$id}'";
         try {//TENTA EXECUTAR A INSTRUCAO
 
-            $this->conexao->exec($sql);
+            $this->conexao->exec($sqluser);
         } catch (PDOException $e) {//EM CASO DE ERRO, CAPTURA A MENSAGEM
             return $e->getMessage();
         }

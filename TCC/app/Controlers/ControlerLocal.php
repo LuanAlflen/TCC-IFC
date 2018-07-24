@@ -55,7 +55,7 @@ switch ($action) {
                 $_SESSION['id'] = $_GET['iduser'];
                 //PARA EXIBIR TODOS OS LOCAIS
                 $crudLocal = new LocalCrud();
-                $locais = $crudLocal->buscaLocais($busca);
+                @$locais = $crudLocal->buscaLocais($busca);
                 $crudCat = new CategoriaCrud();
                 $categorias = $crudCat->getCategorias();
 
@@ -70,7 +70,7 @@ switch ($action) {
             //PARA EXIBIR TODOS OS LOCAIS
             $resultado = 1;
             $crudLocal = new LocalCrud();
-            $locais = $crudLocal->getLocais();
+            @$locais = $crudLocal->getLocais();
             $crudCat = new CategoriaCrud();
             $categorias = $crudCat->getCategorias();
 
@@ -202,6 +202,7 @@ switch ($action) {
 
     case 'excluir':
 
+        //VERIFICAR SE EXISTE COMENTARIOS, SE SIM, EXCLUIR
         $idlocal = $_GET['idlocal'];
         $iduser = $_GET['iduser'];
         $crud = new LocalCrud();

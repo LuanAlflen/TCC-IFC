@@ -18,7 +18,8 @@ switch ($action){
         @session_start();
         $_SESSION['id'] = $_GET['id'];
         $crudLocais = new LocalCrud();
-        $locais = $crudLocais->getLocais();
+        @$locais = $crudLocais->getLocais();
+        include "../Models/restrito.php";
         include "../Views/Template/CabecalhoAdmin.php";
         include "../Views/Admin/admin.php";
         include "../Views/Template/Rodape.php";
@@ -31,7 +32,7 @@ switch ($action){
             $id = $_GET['id'];
             $crud= new UsuarioCrud();
             $usuario = $crud->getUsuarioId($id);
-            include "../Views/Admin/editar.php";
+            include "../Views/Admin/editarUsuario.php";
         }else{ // já passou no form e fez submit
             $nome = $_POST['nome'];
             $login = $_POST['login'];
@@ -53,15 +54,23 @@ switch ($action){
     case 'excluirUsuario':
 
         $iduser = $_GET['id'];
-        //EXCLUI LOCAIS, CASO TENHA
-        $crudLocal = new LocalCrud();
-        $crudLocal->deleteLocalUser($iduser);
-        //EXCLUI USUARIO
-        $cruduser = new UsuarioCrud();
-        $resultado = $cruduser->deleteUsuario($iduser);
         $idAdm = $_GET['idAdm'];
-        header("Location: ControlerAdmin.php?id=$idAdm");
-
+        if ($idAdm == $iduser){
+            $crudLocal = new LocalCrud();
+            $crudLocal->deleteLocalUser($iduser);
+            //EXCLUI USUARIO
+            $cruduser = new UsuarioCrud();
+            $resultado = $cruduser->deleteUsuario($iduser);
+            header("Location: ControlerUsuario.php");
+        }else {
+            //EXCLUI LOCAIS, CASO TENHA, EXCLUI COMENTARIOS, CASO TENHA
+            $crudLocal = new LocalCrud();
+            $crudLocal->deleteLocalUser($iduser);
+            //EXCLUI USUARIO
+            $cruduser = new UsuarioCrud();
+            $resultado = $cruduser->deleteUsuario($iduser);
+            header("Location: ControlerAdmin.php?id=$idAdm");
+        }
         break;
 
     case 'editarLocal':
@@ -75,7 +84,7 @@ switch ($action){
             $categorias = $crudCat->getCategorias();
             $categoria = $crudCat->getCategoria($idCat);
             $nomeCat = $categoria->nome;
-            include "../Views/Local/editar.php";
+            include "../Views/Admin/editarLocal.php";
         }else{ // já passou no form e fez submit
 
             //VERIFICA SE EXISTE FOTO, SE NÃO RETORNA COMO NULL
@@ -92,10 +101,9 @@ switch ($action){
             }
 
             //VERIFICA SE OS CAMPOS DE SELECT FORAM PREENCHIDOS
-            if ($_POST['categoria'] == 0 || $_POST['estados'] == 0 || $_POST['Municipio'] == 0){
+            if ($_POST['categoria'] == 0 || $_POST['estados'] == 0 || $_POST['municipios'] == 0){
                 echo "Todos os campos devem ser preenchidos";
             } else {
-
                 $local = new Local(
                     $nomeArquivo,
                     $_POST['nome'],
@@ -105,14 +113,12 @@ switch ($action){
                     $_POST['telefone'],
                     $_POST['descricao'],
                     $_POST['estados'],
-                    $_POST['Municipio'],
+                    $_POST['municipios'],
                     $_POST['categoria'],
                     $_POST['iduser'],
                     $_GET['idlocal']);
-
                 $crudLocal = new LocalCrud();
                 $crudLocal->updateLocal($local);
-                $id = $_POST['iduser'];
                 $idAdm = $_GET['idAdm'];
                 header("Location: ControlerAdmin.php?id=$idAdm");
             }
@@ -122,12 +128,11 @@ switch ($action){
 
     case 'excluirLocal':
 
+        //VERIFICAR SE EXISTE COMENTARIOS, SE SIM, EXCLUIR
         $idlocal = $_GET['idlocal'];
-        $iduser = $_GET['iduser'];
-        $crud = new LocalCrud();
-        $resultado = $crud->deleteLocal($idlocal);
-        $locais = $crud->getLocalUser($iduser);
         $idAdm = $_GET['idAdm'];
+        $crud = new LocalCrud();
+        $crud->deleteLocal($idlocal);
         header("Location: ControlerAdmin.php?id=$idAdm");
 
         break;

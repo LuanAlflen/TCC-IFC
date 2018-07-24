@@ -36,6 +36,13 @@
     </table>
 </div>
 <div id="divlocais">
+    <?php
+    if (!isset($locais)){
+        echo "<h4 style='text-align: center'>Não existe locais</h4>";
+        die;
+    }
+    ?>
+
     <table class="table table-bordered" >
         <thead>
         <tr>
@@ -60,8 +67,8 @@
                 <td><?= $local->telefone?> </td>
                 <td><?= $local->descricao ?> </td>
                 <td><?= $local->id_usuario?> </td>
-                <td><a href="ControlerLocal.php?acao=editar&iduser=<?=$usuario->id?>&idlocal=<?= $local->id_local ?>">Editar</a> |
-                    <a href="ControlerLocal.php?acao=excluir&iduser=<?=$usuario->id?>&idlocal=<?= $local->id_local ?>">Remover</a>
+                <td><a href="ControlerAdmin.php?acao=editarLocal&idAdm=<?=$usuario->id?>&idlocal=<?= $local->id_local ?>">Editar</a> |
+                    <a href="ControlerAdmin.php?acao=excluirLocal&idAdm=<?=$usuario->id?>&idlocal=<?= $local->id_local ?>">Remover</a>
 
                 </td>
             </tr>

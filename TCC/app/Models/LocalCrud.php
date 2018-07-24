@@ -159,6 +159,13 @@ class LocalCrud
 
     public function deleteLocal($id)
     {
+        $sql = $this->conexao->prepare("SELECT * FROM comentarios WHERE id_local = '{$id}'");
+        $sql->execute();
+        $resultado = $sql->rowCount();
+        if ($resultado != 0){
+            $sql = "DELETE FROM comentarios WHERE id_local = '{$id}'";
+            $this->conexao->exec($sql);
+        }
 
         //EFETUA A CONEXAO
         $this->conexao = DBConnection::getConexao();
@@ -172,21 +179,34 @@ class LocalCrud
         }
     }
 
+
     public function deleteLocalUser($iduser){
         //VERIFICA SE O USUARIO POSSUI LOCAIS, SE SIM, EXCLUI TODOS E RETORNA TRUE, SE NAO, RETORNA FALSE
         $sql = $this->conexao->prepare("SELECT * FROM locais WHERE id_usuario = '{$iduser}'");
         $sql->execute();
         $resultado = $sql->rowCount();
-
         if ($resultado == 0){
-            echo "nenhum";
             return false;
         }else{
-            $sql = "DELETE FROM locais WHERE id_usuario = '{$iduser}'";
-            $this->conexao->exec($sql);
-            echo "exclui";
+            //VERIFICA SE ESSE(s) LOCAL POSSUIEM COMENTARIOS, SE SIM, EXCLUI
+            $crud = new LocalCrud();
+            $locais = $crud->getLocalUser($iduser);
+
+            foreach ($locais as $local){
+                $sql = $this->conexao->prepare("SELECT * FROM comentarios WHERE id_local = '{$local->id_local}'");
+                $sql->execute();
+                $resultado = $sql->rowCount();
+                if ($resultado != 0){
+                    $sql = "DELETE FROM comentarios WHERE id_local = '{$local->id_local}'";
+                    $this->conexao->exec($sql);
+                }
+            }
+
+            $sqllocal = "DELETE FROM locais WHERE id_usuario = '{$iduser}'";
+            $this->conexao->exec($sqllocal);
             return true;
         }
+        die;
     }
 
     public function existeComentarios($idlocal){
