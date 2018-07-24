@@ -95,7 +95,7 @@ switch ($action) {
                 header("Location: ?acao=login&erro=1");
             } else {
                 $iduser = $user->getId();
-                header("Location: ControlerLocal.php?iduser=$iduser");
+                header("Location: ControlerLocal.php?iduser=$iduser&pagina=0");
             }
         }
             break;

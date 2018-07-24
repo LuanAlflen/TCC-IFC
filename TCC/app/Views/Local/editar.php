@@ -16,7 +16,8 @@
                 if( $(this).val() ) {
                     $('#municipios').hide();
 
-                    $.getJSON('https://servicodados.ibge.gov.br/api/v1/localidades/estados/'+$(this).val()+'/municipios', function(j){
+                    var url = 'http://localhost/3info1/TCC/app/Controlers/ControlerMunicipio.php?id='+$(this).val();
+                    $.getJSON(url, function(j){
                         var options = '<option value="0">Selecione...</option>';
                         for (var i = 0; i < j.length; i++) {
                             options += '<option value="' +
@@ -80,7 +81,9 @@
                 <option value="0">Selecione...</option>
                 <?php foreach ($categorias as $categoria):?>
 
-                    <option value="<?= $categoria->id_categoria ?>" <?php if($nomeCat == $categoria->nome) echo"selected"; ?> ><?= $categoria->nome ?></option>
+                    <option value="<?= $categoria->id_categoria ?>"
+                        <?php if($nomeCat == $categoria->nome) echo"selected"; ?> ><?= $categoria->nome ?>
+                    </option>
 
                 <?php endforeach ?>
             </select>
@@ -95,12 +98,13 @@
             $data = file_get_contents($url); // put the contents of the file into a variable
             $estados = json_decode($data); // decode the JSON feed
             echo '<select name="estados" class="select" id="estados" >';
-            echo '<option selected value="'.$local->id_estado.'">'.$local->id_estado.'</option>';
 
             foreach ($estados as $estado) {
+                ?>
 
-                echo '<option value="'.$estado->id.'">'.$estado->nome.'</option>';
+                <option value="<?= $estado->id ?>" <?php if($idEstado == $estado->id) echo "selected"; ?>><?= $estado->nome?></option>
 
+                <?php
             }
 
             echo '</select>';
@@ -108,7 +112,13 @@
             <p>Municipios:</p>
 
             <select name="municipios" class="select" id="municipios">
-                <option selected value="<?= $local->id_municipio?>"><?= $local->id_municipio?></option>
+                <option selected value="<?= $local->id_municipio?>">
+                    <?php
+                    $id = $local->id_municipio;
+                    $municipio = getMunicipio($id);
+                    echo $municipio->nome;
+                    ?>
+                </option>
             </select>
 
             <p>Endereco:</p>

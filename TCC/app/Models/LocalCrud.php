@@ -72,6 +72,40 @@ class LocalCrud
         return $Listalocal;
     }
 
+    public function getLocaisLimit($pagina, $inicio)
+    {
+        $sql = "SELECT * FROM locais LIMIT $pagina OFFSET $inicio";
+        $resultado = $this->conexao->query($sql);
+
+        $locais = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($locais as $local) {
+            $foto = $local['foto'];
+            $nome = $local['nome'];
+            $email = $local['email'];
+            $endereco = $local['endereco'];
+            $numero = $local['numero'];
+            $telefone = $local['telefone'];
+            $descricao = $local['descricao'];
+            $estados = $local['id_estado'];
+            $municipios = $local['id_municipio'];
+            $idcategoria = $local['id_categoria'];
+            $iduser = $local['id_usuario'];
+            $idlocal = $local['id_local'];
+
+            $obj = new Local($foto,$nome, $email, $endereco, $numero, $telefone, $descricao, $estados, $municipios, $idcategoria, $iduser, $idlocal);
+            $Listalocal[] = $obj;
+        }
+        return $Listalocal;
+    }
+
+    public function numeroTotalDeLocais(){
+        $sql = $this->conexao->prepare("SELECT * FROM locais");
+        $sql->execute();
+        $resultado = $sql->rowCount();
+        return $resultado;
+    }
+
     public function insertLocal(Local $local){
         $sql = "insert into locais (foto, nome, email, endereco, numero, telefone, descricao, id_estado, id_municipio, id_categoria, id_usuario)
                 values (

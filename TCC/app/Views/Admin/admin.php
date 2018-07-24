@@ -50,29 +50,41 @@
             <th>Nome</th>
             <th>Email</th>
             <th>Endereco</th>
-            <th>Numero</th>
             <th>Telefone</th>
             <th>Descricao</th>
+            <th>Estado</th>
+            <th>Municipio</th>
             <th>Dono</th>
         </tr>
         </thead>
         <tbody>
         <?php foreach ($locais as $local): ?>
             <tr>
+                <?php
+                $idestado = $local->id_estado;
+                $estado = getEstado($idestado);
+
+                $idmunicipio = $local->id_municipio;
+                $municipio = getMunicipio($idmunicipio);
+
+                $iduser = $local->id_usuario;
+                $crud = new UsuarioCrud();
+                $user = $crud->getUsuarioId($iduser);
+                ?>
                 <th><?= $local->id_local?> </th>
                 <td><?= $local->nome ?> </td>
                 <td><?= $local->email?> </td>
-                <td><?= $local->endereco?> </td>
-                <td><?= $local->numero ?> </td>
+                <td><?= $local->endereco ?> <?= $local->numero ?></td>
                 <td><?= $local->telefone?> </td>
                 <td><?= $local->descricao ?> </td>
-                <td><?= $local->id_usuario?> </td>
+                <td><?= $estado->nome ?> </td>
+                <td><?= $municipio->nome ?> </td>
+                <td><?= $user->getNome()?> </td>
                 <td><a href="ControlerAdmin.php?acao=editarLocal&idAdm=<?=$usuario->id?>&idlocal=<?= $local->id_local ?>">Editar</a> |
                     <a href="ControlerAdmin.php?acao=excluirLocal&idAdm=<?=$usuario->id?>&idlocal=<?= $local->id_local ?>">Remover</a>
 
                 </td>
             </tr>
-
 
         <?php endforeach; ?>
 

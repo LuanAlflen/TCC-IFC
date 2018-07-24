@@ -34,51 +34,73 @@ switch ($action) {
 
     case 'index':
 
-        if (isset($_POST['busca'])){
-            //FAZ A BUSCA POR NOME DOS LOCAIS
-            $busca = $_POST['busca'];
-            $crudLocal = new LocalCrud();
-            $resultado = $crudLocal->validaBusca($busca);
-            //VERIFICA SE A BUSCA DO LOCAL EXISTE, SE NÃO, EXIBE UMA MENSAGEM DE ERRO, SE SIM, MOSTRA APENAS OS LOCAIS PROCURADOS
-            if ($resultado == 0){
-                session_start();
-                $_SESSION['id'] = $_GET['iduser'];
-                $crudCat = new CategoriaCrud();
-                $categorias = $crudCat->getCategorias();
+        session_start();
+        $_SESSION['id'] = $_GET['iduser'];
+        //PARA EXIBIR TODOS OS LOCAIS COM LIMIT
+        $resultado = 1;
+        $crudLocal = new LocalCrud();
+        $crudCat = new CategoriaCrud();
+        $categorias = $crudCat->getCategorias();
 
-                include "../Models/restrito.php";
-                include "../Views/Template/Cabecalho.php";
-                include "../Views/PaginaPrincipal/index.php";
-                include "../Views/Template/Rodape.php";
-            }else{
-                session_start();
-                $_SESSION['id'] = $_GET['iduser'];
-                //PARA EXIBIR TODOS OS LOCAIS
-                $crudLocal = new LocalCrud();
-                @$locais = $crudLocal->buscaLocais($busca);
-                $crudCat = new CategoriaCrud();
-                $categorias = $crudCat->getCategorias();
+        ///////////////////////////////PAGINANÇÃ0////////////////////////////////////////////////////////////////////
+        $locais_por_pagina = 9;
+        $pagina = intval($_GET['pagina']);
+        $inicio = $pagina*$locais_por_pagina;
+        @$locais = $crudLocal->getLocaisLimit($locais_por_pagina,$inicio);
+        $num_total_locais = $crudLocal->numeroTotalDeLocais();
+        $num_paginas = ceil($num_total_locais/$locais_por_pagina);
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-                include "../Models/restrito.php";
-                include "../Views/Template/Cabecalho.php";
-                include "../Views/PaginaPrincipal/index.php";
-                include "../Views/Template/Rodape.php";
-            }
-        }else{
-            session_start();
-            $_SESSION['id'] = $_GET['iduser'];
-            //PARA EXIBIR TODOS OS LOCAIS
-            $resultado = 1;
-            $crudLocal = new LocalCrud();
-            @$locais = $crudLocal->getLocais();
-            $crudCat = new CategoriaCrud();
-            $categorias = $crudCat->getCategorias();
+        include "../Models/restrito.php";
+        include "../Views/Template/Cabecalho.php";
+        include "../Views/PaginaPrincipal/index.php";
+        include "../Views/Template/Rodape.php";
 
-            include "../Models/restrito.php";
-            include "../Views/Template/Cabecalho.php";
-            include "../Views/PaginaPrincipal/index.php";
-            include "../Views/Template/Rodape.php";
-        }
+//        if (isset($_POST['busca'])){
+//            //FAZ A BUSCA POR NOME DOS LOCAIS
+//            $busca = $_POST['busca'];
+//            $crudLocal = new LocalCrud();
+//            $resultado = $crudLocal->validaBusca($busca);
+//            //VERIFICA SE A BUSCA DO LOCAL EXISTE, SE NÃO, EXIBE UMA MENSAGEM DE ERRO, SE SIM, MOSTRA APENAS OS LOCAIS PROCURADOS
+//            if ($resultado == 0){
+//                session_start();
+//                $_SESSION['id'] = $_GET['iduser'];
+//                $crudCat = new CategoriaCrud();
+//                $categorias = $crudCat->getCategorias();
+//
+//                include "../Models/restrito.php";
+//                include "../Views/Template/Cabecalho.php";
+//                include "../Views/PaginaPrincipal/index.php";
+//                include "../Views/Template/Rodape.php";
+//            }else{
+//                session_start();
+//                $_SESSION['id'] = $_GET['iduser'];
+//                //PARA EXIBIR TODOS OS LOCAIS
+//                $crudLocal = new LocalCrud();
+//                @$locais = $crudLocal->buscaLocais($busca);
+//                $crudCat = new CategoriaCrud();
+//                $categorias = $crudCat->getCategorias();
+//
+//                include "../Models/restrito.php";
+//                include "../Views/Template/Cabecalho.php";
+//                include "../Views/PaginaPrincipal/index.php";
+//                include "../Views/Template/Rodape.php";
+//            }
+//        }else{
+//            session_start();
+//            $_SESSION['id'] = $_GET['iduser'];
+//            //PARA EXIBIR TODOS OS LOCAIS
+//            $resultado = 1;
+//            $crudLocal = new LocalCrud();
+//            @$locais = $crudLocal->getLocais();
+//            $crudCat = new CategoriaCrud();
+//            $categorias = $crudCat->getCategorias();
+//
+//            include "../Models/restrito.php";
+//            include "../Views/Template/Cabecalho.php";
+//            include "../Views/PaginaPrincipal/index.php";
+//            include "../Views/Template/Rodape.php";
+//        }
 
 
         break;
@@ -153,6 +175,7 @@ switch ($action) {
             $categorias = $crudCat->getCategorias();
             $categoria = $crudCat->getCategoria($idCat);
             $nomeCat = $categoria->nome;
+            $idEstado = $local->id_estado;
             include "../Views/Local/editar.php";
         }else{ // já passou no form e fez submit
 

@@ -259,15 +259,16 @@ if (@$_GET['erro'] == 1){?>
                             <?php } ?>
                     </div>
             </div>
-            <div id="paninacao"style="text-align: center;">
+            <nav aria-label="Page navigation example">
                 <ul class="pagination">
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
+                    <li class="page-item"><a class="page-link" href="ControlerLocal.php?iduser=<?=$_SESSION['id']?>&pagina=0">Previous</a></li>
+                    <?php
+                    for ($i=0; $i<$num_paginas; $i++){  ?>
+                    <li class="page-item"><a class="page-link" href="ControlerLocal.php?iduser=<?=$_SESSION['id']?>&pagina=<?= $i ?> "><?php echo $i+1; ?></a></li>
+                    <?php } ?>
+                    <li class="page-item"><a class="page-link" href="ControlerLocal.php?iduser=<?=$_SESSION['id']?>&pagina=<?php echo $num_paginas-1;?>  ">Next</a></li>
                 </ul>
-            </div>
+            </nav>
 
             </div>
 
@@ -276,24 +277,7 @@ if (@$_GET['erro'] == 1){?>
     </div>
 
 </div>
-<!-- /.container -->
 
-<div class="container">
-
-    <hr>
-
-    <!-- Footer -->
-    <footer>
-        <div class="row">
-            <div class="col-lg-12" style="margin-left: 25%">
-              <?php $id = $_SESSION['id']; ?>
-                    <br><p> Você esta logado com <?php echo "id = $id."; ?></p>
-            </div>
-        </div>
-    </footer>
-
-</div>
-<!-- /.container -->
 
 <!-- jQuery -->
 <script src="../../assets/js/jquery.js"></script>

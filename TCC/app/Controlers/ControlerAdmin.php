@@ -99,6 +99,7 @@ switch ($action){
             $categorias = $crudCat->getCategorias();
             $categoria = $crudCat->getCategoria($idCat);
             $nomeCat = $categoria->nome;
+            $idEstado = $local->id_estado;
             include "../Views/Admin/editarLocal.php";
         }else{ // já passou no form e fez submit
 
