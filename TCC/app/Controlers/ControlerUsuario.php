@@ -41,7 +41,10 @@ switch ($action) {
         session_start();
         $_SESSION['id'] = $id;
         $crud = new LocalCrud();
-        $locais = $crud->getLocalUser($id);
+        @$locais = $crud->getLocalUser($id);
+        if (!isset($locais)){
+            header("Location: ControlerLocal.php?iduser=$id&erro=1");
+        }
         $cruduser = new UsuarioCrud();
         $user = $cruduser->getUsuarioId($id);
         include "../Models/restrito.php";

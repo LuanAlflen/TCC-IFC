@@ -119,9 +119,6 @@ switch ($action) {
             $idcategoria = $categoria->id_categoria;
 
             //VERIFICA SE OS CAMPOS DE SELECT FORAM PREENCHIDOS
-            if (!isset($idcategoria) || $_POST['estados'] == 0 || $_POST['Municipio'] == 0){
-                echo "Todos os campos devem ser preenchidos";
-            } else {
 
                 $local = new Local(
                     $nomeArquivo,
@@ -139,8 +136,8 @@ switch ($action) {
                 $crudLocal = new LocalCrud();
                 $crudLocal->insertLocal($local);
                 $id = $_POST['iduser'];
-                header("Location: ControlerUsuario.php?acao=show&id=$id");
-            }
+                header("Location: ControlerUsuario.php?acao=show&iduser=$id");
+
         }
 
         break;
@@ -173,9 +170,6 @@ switch ($action) {
             }
 
             //VERIFICA SE OS CAMPOS DE SELECT FORAM PREENCHIDOS
-            if ($_POST['categoria'] == 0 || $_POST['estados'] == 0 || $_POST['Municipio'] == 0){
-                echo "Todos os campos devem ser preenchidos";
-            } else {
 
                 $local = new Local(
                     $nomeArquivo,
@@ -194,8 +188,8 @@ switch ($action) {
                 $crudLocal = new LocalCrud();
                 $crudLocal->updateLocal($local);
                 $id = $_POST['iduser'];
-                header("Location: ControlerUsuario.php");
-            }
+                header("Location: ControlerUsuario.php?acao=show&iduser=$id");
+
         }
 
         break;
@@ -206,11 +200,8 @@ switch ($action) {
         $idlocal = $_GET['idlocal'];
         $iduser = $_GET['iduser'];
         $crud = new LocalCrud();
-        $resultado = $crud->deleteLocal($idlocal);
-        $locais = $crud->getLocalUser($iduser);
-        include "../Views/Template/Cabecalho.php";
-        include "../Views/Usuario/show.php";
-        include "../Views/Template/Rodape.php";
+        $crud->deleteLocal($idlocal);
+        header("Location: ControlerUsuario.php?acao=show&iduser=$iduser");
 
         break;
 

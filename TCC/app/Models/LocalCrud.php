@@ -95,15 +95,7 @@ class LocalCrud
         }
 
     public function getLocalUser($id){
-        $sql = $this->conexao->prepare("SELECT * FROM locais WHERE id_usuario = $id");
-        $sql->execute();
-        $resultado = $sql->rowCount();
 
-        if($resultado == 0){
-            $iduser = $_GET['id'];
-            header("Location: ControlerLocal.php?iduser=$iduser&erro=1");
-            die;
-        }else{
             $sql = "SELECT * FROM locais WHERE id_usuario = $id";
 
             $result = $this->conexao->query($sql);
@@ -127,7 +119,7 @@ class LocalCrud
 
                 $obj = new Local($foto, $nome, $email, $endereco, $numero, $telefone, $descricao, $id_estado, $id_municipio, $idcategoria, $idusuarios, $idlocal);
                 $listaLocais[] = $obj;
-            }
+
             return $listaLocais;
         }
     }

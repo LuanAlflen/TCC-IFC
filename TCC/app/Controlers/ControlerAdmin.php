@@ -116,9 +116,6 @@ switch ($action){
             }
 
             //VERIFICA SE OS CAMPOS DE SELECT FORAM PREENCHIDOS
-            if ($_POST['categoria'] == 0 || $_POST['estados'] == 0 || $_POST['municipios'] == 0){
-                echo "Todos os campos devem ser preenchidos";
-            } else {
                 $local = new Local(
                     $nomeArquivo,
                     $_POST['nome'],
@@ -136,7 +133,7 @@ switch ($action){
                 $crudLocal->updateLocal($local);
                 $idAdm = $_GET['idAdm'];
                 header("Location: ControlerAdmin.php?id=$idAdm");
-            }
+
         }
 
         break;
