@@ -43,7 +43,7 @@ switch ($action) {
         $crud = new LocalCrud();
         @$locais = $crud->getLocalUser($id);
         if (!isset($locais)){
-            header("Location: ControlerLocal.php?iduser=$id&erro=1");
+            header("Location: ControlerLocal.php?iduser=$id&erro=1&pagina=0");
         }
         $cruduser = new UsuarioCrud();
         $user = $cruduser->getUsuarioId($id);
