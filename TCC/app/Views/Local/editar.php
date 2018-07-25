@@ -33,28 +33,7 @@
                 }
             });
 
-            //DIVIDINDO O FORMULARIO EM DOIS
 
-            $("#anterior").hide();
-            $(".etapa2").hide();
-            $(".btn__form").hide();
-
-            $('#proximo').click(function () {
-                $(".etapa1").hide();
-                $(".etapa2").fadeIn();
-                $("#proximo").hide();
-                $("#anterior").show();
-                $(".btn__form").fadeIn();
-
-            });
-
-            $('#anterior').click(function () {
-                $(".etapa1").fadeIn();
-                $(".etapa2").hide();
-                $("#proximo").show();
-                $("#anterior").hide();
-                $(".btn__form").hide();
-            })
 
 
         })

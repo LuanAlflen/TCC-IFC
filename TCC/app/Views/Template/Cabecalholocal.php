@@ -49,13 +49,20 @@ $user = $crudUser->getUsuarioId($iduserlogado);
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="#">Favoritos</a>
-                </li>
-                <li>
-                    <a href="#">Em destaque</a>
-                </li>
+<!--                <li>-->
+<!--                    <a href="#">Favoritos</a>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                    <a href="#">Em destaque</a>-->
+<!--                </li>-->
                 <li class="dropdown pull-right">
+                    <?php
+                    $iduser = $_SESSION['id'];
+                    $crudUser = new UsuarioCrud();
+                    $user = $crudUser->getUsuarioId($iduser);
+
+                    ?>
+                    ?>
                     <a href="#" class="dropdown-toggle pull-right" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?= $user->getNome() ?><span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="ControlerUsuario.php?acao=contato">Contato</a></li>

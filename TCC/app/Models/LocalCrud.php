@@ -131,11 +131,9 @@ class LocalCrud
     public function getLocalUser($id){
 
             $sql = "SELECT * FROM locais WHERE id_usuario = $id";
-
             $result = $this->conexao->query($sql);
 
             $locais = $result->fetchAll(PDO::FETCH_ASSOC);
-
             foreach ($locais as $local) {
                 $foto = $local['foto'];
                 $nome = $local['nome'];
@@ -153,9 +151,9 @@ class LocalCrud
 
                 $obj = new Local($foto, $nome, $email, $endereco, $numero, $telefone, $descricao, $id_estado, $id_municipio, $idcategoria, $idusuarios, $idlocal);
                 $listaLocais[] = $obj;
-
+            }
             return $listaLocais;
-        }
+
     }
 
     public function updateLocal(Local $local)

@@ -140,7 +140,7 @@
         <?php } ?>
             <form method="post" action="ControlerComentario.php?acao=cadastrar">
                 <input type="text" name="texto" placeholder="Digite seu comentario">
-                <input type="hidden" name="iduser" value="<?= $_GET['iduser']; ?>">
+                <input type="hidden" name="iduser" value="<?= $_SESSION['id']; ?>">
                 <input type="hidden" name="idlocal" value="<?= $local->id_local; ?>">
                 <button type="submit" class="bnt btn-success">Comentar</button>
             </form>
