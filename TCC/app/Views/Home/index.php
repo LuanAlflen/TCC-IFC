@@ -58,6 +58,9 @@
                         <a class="page-scroll" href="?acao=login" ><b>Login</b></a>
                     </li>
                     <li>
+                        <a class="page-scroll" href="?acao=visitante" ><b>Entrar como visitante</b></a>
+                    </li>
+                    <li>
                         <a class="page-scroll" href="?acao=contato"><b>Contato</b></a>
                     </li>
                 </ul>

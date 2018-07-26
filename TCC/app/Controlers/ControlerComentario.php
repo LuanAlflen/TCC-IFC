@@ -15,8 +15,15 @@ switch ($action){
 
     case 'cadastrar':
 
+
         $idlocal = $_POST['idlocal'];
         $iduser = $_POST['iduser'];
+
+
+        if ($iduser == 1){
+            header("Location: ControlerLocal.php?acao=show&idlocal=$idlocal&iduser=1&erro=naologado");
+            die;
+        }
         $comentario = new Comentario(null,$_POST['texto'], $_POST['iduser'], $idlocal);
         $crud = new ComentarioCrud();
         $crud->insereComentario($comentario);

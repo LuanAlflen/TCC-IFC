@@ -70,17 +70,28 @@ if (empty($user->getId())){
                         <li><a href="ControlerUsuario.php?acao=contato">Contato</a></li>
                         <?php
                         $tipuser = $user->getTipuser();
+                        if($tipuser == 'visitante') {
+                            echo "<li><a href=\"ControlerUsuario.php?acao=cadastrar\">Cadastrar</a></li>";
+                        }
+                        ?>
+                        <?php
                         if ($tipuser == 'admin'){
                             echo "<li><a href=\"ControlerAdmin.php?id=$iduserlogado\">Área do admin</a></li>";
-                        }else{
+                        }elseif ($tipuser == 'visitante'){
+                            echo "<li role='separator' class='divider'></li>";
+                            echo "<li><a href=\"ControlerUsuario.php?acao=login\">Entrar</a></li>";
+                        }                        else{
                             echo "<li><a href=\"ControlerUsuario.php?acao=show&iduser=$iduserlogado\">Minhas quadras</a></li>";
                         }
                         ?>
+                        <?php
+                        if($tipuser != 'visitante'){ ?>
                         <li><a href="ControlerLocal.php?acao=cadastrar&id=<?= $_SESSION['id'] ?>">Cadastrar quadra</a></li>
                         <li><a href="ControlerUsuario.php?acao=editar&id=<?= $_SESSION['id'] ?>">Editar</a></li>
                         <li><a href="ControlerUsuario.php?acao=excluir&id=<?= $_SESSION['id'] ?>">Excluir conta</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="ControlerUsuario.php">Sair</a></li>
+                        <?php } ?>
                     </ul>
                     <form class="navbar-form pull-right" method="post" action="ControlerLocal.php?iduser=<?= $_SESSION['id'] ?>">
                         <div class="form-group">

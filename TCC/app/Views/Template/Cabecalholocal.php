@@ -77,12 +77,14 @@ $user = $crudUser->getUsuarioId($iduserlogado);
                         if ($iduserlocal == $iduserlogado OR $tipuser == 'admin'){
                             echo "<li><a href=\"ControlerLocal.php?acao=editar&idlocal=$idlocal\">Editar quadra</a></li>";
                             echo "<li><a href=\"ControlerLocal.php?acao=excluir&idlocal=$idlocal\">Excluir quadra</a></li>";
+                        }elseif ($tipuser == 'visitante'){
+                            echo "<li><a href=\"ControlerUsuario.php?acao=login\">Entrar</a></li>";
                         }
                         ?>
                         <?php
                         if ($tipuser == 'admin'){
                             echo "<li><a href=\"ControlerAdmin.php?id=$iduserlogado\">Área do admin</a></li>";
-                        }else{
+                        }elseif($tipuser != 'visitante'){
                             echo "<li><a href=\"ControlerUsuario.php?acao=show&iduser=$iduserlogado\">Minhas quadras</a></li>";
                         }
                         ?>

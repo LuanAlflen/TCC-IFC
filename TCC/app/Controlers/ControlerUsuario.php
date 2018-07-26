@@ -34,6 +34,13 @@ switch ($action) {
 
         break;
 
+    case 'visitante':
+
+        $iduser = 1;
+        header("Location: ControlerLocal.php?iduser=$iduser&pagina=0");
+
+        break;
+
     case 'show':
 
 

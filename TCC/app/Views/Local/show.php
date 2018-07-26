@@ -1,3 +1,7 @@
+<?php
+if (@$_GET['erro'] == 'naologado'){?>
+    <?php echo "<script>alert('É preciso estar logado para comentar!')</script>"; ?>
+<?php } ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

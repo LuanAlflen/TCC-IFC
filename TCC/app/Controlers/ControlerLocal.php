@@ -36,6 +36,7 @@ switch ($action) {
 
         session_start();
         $_SESSION['id'] = $_GET['iduser'];
+        $id = $_SESSION['id'];
         //PARA EXIBIR TODOS OS LOCAIS COM LIMIT
         $resultado = 1;
         $crudLocal = new LocalCrud();

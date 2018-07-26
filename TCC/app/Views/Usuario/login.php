@@ -34,10 +34,14 @@
                 <div class="error-text" style="color: red">Por favor, confirme suas alterações</div>
             <?php } ?>
             <div class="btn__form">
-            	<input class="btn__submit" type="reset" value="Limpar">
-            	<input class="btn__reset" type="submit" name="gravar" value="Login">
+                <input class="btn__submit" type="reset" value="Limpar">
+                <input class="btn__reset" type="submit" name="gravar" value="Login">
             </div>
-		</form>
+            <br>
+            <div class="error-text" style="color: white">
+                <a href="?acao=visitante" style="text-decoration: none">Entrar como convidado</a>
+            </div>
+        </form>
 	</div>
 	
 </body>
