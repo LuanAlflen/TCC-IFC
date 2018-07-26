@@ -74,12 +74,14 @@ if (@$_GET['erro'] == 'naologado'){?>
 
                      <div id="exemplo" class="col-md-3">
                          <p class="lead"><?= $local->getNome();?></p>
-                         <div class="img-embrulho">
-                             <img src="../../assets/img/Local/<?= $local->foto ?>" height="320" width="320">
+                         <div style="text-align: center">
+                         <img src="../../assets/img/Local/<?= $local->foto ?>" height="190" width="260">
                          </div>
                          <br>
-                         <p><?= $local->getDescricao();?></p>
+                         <p style="text-align: center"><?= $local->getDescricao();?></p>
+                         <div style="text-align: center">
                             <br><button id="reservarQuadra" class="btn btn-success">Reservar</button>
+                         </div>
                          </div>
                      </div>
                  <div class="col-md-4">
@@ -122,14 +124,14 @@ if (@$_GET['erro'] == 'naologado'){?>
             foreach ($comentarios as $comentario):
                 ?>
                 <div class="<?= $comentario->id_usuario ?>" style="border-top: 2px solid #000; margin-bottom: 2%">
-                    <p style="float: left"><i class="fa fa-user-circle"
-                                              aria-hidden="true"></i> <b><?php $iduser = $comentario->id_usuario;
+                    <p style="float: left; margin-top: 2%" >
+                        <i class="fa fa-user-circle" aria-hidden="true"></i> <b><?php $iduser = $comentario->id_usuario;
                             $crud = new UsuarioCrud();
                             $usuario = $crud->getUsuarioId($iduser);
                             $nome = $usuario->getNome();
                             echo $nome; ?></b></p>
                     <br>
-                    <p>
+                    <p style="margin-top: 2%">
                         <?= $comentario->texto ?>
                         <a id="excluir"href="ControlerComentario.php?acao=excluir&idcomentario=<?= $comentario->id_comentario; ?>&idusercomentario=<?= $comentario->id_usuario ?>&iduserlogado=<?= $_GET['iduser'] ?>&idlocal=<?= $_GET['idlocal'] ?>"class="fa fa-trash"></a>
                     </p>
