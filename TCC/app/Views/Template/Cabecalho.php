@@ -93,7 +93,7 @@ if (empty($user->getId())){
                         <li><a href="ControlerUsuario.php">Sair</a></li>
                         <?php } ?>
                     </ul>
-                    <form class="navbar-form pull-right" method="post" action="ControlerLocal.php?iduser=<?= $_SESSION['id'] ?>">
+                    <form class="navbar-form pull-right" method="post" action="ControlerLocal.php?iduser=<?= $_SESSION['id'] ?>&pagina=0">
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Buscar" name="busca">
                         </div>

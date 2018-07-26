@@ -195,6 +195,9 @@ if (@$_GET['erro'] == 1){?>
             <div class="row">
                     <div id="conteudos">
                         <?php
+                        if (!isset($resultado)){
+                            $resultado = 1;
+                        }
                             if ($resultado == 0){
                                 echo "<p>Este local não existe!</p>";
                             }else {
@@ -206,55 +209,55 @@ if (@$_GET['erro'] == 1){?>
                                 }
                                 ?>
                                 <?php foreach ($locais as $local): ?>
-                                    <div class="local <?= $local->id_categoria ?> <?= $local->id_estado ?> <?= $local->id_municipio ?>">
-                                        <div class="col-sm-4 col-lg-4 col-md-4">
-                                            <div class="thumbnail">
+                                        <div id="<?= $local->nome ?>" class="local <?= $local->id_categoria ?> <?= $local->id_estado ?> <?= $local->id_municipio ?>">
+                                            <div class="col-sm-4 col-lg-4 col-md-4">
+                                                <div class="thumbnail">
 
-                                                    <img src="../../assets/img/Local/<?= $local->foto ?>" style="width: 260px; height: 160px">
+                                                        <img src="../../assets/img/Local/<?= $local->foto ?>" style="width: 260px; height: 160px">
 
-                                                <div class="caption" style="margin-bottom: 4%;">
-                                                    <h4>
-                                                        <?= $local->nome ?>
-                                                        <a class="btn btn-primary pull-right"
-                                                           href="ControlerLocal.php?acao=show&idlocal=<?= $local->id_local ?>&iduser=<?= $_SESSION['id'] ?>">Ver
-                                                            +</a>
-                                                    </h4>
-                                                    <p>
-                                                        <b>Categoria: </b> <?php
-                                                        $idcat = $local->id_categoria;
-                                                        $crudCat = new CategoriaCrud();
-                                                        $categoria = $crudCat->getCategoria($idcat);
-                                                        echo $categoria->nome;
-                                                        ?>.<br>
-                                                        <?php
-                                                        $id = $local->id_estado;
-                                                        $estado = getEstado($id);
-                                                        ?>
-                                                        <b>Estado:</b> <?= $estado->nome;
-                                                        ?><br>
+                                                    <div class="caption" style="margin-bottom: 4%;">
+                                                        <h4>
+                                                            <?= $local->nome ?>
+                                                            <a class="btn btn-primary pull-right"
+                                                               href="ControlerLocal.php?acao=show&idlocal=<?= $local->id_local ?>&iduser=<?= $_SESSION['id'] ?>">Ver
+                                                                +</a>
+                                                        </h4>
+                                                        <p>
+                                                            <b>Categoria: </b> <?php
+                                                            $idcat = $local->id_categoria;
+                                                            $crudCat = new CategoriaCrud();
+                                                            $categoria = $crudCat->getCategoria($idcat);
+                                                            echo $categoria->nome;
+                                                            ?>.<br>
+                                                            <?php
+                                                            $id = $local->id_estado;
+                                                            $estado = getEstado($id);
+                                                            ?>
+                                                            <b>Estado:</b> <?= $estado->nome;
+                                                            ?><br>
 
-                                                        <?php
-                                                        $id = $local->id_municipio;
-                                                        $municipio = getMunicipio($id);
-                                                        ?>
-                                                        <b>Cidade:</b> <?= $municipio->nome ?><br>
-                                                        <b>Endereço: </b><?= $local->endereco ?> <?= $local->numero ?>
-                                                    </p>
+                                                            <?php
+                                                            $id = $local->id_municipio;
+                                                            $municipio = getMunicipio($id);
+                                                            ?>
+                                                            <b>Cidade:</b> <?= $municipio->nome ?><br>
+                                                            <b>Endereço: </b><?= $local->endereco ?> <?= $local->numero ?>
+                                                        </p>
+                                                    </div>
+                                                    <!--<div class="ratings" style="margin-bottom: 4%;">
+                                                        <p>
+                                                            <span class="glyphicon glyphicon-star"></span>
+                                                            <span class="glyphicon glyphicon-star"></span>
+                                                            <span class="glyphicon glyphicon-star"></span>
+                                                            <span class="glyphicon glyphicon-star"></span>
+                                                            <span class="glyphicon glyphicon-star"></span>
+                                                            <span class="pull-right">Avaliações</span>
+                                                        </p>
+
+                                                    </div>-->
                                                 </div>
-                                                <!--<div class="ratings" style="margin-bottom: 4%;">
-                                                    <p>
-                                                        <span class="glyphicon glyphicon-star"></span>
-                                                        <span class="glyphicon glyphicon-star"></span>
-                                                        <span class="glyphicon glyphicon-star"></span>
-                                                        <span class="glyphicon glyphicon-star"></span>
-                                                        <span class="glyphicon glyphicon-star"></span>
-                                                        <span class="pull-right">Avaliações</span>
-                                                    </p>
-
-                                                </div>-->
                                             </div>
                                         </div>
-                                    </div>
                                 <?php endforeach; ?>
                             <?php } ?>
                     </div>

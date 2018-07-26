@@ -247,9 +247,8 @@ class LocalCrud
         return $resultado;
     }
 
-    public function buscaLocais($busca){
-        $sql = "SELECT * FROM locais WHERE nome LIKE '%{$busca}%'";
-
+    public function buscaLocais($busca, $pagina, $inicio){
+        $sql = "SELECT * FROM locais WHERE nome LIKE '%{$busca}%' LIMIT $pagina OFFSET $inicio";
         $resultado = $this->conexao->query($sql);
 
         $locais = $resultado->fetchAll(PDO::FETCH_ASSOC);
