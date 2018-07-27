@@ -81,6 +81,9 @@
 			 	<input class="btn__submit" type="submit" name="gravar" value="Salvar" >
             </div>
 		</form>
+    <div class="error-text" style="color: white">
+        <a href="?acao=login" style="text-decoration: none">Já possui cadastro? Logue-se</a>
+    </div>
 	</div>
 	
 </body>

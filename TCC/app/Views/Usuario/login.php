@@ -41,6 +41,9 @@
             <div class="error-text" style="color: white">
                 <a href="?acao=visitante" style="text-decoration: none">Entrar como convidado</a>
             </div>
+            <div class="error-text" style="color: white; margin-top: 3px;">
+                <a href="?acao=cadastrar" style="text-decoration: none">Não é cadastrado? Cadastre-se</a>
+            </div>
         </form>
 	</div>
 	
