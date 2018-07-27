@@ -22,7 +22,6 @@
 
     <!-- Custom CSS -->
     <link href="../../assets/css/shop-homepage.css" rel="stylesheet">
-
     <link rel="stylesheet" href="../../assets/css/style.css">
 
 
@@ -108,11 +107,15 @@ if (empty($user->getId())){
                         <li><a href="ControlerUsuario.php">Sair</a></li>
                         <?php } ?>
                     </ul>
+                    <?php
+                    if (@$_GET['acao'] != 'show'){
+                    ?>
                         <div class="navbar-form pull-right">
                             <input type="text" class="form-control" placeholder="Buscar" name="busca" id="texto">
                             <input type="hidden" value="<?= $_SESSION['id'] ?>" id="iduser">
                             <button type="submit" class="btn btn-default" id="botao">Pesquisar</button>
                         </div>
+                <?php } ?>
 
             </ul>
         </div>
