@@ -208,6 +208,9 @@ if (@$_GET['erro'] == 1){?>
                                     die;
                                 }
                                 ?>
+                                <div id="resposta">
+
+                                </div>
                                 <?php foreach ($locais as $local): ?>
                                         <div id="<?= $local->nome ?>" class="local <?= $local->id_categoria ?> <?= $local->id_estado ?> <?= $local->id_municipio ?>">
                                             <div class="col-sm-4 col-lg-4 col-md-4">

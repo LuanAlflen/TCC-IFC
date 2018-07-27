@@ -89,6 +89,21 @@ switch ($action) {
 
         break;
 
+    case 'locais':
+
+        $_SESSION['id'] = $_GET['iduser'];
+        $busca = $_GET['busca'];
+        $_GET['pagina'] = 0;
+        $pagina = intval($_GET['pagina']);
+        $locais_por_pagina = 9;
+        $inicio = $pagina*$locais_por_pagina;
+        $crudLocal = new LocalCrud();
+        $num_total_locais = $crudLocal->numeroTotalDeLocais();
+        $num_paginas = ceil($num_total_locais/$locais_por_pagina);
+        @$locais = $crudLocal->buscaLocais($busca, $locais_por_pagina,$inicio);
+        include "../Views/Local/locais.php";
+        break;
+
     case 'show':
 
         $idlocal = $_GET['idlocal'];

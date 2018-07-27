@@ -10,7 +10,8 @@
     <meta name="author" content="">
 
     <title>TCC- Luan e Bryan</title>
-
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <!-- Bootstrap Core CSS -->
     <link href="../../assets/css/bootstrap.css" rel="stylesheet">
 
@@ -30,6 +31,20 @@
     <!--[if lt IE 9]>
 
     <![endif]-->
+    <script>
+        $(document).ready(function(){
+            $('#botao').click(function () {
+                $(".local").hide();
+                var texto  = $('#texto').val();
+                var iduser = $('#iduser').val();
+                //alert('ControlerLocal.php?acao=locais&busca='+texto);
+                $.get("ControlerLocal.php?acao=locais&iduser="+iduser+"&busca="+texto, function (result) {
+                    $('#resposta').html(result);
+                })
+            })
+        });
+
+    </script>
 
 </head>
 
@@ -80,7 +95,7 @@ if (empty($user->getId())){
                         }elseif ($tipuser == 'visitante'){
                             echo "<li role='separator' class='divider'></li>";
                             echo "<li><a href=\"ControlerUsuario.php?acao=login\">Entrar</a></li>";
-                        }                        else{
+                        }else{
                             echo "<li><a href=\"ControlerUsuario.php?acao=show&iduser=$iduserlogado\">Minhas quadras</a></li>";
                         }
                         ?>
@@ -93,12 +108,11 @@ if (empty($user->getId())){
                         <li><a href="ControlerUsuario.php">Sair</a></li>
                         <?php } ?>
                     </ul>
-                    <form class="navbar-form pull-right" method="post" action="ControlerLocal.php?iduser=<?= $_SESSION['id'] ?>&pagina=0">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Buscar" name="busca">
+                        <div class="navbar-form pull-right">
+                            <input type="text" class="form-control" placeholder="Buscar" name="busca" id="texto">
+                            <input type="hidden" value="<?= $_SESSION['id'] ?>" id="iduser">
+                            <button type="submit" class="btn btn-default" id="botao">Pesquisar</button>
                         </div>
-                        <button type="submit" class="btn btn-default">Pesquisar</button>
-                    </form>
 
             </ul>
         </div>
