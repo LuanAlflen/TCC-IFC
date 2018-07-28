@@ -36,11 +36,16 @@
 
 
         function filtra(){
+            var classTexto = '';
+            var texto = $('#texto').val();
             var classEstado = '';
             var estado = $("#estados").val();
             var classMunicipios = '';
             var municipios = $("#municipios").val();
 
+            if (texto != ''){
+                classTexto = "."+texto;
+            }
 
             if (estado != 0){
                 classEstado = "."+estado;
@@ -49,8 +54,8 @@
             if (municipios != 0){
                 classMunicipios = "."+municipios;
             }
-
             $(".local").hide();
+
 
             var esportes = $("#categorias")
             var selecionados = $(esportes).find(".selecionado");
@@ -59,12 +64,11 @@
             for (i=0; i<selecionados.length; i++){
                 var liAtual = selecionados[i];
                 if ($(liAtual).hasClass("selecionado")){
-                    classes += "."+$(liAtual).attr("id") + classEstado + classMunicipios ;
+                    classes += "."+$(liAtual).attr("id") + classEstado + classMunicipios + classTexto ;
                     if (i !=(selecionados.length - 1)){
                         classes += ",";
                     }
                 }
-
             }
 
             $(classes).show();
@@ -78,6 +82,7 @@
                 $("#abas ul li").removeClass("selecionado");
                 $(this).toggleClass("selecionado");
                 filtra();
+
             });
 
         });
@@ -212,7 +217,8 @@ if (@$_GET['erro'] == 1){?>
 
                                 </div>
                                 <?php foreach ($locais as $local): ?>
-                                        <div id="<?= $local->nome ?>" class="local <?= $local->id_categoria ?> <?= $local->id_estado ?> <?= $local->id_municipio ?>">
+                                    <div class="<?= $local->nome ?>">
+                                    <div id="nome <?= $local->nome ?>" class="local <?= $local->id_categoria ?> <?= $local->id_estado ?> <?= $local->id_municipio ?> <?= $local->nome ?>">
                                             <div class="col-sm-4 col-lg-4 col-md-4">
                                                 <div class="thumbnail">
 
@@ -261,6 +267,7 @@ if (@$_GET['erro'] == 1){?>
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
                                 <?php endforeach; ?>
                             <?php } ?>
                     </div>

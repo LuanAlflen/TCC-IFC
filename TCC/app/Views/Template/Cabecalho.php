@@ -33,13 +33,7 @@
     <script>
         $(document).ready(function(){
             $('#botao').click(function () {
-                $(".local").hide();
-                var texto  = $('#texto').val();
-                var iduser = $('#iduser').val();
-                //alert('ControlerLocal.php?acao=locais&busca='+texto);
-                $.get("ControlerLocal.php?acao=locais&iduser="+iduser+"&busca="+texto, function (result) {
-                    $('#resposta').html(result);
-                })
+                filtra();
             })
         });
 
