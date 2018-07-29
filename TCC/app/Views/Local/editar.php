@@ -111,8 +111,6 @@
         if (@$_GET['erro'] == 1){?>
             <div class="error-text" style="color: red">Todos os campos devem ser preenchidos!</div>
         <?php } ?>
-        <i id="proximo" class="fa fa-arrow-circle-right" style="font-size:36px; color: yellow; margin-left:90%;  "></i>
-        <i id="anterior" class="fa fa-arrow-circle-left" style="font-size:36px; color: yellow;"></i>
         <div class="btn__form">
             <input class="btn__submit" type="reset" value="Limpar">
             <input class="btn__reset" type="submit" name="gravar" value="Salvar">  >

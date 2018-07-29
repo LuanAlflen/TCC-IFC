@@ -35,73 +35,33 @@ switch ($action) {
     case 'index':
 
         //////////////////////////////////////////////////////BUSCA NÃO FUNCIONANDO////////////////////////////////////////////////////////////////////////////////
-//        session_start();
-//        $_SESSION['id'] = $_GET['iduser'];
-//        $id = $_SESSION['id'];
-//        //PARA EXIBIR TODOS OS LOCAIS COM LIMIT
-//        $resultado = 1;
-//        $crudLocal = new LocalCrud();
-//        $crudCat = new CategoriaCrud();
-//        $categorias = $crudCat->getCategorias();
-//
-//        ///////////////////////////////PAGINANÇÃ0////////////////////////////////////////////////////////////////////
-//        $locais_por_pagina = 9;
-//        $pagina = intval($_GET['pagina']);
-//        $inicio = $pagina*$locais_por_pagina;
-//        @$locais = $crudLocal->getLocaisLimit($locais_por_pagina,$inicio);
-//        $num_total_locais = $crudLocal->numeroTotalDeLocais();
-//        $num_paginas = ceil($num_total_locais/$locais_por_pagina);
-//        ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-//
-//        include "../Models/restrito.php";
-//        include "../Views/Template/Cabecalho.php";
-//        include "../Views/PaginaPrincipal/index.php";
-//        include "../Views/Template/Rodape.php";
-
-
-        //////////////////////////////////////////////////////BUSCA FUNCIONANDO MAS PROBLEMA DE REEVIO DE FORMULARIO///////////////////////////////////////////////
-
         session_start();
         $_SESSION['id'] = $_GET['iduser'];
+        $id = $_SESSION['id'];
+        //PARA EXIBIR TODOS OS LOCAIS COM LIMIT
+        $resultado = 1;
+        $crudLocal = new LocalCrud();
         $crudCat = new CategoriaCrud();
         $categorias = $crudCat->getCategorias();
-        $crudLocal = new LocalCrud();
-        $locais_por_pagina = 9;
+
+        ///////////////////////////////PAGINANÇÃ0////////////////////////////////////////////////////////////////////
         $pagina = intval($_GET['pagina']);
-        $inicio = $pagina*$locais_por_pagina;
+        $locais_por_pagina = 9;
+        $inicio = $pagina * $locais_por_pagina;
         $num_total_locais = $crudLocal->numeroTotalDeLocais();
-        $num_paginas = ceil($num_total_locais/$locais_por_pagina);
-        if (isset($_POST['busca'])){
-            //FAZ A BUSCA POR NOME DOS LOCAIS
-            $busca = $_POST['busca'];
-            $resultado = $crudLocal->validaBusca($busca);
-            //VERIFICA SE A BUSCA DO LOCAL EXISTE, SE NÃO, EXIBE UMA MENSAGEM DE ERRO, SE SIM, MOSTRA APENAS OS LOCAIS PROCURADOS
-            if ($resultado != 0){
-                @$locais = $crudLocal->buscaLocais($busca, $locais_por_pagina,$inicio);
-            }
+        $num_paginas = ceil($num_total_locais / $locais_por_pagina);
+        if ($pagina == 0){
+            @$locais = $crudLocal->getLocais();
         }else {
             @$locais = $crudLocal->getLocaisLimit($locais_por_pagina, $inicio);
         }
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         include "../Models/restrito.php";
         include "../Views/Template/Cabecalho.php";
         include "../Views/PaginaPrincipal/index.php";
         include "../Views/Template/Rodape.php";
 
-        break;
-
-    case 'locais':
-
-        $_SESSION['id'] = $_GET['iduser'];
-        $busca = $_GET['busca'];
-        $_GET['pagina'] = 0;
-        $pagina = intval($_GET['pagina']);
-        $locais_por_pagina = 9;
-        $inicio = $pagina*$locais_por_pagina;
-        $crudLocal = new LocalCrud();
-        $num_total_locais = $crudLocal->numeroTotalDeLocais();
-        $num_paginas = ceil($num_total_locais/$locais_por_pagina);
-        @$locais = $crudLocal->buscaLocais($busca, $locais_por_pagina,$inicio);
-        include "../Views/Local/locais.php";
         break;
 
     case 'show':

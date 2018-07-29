@@ -218,7 +218,7 @@ if (@$_GET['erro'] == 1){?>
                                 </div>
                                 <?php foreach ($locais as $local): ?>
                                     <div class="<?= $local->nome ?>">
-                                    <div id="nome <?= $local->nome ?>" class="local <?= $local->id_categoria ?> <?= $local->id_estado ?> <?= $local->id_municipio ?> <?= $local->nome ?>">
+                                    <div id="idlocal <?= $local->id_local ?>" class="local <?= $local->id_categoria ?> <?= $local->id_estado ?> <?= $local->id_municipio ?> <?= $local->nome ?>">
                                             <div class="col-sm-4 col-lg-4 col-md-4">
                                                 <div class="thumbnail">
 
