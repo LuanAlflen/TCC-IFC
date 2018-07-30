@@ -35,6 +35,8 @@
         /////////////////////////////FILTROS/////////////////////////////////////////
 
         $(document).ready(function () {
+            $(".semLocais").hide();
+
             $("#locais > div").each(function(index, value){
                 if (index > 8){
                     $(value).hide();
@@ -82,6 +84,9 @@
             }
 
             $(classes).show();
+            if ($(".local").is(":visible") == false){
+                $(".semLocais").show();
+            }
         }
 
         $(document).ready(function (){
@@ -214,7 +219,7 @@ if (@$_GET['erro'] == 1){?>
                             $resultado = 1;
                         }
                             if ($resultado == 0){
-                                echo "<p>Este local não existe!</p>";
+                                echo "<h4 style='text-align: center; margin-top: 10%'>Não existem locais!</h4>";
                             }else {
                                 ?>
                                 <?php
@@ -223,8 +228,8 @@ if (@$_GET['erro'] == 1){?>
                                     die;
                                 }
                                 ?>
-                                <div id="resposta">
-
+                                <div class="semLocais" style="display: none;">
+                                    <h4 style="text-align: center; margin-top: 10%">O local procurado não existe!</h4>
                                 </div>
                                 <?php foreach ($locais as $local): ?>
                                     <div id="locais">
@@ -279,7 +284,7 @@ if (@$_GET['erro'] == 1){?>
                             <?php } ?>
                     </div>
             </div>
-            <nav class="paginacao" aria-label="Page navigation example">
+            <nav class="paginacao" aria-label="Page navigation example"style="text-align: center">
                 <ul class="pagination">
                     <li class="page-item"><a class="page-link" href="ControlerLocal.php?iduser=<?=$_SESSION['id']?>&pagina=0">Previous</a></li>
                     <?php
