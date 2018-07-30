@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 30-Jul-2018 às 03:12
+-- Generation Time: 30-Jul-2018 às 20:10
 -- Versão do servidor: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -62,11 +62,7 @@ CREATE TABLE `comentarios` (
 --
 
 INSERT INTO `comentarios` (`id_comentario`, `data`, `texto`, `id_usuario`, `id_local`) VALUES
-(1, '2018-06-26 12:18:44', 'teste', 24, 27),
-(3, '2018-06-26 12:24:04', 'outro teste', 24, 27),
-(4, '2018-07-09 18:45:18', 'teste', 24, 23),
-(5, '2018-07-09 18:45:23', 'ola', 24, 23),
-(6, '2018-07-09 18:53:20', 'gostei', 24, 22);
+(1, '2018-06-26 12:18:44', 'teste', 24, 27);
 
 -- --------------------------------------------------------
 
@@ -139,20 +135,18 @@ CREATE TABLE `locais` (
 --
 
 INSERT INTO `locais` (`id_local`, `foto`, `nome`, `email`, `endereco`, `numero`, `telefone`, `descricao`, `id_estado`, `id_municipio`, `id_categoria`, `id_usuario`) VALUES
-(22, '1606201801490812kWin.jpg', 'Quadra de volei', 'teste@mail.com', 'Adolfo da Veiga', 2611, 898989989, 'bem-vindo a essa quadra maravilhosa que vai ser cadastrada', 42, 4209102, 3, 24),
-(23, '15062018072901PrimeiraWinFPP.jpg', 'Vila Belmiro', 'luan.alflen4@gmail.com', 'Rua Princesa Isabel', 501, 9899595, 'Agora quem da bola Ã© o santos', 35, 3548500, 1, 15),
-(24, '1606201805051920180516183741_1.jpg', 'Quadra de tenis', 'a@a', 'Zozimo de oliveira', 117, 98959, 'bla', 42, 4209102, 4, 24),
-(27, '25062018040630robo.png', 'Quadra IFC', 'ifc@ifc.edu.br', 'Rodovia BR 280, km 27 - CÃ¢mpus Araquari, Araquari - SC, 89245-000', 27, 87864684, 'bla bland kdjndk ', 42, 4201307, 1, 24),
+(27, '3007201807515001-Campo-SuiÃ§o.jpg', 'Quadra IFC', 'ifc@ifc.edu.br', 'Rodovia BR 280, km 27 - CÃ¢mpus Araquari, Araquari - SC, 89245-000', 27, 87864684, 'bla bland kdjndk ', 42, 4201307, 1, 24),
 (28, '29072018033548miquelute.jpg', 'Miquelute', 'o@k', 'SC-418, Km 4', 6745, 4545, 'Miquelute materiais e construÃ§Ãµes', 42, 4201307, 1, 24),
 (29, '29072018033919granulado-para-campo-society-03.jpg', 'Porto Grande Futebol Society e Eventos', 'o@k', 'Rua Da Prosperidade', 95, 4545, 'PG', 42, 4201307, 1, 24),
 (30, '29072018034237allianz.jpg', 'Allianz Parque', 'o@k', 'Av. Francisco Matarazzo', 1705, 9899595, 'bando de #@$%', 35, 3550308, 1, 24),
 (31, '29072018034556ginasio-do-maracanazinho.jpg', 'MaracanÃ£zinho', 'o@k', 'Av. Pres. Castelo Branco', 3, 9899595, 'Estadio que eu conheÃ§o de volei', 33, 3304557, 3, 24),
 (32, '29072018035001arena-corinthians.jpg', 'Arena Corinthians', 'o@k', 'Av. Miguel IgnÃ¡cio Curi', 111, 9899595, 'bandido', 35, 3550308, 1, 24),
 (33, '29072018040431MaracanÃ£.jpg', 'MaracanÃ£', 'o@k', ' Av. Pres. Castelo Branco', 3, 9899595, 'sla', 33, 3304557, 1, 24),
-(34, '', 'Basquete da garagem', 'o@k', 'Adolfo da Veiga', 2611, 9899595, 'alow', 42, 4209102, 2, 24),
 (35, '29072018040937download.jpg', 'Arena Fonte Nova', 'o@k', ' Ladeira da Fonte das Pedras', 0, 4545, 'jhgvfdhsdfj', 29, 2927408, 1, 24),
 (36, '30072018031057aa.jpg', 'Arena Joinville', 'o@k', 'R. InÃ¡cio Bastos', 89202, 9899595, 'serie D', 42, 4209102, 1, 24),
-(37, '30072018031109estdio-da-ressacada.jpg', 'Ressacada', 'o@k', 'Carianos', 88047400, 9899595, 'mancha azul', 42, 4205407, 1, 24);
+(37, '30072018031109estdio-da-ressacada.jpg', 'Ressacada', 'o@k', 'Carianos', 88047400, 9899595, 'mancha azul', 42, 4205407, 1, 24),
+(41, '3007201808055701-Campo-SuiÃ§o.jpg', 'teste', 'luan.alflen4@gmail.com', 'aswd', 2611, 4545, 'sdf', 31, 3101409, 1, 34),
+(42, '30072018075355Vila-Belmiro-Santos.jpg', 'Vila Belmiro', 'o@k', 'Rua Princesa Isabel', 501, 9899595, 'Agora quem da a bola Ã© o Santos', 35, 3548500, 1, 24);
 
 -- --------------------------------------------------------
 
@@ -5818,7 +5812,7 @@ ALTER TABLE `estados`
 -- AUTO_INCREMENT for table `locais`
 --
 ALTER TABLE `locais`
-  MODIFY `id_local` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id_local` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `municipios`
