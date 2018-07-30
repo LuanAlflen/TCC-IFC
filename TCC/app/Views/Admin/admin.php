@@ -1,9 +1,4 @@
 <div id="divusuarios">
-    <div class="navbar-form" style="text-align: center">
-        <input type="text" class="form-control" placeholder="Nome do usuario" name="busca" id="texto">
-        <input type="hidden" value="<?= $_SESSION['id'] ?>" id="iduser">
-        <button type="submit" class="btn btn-default" id="botao">Pesquisar</button>
-    </div>
     <table class="table table-bordered" >
         <thead>
         <tr>
@@ -40,18 +35,13 @@
         </tbody>
     </table>
 </div>
-<div id="divlocais">
+<div id="divlocais" style="display: none;">
     <?php
     if (!isset($locais)){
         echo "<h4 style='text-align: center'>Não existe locais</h4>";
         die;
     }
     ?>
-    <div class="navbar-form" style="text-align: center">
-        <input type="text" class="form-control" placeholder="Nome do local" name="busca" id="texto">
-        <input type="hidden" value="<?= $_SESSION['id'] ?>" id="iduser">
-        <button type="submit" class="btn btn-default" id="botao">Pesquisar</button>
-    </div>
     <table class="table table-bordered" >
         <thead>
         <tr>

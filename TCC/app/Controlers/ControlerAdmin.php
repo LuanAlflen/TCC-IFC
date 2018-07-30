@@ -29,11 +29,11 @@ switch ($action){
     case 'index':
 
         $crudUser = new UsuarioCrud();
-        $usuarios = $crudUser->getUsuarios();
+        $usuarios = $crudUser->getUsuariosOrdem();
         @session_start();
         $_SESSION['id'] = $_GET['id'];
         $crudLocais = new LocalCrud();
-        @$locais = $crudLocais->getLocais();
+        @$locais = $crudLocais->getLocaisOrdem();
         include "../Models/restrito.php";
         include "../Views/Template/CabecalhoAdmin.php";
         include "../Views/Admin/admin.php";

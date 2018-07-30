@@ -124,6 +124,29 @@ class UsuarioCrud
         }
         return $listaUsuario;
     }
+    public function getUsuariosOrdem()
+    {
+        $sql = "SELECT * FROM usuarios ORDER BY nome ASC";
+
+        $resultado = $this->conexao->query($sql);
+
+        $usuarios = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($usuarios as $usuario) {
+            $nome = $usuario['nome'];
+            $login = $usuario['login'];
+            $senha = $usuario['senha'];
+            $email = $usuario['email'];
+            $telefone = $usuario['telefone'];
+            $cpf = $usuario['cpf'];
+            $tipuser = $usuario['tipuser'];
+            $id = $usuario['id_usuario'];
+
+            $obj = new Usuario($nome, $login, $senha, $email, $telefone, $cpf, $tipuser,$id);
+            $listaUsuario[] = $obj;
+        }
+        return $listaUsuario;
+    }
 
     public function deleteUsuario($id)
     {

@@ -34,8 +34,18 @@
     <script>
         /////////////////////////////FILTROS/////////////////////////////////////////
 
+        $(document).ready(function () {
+            $("#locais > div").each(function(index, value){
+                if (index > 8){
+                    $(value).hide();
+                }
+            });
+        });
+
+
 
         function filtra(){
+            $(".paginacao").hide();
             var classTexto = '';
             var texto = $('#texto').val();
             var classEstado = '';
@@ -152,7 +162,7 @@ if (@$_GET['erro'] == 1){?>
 
 
         <div class="col-md-3">
-            <p class="lead">Categorias</p>
+            <p class="lead">Esportes</p>
                 <div class="list-group" id="abas">
                     <ul id="categorias">
                         <?php foreach ($categorias as $categoria):?>
@@ -217,22 +227,19 @@ if (@$_GET['erro'] == 1){?>
 
                                 </div>
                                 <?php foreach ($locais as $local): ?>
-                                    <div class="<?= $local->nome ?>">
-                                    <div id="idlocal <?= $local->id_local ?>" class="local <?= $local->id_categoria ?> <?= $local->id_estado ?> <?= $local->id_municipio ?> <?= $local->nome ?>">
+                                    <div id="locais">
+                                    <div class="local <?= $local->id_categoria ?> <?= $local->id_estado ?> <?= $local->id_municipio ?> <?= $local->nome ?>">
                                             <div class="col-sm-4 col-lg-4 col-md-4">
                                                 <div class="thumbnail">
-
+                                                    <a href="ControlerLocal.php?acao=show&idlocal=<?= $local->id_local ?>&iduser=<?= $_SESSION['id'] ?>">
                                                         <img src="../../assets/img/Local/<?= $local->foto ?>" style="width: 260px; height: 160px">
-
+                                                    </a>
                                                     <div class="caption" style="margin-bottom: 4%;">
-                                                        <h4>
+                                                        <h4 style="overflow: hidden; ">
                                                             <?= $local->nome ?>
-                                                            <a class="btn btn-primary pull-right"
-                                                               href="ControlerLocal.php?acao=show&idlocal=<?= $local->id_local ?>&iduser=<?= $_SESSION['id'] ?>">Ver
-                                                                +</a>
                                                         </h4>
-                                                        <p>
-                                                            <b>Categoria: </b> <?php
+                                                        <p style="margin-left: -2%">
+                                                            <b>Esporte: </b> <?php
                                                             $idcat = $local->id_categoria;
                                                             $crudCat = new CategoriaCrud();
                                                             $categoria = $crudCat->getCategoria($idcat);
@@ -272,7 +279,7 @@ if (@$_GET['erro'] == 1){?>
                             <?php } ?>
                     </div>
             </div>
-            <nav aria-label="Page navigation example">
+            <nav class="paginacao" aria-label="Page navigation example">
                 <ul class="pagination">
                     <li class="page-item"><a class="page-link" href="ControlerLocal.php?iduser=<?=$_SESSION['id']?>&pagina=0">Previous</a></li>
                     <?php
