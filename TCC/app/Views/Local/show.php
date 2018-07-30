@@ -75,7 +75,7 @@ if (@$_GET['erro'] == 'naologado'){?>
                      <div id="exemplo" class="col-md-3">
                          <p class="lead"><?= $local->getNome();?></p>
                          <div style="text-align: center">
-                         <img src="../../assets/img/Local/<?= $local->foto ?>" height="190" width="260">
+                         <img src="../../assets/img/Local/<?= $local->foto ?>" height="160" width="260">
                          </div>
                          <br>
                          <p style="text-align: center"><?= $local->getDescricao();?></p>
