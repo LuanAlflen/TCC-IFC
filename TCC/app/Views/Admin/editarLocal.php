@@ -43,7 +43,7 @@
     <div class="form__top">
         <h2>Editar  <span>Local</span></h2>
     </div>
-    <form class="form__reg"  method="post"  action="?acao=editarLocal&idlocal=<?= $local->id_local ?>&idAdm=<?= $_GET['idAdm'] ?>" enctype="multipart/form-data">
+    <form class="form__reg"  method="post"  action="ControlerAdmin.php?acao=editarLocal&idlocal=<?= $local->id_local ?>&idAdm=<?= $_GET['idAdm'] ?>" enctype="multipart/form-data">
         <div class="etapa1">
             <input value="<?= $local->id_usuario ?>"  class="input" type="hidden" name="iduser" placeholder="Id_user" required>
             <input value="<?= $local->foto?>"         class="input" type="file"  name="foto">

@@ -92,7 +92,7 @@ switch ($action) {
                 move_uploaded_file($_FILES['foto']['tmp_name'], '../../assets/img/Local/' . $nomeArquivo);
 
             } else {
-                $nomeArquivo = null;
+                $nomeArquivo = 'image.jpeg';
             }
 
             //TRANSFORMA O NOME DA CATEGORIA EM ID PARA CADASTRAR

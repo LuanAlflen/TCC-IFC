@@ -73,9 +73,12 @@ $user = $crudUser->getUsuarioId($iduserlogado);
                         $crudUser = new UsuarioCrud();
                         $user = $crudUser->getUsuarioId($iduserlogado);
                         $tipuser = $user->getTipuser();
-                        if ($iduserlocal == $iduserlogado OR $tipuser == 'admin'){
-                            echo "<li><a href=\"ControlerLocal.php?acao=editar&idlocal=$idlocal\">Editar quadra</a></li>";
-                            echo "<li><a href=\"ControlerLocal.php?acao=excluir&idlocal=$idlocal\">Excluir quadra</a></li>";
+                        if ($tipuser == 'admin'){
+                            echo "<li><a href=\"ControlerAdmin.php?acao=editarLocal&idlocal=$idlocal&idAdm=$iduserlogado\">Editar quadra</a></li>";
+                            echo "<li><a href=\"ControlerAdmin.php?acao=excluirLocal&idlocal=$idlocal&idAdm=$iduserlogado\">Excluir quadra</a></li>";
+                        }elseif ($iduserlocal == $iduserlogado){
+                            echo "<li><a href=\"ControlerLocal.php?acao=editar&idlocal=$idlocal&iduser=$iduserlogado\">Editar quadra</a></li>";
+                            echo "<li><a href=\"ControlerLocal.php?acao=excluir&idlocal=$idlocal&iduser=$iduserlogado\">Excluir quadra</a></li>";
                         }elseif ($tipuser == 'visitante'){
                             echo "<li><a href=\"ControlerUsuario.php?acao=login\">Entrar</a></li>";
                         }

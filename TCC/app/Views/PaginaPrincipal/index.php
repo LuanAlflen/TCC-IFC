@@ -86,6 +86,8 @@
             $(classes).show();
             if ($(".local").is(":visible") == false){
                 $(".semLocais").show();
+            }else{
+                $(".semLocais").hide();
             }
         }
 
