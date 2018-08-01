@@ -68,6 +68,7 @@ switch ($action) {
 
         $idlocal = $_GET['idlocal'];
         $iduser = $_GET['iduser'];
+        @session_start();
         $_SESSION['id'] = $iduser;
         $crudLocal = new LocalCrud();
         $local = $crudLocal->getLocal($idlocal);

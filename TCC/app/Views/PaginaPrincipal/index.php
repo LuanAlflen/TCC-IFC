@@ -34,6 +34,8 @@
     <script>
         /////////////////////////////FILTROS/////////////////////////////////////////
 
+
+        ///////EXIBI OS NOVE PRIMEIRO O RESTO DA .hide()
         $(document).ready(function () {
             $(".semLocais").hide();
 
@@ -69,7 +71,7 @@
             $(".local").hide();
 
 
-            var esportes = $("#categorias")
+            var esportes = $("#categorias");
             var selecionados = $(esportes).find(".selecionado");
 
             var classes = '';
@@ -84,11 +86,17 @@
             }
 
             $(classes).show();
+            $("#locais > div").each(function(index, value){
+                if (index > 8){
+                    $(value).hide();
+                }
+            });
             if ($(".local").is(":visible") == false){
                 $(".semLocais").show();
             }else{
                 $(".semLocais").hide();
             }
+
         }
 
         $(document).ready(function (){

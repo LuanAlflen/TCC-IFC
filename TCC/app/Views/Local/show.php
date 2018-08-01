@@ -80,7 +80,7 @@ if (@$_GET['erro'] == 'naologado'){?>
                          <br>
                          <p style="text-align: center"><?= $local->getDescricao();?></p>
                          <div style="text-align: center">
-                            <br><button id="reservarQuadra" class="btn btn-success">Reservar</button>
+                            <br><a id="reservarQuadra" class="btn btn-success" href="ControlerReservas.php?idlocal=<?= $local->id_local?>&iduser=<?= $_SESSION['id'] ?>">Reservar</a>
                          </div>
                          </div>
                      </div>
