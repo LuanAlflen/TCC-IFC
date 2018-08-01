@@ -14,13 +14,15 @@ class Reserva
     public $entrada;
     public $saida;
     public $id_local;
+    public $id_user;
 
-    public function __construct($nome=null,$cor=null,$entrada=null,$saida=null,$idlocal=null,$id=null){
+    public function __construct($nome=null,$cor=null,$entrada=null,$saida=null,$idlocal=null,$iduser=null,$id=null){
         $this->nome = $nome;
         $this->cor = $cor;
         $this->entrada = $entrada;
         $this->saida = $saida;
         $this->id_local = $idlocal;
+        $this->id_user = $iduser;
         $this->id = $id;
     }
 
@@ -83,5 +85,16 @@ class Reserva
     {
         $this->id_local = $id_local;
     }
+
+    public function getIdUser()
+    {
+        return $this->id_user;
+    }
+
+    public function setIdUser($id_user)
+    {
+        $this->id_user = $id_user;
+    }
+
 
 }

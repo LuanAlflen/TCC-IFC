@@ -61,7 +61,7 @@ if (empty($user->getId())){
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" style="font-size: 20px" href="ControlerLocal.php?iduser=<?= $_GET['iduser'] ?>&pagina=0">ALPE</a>
+            <a class="navbar-brand" style="font-size: 20px; color: yellow " href="ControlerLocal.php?iduser=<?= $_GET['iduser'] ?>&pagina=0">ALPE</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -73,7 +73,7 @@ if (empty($user->getId())){
 <!--                    <a href="#">Em destaque</a>-->
 <!--                </li>-->
                 <li class="dropdown pull-right">
-                    <a href="#" class="dropdown-toggle pull-right" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <!-- ícone do user --><?= $user->getNome() ?><span class="caret"></span></a>
+                    <a style="color: yellow" href="#" class="dropdown-toggle pull-right" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <!-- ícone do user --><?= $user->getNome() ?><span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="ControlerUsuario.php?acao=contato">Contato</a></li>
                         <?php

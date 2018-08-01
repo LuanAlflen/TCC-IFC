@@ -87,7 +87,7 @@
 
             $(classes).show();
             $("#locais > div").each(function(index, value){
-                if (index > 8){
+                if (index > 17){
                     $(value).hide();
                 }
             });

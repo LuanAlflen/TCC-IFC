@@ -80,7 +80,7 @@ if (@$_GET['erro'] == 'naologado'){?>
                          <br>
                          <p style="text-align: center"><?= $local->getDescricao();?></p>
                          <div style="text-align: center">
-                            <br><a id="reservarQuadra" class="btn btn-success" href="ControlerReservas.php?idlocal=<?= $local->id_local?>&iduser=<?= $_SESSION['id'] ?>">Reservar</a>
+                            <br><a id="reservarQuadra" class="btn btn-success" href="ControlerReservas.php?acao=show&idlocal=<?= $local->id_local?>&iduser=<?= $_SESSION['id'] ?>">Reservar</a>
                          </div>
                          </div>
                      </div>
@@ -107,7 +107,7 @@ if (@$_GET['erro'] == 'naologado'){?>
                     </div>
             </div>
 
-        <h2>Avaliações</h2>
+        <h2>Comentarios</h2>
 
         <!-- ////////////////////FAZER UM FOREACH EXIBINDO TODOS OS COMENTARIOS DESSE LOCAL//////////////////////////// -->
             <br>

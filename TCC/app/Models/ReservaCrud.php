@@ -36,6 +36,7 @@ class ReservaCrud
             $reserva['entrada'],
             $reserva['saida'],
             $reserva['id_local'],
+            $reserva['id_user'],
             $reserva['id']);
 
         //RETORNAR UM OBJETO CATEGORIA COM OS VALORES
@@ -58,9 +59,10 @@ class ReservaCrud
             $entrada = $reserva['entrada'];
             $saida = $reserva['saida'];
             $idlocal = $reserva['id_local'];
+            $iduser = $reserva['id_user'];
             $id = $reserva['id'];
 
-            $obj = new Reserva($nome, $cor, $entrada, $saida, $idlocal, $id);
+            $obj = new Reserva($nome, $cor, $entrada, $saida, $idlocal,$iduser, $id);
             $ListaReserva[] = $obj;
         }
         return $ListaReserva;
@@ -80,9 +82,10 @@ class ReservaCrud
             $entrada = $reserva['entrada'];
             $saida = $reserva['saida'];
             $idlocal = $reserva['id_local'];
+            $iduser = $reserva['id_usuario'];
             $id = $reserva['id'];
 
-            $obj = new Reserva($nome, $cor, $entrada, $saida, $idlocal, $id);
+            $obj = new Reserva($nome, $cor, $entrada, $saida, $idlocal,$iduser, $id);
             $ListaReserva[] = $obj;
         }
         return $ListaReserva;
@@ -94,5 +97,17 @@ class ReservaCrud
         $resultado = $this->conexao->exec($sql);
 
         return $resultado;
+    }
+    public function insereReserva(Reserva $reserva){
+        $sql = "INSERT INTO reservas (nome, cor, entrada, saida, id_local, id_usuario) 
+                values ('{$reserva->getNome()}','{$reserva->getCor()}','{$reserva->getEntrada()}','{$reserva->getSaida()}', '{$reserva->getIdLocal()}','{$reserva->getIdUser()}')";
+
+        try {//TENTA EXECUTAR A INSTRUCAO
+
+            echo $sql;
+            $this->conexao->exec($sql);
+        } catch (PDOException $e) {//EM CASO DE ERRO, CAPTURA A MENSAGEM
+            return $e->getMessage();
+        }
     }
 }
