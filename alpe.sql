@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 30-Jul-2018 às 20:10
+-- Generation Time: 01-Ago-2018 às 04:24
 -- Versão do servidor: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -5717,6 +5717,29 @@ INSERT INTO `municipios` (`id_municipio`, `nome`, `id_estado`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `reservas`
+--
+
+CREATE TABLE `reservas` (
+  `id` int(11) NOT NULL,
+  `nome` varchar(300) NOT NULL,
+  `cor` varchar(20) DEFAULT NULL,
+  `entrada` datetime NOT NULL,
+  `saida` datetime NOT NULL,
+  `id_local` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `reservas`
+--
+
+INSERT INTO `reservas` (`id`, `nome`, `cor`, `entrada`, `saida`, `id_local`) VALUES
+(1, '3info1', '#FF8C00', '2018-08-30 17:00:00', '2018-08-30 18:00:00', 27),
+(2, 'Treino', '#8B0000', '2018-08-21 18:00:00', '2018-08-21 19:00:00', 28);
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `usuarios`
 --
 
@@ -5781,6 +5804,13 @@ ALTER TABLE `municipios`
   ADD KEY `id_estado` (`id_estado`);
 
 --
+-- Indexes for table `reservas`
+--
+ALTER TABLE `reservas`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_local` (`id_local`);
+
+--
 -- Indexes for table `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -5800,7 +5830,7 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT for table `comentarios`
 --
 ALTER TABLE `comentarios`
-  MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `estados`
@@ -5819,6 +5849,12 @@ ALTER TABLE `locais`
 --
 ALTER TABLE `municipios`
   MODIFY `id_municipio` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5300109;
+
+--
+-- AUTO_INCREMENT for table `reservas`
+--
+ALTER TABLE `reservas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `usuarios`
@@ -5849,6 +5885,12 @@ ALTER TABLE `locais`
 --
 ALTER TABLE `municipios`
   ADD CONSTRAINT `municipios_ibfk_1` FOREIGN KEY (`id_estado`) REFERENCES `estados` (`id_estado`);
+
+--
+-- Limitadores para a tabela `reservas`
+--
+ALTER TABLE `reservas`
+  ADD CONSTRAINT `reservas_ibfk_1` FOREIGN KEY (`id_local`) REFERENCES `locais` (`id_local`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
