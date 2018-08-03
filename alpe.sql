@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 02-Ago-2018 às 01:25
+-- Generation Time: 04-Ago-2018 às 01:17
 -- Versão do servidor: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -5735,11 +5735,9 @@ CREATE TABLE `reservas` (
 --
 
 INSERT INTO `reservas` (`id`, `nome`, `cor`, `entrada`, `saida`, `id_local`, `id_usuario`) VALUES
-(1, '3info1', '#FF8C00', '2018-08-30 17:00:00', '2018-08-30 18:00:00', 27, 24),
-(2, 'Treino', '#8B0000', '2018-08-21 18:00:00', '2018-08-21 19:00:00', 28, 24),
-(3, 'Reserva 1', '#0000FF', '2018-08-13 08:00:00', '2018-08-13 09:00:00', 27, 15),
-(4, 'Reserva 2', '#006400', '2018-08-14 13:00:00', '2018-08-14 23:00:00', 27, 24),
-(5, 'teste', '#436EEE', '2018-08-02 17:00:00', '2018-08-02 18:00:00', 27, 24);
+(6, 'teste', '#FFD700', '2018-08-15 00:00:00', '2018-08-16 00:00:00', 27, 24),
+(7, 'Luan', '#8B4513', '2018-08-08 18:00:00', '2018-08-08 19:00:00', 27, 15),
+(10, 'Luan', '#1C1C1C', '2018-08-09 12:00:00', '2018-08-09 18:00:00', 27, 15);
 
 -- --------------------------------------------------------
 
@@ -5859,7 +5857,7 @@ ALTER TABLE `municipios`
 -- AUTO_INCREMENT for table `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `usuarios`
