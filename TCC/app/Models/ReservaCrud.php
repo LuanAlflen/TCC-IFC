@@ -36,7 +36,7 @@ class ReservaCrud
             $reserva['entrada'],
             $reserva['saida'],
             $reserva['id_local'],
-            $reserva['id_user'],
+            $reserva['id_usuario'],
             $reserva['id']);
 
         //RETORNAR UM OBJETO CATEGORIA COM OS VALORES
@@ -90,6 +90,28 @@ class ReservaCrud
         }
         return $ListaReserva;
     }
+    public function getReservasUsuario($iduser)
+    {
+        $sql = 'SELECT * FROM reservas WHERE id_usuario = '.$iduser;
+
+        $resultado = $this->conexao->query($sql);
+
+        $reservas = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($reservas as $reserva) {
+            $nome = $reserva['nome'];
+            $cor = $reserva['cor'];
+            $entrada = $reserva['entrada'];
+            $saida = $reserva['saida'];
+            $idlocal = $reserva['id_local'];
+            $iduser = $reserva['id_usuario'];
+            $id = $reserva['id'];
+
+            $obj = new Reserva($nome, $cor, $entrada, $saida, $idlocal,$iduser, $id);
+            $ListaReserva[] = $obj;
+        }
+        return $ListaReserva;
+    }
     public function getReservasLocalArray($idlocal)
     {
         $sql = 'SELECT * FROM reservas WHERE id_local = '.$idlocal;
@@ -98,6 +120,20 @@ class ReservaCrud
 
         return $resultado;
     }
+
+    public function existeReservasUsuario($iduser, $idlocal)
+    {
+        $sql = 'SELECT * FROM reservas WHERE id_usuario = '.$iduser.' AND id_local = '.$idlocal;
+        $this->conexao = DBConnection::getConexao();
+        //VERIFICA SE EXISTE COMENTARIOS, SE SIM, EXCLUI
+        $sql = $this->conexao->prepare($sql);
+        $sql->execute();
+        $resultado = $sql->rowCount();
+
+        return $resultado;
+    }
+
+
     public function insereReserva(Reserva $reserva){
         $sql = "INSERT INTO reservas (nome, cor, entrada, saida, id_local, id_usuario) 
                 values ('{$reserva->getNome()}','{$reserva->getCor()}','{$reserva->getEntrada()}','{$reserva->getSaida()}', '{$reserva->getIdLocal()}','{$reserva->getIdUser()}')";
@@ -110,4 +146,33 @@ class ReservaCrud
             return $e->getMessage();
         }
     }
+
+    public function updateReserva(Reserva $reserva)
+    {
+
+        //MONTA O TEXTO DA INSTRUÇÃO SQL DE INSERT
+        $sql = "UPDATE reservas 
+                SET id = '{$reserva->getId()}', 
+                nome = '{$reserva->getNome()}', 
+                cor = '{$reserva->getCor()}', 
+                entrada = '{$reserva->getEntrada()}', 
+                saida = '{$reserva->getSaida()}'
+                WHERE id = {$reserva->getId()}";
+        try {//TENTA EXECUTAR A INSTRUCAO
+            $this->conexao->exec($sql);
+        } catch (PDOException $e) {//EM CASO DE ERRO, CAPTURA A MENSAGEM
+            return $e->getMessage();
+        }
+    }
+
+    public function deleteReserva($id){
+        $sql= "DELETE FROM reservas WHERE id = '{$id}'";
+        try {//TENTA EXECUTAR A INSTRUCAO
+
+            $this->conexao->exec($sql);
+        } catch (PDOException $e) {//EM CASO DE ERRO, CAPTURA A MENSAGEM
+            return $e->getMessage();
+        }
+    }
+
 }
