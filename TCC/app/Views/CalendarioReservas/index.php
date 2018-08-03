@@ -65,10 +65,14 @@ $reservas = $crud->getReservasLocal($idlocal);
 
                   <?php
                     foreach ($reservas as $reserva):
+                        $iduser_reserva = $reserva->id_user;
+                        $crudUser = new UsuarioCrud();
+                        $user = $crudUser->getUsuarioId($iduser_reserva);
+                        $nome = $user->getNome();
                   ?>
                   {
                       id: '<?php echo $reserva->id; ?>',
-                      title: '<?php echo $reserva->nome; ?>',
+                      title: '<?php echo $nome; ?>',
                       start: '<?php echo $reserva->entrada; ?>',
                       end: '<?php echo $reserva->saida; ?>',
                       color : '<?php echo $reserva->cor; ?>'

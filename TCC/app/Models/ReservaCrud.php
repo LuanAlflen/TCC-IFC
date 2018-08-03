@@ -31,7 +31,6 @@ class ReservaCrud
 
         //CRIAR OBJETO DO TIPO CATEGORIA - USANDO OS VALORES DA CONSULTA
         $objetoReserva = new Reserva(
-            $reserva['nome'],
             $reserva['cor'],
             $reserva['entrada'],
             $reserva['saida'],
@@ -54,7 +53,6 @@ class ReservaCrud
         $reservas = $resultado->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($reservas as $reserva) {
-            $nome = $reserva['nome'];
             $cor = $reserva['cor'];
             $entrada = $reserva['entrada'];
             $saida = $reserva['saida'];
@@ -62,7 +60,7 @@ class ReservaCrud
             $iduser = $reserva['id_user'];
             $id = $reserva['id'];
 
-            $obj = new Reserva($nome, $cor, $entrada, $saida, $idlocal,$iduser, $id);
+            $obj = new Reserva($cor, $entrada, $saida, $idlocal,$iduser, $id);
             $ListaReserva[] = $obj;
         }
         return $ListaReserva;
@@ -77,7 +75,6 @@ class ReservaCrud
         $reservas = $resultado->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($reservas as $reserva) {
-            $nome = $reserva['nome'];
             $cor = $reserva['cor'];
             $entrada = $reserva['entrada'];
             $saida = $reserva['saida'];
@@ -85,7 +82,7 @@ class ReservaCrud
             $iduser = $reserva['id_usuario'];
             $id = $reserva['id'];
 
-            $obj = new Reserva($nome, $cor, $entrada, $saida, $idlocal,$iduser, $id);
+            $obj = new Reserva($cor, $entrada, $saida, $idlocal,$iduser, $id);
             $ListaReserva[] = $obj;
         }
         return $ListaReserva;
@@ -99,7 +96,6 @@ class ReservaCrud
         $reservas = $resultado->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($reservas as $reserva) {
-            $nome = $reserva['nome'];
             $cor = $reserva['cor'];
             $entrada = $reserva['entrada'];
             $saida = $reserva['saida'];
@@ -107,7 +103,7 @@ class ReservaCrud
             $iduser = $reserva['id_usuario'];
             $id = $reserva['id'];
 
-            $obj = new Reserva($nome, $cor, $entrada, $saida, $idlocal,$iduser, $id);
+            $obj = new Reserva($cor, $entrada, $saida, $idlocal,$iduser, $id);
             $ListaReserva[] = $obj;
         }
         return $ListaReserva;
@@ -135,8 +131,8 @@ class ReservaCrud
 
 
     public function insereReserva(Reserva $reserva){
-        $sql = "INSERT INTO reservas (nome, cor, entrada, saida, id_local, id_usuario) 
-                values ('{$reserva->getNome()}','{$reserva->getCor()}','{$reserva->getEntrada()}','{$reserva->getSaida()}', '{$reserva->getIdLocal()}','{$reserva->getIdUser()}')";
+        $sql = "INSERT INTO reservas (cor, entrada, saida, id_local, id_usuario) 
+                values ('{$reserva->getCor()}','{$reserva->getEntrada()}','{$reserva->getSaida()}', '{$reserva->getIdLocal()}','{$reserva->getIdUser()}')";
 
         try {//TENTA EXECUTAR A INSTRUCAO
 
@@ -153,7 +149,6 @@ class ReservaCrud
         //MONTA O TEXTO DA INSTRUÇÃO SQL DE INSERT
         $sql = "UPDATE reservas 
                 SET id = '{$reserva->getId()}', 
-                nome = '{$reserva->getNome()}', 
                 cor = '{$reserva->getCor()}', 
                 entrada = '{$reserva->getEntrada()}', 
                 saida = '{$reserva->getSaida()}'

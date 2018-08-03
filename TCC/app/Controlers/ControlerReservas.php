@@ -78,14 +78,11 @@ switch ($action) {
             $saida_sem_barra = $data_sem_barra . " " . $hora;
 
             //INSTANCIANDO PARA OBTER AS INFORMAÇÕES PARA CADASTRAR
-            $crudUser = new UsuarioCrud();
-            $user = $crudUser->getUsuarioId($iduser);
-            $nome = $user->nome;
             $crudLocal = new LocalCrud();
             $local = $crudLocal->getLocal($idlocal);
             $idlocal = $local->id_local;
             $crudReserva = new ReservaCrud();
-            $reserva = new Reserva($nome,$cor,$entrada_sem_barra,$saida_sem_barra,$idlocal,$iduser);
+            $reserva = new Reserva($cor,$entrada_sem_barra,$saida_sem_barra,$idlocal,$iduser);
             $_SESSION['msg'] = "<div class='alert alert-success' role='alert'>Reserva cadastrada com sucesso
             <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
             $crudReserva->insereReserva($reserva);
@@ -134,14 +131,11 @@ switch ($action) {
                 header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
                 die;
             }
-            $crudUser = new UsuarioCrud();
-            $user = $crudUser->getUsuarioId($iduser_reserva);
-            $nome = $user->nome;
             $crudLocal = new LocalCrud();
             $local = $crudLocal->getLocal($idlocal);
             $idlocal = $local->id_local;
             $crudReserva = new ReservaCrud();
-            $reserva = new Reserva($nome,$cor,$entrada_sem_barra,$saida_sem_barra,$idlocal,$iduser,$idreserva);
+            $reserva = new Reserva($cor,$entrada_sem_barra,$saida_sem_barra,$idlocal,$iduser,$idreserva);
             $_SESSION['msg'] = "<div class='alert alert-success' role='alert'>Alterações feitas com sucesso
             <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
             $crudReserva->updateReserva($reserva);
