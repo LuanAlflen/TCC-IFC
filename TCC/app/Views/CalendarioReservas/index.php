@@ -1,8 +1,12 @@
 <?php
 @session_start();
 
+
 $crud = new ReservaCrud();
-$reservas = $crud->getReservasLocal($idlocal);
+$numero_reservas = $crud->numeroReservasLocal($idlocal);
+@$reservas = $crud->getReservasLocal($idlocal);
+
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -30,7 +34,6 @@ $reservas = $crud->getReservasLocal($idlocal);
 
               defaultDate: Date(),
               navLinks: true, // can click day/week names to navigate views
-              editable: true,
               eventLimit: true, // allow "more" link when too many events
                  //default: '01:00:00', CASO NAO FOR DEFINIDO A DATA DE SAIDA, ATRIBUI UMA HORA DEPOIS DA ENTRADA
 
@@ -64,25 +67,31 @@ $reservas = $crud->getReservasLocal($idlocal);
                 events: [
 
                   <?php
-                    foreach ($reservas as $reserva):
-                        $iduser_reserva = $reserva->id_user;
-                        $crudUser = new UsuarioCrud();
-                        $user = $crudUser->getUsuarioId($iduser_reserva);
-                        $nome = $user->getNome();
-                  ?>
-                  {
-                      id: '<?php echo $reserva->id; ?>',
-                      title: '<?php echo $nome; ?>',
-                      start: '<?php echo $reserva->entrada; ?>',
-                      end: '<?php echo $reserva->saida; ?>',
-                      color : '<?php echo $reserva->cor; ?>'
+                        if ($numero_reservas == 0){
+                            echo "";
+                        }else {
+                            foreach ($reservas as $reserva):
+                                $iduser_reserva = $reserva->id_user;
+                                $crudUser = new UsuarioCrud();
+                                $user = $crudUser->getUsuarioId($iduser_reserva);
+                                $nome = $user->getNome();
 
-                  },
-                  <?php
-                    endforeach;
+                                echo " { ";
+
+                                echo "id: '".$reserva->id."',";
+                                echo "title: '".$nome."',";
+                                echo "color: '".$reserva->cor."',";
+                                echo "start: '".$reserva->entrada."',";
+                                echo "end: '".$reserva->saida."'";
+
+                                echo "},";
+
+
+                            endforeach;
+                        }
                     ?>
 
-              ],
+              ]
                 // businessHours: [ // specify an array instead
                 //     {
                 //         dow: [ 1, 2,3,4,5 ], // Monday, Tuesday, Wednesday
@@ -274,7 +283,7 @@ $reservas = $crud->getReservasLocal($idlocal);
                               <div class="form-group">
                                   <label for="inputEmail3" class="col-sm-2 control-label">Saída</label>
                                   <div class="col-sm-10">
-                                      <input type="text" class="form-control" id="entrada" name="saida" onKeyPress="DataHora(event, this)">
+                                      <input type="text" class="form-control" id="saida" name="saida" onKeyPress="DataHora(event, this)">
                                   </div>
                               </div>
                               <input type="hidden" value="<?= $_SESSION['id'] ?>" name="iduser">

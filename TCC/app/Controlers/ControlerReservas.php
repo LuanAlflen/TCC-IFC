@@ -43,10 +43,13 @@ switch ($action) {
         $crud = new ReservaCrud();
         $resultado = $crud->existeReservasUsuario($iduser, $idlocal);
 
+        @session_start();
+        if (!isset($_SESSION['id']) OR empty($_SESSION['id']) OR $_SESSION['id'] == 1){
+            header("Location: ControlerUsuario.php?acao=login&erro=naologado");
+        }
         include "../Views/Template/Cabecalho.php";
         include "../Views/CalendarioReservas/index.php";
         include "../Views/Template/Rodape.php";
-        echo $resultado;
 
         break;
 
@@ -125,21 +128,28 @@ switch ($action) {
             $crudReserva = new ReservaCrud();
             $reserva_editar = $crudReserva->getReserva($idreserva);
             $iduser_reserva = $reserva_editar->getIdUser();
-            if ($iduser != $iduser_reserva){
-                $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>Só é possível editar suas próprias reservas!
-                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
-                header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
-                die;
-            }
+
             $crudLocal = new LocalCrud();
             $local = $crudLocal->getLocal($idlocal);
             $idlocal = $local->id_local;
-            $crudReserva = new ReservaCrud();
-            $reserva = new Reserva($cor,$entrada_sem_barra,$saida_sem_barra,$idlocal,$iduser,$idreserva);
-            $_SESSION['msg'] = "<div class='alert alert-success' role='alert'>Alterações feitas com sucesso
-            <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
-            $crudReserva->updateReserva($reserva);
-            header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
+            $iduserlocal = $local->id_usuario;
+
+            $crudUsuario = new UsuarioCrud();
+            $user = $crudUsuario->getUsuarioId($iduser);
+            $tipuser = $user->getTipuser();
+
+            if ($iduser == $iduser_reserva OR $iduser == $iduserlocal OR $tipuser == 'admin'){
+                $crudReserva = new ReservaCrud();
+                $reserva = new Reserva($cor,$entrada_sem_barra,$saida_sem_barra,$idlocal,$iduser,$idreserva);
+                $_SESSION['msg'] = "<div class='alert alert-success' role='alert'>Alterações feitas com sucesso
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+                $crudReserva->updateReserva($reserva);
+                header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
+            }else {
+                $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>Só é possível editar suas próprias reservas!
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+                header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
+            }
         }else{
             $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>Todos os campos devem ser preenchidos
             <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
@@ -158,16 +168,26 @@ switch ($action) {
         $crudReserva = new ReservaCrud();
         $reserva_editar = $crudReserva->getReserva($idreserva);
         $iduser_reserva = $reserva_editar->getIdUser();
-        if ($iduser != $iduser_reserva){
-            $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>Só é possível excluir suas próprias reservas!
-                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+
+        $crudLocal = new LocalCrud();
+        $local = $crudLocal->getLocal($idlocal);
+        $idlocal = $local->id_local;
+        $iduserlocal = $local->id_usuario;
+
+        $crudUsuario = new UsuarioCrud();
+        $user = $crudUsuario->getUsuarioId($iduser);
+        $tipuser = $user->getTipuser();
+
+        if ($iduser == $iduser_reserva OR $iduser == $iduserlocal OR $tipuser == 'admin'){
+            $_SESSION['msg'] = "<div class='alert alert-success' role='alert'>Reserva excluida com sucesso
+            <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+            $crudReserva->deleteReserva($idreserva);
             header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
-            die;
+        }else{
+            $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>Só é possível excluir suas próprias reservas!
+            <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+            header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
         }
-        $_SESSION['msg'] = "<div class='alert alert-success' role='alert'>Reserva excluida com sucesso
-        <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
-        $crudReserva->deleteReserva($idreserva);
-        header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
         break;
 }
 

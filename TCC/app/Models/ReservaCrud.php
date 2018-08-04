@@ -66,6 +66,18 @@ class ReservaCrud
         return $ListaReserva;
     }
 
+    public function numeroReservasLocal($idlocal)
+    {
+        $sql = 'SELECT * FROM reservas WHERE id_local = '.$idlocal;
+
+        $this->conexao = DBConnection::getConexao();
+        //VERIFICA SE EXISTE COMENTARIOS, SE SIM, EXCLUI
+        $sql = $this->conexao->prepare($sql);
+        $sql->execute();
+        $resultado = $sql->rowCount();
+        return $resultado;
+    }
+
     public function getReservasLocal($idlocal)
     {
         $sql = 'SELECT * FROM reservas WHERE id_local = '.$idlocal;

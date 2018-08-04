@@ -72,6 +72,7 @@ switch ($action) {
         $_SESSION['id'] = $iduser;
         $crudLocal = new LocalCrud();
         $local = $crudLocal->getLocal($idlocal);
+        include "../Models/restrito.php";
         include "../Views/Template/Cabecalholocal.php";
         include "../Views/Local/show.php";
         include "../Views/Template/Rodape.php";
