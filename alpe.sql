@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 04-Ago-2018 às 01:38
+-- Generation Time: 06-Ago-2018 às 07:26
 -- Versão do servidor: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -112,6 +112,56 @@ INSERT INTO `estados` (`id_estado`, `sigla`, `nome`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `horario_funcionamento`
+--
+
+CREATE TABLE `horario_funcionamento` (
+  `id` int(11) NOT NULL,
+  `seg` time DEFAULT NULL,
+  `seg1` time DEFAULT NULL,
+  `ter` time DEFAULT NULL,
+  `ter1` time DEFAULT NULL,
+  `qua` time DEFAULT NULL,
+  `qua1` time DEFAULT NULL,
+  `qui` time DEFAULT NULL,
+  `qui1` time DEFAULT NULL,
+  `sex` time DEFAULT NULL,
+  `sex1` time DEFAULT NULL,
+  `sab` time DEFAULT NULL,
+  `sab1` time DEFAULT NULL,
+  `dom` time DEFAULT NULL,
+  `dom1` time DEFAULT NULL,
+  `id_local` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `horario_funcionamento`
+--
+
+INSERT INTO `horario_funcionamento` (`id`, `seg`, `seg1`, `ter`, `ter1`, `qua`, `qua1`, `qui`, `qui1`, `sex`, `sex1`, `sab`, `sab1`, `dom`, `dom1`, `id_local`) VALUES
+(4, '08:00:00', '18:00:00', '09:00:00', '18:00:00', NULL, NULL, '09:00:00', '20:00:00', '09:00:00', '18:00:00', NULL, NULL, NULL, NULL, 54),
+(5, '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', NULL, NULL, NULL, NULL, 27),
+(6, '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', NULL, NULL, NULL, NULL, 28),
+(7, '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', NULL, NULL, NULL, NULL, 29),
+(8, '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', NULL, NULL, NULL, NULL, 30),
+(9, '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', NULL, NULL, NULL, NULL, 31),
+(10, '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', NULL, NULL, NULL, NULL, 32),
+(11, '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', NULL, NULL, NULL, NULL, 33),
+(12, '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', NULL, NULL, NULL, NULL, 35),
+(14, '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', NULL, NULL, NULL, NULL, 29),
+(15, '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', NULL, NULL, NULL, NULL, 30),
+(16, '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', NULL, NULL, NULL, NULL, 31),
+(17, '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', NULL, NULL, NULL, NULL, 32),
+(18, '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', NULL, NULL, NULL, NULL, 33),
+(19, '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', NULL, NULL, NULL, NULL, 35),
+(20, '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', NULL, NULL, NULL, NULL, 36),
+(21, '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', NULL, NULL, NULL, NULL, 37),
+(22, '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', NULL, NULL, NULL, NULL, 41),
+(23, '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', NULL, NULL, NULL, NULL, 42);
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `locais`
 --
 
@@ -146,7 +196,8 @@ INSERT INTO `locais` (`id_local`, `foto`, `nome`, `email`, `endereco`, `numero`,
 (36, '30072018031057aa.jpg', 'Arena Joinville', 'o@k', 'R. InÃ¡cio Bastos', 89202, 9899595, 'serie D', 42, 4209102, 1, 24),
 (37, '30072018031109estdio-da-ressacada.jpg', 'Ressacada', 'o@k', 'Carianos', 88047400, 9899595, 'mancha azul', 42, 4205407, 1, 24),
 (41, '3007201808055701-Campo-SuiÃ§o.jpg', 'teste', 'luan.alflen4@gmail.com', 'aswd', 2611, 4545, 'sdf', 31, 3101409, 1, 34),
-(42, '30072018075355Vila-Belmiro-Santos.jpg', 'Vila Belmiro', 'o@k', 'Rua Princesa Isabel', 501, 9899595, 'Agora quem da a bola Ã© o Santos', 35, 3548500, 1, 24);
+(42, '30072018075355Vila-Belmiro-Santos.jpg', 'Vila Belmiro', 'o@k', 'Rua Princesa Isabel', 501, 9899595, 'Agora quem da a bola Ã© o Santos', 35, 3548500, 1, 24),
+(54, 'image.jpeg', 'Alo', 'o@k', 'Rodovia BR 280', 0, 68496, 'yfyut', 42, 4201307, 1, 24);
 
 -- --------------------------------------------------------
 
@@ -5734,9 +5785,12 @@ CREATE TABLE `reservas` (
 --
 
 INSERT INTO `reservas` (`id`, `cor`, `entrada`, `saida`, `id_local`, `id_usuario`) VALUES
-(6, '#FFD700', '2018-08-15 00:00:00', '2018-08-16 00:00:00', 27, 24),
-(7, '#8B4513', '2018-08-08 18:00:00', '2018-08-08 19:00:00', 27, 15),
-(10, '#1C1C1C', '2018-08-09 12:00:00', '2018-08-09 18:00:00', 27, 15);
+(7, '#FF4500', '2018-08-08 17:00:00', '2018-08-08 19:00:00', 27, 15),
+(14, '#FF4500', '2018-08-07 00:00:00', '2018-08-08 00:00:00', 28, 34),
+(15, '#8B4513', '2018-08-07 00:00:00', '2018-08-08 00:00:00', 28, 34),
+(16, '#FF4500', '2018-08-08 00:00:00', '2018-08-09 00:00:00', 28, 34),
+(18, '#8B4513', '2018-08-07 00:00:00', '2018-08-08 00:00:00', 27, 24),
+(19, '#8B4513', '2018-08-06 00:00:00', '2018-08-07 00:00:00', 54, 24);
 
 -- --------------------------------------------------------
 
@@ -5790,6 +5844,13 @@ ALTER TABLE `estados`
   ADD PRIMARY KEY (`id_estado`);
 
 --
+-- Indexes for table `horario_funcionamento`
+--
+ALTER TABLE `horario_funcionamento`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_local` (`id_local`);
+
+--
 -- Indexes for table `locais`
 --
 ALTER TABLE `locais`
@@ -5841,10 +5902,16 @@ ALTER TABLE `estados`
   MODIFY `id_estado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
+-- AUTO_INCREMENT for table `horario_funcionamento`
+--
+ALTER TABLE `horario_funcionamento`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
 -- AUTO_INCREMENT for table `locais`
 --
 ALTER TABLE `locais`
-  MODIFY `id_local` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id_local` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `municipios`
@@ -5856,7 +5923,7 @@ ALTER TABLE `municipios`
 -- AUTO_INCREMENT for table `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `usuarios`
@@ -5874,6 +5941,12 @@ ALTER TABLE `usuarios`
 ALTER TABLE `comentarios`
   ADD CONSTRAINT `comentarios_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`),
   ADD CONSTRAINT `comentarios_ibfk_2` FOREIGN KEY (`id_local`) REFERENCES `locais` (`id_local`);
+
+--
+-- Limitadores para a tabela `horario_funcionamento`
+--
+ALTER TABLE `horario_funcionamento`
+  ADD CONSTRAINT `horario_funcionamento_ibfk_1` FOREIGN KEY (`id_local`) REFERENCES `locais` (`id_local`);
 
 --
 -- Limitadores para a tabela `locais`
