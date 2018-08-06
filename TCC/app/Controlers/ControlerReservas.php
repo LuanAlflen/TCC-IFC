@@ -159,6 +159,19 @@ switch ($action) {
             $data_sem_barra = implode("-", $data_sem_barra);
             $saida_sem_barra = $data_sem_barra . " " . $hora;
 
+            $date  = new DateTime($entrada_sem_barra);
+            $date2 = new DateTime($saida_sem_barra);
+
+            //SE A DATA DE ENTRADA VIER DEPOIS DA DATA DE SAIDA, RETORNA DANDO ERRO
+            $diferenca = ($date->diff($date2));
+            if ($diferenca->invert != 0){
+                $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>Datas incorretas!
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+                header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
+                die;
+            }
+
+
             //INSTANCIANDO PARA OBTER AS INFORMAÇÕES PARA CADASTRAR
             $crudReserva = new ReservaCrud();
             $reserva_editar = $crudReserva->getReserva($idreserva);
