@@ -5,6 +5,7 @@
         require_once __DIR__."/../Models/UsuarioCrud.php";
         require_once __DIR__."/../Models/ComentarioCrud.php";
         require_once __DIR__."/../Models/ReservaCrud.php";
+        require_once __DIR__."/../Models/Horario_FuncionamentoCrud.php";
 
 
 if (isset($_GET['acao'])){

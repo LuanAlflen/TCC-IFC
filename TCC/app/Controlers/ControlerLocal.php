@@ -4,6 +4,7 @@
     require_once __DIR__."/../Models/CategoriaCrud.php";
     require_once __DIR__."/../Models/UsuarioCrud.php";
     require_once __DIR__."/../Models/ComentarioCrud.php";
+    require_once __DIR__."/../Models/Horario_FuncionamentoCrud.php";
 
     $crud = new LocalCrud();
     $listaLocais = $crud->getLocais();
@@ -118,16 +119,34 @@ switch ($action) {
                     $idcategoria,
                     $_POST['iduser']);
 
-                $horario = $_POST['horario'];
-
-                print_r($local);
-                echo "<br><br>";
-                echo $horario;
 
                 $crudLocal = new LocalCrud();
-                //$crudLocal->insertLocal($local);
-                //$id = $_POST['iduser'];
-                //header("Location: ControlerUsuario.php?acao=show&iduser=$id");
+                $id_local = $crudLocal->insertLocal($local);
+
+                $horario = [];
+                $json = $_POST['horario'];
+                $arrayhorario = json_decode($json);
+                $horario = new Horario_Funcionamento(
+                    $arrayhorario[0]->timeFrom,
+                    $arrayhorario[0]->timeTill,
+                    $arrayhorario[1]->timeFrom,
+                    $arrayhorario[1]->timeTill,
+                    $arrayhorario[2]->timeFrom,
+                    $arrayhorario[2]->timeTill,
+                    $arrayhorario[3]->timeFrom,
+                    $arrayhorario[3]->timeTill,
+                    $arrayhorario[4]->timeFrom,
+                    $arrayhorario[4]->timeTill,
+                    $arrayhorario[5]->timeFrom,
+                    $arrayhorario[5]->timeTill,
+                    $arrayhorario[6]->timeFrom,
+                    $arrayhorario[6]->timeTill,
+                    $id_local
+                );
+                $crudHorario = new Horario_FuncionamentoCrud();
+                $crudHorario->insertHorario($horario);
+                $id = $_POST['iduser'];
+                header("Location: ControlerLocal.php?acao=show&idlocal=$id_local&iduser=$id");
 
         }
 

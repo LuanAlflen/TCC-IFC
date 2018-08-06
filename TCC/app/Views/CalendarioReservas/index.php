@@ -6,6 +6,9 @@ $crud = new ReservaCrud();
 $numero_reservas = $crud->numeroReservasLocal($idlocal);
 @$reservas = $crud->getReservasLocal($idlocal);
 
+$crudHorario = new Horario_FuncionamentoCrud();
+@$horarios = $crudHorario->getLocaisLocal($idlocal);
+
 
 ?>
 <!DOCTYPE html>
@@ -86,105 +89,155 @@ $numero_reservas = $crud->numeroReservasLocal($idlocal);
 
                                 echo "},";
 
-
                             endforeach;
                         }
                     ?>
 
               ],
-                businessHours: [ // specify an array instead
-                    {
-                        dow: [ 1, 2,3,4,5 ], // Monday, Tuesday, Wednesday
-                        start: '08:00', // 8am
-                        end: '18:00' // 6pm
-                    },
-                    {
-                        dow: [ 6,0 ], // Thursday, Friday
-                        start: '10:00', // 10am
-                        end: '16:00' // 4pm
+
+
+                        businessHours: [
+                        <?php
+
+                    foreach ($horarios as $horario):
+                        if (!isset($horario->dom)){
+                            echo "";
+                        }else{
+                            echo "{dow: [0],";
+                            echo "start: '$horario->dom',";
+                            echo "end: '$horario->dom1'},";
+                        }
+                        if (!isset($horario->seg)){
+                            echo "";
+                        }else{
+                            echo "{dow: [1],";
+                            echo "start: '$horario->seg',";
+                            echo "end: '$horario->seg1'},";
+                        }
+                        if (!isset($horario->ter)){
+                            echo "";
+                        }else{
+                            echo "{dow: [2],";
+                            echo "start: '$horario->ter',";
+                            echo "end: '$horario->ter1'},";
+                        }
+                        if (!isset($horario->qua)){
+                            echo "";
+                        }else{
+                            echo "{dow: [3],";
+                            echo "start: '$horario->qua',";
+                            echo "end: '$horario->qua1'},";
+                        }
+                        if (!isset($horario->qui)){
+                            echo "";
+                        }else{
+                            echo "{dow: [4],";
+                            echo "start: '$horario->qui',";
+                            echo "end: '$horario->qui1'},";
+                        }
+                        if (!isset($horario->sex)){
+                            echo "";
+                        }else{
+                            echo "{dow: [5],";
+                            echo "start: '$horario->sex',";
+                            echo "end: '$horario->sex1'},";
+                        }
+                        if (!isset($horario->sab)){
+                            echo "";
+                        }else{
+                            echo "{dow: [6],";
+                            echo "start: '$horario->sab',";
+                            echo "end: '$horario->sab1'}";
+                        }
+
+
+
+                    endforeach;
+                            echo "]";
+
+                            ?>
+
+                });
+
+              });
+                //MASCARA PARA O CAMPO DATA E HORA
+                function DataHora(evento, objeto) {
+                    var keypress=(window.event)?event.keyCode:evento.which;
+                    campo = eval (objeto);
+                    if (campo.value == '00/00/0000 00:00:00'){
+                        campo.value=""
                     }
-                    ]
-            });
 
-          });
-            //MASCARA PARA O CAMPO DATA E HORA
-            function DataHora(evento, objeto) {
-                var keypress=(window.event)?event.keyCode:evento.which;
-                campo = eval (objeto);
-                if (campo.value == '00/00/0000 00:00:00'){
-                    campo.value=""
+                    caracteres = '0123456789';
+                    separacao1 = '/';
+                    separacao2 = ' ';
+                    separacao3 = ':';
+                    conjunto1 = 2;
+                    conjunto2 = 5;
+                    conjunto3 = 10;
+                    conjunto4 = 13;
+                    conjunto5 = 16;
+                    if ((caracteres.search(String.fromCharCode (keypress))!=-1) && campo.value.length < (19)){
+                        if (campo.value.length == conjunto1 )
+                            campo.value = campo.value + separacao1;
+                        else if (campo.value.length == conjunto2)
+                            campo.value = campo.value + separacao1;
+                        else if (campo.value.length == conjunto3)
+                            campo.value = campo.value + separacao2;
+                        else if (campo.value.length == conjunto4)
+                            campo.value = campo.value + separacao3;
+                        else if (campo.value.length == conjunto5)
+                            campo.value = campo.value + separacao3;
+                    }else{
+                        event.returnValue = false;
+                    }
                 }
+            </script>
+        </head>
+        <body>
+        <div class="container">
+            <div class="page-header">
+                <h1>Agenda do(a) <?= $local->nome ?></h1>
+            </div>
+        <?php
+        if(isset($_SESSION['msg'])){
+            echo $_SESSION['msg'];
+            unset($_SESSION['msg']);
+        }
+        ?>
+              <div id='calendar'></div>
 
-                caracteres = '0123456789';
-                separacao1 = '/';
-                separacao2 = ' ';
-                separacao3 = ':';
-                conjunto1 = 2;
-                conjunto2 = 5;
-                conjunto3 = 10;
-                conjunto4 = 13;
-                conjunto5 = 16;
-                if ((caracteres.search(String.fromCharCode (keypress))!=-1) && campo.value.length < (19)){
-                    if (campo.value.length == conjunto1 )
-                        campo.value = campo.value + separacao1;
-                    else if (campo.value.length == conjunto2)
-                        campo.value = campo.value + separacao1;
-                    else if (campo.value.length == conjunto3)
-                        campo.value = campo.value + separacao2;
-                    else if (campo.value.length == conjunto4)
-                        campo.value = campo.value + separacao3;
-                    else if (campo.value.length == conjunto5)
-                        campo.value = campo.value + separacao3;
-                }else{
-                    event.returnValue = false;
-                }
-            }
-        </script>
-    </head>
-    <body>
-    <div class="container">
-        <div class="page-header">
-            <h1>Agenda do(a) <?= $local->nome ?></h1>
         </div>
-    <?php
-    if(isset($_SESSION['msg'])){
-        echo $_SESSION['msg'];
-        unset($_SESSION['msg']);
-    }
-    ?>
-          <div id='calendar'></div>
-
-    </div>
-          <div class="modal fade" id="info" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-              <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                      <div class="modal-header">
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                          <h4 class="modal-title text-center" >Informação sobre a reserva</h4>
-                      </div>
-                      <div class="modal-body">
-                          <div class="visualizar" style="display: block">
-                              <dl class="dl-horizontal">
-                                  <dt>Reservado por:</dt>
-                                  <dd id="nome"></dd>
-                                  <dt>Entrada</dt>
-                                  <dd id="entrada"></dd>
-                                  <dt>Saida</dt>
-                                  <dd id="saida"></dd>
-                              </dl>
-                              <div style="text-align: center">
-                              <button class="btn btn-canc-vis btn-warning">Editar</button>
-                              <a class="btn btn-excluir btn-danger" >Excluir</a>
-                              </div>
+              <div class="modal fade" id="info" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                  <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                              <h4 class="modal-title text-center" >Informação sobre a reserva</h4>
                           </div>
+                          <div class="modal-body">
+                              <div class="visualizar" style="display: block">
+                                  <dl class="dl-horizontal">
+                                      <dt>Reservado por:</dt>
+                                      <dd id="nome"></dd>
+                                      <dt>Entrada</dt>
+                                      <dd id="entrada"></dd>
+                                      <dt>Saida</dt>
+                                      <dd id="saida"></dd>
+                                  </dl>
+                                  <div style="text-align: center">
+                                  <button class="btn btn-canc-vis btn-warning">Editar</button>
+                                  <a class="btn btn-excluir btn-danger" >Excluir</a>
+                                  </div>
+                              </div>
 
-                          <!-- ----------------------------------------------EXCLUIR ---------------------------------------->
+                              <!-- ----------------------------------------------EXCLUIR ---------------------------------------->
 
-                          <div class="excluir">
-                              <h4 class="modal-title text-center">Tem certeza que deseja excluir essa reserva?</h4>
-                              <br>
-                              <form method="post" action="ControlerReservas.php?acao=excluir">
-                                  <input type="hidden" value="<?= $_SESSION['id'] ?>" name="iduser">
+                              <div class="excluir">
+                                  <h4 class="modal-title text-center">Tem certeza que deseja excluir essa reserva?</h4>
+                                  <br>
+                                  <form method="post" action="ControlerReservas.php?acao=excluir">
+                                      <input type="hidden" value="<?= $_SESSION['id'] ?>" name="iduser">
                                   <input type="hidden" value="<?= $idlocal ?>" name="idlocal">
                                   <input type="hidden" id="id" name="id">
                                   <div class="form-group">

@@ -150,6 +150,8 @@ class LocalCrud
         try {//TENTA EXECUTAR A INSTRUCAO
 
             $this->conexao->exec($sql);
+            $id = $this->conexao->lastInsertId();
+            return $id;
         } catch (PDOException $e) {//EM CASO DE ERRO, CAPTURA A MENSAGEM
             return $e->getMessage();
             }
