@@ -104,6 +104,7 @@ switch ($action) {
 
             //VERIFICA SE OS CAMPOS DE SELECT FORAM PREENCHIDOS
 
+
                 $local = new Local(
                     $nomeArquivo,
                     $_POST['nome'],
@@ -117,10 +118,16 @@ switch ($action) {
                     $idcategoria,
                     $_POST['iduser']);
 
+                $horario = $_POST['horario'];
+
+                print_r($local);
+                echo "<br><br>";
+                echo $horario;
+
                 $crudLocal = new LocalCrud();
-                $crudLocal->insertLocal($local);
-                $id = $_POST['iduser'];
-                header("Location: ControlerUsuario.php?acao=show&iduser=$id");
+                //$crudLocal->insertLocal($local);
+                //$id = $_POST['iduser'];
+                //header("Location: ControlerUsuario.php?acao=show&iduser=$id");
 
         }
 

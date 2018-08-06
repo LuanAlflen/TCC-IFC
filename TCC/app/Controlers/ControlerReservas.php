@@ -66,6 +66,7 @@ switch ($action) {
         $entrada = $_POST['entrada'];
         $saida = $_POST['saida'];
 
+
         if (!empty($cor) AND !empty($entrada) AND !empty($saida)){
             //Converter a data e hora do formato brasileiro para o formato do Banco de Dados
             $data = explode(" ", $entrada);
@@ -79,6 +80,40 @@ switch ($action) {
             $data_sem_barra = array_reverse(explode("/", $date));
             $data_sem_barra = implode("-", $data_sem_barra);
             $saida_sem_barra = $data_sem_barra . " " . $hora;
+
+
+            $date  = new DateTime($entrada_sem_barra);
+            $date2 = new DateTime($saida_sem_barra);
+
+            //SE A DATA DE ENTRADA VIER DEPOIS DA DATA DE SAIDA, RETORNA DANDO ERRO
+            $diferenca = ($date->diff($date2));
+            if ($diferenca->invert != 0){
+                $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>Datas incorretas!
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+                header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
+                die;
+            }
+
+            //DEFININDO ENTRADA EM UM ARRAY(WEEK,HORA);
+            $diasemana = array(0,1,2,3,4,5,6);
+            $data = substr($entrada_sem_barra, 0, -9);
+            $diasemana_numero = date('w', strtotime($data));
+            $startWeek = $diasemana[$diasemana_numero];
+            $startHour = substr($entrada_sem_barra,  -8);
+            $startHour = substr($startHour,  0,-3);
+            $entrada = array($startWeek,$startHour);
+            //print_r($entrada);
+
+            //DEFININDO SAIDA EM UM ARRAY(WEEK,HORA);
+            $data = substr($saida_sem_barra, 0, -9);
+            $diasemana_numero = date('w', strtotime($data));
+            $endWeek = $diasemana[$diasemana_numero];
+            $endHour = substr($saida_sem_barra,  -8);
+            $endHour = substr($endHour,  0,-3);
+            $saida = array($endWeek,$endHour);
+            //print_r($saida);
+
+
 
             //INSTANCIANDO PARA OBTER AS INFORMAÇÕES PARA CADASTRAR
             $crudLocal = new LocalCrud();

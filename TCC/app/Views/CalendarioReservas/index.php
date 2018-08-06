@@ -59,8 +59,8 @@ $numero_reservas = $crud->numeroReservasLocal($idlocal);
                 selectable: true,
                 selectHelper: true,
                 select: function (start, end) {
-                    $("#cadastrar #entrada").val(moment(start).format('DD/MM/YYYY HH:mm:ss'))
-                    $("#cadastrar #saida").val(moment(end).format('DD/MM/YYYY HH:mm:ss'))
+                    $("#cadastrar #entrada").val(moment(start).format('DD/MM/YYYY HH:mm:ss'));
+                    $("#cadastrar #saida").val(moment(end).format('DD/MM/YYYY HH:mm:ss'));
                     $("#cadastrar").modal("show");
               },
 
@@ -91,19 +91,19 @@ $numero_reservas = $crud->numeroReservasLocal($idlocal);
                         }
                     ?>
 
-              ]
-                // businessHours: [ // specify an array instead
-                //     {
-                //         dow: [ 1, 2,3,4,5 ], // Monday, Tuesday, Wednesday
-                //         start: '08:00', // 8am
-                //         end: '18:00' // 6pm
-                //     },
-                //     {
-                //         dow: [ 6,0 ], // Thursday, Friday
-                //         start: '10:00', // 10am
-                //         end: '16:00' // 4pm
-                //     }
-                //     ]
+              ],
+                businessHours: [ // specify an array instead
+                    {
+                        dow: [ 1, 2,3,4,5 ], // Monday, Tuesday, Wednesday
+                        start: '08:00', // 8am
+                        end: '18:00' // 6pm
+                    },
+                    {
+                        dow: [ 6,0 ], // Thursday, Friday
+                        start: '10:00', // 10am
+                        end: '16:00' // 4pm
+                    }
+                    ]
             });
 
           });

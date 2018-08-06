@@ -160,6 +160,16 @@ class UsuarioCrud
             $this->conexao->exec($sql);
         }
 
+        $this->conexao = DBConnection::getConexao();
+        //VERIFICA SE EXISTE RESERVAS, SE SIM, EXCLUI
+        $sqlreserva = $this->conexao->prepare("SELECT * FROM reservas WHERE id_usuario = '{$id}'");
+        $sqlreserva->execute();
+        $resultado = $sql->rowCount();
+        if ($resultado != 0){
+            $sqlreserva = "DELETE FROM reservas WHERE id_usuario = '{$id}'";
+            $this->conexao->exec($sqlreserva);
+        }
+
         //EXCLUI O USUARIO
         $sqluser = "DELETE FROM usuarios WHERE id_usuario = '{$id}'";
         try {//TENTA EXECUTAR A INSTRUCAO
