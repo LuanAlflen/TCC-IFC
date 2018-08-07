@@ -198,12 +198,53 @@ switch ($action) {
 
                 $crudLocal = new LocalCrud();
                 $crudLocal->updateLocal($local);
+
                 $id = $_POST['iduser'];
                 header("Location: ControlerUsuario.php?acao=show&iduser=$id");
 
         }
 
         break;
+
+    case 'editarHorario':
+
+
+            if(!isset($_POST['gravar'])){ // vai para o form
+                include "../Views/Local/editarHorario.php";
+            }else {
+                $horario = [];
+                $json = $_POST['horario'];
+                $arrayhorario = json_decode($json);
+                $crudHorario = new Horario_FuncionamentoCrud();
+                $horario1 = $crudHorario->getHorarioLocal($_GET['idlocal']);
+                $idhorario = $horario1->id;
+                $horario = new Horario_Funcionamento(
+                    $arrayhorario[0]->timeFrom,
+                    $arrayhorario[0]->timeTill,
+                    $arrayhorario[1]->timeFrom,
+                    $arrayhorario[1]->timeTill,
+                    $arrayhorario[2]->timeFrom,
+                    $arrayhorario[2]->timeTill,
+                    $arrayhorario[3]->timeFrom,
+                    $arrayhorario[3]->timeTill,
+                    $arrayhorario[4]->timeFrom,
+                    $arrayhorario[4]->timeTill,
+                    $arrayhorario[5]->timeFrom,
+                    $arrayhorario[5]->timeTill,
+                    $arrayhorario[6]->timeFrom,
+                    $arrayhorario[6]->timeTill,
+                    $_GET['idlocal'],
+                    $idhorario
+                );
+                $crudHorario = new Horario_FuncionamentoCrud();
+                $crudHorario->updateHorario($horario);
+                $id = $_POST['iduser'];
+                header("Location: ControlerUsuario.php?acao=show&iduser=$id");
+
+            }
+
+
+    break;
 
     case 'excluir':
 

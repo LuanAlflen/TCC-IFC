@@ -44,6 +44,7 @@ class Horario_Funcionamento
         $this->id= $id;
     }
 
+
     /**
      * @return null
      */

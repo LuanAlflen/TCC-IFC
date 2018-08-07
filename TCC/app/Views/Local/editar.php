@@ -6,39 +6,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Formulario</title>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script type="text/javascript">
-        //ao carregar a pagina, fica sempre pronto pra executar
-        $(function(){
 
-            /////////////////// FORMULARIO ESTADOS SENDO PREENCHIDO VIA API////////////////////////////
-
-            $('#estados').change(function(){
-                if( $(this).val() ) {
-                    $('#municipios').hide();
-
-                    var url = 'http://localhost/3info1/TCC/app/Controlers/ControlerMunicipio.php?id='+$(this).val();
-                    $.getJSON(url, function(j){
-                        var options = '<option value="0">Selecione...</option>';
-                        for (var i = 0; i < j.length; i++) {
-                            options += '<option value="' +
-                                j[i].id + '">' +
-                                j[i].nome + '</option>';
-                        }
-                        $('#municipios').html(options).show();
-                    });
-                } else {
-                    $('#municipios').html(
-                        '<option value="0">-- Selecione um estado --</option>'
-                    );
-                }
-            });
-
-
-
-
-        })
-
-    </script>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link href="../../assets/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="../../assets/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="../../assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../assets/js/timepicker.min.js"></script>
+    <script type="text/javascript" src="../../assets/js/jquery.businessHours.min.js"></script>
+    <script type="text/javascript" src="../../assets/js/cadastroLocal.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/jquery.businessHours.css">
 
 </head>
 <body>
@@ -72,7 +48,7 @@
             <p>Estados:</p>
             <!--            Aqui começa o endereco(Estados, municipios, endereço e numero)-->
             <?php
-            $url = 'https://servicodados.ibge.gov.br/api/v1/localidades/estados'; // marcas
+            $url = 'http://localhost/3info1/TCC/app/Controlers/ControlerEstado.php'; // marcas
 
             $data = file_get_contents($url); // put the contents of the file into a variable
             $estados = json_decode($data); // decode the JSON feed
@@ -113,12 +89,13 @@
         <?php } ?>
         <div class="btn__form">
             <input class="btn__submit" type="reset" value="Limpar">
-            <input class="btn__reset" type="submit" name="gravar" value="Salvar">  >
+            <input class="btn__reset" type="submit" id="enviar" name="gravar" value="Salvar">
         </div>
-
+        <div class="error-text" style="color: white">
+            <a href="?acao=editarHorario&idlocal=<?= $local->id_local ?>&iduser=<?php $_GET['iduser']?>" style="text-decoration: none">Editar horário de fucionamento</a>
+        </div>
 
     </form>
 </div>
-
 </body>
 </html>

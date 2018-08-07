@@ -4,6 +4,7 @@ require '../../app/Models/UsuarioCrud.php';
 require '../../app/Models/LocalCrud.php';
 require '../../app/Models/CategoriaCrud.php';
 require '../../app/Models/ComentarioCrud.php';
+require '../../app/Models/Horario_FuncionamentoCrud.php';
 
 if (isset($_GET['acao'])){
     $action = $_GET['acao'];
@@ -132,6 +133,34 @@ switch ($action){
                     $_GET['idlocal']);
                 $crudLocal = new LocalCrud();
                 $crudLocal->updateLocal($local);
+
+//            $horario = [];
+//            $json = $_POST['horario'];
+//            $arrayhorario = json_decode($json);
+//            $crudHorario = new Horario_FuncionamentoCrud();
+//            $horario1 = $crudHorario->getHorarioLocal($local->id_local);
+//            $idhorario = $horario1->id;
+//            $horario = new Horario_Funcionamento(
+//                $arrayhorario[0]->timeFrom,
+//                $arrayhorario[0]->timeTill,
+//                $arrayhorario[1]->timeFrom,
+//                $arrayhorario[1]->timeTill,
+//                $arrayhorario[2]->timeFrom,
+//                $arrayhorario[2]->timeTill,
+//                $arrayhorario[3]->timeFrom,
+//                $arrayhorario[3]->timeTill,
+//                $arrayhorario[4]->timeFrom,
+//                $arrayhorario[4]->timeTill,
+//                $arrayhorario[5]->timeFrom,
+//                $arrayhorario[5]->timeTill,
+//                $arrayhorario[6]->timeFrom,
+//                $arrayhorario[6]->timeTill,
+//                $local->id_local,
+//                $idhorario
+//
+//            );
+//            $crudHorario->updateHorario($horario);
+
                 $idAdm = $_GET['idAdm'];
                 header("Location: ControlerAdmin.php?id=$idAdm");
 

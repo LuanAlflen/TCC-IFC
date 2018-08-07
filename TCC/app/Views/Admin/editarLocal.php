@@ -7,7 +7,14 @@
     <title>Formulario</title>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="../../assets/js/cadastroLocal.js"></script>
-
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link href="../../assets/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="../../assets/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="../../assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../assets/js/timepicker.min.js"></script>
+    <script type="text/javascript" src="../../assets/js/jquery.businessHours.min.js"></script>
+    <script type="text/javascript" src="../../assets/js/cadastroLocal.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/jquery.businessHours.css">
 </head>
 <body>
 
@@ -77,15 +84,46 @@
         if (@$_GET['erro'] == 1){?>
             <div class="error-text" style="color: red">Todos os campos devem ser preenchidos!</div>
         <?php } ?>
-
+        <br>
+        <p style="text-align: center">Horário de Funcionamento:</p>
+        <div id="container" class="container">
+            <div>
+                <div id="businessHoursContainer3"></div>
+                <input id="businessHoursOutput1" name="horario" type="hidden">
+            </div>
+        </div>
         <div class="btn__form">
             <input class="btn__submit" type="reset" value="Limpar">
-            <input class="btn__reset" type="submit" name="gravar" value="Salvar">  >
+            <input class="btn__reset" type="submit" name="gravar" id="enviar" value="Salvar">
         </div>
 
 
     </form>
 </div>
+<script>
+
+    (function() {
+
+        var b3 = $("#businessHoursContainer3");
+        var businessHoursManagerBootstrap = b3.businessHours({
+            weekdays: ['Seg','Ter','Qua','Qui','Sex','Sab','Dom'],
+            postInit:function(){},
+            dayTmpl: '<div class="dayContainer" style="width: 80px; margin-top: 5%">' +
+            '<div data-original-title="" class="colorBox"><input type="checkbox" class="invisible operationState"/></div>' +
+            '<div class="weekday" style="color: white"></div>' +
+            '<div class="operationDayTimeContainer">' +
+            '<div class="operationTime input-group"><span class="input-group-addon"><i class="fa fa-sun-o"></i></span><input type="text" name="startTime" class="mini-time form-control operationTimeFrom" value=""/></div>' +
+            '<div class="operationTime input-group"><span class="input-group-addon"><i class="fa fa-moon-o"></i></span><input type="text" name="endTime" class="mini-time form-control operationTimeTill" value=""/></div>' +
+            '</div></div>'
+        });
+
+        $("#enviar")  .click(function() {
+            $("#businessHoursOutput1").val(JSON.stringify(businessHoursManagerBootstrap.serialize()));
+            //alert(JSON.stringify(businessHoursManagerBootstrap.serialize()));
+        });
+
+    })();
+</script>
 
 </body>
 </html>

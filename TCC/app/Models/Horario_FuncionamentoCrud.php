@@ -194,4 +194,36 @@ class Horario_FuncionamentoCrud
         }
     }
 
+    public function updateHorario(Horario_Funcionamento $horario)
+    {
+
+        //MONTA O TEXTO DA INSTRUÇÃO SQL DE INSERT
+        $sql = "UPDATE horario_funcionamento 
+                SET id = '{$horario->getId()}',
+                seg = '{$horario->getSeg()}',
+                seg1 = '{$horario->getSeg1()}',
+                ter = '{$horario->getTer()}',
+                ter1 = '{$horario->getTer1()}',
+                qua = '{$horario->getQua()}',
+                qua1 = '{$horario->getQua()}',
+                qui = '{$horario->getQui()}',
+                qui1 = '{$horario->getQui1()}',
+                sex = '{$horario->getSex()}',
+                sex1 = '{$horario->getSex1()}',
+                sab = '{$horario->getSab()}',
+                sab1 = '{$horario->getSab1()}',
+                dom = '{$horario->getDom()}',
+                dom1 = '{$horario->getDom1()}',
+                id_local = '{$horario->getIdLocal()}'
+                WHERE id = '{$horario->getId()}'";
+        $sql = str_replace("''", "null", $sql);
+        try {//TENTA EXECUTAR A INSTRUCAO
+            echo $sql;die;
+//            $this->conexao->exec($sql);
+        } catch (PDOException $e) {//EM CASO DE ERRO, CAPTURA A MENSAGEM
+            return $e->getMessage();
+        }
+    }
+
+
 }

@@ -22,9 +22,6 @@
 
 </head>
 <body>
-
-
-
 	<div class="container">
 		<div class="form__top">
 			<h2>Cadastro  <span>Local</span></h2>
@@ -77,10 +74,6 @@
                 <input id="numero" class="input" type="text"  name="numero" placeholder="Nº">
 
             </div>
-            <?php
-            if (@$_GET['erro'] == 1){?>
-            <div class="error-text" style="color: red">Todos os campos devem ser preenchidos!</div>
-            <?php } ?>
             <br>
             <p style="text-align: center">Horário de Funcionamento:</p>
             <div id="container" class="container">
@@ -89,13 +82,14 @@
                     <input id="businessHoursOutput1" name="horario" type="hidden">
                 </div>
             </div>
-
+            <?php
+            if (@$_GET['erro'] == 1){?>
+                <div class="error-text" style="color: red">Todos os campos devem ser preenchidos!</div>
+            <?php } ?>
             <div class="btn__form">
             	<input class="btn__submit" type="reset" value="Limpar">
             	<input class="btn__reset" type="submit" name="gravar" value="Salvar" id="enviar">
             </div>
-
-
 		</form>
 	</div>
     <script>
