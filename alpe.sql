@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 07-Ago-2018 às 03:46
+-- Generation Time: 08-Ago-2018 às 00:40
 -- Versão do servidor: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -140,7 +140,7 @@ CREATE TABLE `horario_funcionamento` (
 
 INSERT INTO `horario_funcionamento` (`id`, `seg`, `seg1`, `ter`, `ter1`, `qua`, `qua1`, `qui`, `qui1`, `sex`, `sex1`, `sab`, `sab1`, `dom`, `dom1`, `id_local`) VALUES
 (4, '08:00:00', '18:00:00', '09:00:00', '18:00:00', NULL, NULL, '09:00:00', '20:00:00', '09:00:00', '18:00:00', NULL, NULL, NULL, NULL, 54),
-(5, '08:00:00', '18:00:00', '08:00:00', '18:00:00', '10:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', NULL, NULL, NULL, NULL, 27),
+(5, '08:00:00', '17:00:00', '08:00:00', '17:00:00', '08:00:00', '12:00:00', '08:00:00', '17:00:00', '08:00:00', '17:00:00', NULL, NULL, NULL, NULL, 27),
 (6, '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', NULL, NULL, NULL, NULL, 28),
 (7, '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', NULL, NULL, NULL, NULL, 29),
 (8, '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', NULL, NULL, NULL, NULL, 30),
@@ -185,7 +185,7 @@ CREATE TABLE `locais` (
 --
 
 INSERT INTO `locais` (`id_local`, `foto`, `nome`, `email`, `endereco`, `numero`, `telefone`, `descricao`, `id_estado`, `id_municipio`, `id_categoria`, `id_usuario`) VALUES
-(27, '3007201807515001-Campo-SuiÃ§o.jpg', 'Quadra IFC', 'ifc@ifc.edu.br', 'Rodovia BR 280, km 27 - CÃ¢mpus Araquari, Araquari - SC, 89245-000', 27, 87864684, 'bla bland kdjndk ', 42, 4201307, 1, 24),
+(27, 'image.jpeg', 'Quadra IFC', 'ifc@ifc.edu.br', 'Rodovia BR 280, km 27 - CÃ¢mpus Araquari, Araquari - SC, 89245-000', 27, 87864684, 'bla bland kdjndk ', 42, 4201307, 1, 24),
 (28, '29072018033548miquelute.jpg', 'Miquelute', 'o@k', 'SC-418, Km 4', 6745, 4545, 'Miquelute materiais e construÃ§Ãµes', 42, 4201307, 1, 24),
 (29, '29072018033919granulado-para-campo-society-03.jpg', 'Porto Grande Futebol Society e Eventos', 'o@k', 'Rua Da Prosperidade', 95, 4545, 'PG', 42, 4201307, 1, 24),
 (30, '29072018034237allianz.jpg', 'Allianz Parque', 'o@k', 'Av. Francisco Matarazzo', 1705, 9899595, 'bando de #@$%', 35, 3550308, 1, 24),
@@ -5817,7 +5817,7 @@ CREATE TABLE `usuarios` (
 INSERT INTO `usuarios` (`id_usuario`, `nome`, `login`, `senha`, `telefone`, `email`, `cpf`, `tipuser`) VALUES
 (1, 'Visitante', '', '', '', '', '', 'visitante'),
 (15, 'Luan', 'LuanAlflen', '123', '2147483647', 'luan.alflen4@gmail.com', '2147483647', 'comum'),
-(24, 'teste', 'login', '12', '31256415', 'teste@mail.com', '1561515', 'comum'),
+(24, 'teste', 'login', '12', '31256415', 'teste@mail.com.br', '1561515', 'comum'),
 (34, 'Administrador', 'Adm', '7967017457', '047 996000900', 'luan.alflen4@gmail.com', '09118737919', 'admin');
 
 --
