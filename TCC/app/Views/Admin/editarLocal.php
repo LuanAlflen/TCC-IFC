@@ -6,35 +6,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Formulario</title>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script type="text/javascript">
-        //ao carregar a pagina, fica sempre pronto pra executar
-        $(function(){
-
-            /////////////////// FORMULARIO ESTADOS SENDO PREENCHIDO VIA API////////////////////////////
-
-            $('#estados').change(function(){
-                if( $(this).val() ) {
-                    $('#municipios').hide();
-
-                    $.getJSON('http://localhost/3info1/TCC/app/Controlers/ControlerMunicipio.php?id='+$(this).val(), function(j){
-                        var options = '<option value="0">Selecione...</option>';
-                        for (var i = 0; i < j.length; i++) {
-                            options += '<option value="' +
-                                j[i].id + '">' +
-                                j[i].nome + '</option>';
-                        }
-                        $('#municipios').html(options).show();
-                    });
-                } else {
-                    $('#municipios').html(
-                        '<option value="0">-- Selecione um estado --</option>'
-                    );
-                }
-            });
-
-        })
-
-    </script>
+    <script src="../../assets/js/cadastroLocal.js"></script>
 
 </head>
 <body>

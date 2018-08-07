@@ -25,21 +25,8 @@
 
     <link rel="stylesheet" href="../../assets/css/style.css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script>
-        $(function() {
-            $("#divlocais").hide();
+    <script src="../../assets/js/cabecalhoAdm.js"></script>
 
-            $('#usuarios').click(function () {
-                $("#divlocais").hide();
-                $("#divusuarios").fadeIn();
-            });
-
-            $('#locais').click(function () {
-                $("#divusuarios").hide();
-                $("#divlocais").fadeIn();
-            })
-        });
-    </script>
 
 
 </head>

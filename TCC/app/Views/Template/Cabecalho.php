@@ -24,20 +24,14 @@
     <link href="../../assets/css/shop-homepage.css" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/css/style.css">
 
+    <script src="../../assets/js/cabecalho.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
 
     <![endif]-->
-    <script>
-        $(document).ready(function(){
-            $('#botao').click(function () {
-                filtra();
-            })
-        });
 
-    </script>
 
 </head>
 
