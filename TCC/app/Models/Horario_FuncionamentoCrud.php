@@ -52,9 +52,59 @@ class Horario_FuncionamentoCrud
         return $objetoHorario;
 
     }
+    public function getHorarioLocal($id)
+    {
+        //RETORNA UMA CATEGORIA, DADO UM ID
+
+        //FAZER A CONSULTA
+        $sql = 'select * from horario_funcionamento where id_local='.$id;
+        $resultado = $this->conexao->query($sql);
+
+        //FETCH - TRANSFORMA O RESULTADO EM UM ARRAY ASSOCIATIVO
+        $horario = $resultado->fetch(PDO::FETCH_ASSOC);
+
+        //CRIAR OBJETO DO TIPO CATEGORIA - USANDO OS VALORES DA CONSULTA
+        $objetoHorario = new Horario_Funcionamento(
+            $horario['seg'],
+            $horario['seg1'],
+            $horario['ter'],
+            $horario['ter1'],
+            $horario['qua'],
+            $horario['qua1'],
+            $horario['qui'],
+            $horario['qui1'],
+            $horario['sex'],
+            $horario['sex1'],
+            $horario['sab'],
+            $horario['sab1'],
+            $horario['dom'],
+            $horario['dom1'],
+            $horario['id_local'],
+            $horario['id']);
+
+        //RETORNAR UM OBJETO CATEGORIA COM OS VALORES
+        return $objetoHorario;
+
+    }
+    public function getHorarioLocalArray($id)
+    {
+        //RETORNA UMA CATEGORIA, DADO UM ID
+
+        //FAZER A CONSULTA
+        $sql = 'select * from horario_funcionamento where id_local='.$id;
+        $resultado = $this->conexao->query($sql);
+
+        //FETCH - TRANSFORMA O RESULTADO EM UM ARRAY ASSOCIATIVO
+        $horario = $resultado->fetch(PDO::FETCH_ASSOC);
+
+        //CRIAR OBJETO DO TIPO CATEGORIA - USANDO OS VALORES DA CONSULTA
+
+        return $horario;
+
+    }
 
 
-    public function getLocais()
+    public function getHorarios()
     {
         $sql = "SELECT * FROM horario_funcionamento";
 
@@ -86,7 +136,7 @@ class Horario_FuncionamentoCrud
         return $ListaHorario;
     }
 
-    public function getLocaisLocal($id_local)
+    public function getHorariosLocal($id_local)
     {
         $sql = "SELECT * FROM horario_funcionamento WHERE id_local =".$id_local;
 

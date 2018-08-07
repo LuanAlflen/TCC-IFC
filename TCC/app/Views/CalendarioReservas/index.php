@@ -7,7 +7,7 @@ $numero_reservas = $crud->numeroReservasLocal($idlocal);
 @$reservas = $crud->getReservasLocal($idlocal);
 
 $crudHorario = new Horario_FuncionamentoCrud();
-@$horarios = $crudHorario->getLocaisLocal($idlocal);
+@$horarios = $crudHorario->getHorariosLocal($idlocal);
 
 
 ?>
@@ -38,7 +38,7 @@ $crudHorario = new Horario_FuncionamentoCrud();
               defaultDate: Date(),
               navLinks: true, // can click day/week names to navigate views
               eventLimit: true, // allow "more" link when too many events
-                 //default: '01:00:00', CASO NAO FOR DEFINIDO A DATA DE SAIDA, ATRIBUI UMA HORA DEPOIS DA ENTRADA
+                default: false,
 
 
 
@@ -50,8 +50,6 @@ $crudHorario = new Horario_FuncionamentoCrud();
                     $("#info #nome").val(event.title);
                     $("#info #entrada").text(event.start.format('DD/MM/YYYY HH:mm:ss'));
                     $("#info #entrada").val(event.start.format('DD/MM/YYYY HH:mm:ss'));
-                    $("#info #saida").text(event.end.format('DD/MM/YYYY HH:mm:ss'));
-                    $("#info #saida").val(event.end.format('DD/MM/YYYY HH:mm:ss'));
                     $("#info #color").val(event.color);
                     $("#info").modal("show");
                     // change the border color just for fun
@@ -61,101 +59,100 @@ $crudHorario = new Horario_FuncionamentoCrud();
 
                 selectable: true,
                 selectHelper: true,
-                select: function (start, end) {
+                select: function (start) {
                     $("#cadastrar #entrada").val(moment(start).format('DD/MM/YYYY HH:mm:ss'));
-                    $("#cadastrar #saida").val(moment(end).format('DD/MM/YYYY HH:mm:ss'));
                     $("#cadastrar").modal("show");
               },
 
                 events: [
 
+                 //CASO NAO FOR DEFINIDO A DATA DE SAIDA, ATRIBUI UMA HORA DEPOIS DA ENTRADA
+
                   <?php
-                        if ($numero_reservas == 0){
-                            echo "";
-                        }else {
-                            foreach ($reservas as $reserva):
-                                $iduser_reserva = $reserva->id_user;
-                                $crudUser = new UsuarioCrud();
-                                $user = $crudUser->getUsuarioId($iduser_reserva);
-                                $nome = $user->getNome();
+                    if ($numero_reservas == 0){
+                        echo "";
+                    }else {
+                        foreach ($reservas as $reserva):
+                            $iduser_reserva = $reserva->id_user;
+                            $crudUser = new UsuarioCrud();
+                            $user = $crudUser->getUsuarioId($iduser_reserva);
+                            $nome = $user->getNome();
 
-                                echo " { ";
+                            $entrada = $reserva->entrada;
+                            $data = new DateTime($entrada);
+                            $data->modify('+1 hour');
 
-                                echo "id: '".$reserva->id."',";
-                                echo "title: '".$nome."',";
-                                echo "color: '".$reserva->cor."',";
-                                echo "start: '".$reserva->entrada."',";
-                                echo "end: '".$reserva->saida."'";
+                            echo " { ";
 
-                                echo "},";
+                            echo "id: '".$reserva->id."',";
+                            echo "title: '".$nome."',";
+                            echo "color: '".$reserva->cor."',";
+                            echo "start: '".$entrada."',";
+                            echo "end: '".$data->format('Y-m-d H:i:s')."'";
 
-                            endforeach;
-                        }
+                            echo "},";
+
+                        endforeach;
+                    }
                     ?>
 
               ],
 
-
-                        businessHours: [
-                        <?php
-
-                    foreach ($horarios as $horario):
-                        if (!isset($horario->dom)){
-                            echo "";
-                        }else{
-                            echo "{dow: [0],";
-                            echo "start: '$horario->dom',";
-                            echo "end: '$horario->dom1'},";
-                        }
-                        if (!isset($horario->seg)){
-                            echo "";
-                        }else{
-                            echo "{dow: [1],";
-                            echo "start: '$horario->seg',";
-                            echo "end: '$horario->seg1'},";
-                        }
-                        if (!isset($horario->ter)){
-                            echo "";
-                        }else{
-                            echo "{dow: [2],";
-                            echo "start: '$horario->ter',";
-                            echo "end: '$horario->ter1'},";
-                        }
-                        if (!isset($horario->qua)){
-                            echo "";
-                        }else{
-                            echo "{dow: [3],";
-                            echo "start: '$horario->qua',";
-                            echo "end: '$horario->qua1'},";
-                        }
-                        if (!isset($horario->qui)){
-                            echo "";
-                        }else{
-                            echo "{dow: [4],";
-                            echo "start: '$horario->qui',";
-                            echo "end: '$horario->qui1'},";
-                        }
-                        if (!isset($horario->sex)){
-                            echo "";
-                        }else{
-                            echo "{dow: [5],";
-                            echo "start: '$horario->sex',";
-                            echo "end: '$horario->sex1'},";
-                        }
-                        if (!isset($horario->sab)){
-                            echo "";
-                        }else{
-                            echo "{dow: [6],";
-                            echo "start: '$horario->sab',";
-                            echo "end: '$horario->sab1'}";
-                        }
-
-
-
-                    endforeach;
-                            echo "]";
-
-                            ?>
+                businessHours: [
+                <?php
+                foreach ($horarios as $horario):
+                    if (!isset($horario->dom)){
+                        echo "";
+                    }else{
+                        echo "{dow: [0],";
+                        echo "start: '$horario->dom',";
+                        echo "end: '$horario->dom1'},";
+                    }
+                    if (!isset($horario->seg)){
+                        echo "";
+                    }else{
+                        echo "{dow: [1],";
+                        echo "start: '$horario->seg',";
+                        echo "end: '$horario->seg1'},";
+                    }
+                    if (!isset($horario->ter)){
+                        echo "";
+                    }else{
+                        echo "{dow: [2],";
+                        echo "start: '$horario->ter',";
+                        echo "end: '$horario->ter1'},";
+                    }
+                    if (!isset($horario->qua)){
+                        echo "";
+                    }else{
+                        echo "{dow: [3],";
+                        echo "start: '$horario->qua',";
+                        echo "end: '$horario->qua1'},";
+                    }
+                    if (!isset($horario->qui)){
+                        echo "";
+                    }else{
+                        echo "{dow: [4],";
+                        echo "start: '$horario->qui',";
+                        echo "end: '$horario->qui1'},";
+                    }
+                    if (!isset($horario->sex)){
+                        echo "";
+                    }else{
+                        echo "{dow: [5],";
+                        echo "start: '$horario->sex',";
+                        echo "end: '$horario->sex1'},";
+                    }
+                    if (!isset($horario->sab)){
+                        echo "";
+                    }else{
+                        echo "{dow: [6],";
+                        echo "start: '$horario->sab',";
+                        echo "end: '$horario->sab1'}";
+                    }
+                endforeach;
+                echo "]";
+                ?>
 
                 });
 
@@ -222,8 +219,6 @@ $crudHorario = new Horario_FuncionamentoCrud();
                                       <dd id="nome"></dd>
                                       <dt>Entrada</dt>
                                       <dd id="entrada"></dd>
-                                      <dt>Saida</dt>
-                                      <dd id="saida"></dd>
                                   </dl>
                                   <div style="text-align: center">
                                   <button class="btn btn-canc-vis btn-warning">Editar</button>
@@ -276,12 +271,6 @@ $crudHorario = new Horario_FuncionamentoCrud();
                                           <input type="text" class="form-control" id="entrada" name="entrada" onKeyPress="DataHora(event, this)">
                                       </div>
                                   </div>
-                                  <div class="form-group">
-                                      <label for="inputEmail3" class="col-sm-2 control-label">Saída</label>
-                                      <div class="col-sm-10">
-                                          <input type="text" class="form-control" id="saida" name="saida" onKeyPress="DataHora(event, this)">
-                                      </div>
-                                  </div>
                                   <input type="hidden" value="<?= $_SESSION['id'] ?>" name="iduser">
                                   <input type="hidden" value="<?= $idlocal ?>" name="idlocal">
                                   <input type="hidden" id="id" name="id">
@@ -331,12 +320,6 @@ $crudHorario = new Horario_FuncionamentoCrud();
                                   <label for="inputEmail3" class="col-sm-2 control-label">Entrada</label>
                                   <div class="col-sm-10">
                                       <input type="text" class="form-control" id="entrada" name="entrada" onKeyPress="DataHora(event, this)">
-                                  </div>
-                              </div>
-                              <div class="form-group">
-                                  <label for="inputEmail3" class="col-sm-2 control-label">Saída</label>
-                                  <div class="col-sm-10">
-                                      <input type="text" class="form-control" id="saida" name="saida" onKeyPress="DataHora(event, this)">
                                   </div>
                               </div>
                               <input type="hidden" value="<?= $_SESSION['id'] ?>" name="iduser">

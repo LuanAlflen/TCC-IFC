@@ -65,10 +65,9 @@ switch ($action) {
 
         $cor = $_POST['cor'];
         $entrada = $_POST['entrada'];
-        $saida = $_POST['saida'];
 
 
-        if (!empty($cor) AND !empty($entrada) AND !empty($saida)){
+        if (!empty($cor) AND !empty($entrada)){
             //Converter a data e hora do formato brasileiro para o formato do Banco de Dados
             $data = explode(" ", $entrada);
             list($date, $hora) = $data;
@@ -76,44 +75,50 @@ switch ($action) {
             $data_sem_barra = implode("-", $data_sem_barra);
             $entrada_sem_barra = $data_sem_barra . " " . $hora;
 
-            $data = explode(" ", $saida);
-            list($date, $hora) = $data;
-            $data_sem_barra = array_reverse(explode("/", $date));
-            $data_sem_barra = implode("-", $data_sem_barra);
-            $saida_sem_barra = $data_sem_barra . " " . $hora;
-
-
             $date  = new DateTime($entrada_sem_barra);
-            $date2 = new DateTime($saida_sem_barra);
 
-            //SE A DATA DE ENTRADA VIER DEPOIS DA DATA DE SAIDA, RETORNA DANDO ERRO
-            $diferenca = ($date->diff($date2));
-            if ($diferenca->invert != 0){
-                $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>Datas incorretas!
-                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
-                header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
-                die;
-            }
 
             //DEFININDO ENTRADA EM UM ARRAY(WEEK,HORA);
-            $diasemana = array(0,1,2,3,4,5,6);
+            $diasemana = array('dom','seg','ter','qua','qui','sex','sab');
             $data = substr($entrada_sem_barra, 0, -9);
             $diasemana_numero = date('w', strtotime($data));
             $startWeek = $diasemana[$diasemana_numero];
             $startHour = substr($entrada_sem_barra,  -8);
             $startHour = substr($startHour,  0,-3);
             $entrada = array($startWeek,$startHour);
-            //print_r($entrada);
 
-            //DEFININDO SAIDA EM UM ARRAY(WEEK,HORA);
-            $data = substr($saida_sem_barra, 0, -9);
-            $diasemana_numero = date('w', strtotime($data));
-            $endWeek = $diasemana[$diasemana_numero];
-            $endHour = substr($saida_sem_barra,  -8);
-            $endHour = substr($endHour,  0,-3);
-            $saida = array($endWeek,$endHour);
-            //print_r($saida);
+            ////////////////////////////////////////HORARIO DO DIA DA SEMANA DE AACORDO COM A RESERVA///////////////////////////////////////////////////////////////
+            $crudHorario = new Horario_FuncionamentoCrud();
+            $horario = $crudHorario->getHorarioLocalArray($idlocal);
 
+            $diaSemanaEntrada = $entrada[0];
+            $horaEntradaDaSemana = $horario[$diaSemanaEntrada];
+            $horaSaidaDaSemana = $horario[$diaSemanaEntrada.'1'];
+            $data = $startHour.":00";
+
+            echo "Horario reserva:".$data;
+            echo "<br>";
+            echo "Horario inicio:".$horaEntradaDaSemana;
+            echo "<br>";
+            echo "Horario saida:".$horaSaidaDaSemana;
+            echo "<br>";
+            //die;
+
+            $nova_data=date('Y-m-d H:i:s', strtotime($data));
+
+            $de = date('Y-m-d H:i:s', strtotime($horaEntradaDaSemana));
+            $ate = date('Y-m-d H:i:s', strtotime($horaSaidaDaSemana));
+
+            if(($nova_data >= $de) && ($nova_data <= $ate)) {
+                echo "entre as datas";
+            } else {
+                $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>O local não atende a esse horário!
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+                header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
+                die;
+            }
+
+            die;
 
 
             //INSTANCIANDO PARA OBTER AS INFORMAÇÕES PARA CADASTRAR
@@ -121,7 +126,7 @@ switch ($action) {
             $local = $crudLocal->getLocal($idlocal);
             $idlocal = $local->id_local;
             $crudReserva = new ReservaCrud();
-            $reserva = new Reserva($cor,$entrada_sem_barra,$saida_sem_barra,$idlocal,$iduser);
+            $reserva = new Reserva($cor,$entrada_sem_barra,$idlocal,$iduser);
             $_SESSION['msg'] = "<div class='alert alert-success' role='alert'>Reserva cadastrada com sucesso
             <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
             $crudReserva->insereReserva($reserva);
@@ -143,34 +148,15 @@ switch ($action) {
         $idreserva = $_POST['id'];
         $cor = $_POST['cor'];
         $entrada = $_POST['entrada'];
-        $saida = $_POST['saida'];
 
 
-        if (!empty($cor) AND !empty($entrada) AND !empty($saida)){
+        if (!empty($cor) AND !empty($entrada)){
             //Converter a data e hora do formato brasileiro para o formato do Banco de Dados
             $data = explode(" ", $entrada);
             list($date, $hora) = $data;
             $data_sem_barra = array_reverse(explode("/", $date));
             $data_sem_barra = implode("-", $data_sem_barra);
             $entrada_sem_barra = $data_sem_barra . " " . $hora;
-
-            $data = explode(" ", $saida);
-            list($date, $hora) = $data;
-            $data_sem_barra = array_reverse(explode("/", $date));
-            $data_sem_barra = implode("-", $data_sem_barra);
-            $saida_sem_barra = $data_sem_barra . " " . $hora;
-
-            $date  = new DateTime($entrada_sem_barra);
-            $date2 = new DateTime($saida_sem_barra);
-
-            //SE A DATA DE ENTRADA VIER DEPOIS DA DATA DE SAIDA, RETORNA DANDO ERRO
-            $diferenca = ($date->diff($date2));
-            if ($diferenca->invert != 0){
-                $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>Datas incorretas!
-                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
-                header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
-                die;
-            }
 
 
             //INSTANCIANDO PARA OBTER AS INFORMAÇÕES PARA CADASTRAR
@@ -189,7 +175,7 @@ switch ($action) {
 
             if ($iduser == $iduser_reserva OR $iduser == $iduserlocal OR $tipuser == 'admin'){
                 $crudReserva = new ReservaCrud();
-                $reserva = new Reserva($cor,$entrada_sem_barra,$saida_sem_barra,$idlocal,$iduser,$idreserva);
+                $reserva = new Reserva($cor,$entrada_sem_barra,$idlocal,$iduser,$idreserva);
                 $_SESSION['msg'] = "<div class='alert alert-success' role='alert'>Alterações feitas com sucesso
                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
                 $crudReserva->updateReserva($reserva);

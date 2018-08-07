@@ -33,7 +33,6 @@ class ReservaCrud
         $objetoReserva = new Reserva(
             $reserva['cor'],
             $reserva['entrada'],
-            $reserva['saida'],
             $reserva['id_local'],
             $reserva['id_usuario'],
             $reserva['id']);
@@ -55,12 +54,11 @@ class ReservaCrud
         foreach ($reservas as $reserva) {
             $cor = $reserva['cor'];
             $entrada = $reserva['entrada'];
-            $saida = $reserva['saida'];
             $idlocal = $reserva['id_local'];
             $iduser = $reserva['id_user'];
             $id = $reserva['id'];
 
-            $obj = new Reserva($cor, $entrada, $saida, $idlocal,$iduser, $id);
+            $obj = new Reserva($cor, $entrada, $idlocal,$iduser, $id);
             $ListaReserva[] = $obj;
         }
         return $ListaReserva;
@@ -89,12 +87,11 @@ class ReservaCrud
         foreach ($reservas as $reserva) {
             $cor = $reserva['cor'];
             $entrada = $reserva['entrada'];
-            $saida = $reserva['saida'];
             $idlocal = $reserva['id_local'];
             $iduser = $reserva['id_usuario'];
             $id = $reserva['id'];
 
-            $obj = new Reserva($cor, $entrada, $saida, $idlocal,$iduser, $id);
+            $obj = new Reserva($cor, $entrada, $idlocal,$iduser, $id);
             $ListaReserva[] = $obj;
         }
         return $ListaReserva;
@@ -110,12 +107,11 @@ class ReservaCrud
         foreach ($reservas as $reserva) {
             $cor = $reserva['cor'];
             $entrada = $reserva['entrada'];
-            $saida = $reserva['saida'];
             $idlocal = $reserva['id_local'];
             $iduser = $reserva['id_usuario'];
             $id = $reserva['id'];
 
-            $obj = new Reserva($cor, $entrada, $saida, $idlocal,$iduser, $id);
+            $obj = new Reserva($cor, $entrada, $idlocal,$iduser, $id);
             $ListaReserva[] = $obj;
         }
         return $ListaReserva;
@@ -143,8 +139,8 @@ class ReservaCrud
 
 
     public function insereReserva(Reserva $reserva){
-        $sql = "INSERT INTO reservas (cor, entrada, saida, id_local, id_usuario) 
-                values ('{$reserva->getCor()}','{$reserva->getEntrada()}','{$reserva->getSaida()}', '{$reserva->getIdLocal()}','{$reserva->getIdUser()}')";
+        $sql = "INSERT INTO reservas (cor, entrada, id_local, id_usuario) 
+                values ('{$reserva->getCor()}','{$reserva->getEntrada()}','{$reserva->getIdLocal()}','{$reserva->getIdUser()}')";
 
         try {//TENTA EXECUTAR A INSTRUCAO
 
@@ -163,7 +159,6 @@ class ReservaCrud
                 SET id = '{$reserva->getId()}', 
                 cor = '{$reserva->getCor()}', 
                 entrada = '{$reserva->getEntrada()}', 
-                saida = '{$reserva->getSaida()}'
                 WHERE id = {$reserva->getId()}";
         try {//TENTA EXECUTAR A INSTRUCAO
             $this->conexao->exec($sql);
