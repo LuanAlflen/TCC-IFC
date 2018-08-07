@@ -164,7 +164,7 @@ class UsuarioCrud
         //VERIFICA SE EXISTE RESERVAS, SE SIM, EXCLUI
         $sqlreserva = $this->conexao->prepare("SELECT * FROM reservas WHERE id_usuario = '{$id}'");
         $sqlreserva->execute();
-        $resultado = $sql->rowCount();
+        $resultado = $sqlreserva->rowCount();
         if ($resultado != 0){
             $sqlreserva = "DELETE FROM reservas WHERE id_usuario = '{$id}'";
             $this->conexao->exec($sqlreserva);
@@ -173,7 +173,6 @@ class UsuarioCrud
         //EXCLUI O USUARIO
         $sqluser = "DELETE FROM usuarios WHERE id_usuario = '{$id}'";
         try {//TENTA EXECUTAR A INSTRUCAO
-
             $this->conexao->exec($sqluser);
         } catch (PDOException $e) {//EM CASO DE ERRO, CAPTURA A MENSAGEM
             return $e->getMessage();

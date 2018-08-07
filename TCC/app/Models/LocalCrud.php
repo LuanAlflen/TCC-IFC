@@ -222,12 +222,22 @@ class LocalCrud
 
         $this->conexao = DBConnection::getConexao();
         //VERIFICA SE EXISTE RESERVAS, SE SIM, EXCLUI
-        $sqlreserva = $this->conexao->prepare("SELECT * FROM reservas WHERE id_usuario = '{$id}'");
+        $sqlreserva = $this->conexao->prepare("SELECT * FROM reservas WHERE id_local = '{$id}'");
         $sqlreserva->execute();
-        $resultado = $sql->rowCount();
+        $resultado = $sqlreserva->rowCount();
         if ($resultado != 0){
-            $sqlreserva = "DELETE FROM reservas WHERE id_usuario = '{$id}'";
+            $sqlreserva = "DELETE FROM reservas WHERE id_local= '{$id}'";
             $this->conexao->exec($sqlreserva);
+        }
+
+        $this->conexao = DBConnection::getConexao();
+        //VERIFICA SE EXISTE RESERVAS, SE SIM, EXCLUI
+        $sqlhorario = $this->conexao->prepare("SELECT * FROM horario_funcionamento WHERE id_local = '{$id}'");
+        $sqlhorario->execute();
+        $resultado = $sqlhorario->rowCount();
+        if ($resultado != 0){
+            $sqlhorario= "DELETE FROM horario_funcionamento WHERE id_local = '{$id}'";
+            $this->conexao->exec($sqlhorario);
         }
 
         //EFETUA A CONEXAO
@@ -256,20 +266,46 @@ class LocalCrud
             $locais = $crud->getLocalUser($iduser);
 
             foreach ($locais as $local){
-                $sql = $this->conexao->prepare("SELECT * FROM comentarios WHERE id_local = '{$local->id_local}'");
-                $sql->execute();
-                $resultado = $sql->rowCount();
+
+
+                //VERIFICA SE EXISTE COMENTARIOS, SE SIM, EXCLUI
+                $sqlcomentario = $this->conexao->prepare("SELECT * FROM comentarios WHERE id_local = '{$local->id_local}'");
+                $sqlcomentario->execute();
+                $resultado = $sqlcomentario->rowCount();
                 if ($resultado != 0){
-                    $sql = "DELETE FROM comentarios WHERE id_local = '{$local->id_local}'";
-                    $this->conexao->exec($sql);
+                    $sqlcomentario = "DELETE FROM comentarios WHERE id_local = '{$local->id_local}'";
+                    $this->conexao->exec($sqlcomentario);
                 }
+
+                $this->conexao = DBConnection::getConexao();
+                //VERIFICA SE EXISTE RESERVAS, SE SIM, EXCLUI
+                $sqlreserva = $this->conexao->prepare("SELECT * FROM reservas WHERE id_local = '{$local->id_local}'");
+                $sqlreserva->execute();
+                $resultado = $sqlreserva->rowCount();
+                if ($resultado != 0){
+                    $sqlreserva = "DELETE FROM reservas WHERE id_local= '{$local->id_local}'";
+                    $this->conexao->exec($sqlreserva);
+                }
+
+                $this->conexao = DBConnection::getConexao();
+                //VERIFICA SE EXISTE HORARIOS, SE SIM, EXCLUI
+                $sqlhorario = $this->conexao->prepare("SELECT * FROM horario_funcionamento WHERE id_local = '{$local->id_local}'");
+                $sqlhorario->execute();
+                $resultado = $sqlhorario->rowCount();
+                if ($resultado != 0){
+                    $sqlhorario= "DELETE FROM horario_funcionamento WHERE id_local = '{$local->id_local}'";
+                    $this->conexao->exec($sqlhorario);
+                }
+
+
             }
+
+
 
             $sqllocal = "DELETE FROM locais WHERE id_usuario = '{$iduser}'";
             $this->conexao->exec($sqllocal);
             return true;
         }
-        die;
     }
 
     public function existeComentarios($idlocal){

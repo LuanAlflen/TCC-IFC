@@ -118,7 +118,6 @@ switch ($action) {
                 die;
             }
 
-            die;
 
 
             //INSTANCIANDO PARA OBTER AS INFORMAÇÕES PARA CADASTRAR

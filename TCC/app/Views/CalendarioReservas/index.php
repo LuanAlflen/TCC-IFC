@@ -34,6 +34,12 @@ $crudHorario = new Horario_FuncionamentoCrud();
                 center: 'title',
                 right: 'month,agendaWeek,agendaDay,listWeek'
               },
+                //NAO DEIXA SELECIONAR MAIS DO QUE UM HORA, POREM QUANDO O USUARIO CLICA NO DIA ELE IMPEDE TBM
+                // selectAllow: function(selectInfo) {
+                //     var duration = moment.duration(selectInfo.end.diff(selectInfo.start));
+                //     // alert(selectInfo.start);
+                //     return duration.asHours() <= 1 ;
+                // },
 
               defaultDate: Date(),
               navLinks: true, // can click day/week names to navigate views
@@ -321,6 +327,10 @@ $crudHorario = new Horario_FuncionamentoCrud();
                                   <div class="col-sm-10">
                                       <input type="text" class="form-control" id="entrada" name="entrada" onKeyPress="DataHora(event, this)">
                                   </div>
+                              </div>
+                              <div class="footer">
+                                    <label for="inputEmail3" class="col-sm-8 control-label" style="margin-left: 7%; margin-bottom: 3%">*Data de saida é atribuida 1 hora após a entrada</label>
+
                               </div>
                               <input type="hidden" value="<?= $_SESSION['id'] ?>" name="iduser">
                               <input type="hidden" value="<?= $idlocal ?>" name="idlocal">
