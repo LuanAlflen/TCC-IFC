@@ -81,8 +81,8 @@
                 <td><?= $user->getNome()?> </td>
                 <td>
                     <a href="ControlerLocal.php?acao=show&iduser=<?=$_SESSION['id']?>&idlocal=<?= $local->id_local ?>">Ver</a> |
-                    <a href="ControlerAdmin.php?acao=editarLocal&idAdm=<?=$usuario->id?>&idlocal=<?= $local->id_local ?>">Editar</a> |
-                    <a href="ControlerAdmin.php?acao=excluirLocal&idAdm=<?=$usuario->id?>&idlocal=<?= $local->id_local ?>">Remover</a>
+                    <a href="ControlerAdmin.php?acao=editarLocal&idAdm=<?=$_SESSION['id']?>&idlocal=<?= $local->id_local ?>">Editar</a> |
+                    <a href="ControlerAdmin.php?acao=excluirLocal&idAdm=<?=$_SESSION['id']?>&idlocal=<?= $local->id_local ?>">Remover</a>
                 </td>
             </tr>
 

@@ -8,8 +8,6 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-    <link href="../../assets/css/font-awesome.css" rel="stylesheet" type="text/css">
-    <link href="../../assets/css/bootstrap.min.css" rel="stylesheet">
     <script type="text/javascript" src="../../assets/vendor/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../assets/js/timepicker.min.js"></script>
     <script type="text/javascript" src="../../assets/js/jquery.businessHours.min.js"></script>
@@ -91,8 +89,8 @@
             <input class="btn__submit" type="reset" value="Limpar">
             <input class="btn__reset" type="submit" id="enviar" name="gravar" value="Salvar">
         </div>
-        <div class="error-text" style="color: white">
-            <a href="?acao=editarHorario&idlocal=<?= $local->id_local ?>&iduser=<?php $_GET['iduser']?>" style="text-decoration: none">Editar horário de fucionamento</a>
+        <div style="color: white">
+            <a href="?acao=editarHorario&idlocal=<?= $local->id_local ?>&iduser=<?= $_GET['iduser']?>" style="text-decoration: none; color: white;">Editar horário de fucionamento</a>
         </div>
 
     </form>

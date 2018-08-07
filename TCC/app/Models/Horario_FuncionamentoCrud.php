@@ -205,7 +205,7 @@ class Horario_FuncionamentoCrud
                 ter = '{$horario->getTer()}',
                 ter1 = '{$horario->getTer1()}',
                 qua = '{$horario->getQua()}',
-                qua1 = '{$horario->getQua()}',
+                qua1 = '{$horario->getQua1()}',
                 qui = '{$horario->getQui()}',
                 qui1 = '{$horario->getQui1()}',
                 sex = '{$horario->getSex()}',
@@ -218,8 +218,7 @@ class Horario_FuncionamentoCrud
                 WHERE id = '{$horario->getId()}'";
         $sql = str_replace("''", "null", $sql);
         try {//TENTA EXECUTAR A INSTRUCAO
-            echo $sql;die;
-//            $this->conexao->exec($sql);
+            $this->conexao->exec($sql);
         } catch (PDOException $e) {//EM CASO DE ERRO, CAPTURA A MENSAGEM
             return $e->getMessage();
         }
