@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 06-Ago-2018 às 07:26
+-- Generation Time: 07-Ago-2018 às 03:46
 -- Versão do servidor: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -140,7 +140,7 @@ CREATE TABLE `horario_funcionamento` (
 
 INSERT INTO `horario_funcionamento` (`id`, `seg`, `seg1`, `ter`, `ter1`, `qua`, `qua1`, `qui`, `qui1`, `sex`, `sex1`, `sab`, `sab1`, `dom`, `dom1`, `id_local`) VALUES
 (4, '08:00:00', '18:00:00', '09:00:00', '18:00:00', NULL, NULL, '09:00:00', '20:00:00', '09:00:00', '18:00:00', NULL, NULL, NULL, NULL, 54),
-(5, '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', NULL, NULL, NULL, NULL, 27),
+(5, '08:00:00', '18:00:00', '08:00:00', '18:00:00', '10:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', NULL, NULL, NULL, NULL, 27),
 (6, '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', NULL, NULL, NULL, NULL, 28),
 (7, '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', NULL, NULL, NULL, NULL, 29),
 (8, '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', NULL, NULL, NULL, NULL, 30),
@@ -5775,7 +5775,6 @@ CREATE TABLE `reservas` (
   `id` int(11) NOT NULL,
   `cor` varchar(20) DEFAULT NULL,
   `entrada` datetime NOT NULL,
-  `saida` datetime NOT NULL,
   `id_local` int(11) NOT NULL,
   `id_usuario` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -5784,13 +5783,15 @@ CREATE TABLE `reservas` (
 -- Extraindo dados da tabela `reservas`
 --
 
-INSERT INTO `reservas` (`id`, `cor`, `entrada`, `saida`, `id_local`, `id_usuario`) VALUES
-(7, '#FF4500', '2018-08-08 17:00:00', '2018-08-08 19:00:00', 27, 15),
-(14, '#FF4500', '2018-08-07 00:00:00', '2018-08-08 00:00:00', 28, 34),
-(15, '#8B4513', '2018-08-07 00:00:00', '2018-08-08 00:00:00', 28, 34),
-(16, '#FF4500', '2018-08-08 00:00:00', '2018-08-09 00:00:00', 28, 34),
-(18, '#8B4513', '2018-08-07 00:00:00', '2018-08-08 00:00:00', 27, 24),
-(19, '#8B4513', '2018-08-06 00:00:00', '2018-08-07 00:00:00', 54, 24);
+INSERT INTO `reservas` (`id`, `cor`, `entrada`, `id_local`, `id_usuario`) VALUES
+(7, '#FF4500', '2018-08-08 17:00:00', 27, 15),
+(14, '#FF4500', '2018-08-07 00:00:00', 28, 34),
+(15, '#8B4513', '2018-08-07 00:00:00', 28, 34),
+(16, '#FF4500', '2018-08-08 00:00:00', 28, 34),
+(19, '#8B4513', '2018-08-06 00:00:00', 54, 24),
+(21, '#436EEE', '2018-08-06 20:00:00', 27, 24),
+(24, '#1C1C1C', '2018-08-06 16:00:00', 27, 24),
+(25, '#40E0D0', '2018-08-06 09:00:00', 27, 24);
 
 -- --------------------------------------------------------
 
@@ -5911,7 +5912,7 @@ ALTER TABLE `horario_funcionamento`
 -- AUTO_INCREMENT for table `locais`
 --
 ALTER TABLE `locais`
-  MODIFY `id_local` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id_local` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `municipios`
@@ -5923,7 +5924,7 @@ ALTER TABLE `municipios`
 -- AUTO_INCREMENT for table `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `usuarios`
