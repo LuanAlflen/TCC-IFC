@@ -95,22 +95,19 @@ switch ($action) {
             $horaEntradaDaSemana = $horario[$diaSemanaEntrada];
             $horaSaidaDaSemana = $horario[$diaSemanaEntrada.'1'];
             $data = $startHour.":00";
-
-            echo "Horario reserva:".$data;
-            echo "<br>";
-            echo "Horario inicio:".$horaEntradaDaSemana;
-            echo "<br>";
-            echo "Horario saida:".$horaSaidaDaSemana;
-            echo "<br>";
-            //die;
+//
+//            echo "Horario reserva:".$data;
+//            echo "<br>";
+//            echo "Horario inicio:".$horaEntradaDaSemana;
+//            echo "<br>";
+//            echo "Horario saida:".$horaSaidaDaSemana;
+//            echo "<br>";
 
             $nova_data=date('Y-m-d H:i:s', strtotime($data));
-
             $de = date('Y-m-d H:i:s', strtotime($horaEntradaDaSemana));
             $ate = date('Y-m-d H:i:s', strtotime($horaSaidaDaSemana));
 
             if(($nova_data >= $de) && ($nova_data <= $ate)) {
-                echo "entre as datas";
             } else {
                 $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>O local não atende a esse horário!
                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
@@ -118,7 +115,27 @@ switch ($action) {
                 die;
             }
 
+            ////////////////////////////////VERIFICA SE A DATA ESCOLHIDA JA PASSOU//////////////////////////////////////////////////////////////////
+            date_default_timezone_set('America/Sao_Paulo');
+            $atual= date('Y-m-d H:i:s');
+            $data_atual = substr($atual, 0, 10);
+            $data_reserva = substr($entrada_sem_barra, 0, 10);
+            $hora_atual = substr($atual, 11);
+            $hora_reserva = substr($entrada_sem_barra, 11);
 
+            if(strtotime($data_reserva) < strtotime($data_atual)) {
+                $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>A data escolhida ja passou!
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+                header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
+                die;
+            }elseif (strtotime($data_reserva) == strtotime($data_atual)){
+                if(strtotime($hora_reserva) <= strtotime($hora_atual)){
+                    $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>A data escolhida ja passou!
+                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+                    header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
+                    die;
+                }
+            }
 
             //INSTANCIANDO PARA OBTER AS INFORMAÇÕES PARA CADASTRAR
             $crudLocal = new LocalCrud();
@@ -157,8 +174,63 @@ switch ($action) {
             $data_sem_barra = implode("-", $data_sem_barra);
             $entrada_sem_barra = $data_sem_barra . " " . $hora;
 
+            $date  = new DateTime($entrada_sem_barra);
 
-            //INSTANCIANDO PARA OBTER AS INFORMAÇÕES PARA CADASTRAR
+
+            //DEFININDO ENTRADA EM UM ARRAY(WEEK,HORA);
+            $diasemana = array('dom','seg','ter','qua','qui','sex','sab');
+            $data = substr($entrada_sem_barra, 0, -9);
+            $diasemana_numero = date('w', strtotime($data));
+            $startWeek = $diasemana[$diasemana_numero];
+            $startHour = substr($entrada_sem_barra,  -8);
+            $startHour = substr($startHour,  0,-3);
+            $entrada = array($startWeek,$startHour);
+
+            ////////////////////////////////////////HORARIO DO DIA DA SEMANA DE ACORDO COM A RESERVA///////////////////////////////////////////////////////////////
+            $crudHorario = new Horario_FuncionamentoCrud();
+            $horario = $crudHorario->getHorarioLocalArray($idlocal);
+
+            $diaSemanaEntrada = $entrada[0];
+            $horaEntradaDaSemana = $horario[$diaSemanaEntrada];
+            $horaSaidaDaSemana = $horario[$diaSemanaEntrada.'1'];
+            $data = $startHour.":00";
+
+            $nova_data=date('Y-m-d H:i:s', strtotime($data));
+            $de = date('Y-m-d H:i:s', strtotime($horaEntradaDaSemana));
+            $ate = date('Y-m-d H:i:s', strtotime($horaSaidaDaSemana));
+
+            if(($nova_data >= $de) && ($nova_data <= $ate)) {
+            } else {
+                $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>O local não atende a esse horário!
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+                header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
+                die;
+            }
+
+
+            ////////////////////////////////VERIFICA SE A DATA ESCOLHIDA JA PASSOU//////////////////////////////////////////////////////////////////
+            date_default_timezone_set('America/Sao_Paulo');
+            $atual= date('Y-m-d H:i:s');
+            $data_atual = substr($atual, 0, 10);
+            $data_reserva = substr($entrada_sem_barra, 0, 10);
+            $hora_atual = substr($atual, 11);
+            $hora_reserva = substr($entrada_sem_barra, 11);
+
+            if(strtotime($data_reserva) < strtotime($data_atual)) {
+                $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>A data escolhida ja passou!
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+                header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
+                die;
+            }elseif (strtotime($data_reserva) == strtotime($data_atual)){
+                if(strtotime($hora_reserva) <= strtotime($hora_atual)){
+                    $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>A data escolhida ja passou!
+                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+                    header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
+                    die;
+                }
+            }
+
+            //INSTANCIANDO PARA OBTER AS INFORMAÇÕES PARA EDITAR
             $crudReserva = new ReservaCrud();
             $reserva_editar = $crudReserva->getReserva($idreserva);
             $iduser_reserva = $reserva_editar->getIdUser();

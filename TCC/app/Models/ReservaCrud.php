@@ -158,7 +158,7 @@ class ReservaCrud
         $sql = "UPDATE reservas 
                 SET id = '{$reserva->getId()}', 
                 cor = '{$reserva->getCor()}', 
-                entrada = '{$reserva->getEntrada()}', 
+                entrada = '{$reserva->getEntrada()}' 
                 WHERE id = {$reserva->getId()}";
         try {//TENTA EXECUTAR A INSTRUCAO
             $this->conexao->exec($sql);
