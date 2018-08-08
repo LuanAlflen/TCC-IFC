@@ -77,8 +77,7 @@
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
                         <h1 class="brand-heading">Bem-vindo</h1>
-                        <p class="intro-text">Algum texto introdutório que a gente tem que criar.
-                            <br>Só pra enrolar mesmo</p>
+                        <p class="intro-text">Conheça, reserve e pratique esportes!</p>
                     </div>
                 </div>
             </div>

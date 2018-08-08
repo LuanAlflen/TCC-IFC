@@ -137,14 +137,24 @@ class ReservaCrud
         return $resultado;
     }
 
+    public function existeReservasLocal($idlocal)
+    {
+        $sql = 'SELECT * FROM reservas WHERE id_local = '.$idlocal;
+        $this->conexao = DBConnection::getConexao();
+        //VERIFICA SE EXISTE COMENTARIOS, SE SIM, EXCLUI
+        $sql = $this->conexao->prepare($sql);
+        $sql->execute();
+        $resultado = $sql->rowCount();
+
+        return $resultado;
+    }
+
 
     public function insereReserva(Reserva $reserva){
         $sql = "INSERT INTO reservas (cor, entrada, id_local, id_usuario) 
                 values ('{$reserva->getCor()}','{$reserva->getEntrada()}','{$reserva->getIdLocal()}','{$reserva->getIdUser()}')";
 
         try {//TENTA EXECUTAR A INSTRUCAO
-
-            echo $sql;
             $this->conexao->exec($sql);
         } catch (PDOException $e) {//EM CASO DE ERRO, CAPTURA A MENSAGEM
             return $e->getMessage();
@@ -170,7 +180,6 @@ class ReservaCrud
     public function deleteReserva($id){
         $sql= "DELETE FROM reservas WHERE id = '{$id}'";
         try {//TENTA EXECUTAR A INSTRUCAO
-
             $this->conexao->exec($sql);
         } catch (PDOException $e) {//EM CASO DE ERRO, CAPTURA A MENSAGEM
             return $e->getMessage();

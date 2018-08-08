@@ -104,8 +104,8 @@
                 '<div data-original-title="" class="colorBox"><input type="checkbox" class="invisible operationState"/></div>' +
                 '<div class="weekday" style="color: white"></div>' +
                 '<div class="operationDayTimeContainer">' +
-                '<div class="operationTime input-group"><span class="input-group-addon"><i class="fa fa-sun-o"></i></span><input type="text" name="startTime" class="mini-time form-control operationTimeFrom" value=""/></div>' +
-                '<div class="operationTime input-group"><span class="input-group-addon"><i class="fa fa-moon-o"></i></span><input type="text" name="endTime" class="mini-time form-control operationTimeTill" value=""/></div>' +
+                '<div class="operationTime input-group"><span class="input-group-addon"><i class="fa fa-sun-o"></i></span><input type="text" name="startTime" class="form-control time-mask mini-time operationTimeFrom" id="quantidadeHoras" value=""/></div>' +
+                '<div class="operationTime input-group"><span class="input-group-addon"><i class="fa fa-moon-o"></i></span><input type="text" name="endTime" class="form-control time-mask mini-time operationTimeTill" value=""/></div>' +
                 '</div></div>'
             });
 
@@ -115,7 +115,9 @@
             });
 
         })();
+
     </script>
+
 	
 </body>
 </html>

@@ -148,7 +148,6 @@ class LocalCrud
                 '{$local->getIdCategoria()}',
                 '{$local->getIdUsuario()}')";
         try {//TENTA EXECUTAR A INSTRUCAO
-
             $this->conexao->exec($sql);
             $id = $this->conexao->lastInsertId();
             return $id;
