@@ -56,10 +56,14 @@ switch ($action) {
                 $entrada = $entrada->format('Y-m-d H:i:s');
                 if (strtotime($atual) > strtotime($entrada)){
                     $crud->deleteReserva($reserva->id);
+//                    echo "<br>";
+//                    echo "<br>";
+//                    echo "<br>";
+//                    echo "exclui reserva com id: ".$reserva->id;
+//                    echo "<br>";
                 }
             }
         }
-
 
         @session_start();
         if (!isset($_SESSION['id']) OR empty($_SESSION['id']) OR $_SESSION['id'] == 1){
@@ -189,14 +193,32 @@ switch ($action) {
                 $reservasLocal = $crudReserva->getReservasLocal($idlocal);
                 foreach ($reservasLocal as $reserva) {
                     $entrada = $reserva->entrada;
-                    $entrada = new DateTime($entrada);
-                    $entrada->modify('-30 minutes');
-                    $entrada = $entrada->format('Y-m-d H:i:s');
-                    if (strtotime($entrada_sem_barra) == strtotime($entrada)) {
+                    $saida = new DateTime($entrada);
+                    $saida->modify('+1 hour');
+                    $saida = $saida->format('Y-m-d H:i:s');
+
+                    $data_inicio = substr($entrada, 0, 10);
+                    $hora_inicio = substr($entrada, 11);
+                    $hora_fim = new DateTime($hora_inicio);
+                    $hora_fim->modify('+1 hour');
+                    $hora_fim = $hora_fim->format('H:i:s');
+
+                    $hora_antes = new DateTime($hora_inicio);
+                    $hora_antes->modify('-1 hour');
+                    $hora_antes = $hora_antes->format('H:i:s');
+
+                    if (strtotime($data_reserva) == strtotime($data_inicio)){
+                        if (strtotime($hora_reserva) >= strtotime($hora_inicio) AND strtotime($hora_reserva) < strtotime($hora_fim)){
+                            $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>Já existe uma reserva neste horário!
+                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+                            header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
+                            die;
+                        }elseif (strtotime($hora_reserva) > strtotime($hora_antes) AND strtotime($hora_reserva) <= strtotime($hora_inicio)){
                         $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>Já existe uma reserva neste horário!
-                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
                         header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
                         die;
+                        }
                     }
                 }
             }
@@ -285,7 +307,6 @@ switch ($action) {
                 header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
                 die;
             }
-            echo "deu certo, ou não";die;
 
 
             ////////////////////////////////VERIFICA SE A DATA ESCOLHIDA JA PASSOU//////////////////////////////////////////////////////////////////
@@ -317,17 +338,36 @@ switch ($action) {
                 $reservasLocal = $crudReserva->getReservasLocal($idlocal);
                 foreach ($reservasLocal as $reserva) {
                     $entrada = $reserva->entrada;
-                    $entrada = new DateTime($entrada);
-                    $entrada->modify('-30 minutes');
-                    $entrada = $entrada->format('Y-m-d H:i:s');
-                    if (strtotime($entrada_sem_barra) == strtotime($entrada)) {
-                        $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>Já existe uma reserva neste horário!
-                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
-                        header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
-                        die;
+                    $saida = new DateTime($entrada);
+                    $saida->modify('+1 hour');
+                    $saida = $saida->format('Y-m-d H:i:s');
+
+                    $data_inicio = substr($entrada, 0, 10);
+                    $hora_inicio = substr($entrada, 11);
+                    $hora_fim = new DateTime($hora_inicio);
+                    $hora_fim->modify('+1 hour');
+                    $hora_fim = $hora_fim->format('H:i:s');
+
+                    $hora_antes = new DateTime($hora_inicio);
+                    $hora_antes->modify('-1 hour');
+                    $hora_antes = $hora_antes->format('H:i:s');
+
+                    if (strtotime($data_reserva) == strtotime($data_inicio)){
+                        if (strtotime($hora_reserva) >= strtotime($hora_inicio) AND strtotime($hora_reserva) < strtotime($hora_fim)){
+                            $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>Já existe uma reserva neste horário!
+                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+                            header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
+                            die;
+                        }elseif (strtotime($hora_reserva) > strtotime($hora_antes) AND strtotime($hora_reserva) <= strtotime($hora_inicio)){
+                            $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>Já existe uma reserva neste horário!
+                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+                            header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
+                            die;
+                        }
                     }
                 }
             }
+
 
             //INSTANCIANDO PARA OBTER AS INFORMAÇÕES PARA EDITAR
             $reserva_editar = $crudReserva->getReserva($idreserva);
