@@ -137,32 +137,31 @@ switch ($action) {
             $hora_fim->modify('-1 hour');
             $hora_fim = $hora_fim->format('H:i:s');
             /////////////////////////////////////SE O LOCAL NÃO ATENDER AO HORARIO ESCOLHIDO, RETORNA ERRO////////////////////////////////////
-            if(strtotime($nova_data) < strtotime($de) AND strtotime($nova_data) <= strtotime($ate)) {
+
+            echo "data reserva: ".$hora_reserva;
+            echo "<br>";
+            echo "de : ".$hora_inicio;
+            echo "<br>";
+            echo "ate : ".$hora_fim;
+            echo "<br>";
+
+
+
+
+            if(strtotime($hora_reserva) <= strtotime($hora_inicio)) {
                 $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>O local não atende a esse horário!
                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
                 header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
                 die;
-            }elseif (strtotime($nova_data) == strtotime($ate)){
-                $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>O local não atende a esse horário!
-                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
-                header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
-                die;
-            }elseif (strtotime($nova_data) == strtotime($ate_30min)){
-                $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>O local não atende a esse horário!
-                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
-                header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
-                die;
-            }elseif (strtotime($hora_reserva) < strtotime($hora_inicio)){
-                $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>O local não atende a esse horário!
-                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
-                header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
-                die;
-            }elseif (strtotime($hora_reserva) >= strtotime($hora_fim)){
+            }elseif (strtotime($hora_reserva) > strtotime($hora_fim)){
                 $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>O local não atende a esse horário!
                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
                 header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
                 die;
             }
+
+
+            die;
 
             ////////////////////////////////VERIFICA SE A DATA ESCOLHIDA JA PASSOU//////////////////////////////////////////////////////////////////
             date_default_timezone_set('America/Sao_Paulo');
