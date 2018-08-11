@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.8.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 08-Ago-2018 às 00:40
--- Versão do servidor: 10.1.29-MariaDB
--- PHP Version: 7.2.0
+-- Generation Time: 11-Ago-2018 às 22:00
+-- Versão do servidor: 10.1.34-MariaDB
+-- PHP Version: 7.2.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -41,7 +41,9 @@ INSERT INTO `categoria` (`id_categoria`, `nome`) VALUES
 (1, 'Futebol'),
 (2, 'Basquete'),
 (3, 'Volei'),
-(4, 'Tenis');
+(4, 'Tenis'),
+(5, 'Society'),
+(6, 'Futsal');
 
 -- --------------------------------------------------------
 
@@ -62,7 +64,13 @@ CREATE TABLE `comentarios` (
 --
 
 INSERT INTO `comentarios` (`id_comentario`, `data`, `texto`, `id_usuario`, `id_local`) VALUES
-(1, '2018-06-26 12:18:44', 'teste', 24, 27);
+(2, '2018-08-11 18:05:25', 'xingando meu estÃ¡dio', 35, 30),
+(3, '2018-08-11 18:05:59', 'Feio e pequeno', 35, 42),
+(5, '2018-08-11 18:20:24', 'Bem loko esse lugar ae', 35, 29),
+(6, '2018-08-11 19:08:24', 'PORCARIA DE TIME >:(', 35, 36),
+(7, '2018-08-11 19:09:01', 'ja fui assaltado', 35, 32),
+(8, '2018-08-11 19:10:53', 'kohnpromisso', 35, 27),
+(9, '2018-08-11 19:32:58', 'pa joga un folei', 35, 31);
 
 -- --------------------------------------------------------
 
@@ -139,7 +147,6 @@ CREATE TABLE `horario_funcionamento` (
 --
 
 INSERT INTO `horario_funcionamento` (`id`, `seg`, `seg1`, `ter`, `ter1`, `qua`, `qua1`, `qui`, `qui1`, `sex`, `sex1`, `sab`, `sab1`, `dom`, `dom1`, `id_local`) VALUES
-(4, '08:00:00', '18:00:00', '09:00:00', '18:00:00', NULL, NULL, '09:00:00', '20:00:00', '09:00:00', '18:00:00', NULL, NULL, NULL, NULL, 54),
 (5, '08:00:00', '17:00:00', '08:00:00', '17:00:00', '08:00:00', '12:00:00', '08:00:00', '17:00:00', '08:00:00', '17:00:00', NULL, NULL, NULL, NULL, 27),
 (6, '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', NULL, NULL, NULL, NULL, 28),
 (7, '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', NULL, NULL, NULL, NULL, 29),
@@ -156,8 +163,9 @@ INSERT INTO `horario_funcionamento` (`id`, `seg`, `seg1`, `ter`, `ter1`, `qua`, 
 (19, '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', NULL, NULL, NULL, NULL, 35),
 (20, '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', NULL, NULL, NULL, NULL, 36),
 (21, '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', NULL, NULL, NULL, NULL, 37),
-(22, '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', NULL, NULL, NULL, NULL, 41),
-(23, '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', NULL, NULL, NULL, NULL, 42);
+(23, '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', NULL, NULL, NULL, NULL, 42),
+(26, '09:00:00', '18:00:00', '09:00:00', '18:00:00', '09:00:00', '18:00:00', '09:00:00', '18:00:00', '09:00:00', '18:00:00', '09:00:00', '18:00:00', '09:00:00', '18:00:00', 57),
+(27, '09:00:00', '18:00:00', '09:00:00', '18:00:00', '09:00:00', '18:00:00', '09:00:00', '18:00:00', '09:00:00', '18:00:00', '09:00:00', '18:00:00', '09:00:00', '18:00:00', 58);
 
 -- --------------------------------------------------------
 
@@ -185,19 +193,19 @@ CREATE TABLE `locais` (
 --
 
 INSERT INTO `locais` (`id_local`, `foto`, `nome`, `email`, `endereco`, `numero`, `telefone`, `descricao`, `id_estado`, `id_municipio`, `id_categoria`, `id_usuario`) VALUES
-(27, 'image.jpeg', 'Quadra IFC', 'ifc@ifc.edu.br', 'Rodovia BR 280, km 27 - CÃ¢mpus Araquari, Araquari - SC, 89245-000', 27, 87864684, 'bla bland kdjndk ', 42, 4201307, 1, 24),
-(28, '29072018033548miquelute.jpg', 'Miquelute', 'o@k', 'SC-418, Km 4', 6745, 4545, 'Miquelute materiais e construÃ§Ãµes', 42, 4201307, 1, 24),
-(29, '29072018033919granulado-para-campo-society-03.jpg', 'Porto Grande Futebol Society e Eventos', 'o@k', 'Rua Da Prosperidade', 95, 4545, 'PG', 42, 4201307, 1, 24),
-(30, '29072018034237allianz.jpg', 'Allianz Parque', 'o@k', 'Av. Francisco Matarazzo', 1705, 9899595, 'bando de #@$%', 35, 3550308, 1, 24),
-(31, '29072018034556ginasio-do-maracanazinho.jpg', 'MaracanÃ£zinho', 'o@k', 'Av. Pres. Castelo Branco', 3, 9899595, 'Estadio que eu conheÃ§o de volei', 33, 3304557, 3, 24),
-(32, '29072018035001arena-corinthians.jpg', 'Arena Corinthians', 'o@k', 'Av. Miguel IgnÃ¡cio Curi', 111, 9899595, 'bandido', 35, 3550308, 1, 24),
-(33, '29072018040431MaracanÃ£.jpg', 'MaracanÃ£', 'o@k', ' Av. Pres. Castelo Branco', 3, 9899595, 'sla', 33, 3304557, 1, 24),
-(35, '29072018040937download.jpg', 'Arena Fonte Nova', 'o@k', ' Ladeira da Fonte das Pedras', 0, 4545, 'jhgvfdhsdfj', 29, 2927408, 1, 24),
+(27, 'image.jpeg', 'Quadra IFC', 'ifc@ifc.edu.br', 'Rodovia BR 280, km 27 - CÃ¢mpus Araquari, Araquari - SC, 89245-000', 27, 87864684, 'CopÃ£o IFC', 42, 4201307, 6, 24),
+(28, '29072018033548miquelute.jpg', 'Miquelute', 'o@k', 'SC-418, Km 4', 6745, 4545, 'Miquelute materiais e construÃ§Ãµes', 42, 4201307, 5, 24),
+(29, '29072018033919granulado-para-campo-society-03.jpg', 'Porto Grande Futebol Society e Eventos', 'o@k', 'Rua Da Prosperidade', 95, 4545, 'PG', 42, 4201307, 5, 24),
+(30, '29072018034237allianz.jpg', 'Allianz Parque', 'o@k', 'Av. Francisco Matarazzo', 1705, 9899595, 'bando de palmeirenses', 35, 3550308, 1, 24),
+(31, '29072018034556ginasio-do-maracanazinho.jpg', 'MaracanÃ£zinho', 'o@k', 'Av. Pres. Castelo Branco', 3, 9899595, 'SeleÃ§Ã£o Feminina de VÃ´lei', 33, 3304557, 3, 24),
+(32, '29072018035001arena-corinthians.jpg', 'Arena Corinthians', 'o@k', 'Av. Miguel IgnÃ¡cio Curi', 111, 9899595, 'bando de loucos', 35, 3550308, 1, 24),
+(33, '29072018040431MaracanÃ£.jpg', 'MaracanÃ£', 'o@k', ' Av. Pres. Castelo Branco', 3, 9899595, 'Segue o vice!', 33, 3304557, 1, 24),
+(35, '29072018040937download.jpg', 'Arena Fonte Nova', 'o@k', ' Ladeira da Fonte das Pedras', 0, 4545, 'Bahia F.C.', 29, 2927408, 1, 24),
 (36, '30072018031057aa.jpg', 'Arena Joinville', 'o@k', 'R. InÃ¡cio Bastos', 89202, 9899595, 'serie D', 42, 4209102, 1, 24),
 (37, '30072018031109estdio-da-ressacada.jpg', 'Ressacada', 'o@k', 'Carianos', 88047400, 9899595, 'mancha azul', 42, 4205407, 1, 24),
-(41, '3007201808055701-Campo-SuiÃ§o.jpg', 'teste', 'luan.alflen4@gmail.com', 'aswd', 2611, 4545, 'sdf', 31, 3101409, 1, 34),
 (42, '30072018075355Vila-Belmiro-Santos.jpg', 'Vila Belmiro', 'o@k', 'Rua Princesa Isabel', 501, 9899595, 'Agora quem da a bola Ã© o Santos', 35, 3548500, 1, 24),
-(54, 'image.jpeg', 'Alo', 'o@k', 'Rodovia BR 280', 0, 68496, 'yfyut', 42, 4201307, 1, 24);
+(57, '1108201809444209-03-2015-14-58-53-online-dsc-8710.jpg', 'Centreventos Cau Hansem', 'Centreventos@gmail.com', 'Av. JosÃ© Vieira', 315, 34367551, 'Lugar para todo tipo de esportes!', 42, 4209102, 2, 35),
+(58, '11082018095801arenajaguara03_ivanraupp_15.jpg', 'Arena Jaragua', 'arenajaragua@gmail.com', 'R. Gustavo Hagedorn', 636, 2147483647, 'Arena Jaragua', 42, 4208906, 6, 34);
 
 -- --------------------------------------------------------
 
@@ -5784,14 +5792,8 @@ CREATE TABLE `reservas` (
 --
 
 INSERT INTO `reservas` (`id`, `cor`, `entrada`, `id_local`, `id_usuario`) VALUES
-(7, '#FF4500', '2018-08-08 17:00:00', 27, 15),
-(14, '#FF4500', '2018-08-07 00:00:00', 28, 34),
-(15, '#8B4513', '2018-08-07 00:00:00', 28, 34),
-(16, '#FF4500', '2018-08-08 00:00:00', 28, 34),
-(19, '#8B4513', '2018-08-06 00:00:00', 54, 24),
-(21, '#436EEE', '2018-08-06 20:00:00', 27, 24),
-(24, '#1C1C1C', '2018-08-06 16:00:00', 27, 24),
-(25, '#40E0D0', '2018-08-06 09:00:00', 27, 24);
+(27, '#1C1C1C', '2018-08-17 17:00:00', 36, 35),
+(29, '#0071c5', '2018-08-15 11:00:00', 27, 34);
 
 -- --------------------------------------------------------
 
@@ -5818,7 +5820,8 @@ INSERT INTO `usuarios` (`id_usuario`, `nome`, `login`, `senha`, `telefone`, `ema
 (1, 'Visitante', '', '', '', '', '', 'visitante'),
 (15, 'Luan', 'LuanAlflen', '123', '2147483647', 'luan.alflen4@gmail.com', '2147483647', 'comum'),
 (24, 'teste', 'login', '12', '31256415', 'teste@mail.com.br', '1561515', 'comum'),
-(34, 'Administrador', 'Adm', '7967017457', '047 996000900', 'luan.alflen4@gmail.com', '09118737919', 'admin');
+(34, 'Administrador', 'Adm', '7967017457', '047 996000900', 'luan.alflen4@gmail.com', '09118737919', 'admin'),
+(35, 'Manaka', 'lolizinha', 'queijo', '22331140', 'nemuso@gmail.com', '11111111111', 'comum');
 
 --
 -- Indexes for dumped tables
@@ -5857,7 +5860,9 @@ ALTER TABLE `horario_funcionamento`
 ALTER TABLE `locais`
   ADD PRIMARY KEY (`id_local`),
   ADD KEY `id_usuario` (`id_usuario`),
-  ADD KEY `id_categoria` (`id_categoria`);
+  ADD KEY `id_categoria` (`id_categoria`),
+  ADD KEY `id_estado` (`id_estado`),
+  ADD KEY `id_municipio` (`id_municipio`);
 
 --
 -- Indexes for table `municipios`
@@ -5888,13 +5893,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT for table `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `comentarios`
 --
 ALTER TABLE `comentarios`
-  MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `estados`
@@ -5906,13 +5911,13 @@ ALTER TABLE `estados`
 -- AUTO_INCREMENT for table `horario_funcionamento`
 --
 ALTER TABLE `horario_funcionamento`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `locais`
 --
 ALTER TABLE `locais`
-  MODIFY `id_local` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id_local` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `municipios`
@@ -5924,13 +5929,13 @@ ALTER TABLE `municipios`
 -- AUTO_INCREMENT for table `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- Constraints for dumped tables
@@ -5954,7 +5959,10 @@ ALTER TABLE `horario_funcionamento`
 --
 ALTER TABLE `locais`
   ADD CONSTRAINT `locais_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`),
-  ADD CONSTRAINT `locais_ibfk_2` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id_categoria`);
+  ADD CONSTRAINT `locais_ibfk_2` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id_categoria`),
+  ADD CONSTRAINT `locais_ibfk_3` FOREIGN KEY (`id_estado`) REFERENCES `estados` (`id_estado`),
+  ADD CONSTRAINT `locais_ibfk_4` FOREIGN KEY (`id_estado`) REFERENCES `estados` (`id_estado`),
+  ADD CONSTRAINT `locais_ibfk_5` FOREIGN KEY (`id_municipio`) REFERENCES `municipios` (`id_municipio`);
 
 --
 -- Limitadores para a tabela `municipios`
