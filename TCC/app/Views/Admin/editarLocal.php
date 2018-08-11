@@ -28,7 +28,7 @@
             <input value="<?= $local->foto?>"         class="input" type="file"  name="foto">
             <input value="<?= $local->nome ?>"        class="input" type="text" name="nome" required >
             <input value="<?= $local->email ?>"       class="input" type="email" name="email" required>
-            <input value="<?= $local->telefone ?>"    class="input" type="text" name="telefone" required>
+            <input value="<?= $local->telefone ?>"    class="input" type="number" name="telefone" required>
             <br><textarea rows="5" cols="40" maxlength="500" name="descricao"><?= $local->descricao ?></textarea>
             <p>Categoria:</p>
             <select name="categoria" class="select">

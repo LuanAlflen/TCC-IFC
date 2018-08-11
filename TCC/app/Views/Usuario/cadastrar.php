@@ -64,7 +64,7 @@
 			<input class="input" type="text"     name="login"    placeholder="Login"     required>
 			<input class="input" type="password" name="senha"    placeholder="Senha"    required>
             <input class="input" type="email"    name="email"    placeholder="Email"    required>
-            <input class="input" type="text"     name="telefone" placeholder="Telefone">
+            <input class="input" type="number"     name="telefone" placeholder="Telefone">
 			<input id="cpf" class="input" type="number"     name="cpf"      placeholder="CPF"      required>
             <div class="erroCPF" style="color: red">Informe um CPF válido</div>
             <input class="input" type="hidden"   name="tipuser" required>

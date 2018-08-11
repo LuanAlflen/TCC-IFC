@@ -23,7 +23,7 @@
 			<input class="input" value="<?= $usuario->getLogin() ?>" type="text"     name="login"    required>
 			<input class="input" value="<?= $usuario->getSenha() ?>" type="password" name="senha"  required>
             <input class="input" value="<?= $usuario->getEmail() ?>" type="email"    name="email"   required>
-            <input class="input" value="<?= $usuario->getTelefone() ?>" type="text"     name="telefone">
+            <input class="input" value="<?= $usuario->getTelefone() ?>" type="number"     name="telefone">
 			<input class="input" value="<?= $usuario->getCpf() ?>" type="text"     name="cpf"      required>
             <input class="input" value="<?= $usuario->getTipuser() ?>" type="hidden"     name="tipuser" required>
             <div class="btn__form">

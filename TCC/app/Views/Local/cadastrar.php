@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,7 +33,7 @@
             <input class="input" type="file"  name="foto">
 			<input class="input" type="text"  name="nome"     placeholder="Nome"     required>
             <input class="input" type="email" name="email"    placeholder="Email"    required>
-            <input class="input" type="text"  name="telefone" placeholder="Telefone" required>
+            <input class="input" type="number"  name="telefone" placeholder="Telefone" required>
             <br><textarea rows="5" cols="40" maxlength="500" name="descricao" placeholder="Descrição..."></textarea>
             <p>Categoria:</p>
             <select name="categoria" class="select">
