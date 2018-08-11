@@ -269,7 +269,7 @@ switch ($action) {
             $startHour = substr($startHour,  0,-3);
             $entrada = array($startWeek,$startHour);
 
-            ////////////////////////////////////////HORARIO DO DIA DA SEMANA DE ACORDO COM A RESERVA///////////////////////////////////////////////////////////////
+            ////////////////////////////////////////HORARIO DO DIA DA SEMANA DE AACORDO COM A RESERVA///////////////////////////////////////////////////////////////
             $crudHorario = new Horario_FuncionamentoCrud();
             $horario = $crudHorario->getHorarioLocalArray($idlocal);
 
@@ -285,6 +285,18 @@ switch ($action) {
             $ate_30min = new DateTime($ate);
             $ate_30min->modify('-30 minutes');
             $ate_30min = $ate_30min->format('Y-m-d H:i:s');
+
+            $hora_reserva = substr($nova_data,  -8);
+            $hora_reserva = substr($hora_reserva,  0,-3);
+
+            $hora_inicio = substr($de,  -8);
+            $hora_inicio= substr($hora_inicio,  0,-3);
+
+            $hora_fim = substr($ate,  -8);
+            $hora_fim = substr($hora_fim,  0,-3);
+            $hora_fim = new DateTime($hora_fim);
+            $hora_fim->modify('-1 hour');
+            $hora_fim = $hora_fim->format('H:i:s');
 
             /////////////////////////////////////SE O LOCAL NÃO ATENDER AO HORARIO ESCOLHIDO, RETORNA ERRO////////////////////////////////////
             if(strtotime($hora_reserva) < strtotime($hora_inicio)) {
