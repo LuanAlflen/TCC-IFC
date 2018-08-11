@@ -148,7 +148,7 @@ switch ($action) {
 
 
 
-            if(strtotime($hora_reserva) <= strtotime($hora_inicio)) {
+            if(strtotime($hora_reserva) < strtotime($hora_inicio)) {
                 $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>O local não atende a esse horário!
                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
                 header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
@@ -159,9 +159,6 @@ switch ($action) {
                 header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
                 die;
             }
-
-
-            die;
 
             ////////////////////////////////VERIFICA SE A DATA ESCOLHIDA JA PASSOU//////////////////////////////////////////////////////////////////
             date_default_timezone_set('America/Sao_Paulo');
@@ -290,17 +287,12 @@ switch ($action) {
             $ate_30min = $ate_30min->format('Y-m-d H:i:s');
 
             /////////////////////////////////////SE O LOCAL NÃO ATENDER AO HORARIO ESCOLHIDO, RETORNA ERRO////////////////////////////////////
-            if(strtotime($nova_data) < strtotime($de) AND strtotime($nova_data) <= strtotime($ate)) {
+            if(strtotime($hora_reserva) < strtotime($hora_inicio)) {
                 $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>O local não atende a esse horário!
                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
                 header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
                 die;
-            }elseif (strtotime($nova_data) == strtotime($ate)){
-                $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>O local não atende a esse horário!
-                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
-                header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
-                die;
-            }elseif (strtotime($nova_data) == strtotime($ate_30min)){
+            }elseif (strtotime($hora_reserva) > strtotime($hora_fim)){
                 $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>O local não atende a esse horário!
                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
                 header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
@@ -336,35 +328,39 @@ switch ($action) {
             if ($resultado1 != 0) {
                 $reservasLocal = $crudReserva->getReservasLocal($idlocal);
                 foreach ($reservasLocal as $reserva) {
-                    $entrada = $reserva->entrada;
-                    $saida = new DateTime($entrada);
-                    $saida->modify('+1 hour');
-                    $saida = $saida->format('Y-m-d H:i:s');
+                    if ($idreserva != $reserva->id) {
+                        $entrada = $reserva->entrada;
+                        $saida = new DateTime($entrada);
+                        $saida->modify('+1 hour');
+                        $saida = $saida->format('Y-m-d H:i:s');
 
-                    $data_inicio = substr($entrada, 0, 10);
-                    $hora_inicio = substr($entrada, 11);
-                    $hora_fim = new DateTime($hora_inicio);
-                    $hora_fim->modify('+1 hour');
-                    $hora_fim = $hora_fim->format('H:i:s');
+                        $data_inicio = substr($entrada, 0, 10);
+                        $hora_inicio = substr($entrada, 11);
+                        $hora_fim = new DateTime($hora_inicio);
+                        $hora_fim->modify('+1 hour');
+                        $hora_fim = $hora_fim->format('H:i:s');
 
-                    $hora_antes = new DateTime($hora_inicio);
-                    $hora_antes->modify('-1 hour');
-                    $hora_antes = $hora_antes->format('H:i:s');
+                        $hora_antes = new DateTime($hora_inicio);
+                        $hora_antes->modify('-1 hour');
+                        $hora_antes = $hora_antes->format('H:i:s');
 
-                    if (strtotime($data_reserva) == strtotime($data_inicio)){
-                        if (strtotime($hora_reserva) >= strtotime($hora_inicio) AND strtotime($hora_reserva) < strtotime($hora_fim)){
-                            $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>Já existe uma reserva neste horário!
+                        if (strtotime($data_reserva) == strtotime($data_inicio)) {
+                            if (strtotime($hora_reserva) >= strtotime($hora_inicio) AND strtotime($hora_reserva) < strtotime($hora_fim)) {
+                                $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>Já existe uma reserva neste horário!
                             <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
-                            header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
-                            die;
-                        }elseif (strtotime($hora_reserva) > strtotime($hora_antes) AND strtotime($hora_reserva) <= strtotime($hora_inicio)){
-                            $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>Já existe uma reserva neste horário!
+                                header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
+                                die;
+                            } elseif (strtotime($hora_reserva) > strtotime($hora_antes) AND strtotime($hora_reserva) <= strtotime($hora_inicio)) {
+                                $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>Já existe uma reserva neste horário!
                             <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
-                            header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
-                            die;
+                                header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
+                                die;
+                            }
                         }
                     }
                 }
+
+
             }
 
 
