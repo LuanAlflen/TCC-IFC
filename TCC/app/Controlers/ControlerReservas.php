@@ -66,22 +66,18 @@ switch ($action) {
         $crud = new ReservaCrud();
         $resultado = $crud->existeReservasUsuario($iduser, $idlocal);
         $resultado1 = $crud->existeReservasLocal($idlocal);
+        date_default_timezone_set('America/Sao_Paulo');
+        $atual= date('Y-m-d H:i:s');
+        $atual = new DateTime($atual);
+        $atual = $atual->format('Y-m-d H:i:s');
         if ($resultado1 != 0){
-            date_default_timezone_set('America/Sao_Paulo');
-            $atual= date('Y-m-d H:i:s');
             $reservasLocal = $crud->getReservasLocal($idlocal);
             foreach ($reservasLocal as $reserva){
                 $entrada = $reserva->entrada;
                 $entrada = new DateTime($entrada);
-                $entrada->modify('-30 minutes');
                 $entrada = $entrada->format('Y-m-d H:i:s');
-                if (strtotime($atual) > strtotime($entrada)){
+                if (strtotime($atual) >= strtotime($entrada)){
                     $crud->deleteReserva($reserva->id);
-//                    echo "<br>";
-//                    echo "<br>";
-//                    echo "<br>";
-//                    echo "exclui reserva com id: ".$reserva->id;
-//                    echo "<br>";
                 }
             }
         }
