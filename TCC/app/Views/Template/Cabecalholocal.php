@@ -43,7 +43,7 @@ $user = $crudUser->getUsuarioId($iduserlogado);
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <a  class="navbar-brand" style="font-size: 20px; color: yellow" href="ControlerLocal.php?iduser=<?= $_GET['iduser'] ?>&pagina=0">ALPE</a>
+            <a  class="navbar-brand" style="font-size: 20px; color: yellow" href="ControlerLocal.php?iduser=<?= $_GET['iduser'] ?>&pagina=0">Quadraki</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -88,6 +88,7 @@ $user = $crudUser->getUsuarioId($iduserlogado);
                             echo "<li><a href=\"ControlerAdmin.php?id=$iduserlogado\">Área do admin</a></li>";
                         }elseif($tipuser != 'visitante'){
                             echo "<li><a href=\"ControlerUsuario.php?acao=show&iduser=$iduserlogado\">Minhas quadras</a></li>";
+                            echo "<li><a href=\"ControlerReservas.php?acao=showUsuario&iduser=$iduserlogado\">Minhas reservas</a></li>";
                         }
                         ?>
 

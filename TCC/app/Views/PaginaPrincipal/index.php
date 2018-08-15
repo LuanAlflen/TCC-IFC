@@ -35,11 +35,6 @@
 </head>
 
 <body>
-<!-- CASO USUARIO NÃO POSSUI QUADRA E CLIQUE MINHA QUADRAS EXIBE A MENSAGEM DE ERRO-->
-<?php
-if (@$_GET['erro'] == 1){?>
-    <?php echo "<script>alert('Você não possui locais cadastrados!')</script>"; ?>
-<?php } ?>
 <!-- Navigation -->
 
 
@@ -194,7 +189,15 @@ if (@$_GET['erro'] == 1){?>
 <!-- Bootstrap Core JavaScript -->
 <script src="../../assets/js/bootstrap.min.js"></script>
 
-
+<!-- CASO USUARIO NÃO POSSUI QUADRA E CLIQUE MINHA QUADRAS EXIBE A MENSAGEM DE ERRO-->
+<?php
+if (@$_GET['erro'] == 1){?>
+    <?php echo "<script>alert('Você não possui locais cadastrados!')</script>"; ?>
+<?php } ?>
+<?php
+if (@$_GET['erro'] == 'semReservas'){?>
+    <?php echo "<script>alert('Você não possui reservas no momento!')</script>"; ?>
+<?php } ?>
 </body>
 
 

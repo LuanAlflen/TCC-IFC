@@ -22,6 +22,39 @@ function getMunicipio($id){
     $municipio = json_decode($data); // decode the JSON feed
     return $municipio;
 }
+function getNomeCor($id){
+    if ($id == '#FFD700'){
+        $nome = 'Amarelo';
+        return $nome;
+    }elseif($id == '#0071c5'){
+        $nome = 'Azul Turquesa';
+        return $nome;
+    }elseif($id == '#FF4500'){
+        $nome = 'Laranja';
+        return $nome;
+    }elseif($id == '#8B4513'){
+        $nome = 'Marrom';
+        return $nome;
+    }elseif($id == '#1C1C1C'){
+        $nome = 'Preto';
+        return $nome;
+    }elseif($id == '#436EEE'){
+        $nome = 'Royal Blue';
+        return $nome;
+    }elseif($id == '#A020F0'){
+        $nome = 'Roxo';
+        return $nome;
+    }elseif($id == '#40E0D0'){
+        $nome = 'Turquesa';
+        return $nome;
+    }elseif($id == '#228B22'){
+        $nome = 'Verde';
+        return $nome;
+    }else{
+        $nome = 'Vermelho';
+        return $nome;
+    }
+}
 switch ($action) {
     case 'show':
         $idlocal = $_GET['idlocal'];
@@ -56,10 +89,29 @@ switch ($action) {
         if (!isset($_SESSION['id']) OR empty($_SESSION['id']) OR $_SESSION['id'] == 1){
             header("Location: ControlerUsuario.php?acao=login&erro=naologado");
         }
-        include "../Views/Template/Cabecalho.php";
+        $crudUsuario = new UsuarioCrud();
+        $userlogado = $crudUsuario->getUsuarioId($iduser);
+        include "../Views/Template/CabecalhoUsuario.php";
         include "../Views/CalendarioReservas/index.php";
         include "../Views/Template/Rodape.php";
         break;
+
+    case 'showUsuario':
+
+        $iduser = $_GET['iduser'];
+        session_start();
+        $_SESSION['id'] = $iduser;
+        $crudReserva = new ReservaCrud();
+        @$reservas = $crudReserva->getReservasUsuario($iduser);
+        if (!isset($reservas)){
+            header("Location: ControlerLocal.php?iduser=$iduser&pagina=0&erro=semReservas");
+        }
+        include "../Views/Template/CabecalhoUsuario.php";
+        include "../Views/CalendarioReservas/showUsuario.php";
+        include "../Views/Template/Rodape.php";
+
+        break;
+
     case 'cadastrar':
         session_start();
         $idlocal = $_POST['idlocal'];
@@ -178,10 +230,17 @@ switch ($action) {
                 }
             }
             //INSTANCIANDO PARA OBTER AS INFORMAÇÕES PARA CADASTRAR
+            $crudUsuario = new UsuarioCrud();
+            $user = $crudUsuario->getUsuarioId($iduser);
+            if (isset($_POST['nome'])){
+                $nome = $_POST['nome'];
+            }else{
+                $nome = $user->getNome();
+            }
             $crudLocal = new LocalCrud();
             $local = $crudLocal->getLocal($idlocal);
             $idlocal = $local->id_local;
-            $reserva = new Reserva($cor,$entrada_sem_barra,$idlocal,$iduser);
+            $reserva = new Reserva($nome,$cor,$entrada_sem_barra,$idlocal,$iduser);
             $_SESSION['msg'] = "<div class='alert alert-success' role='alert'>Reserva cadastrada com sucesso
             <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
             $crudReserva->insereReserva($reserva);
@@ -306,6 +365,14 @@ switch ($action) {
                 }
             }
             //INSTANCIANDO PARA OBTER AS INFORMAÇÕES PARA EDITAR
+            $crudUsuario = new UsuarioCrud();
+            $userlogado = $crudUsuario->getUsuarioId($iduser);
+            if (isset($_POST['nome'])){
+                $nome = $_POST['nome'];
+            }else{
+                $nome = $userlogado->getNome();
+            }
+
             $reserva_editar = $crudReserva->getReserva($idreserva);
             $iduser_reserva = $reserva_editar->getIdUser();
             $crudLocal = new LocalCrud();
@@ -317,7 +384,7 @@ switch ($action) {
             $tipuser = $user->getTipuser();
             if ($iduser == $iduser_reserva OR $iduser == $iduserlocal OR $tipuser == 'admin'){
                 $crudReserva = new ReservaCrud();
-                $reserva = new Reserva($cor,$entrada_sem_barra,$idlocal,$iduser,$idreserva);
+                $reserva = new Reserva($nome,$cor,$entrada_sem_barra,$idlocal,$iduser,$idreserva);
                 $_SESSION['msg'] = "<div class='alert alert-success' role='alert'>Alterações feitas com sucesso
                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
                 $crudReserva->updateReserva($reserva);

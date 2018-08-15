@@ -55,7 +55,7 @@ if (empty($user->getId())){
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" style="font-size: 20px; color: yellow " href="ControlerLocal.php?iduser=<?= $_GET['iduser'] ?>&pagina=0">ALPE</a>
+            <a class="navbar-brand" style="font-size: 20px; color: yellow " href="ControlerLocal.php?iduser=<?= $_GET['iduser'] ?>&pagina=0">Quadraki</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -88,15 +88,16 @@ if (empty($user->getId())){
                         ?>
                         <?php
                         if($tipuser != 'visitante'){ ?>
-                        <li><a href="ControlerLocal.php?acao=cadastrar&id=<?= $_SESSION['id'] ?>">Cadastrar quadra</a></li>
-                        <li><a href="ControlerUsuario.php?acao=editar&id=<?= $_SESSION['id'] ?>">Editar</a></li>
-                        <li><a href="ControlerUsuario.php?acao=excluir&id=<?= $_SESSION['id'] ?>">Excluir conta</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="ControlerUsuario.php">Sair</a></li>
+                            <li><a href="ControlerReservas.php?acao=showUsuario&iduser=<?= $_SESSION['id'] ?>">Minhas reservas</a></li>
+                            <li><a href="ControlerLocal.php?acao=cadastrar&id=<?= $_SESSION['id'] ?>">Cadastrar quadra</a></li>
+                            <li><a href="ControlerUsuario.php?acao=editar&id=<?= $_SESSION['id'] ?>">Editar</a></li>
+                            <li><a href="ControlerUsuario.php?acao=excluir&id=<?= $_SESSION['id'] ?>">Excluir conta</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="ControlerUsuario.php">Sair</a></li>
                         <?php } ?>
                     </ul>
                     <?php
-                    if (@$_GET['acao'] != 'show'){
+                    if (@$_GET['acao'] != 'show' OR @$_GET['acao'] != 'showUsuario'){
                     ?>
                         <div class="navbar-form pull-right">
                             <input type="text" class="form-control" placeholder="Buscar" name="busca" id="texto">

@@ -82,7 +82,6 @@ $crudHorario = new Horario_FuncionamentoCrud();
                             $iduser_reserva = $reserva->id_user;
                             $crudUser = new UsuarioCrud();
                             $user = $crudUser->getUsuarioId($iduser_reserva);
-                            $nome = $user->getNome();
 
                             $entrada = $reserva->entrada;
                             $data = new DateTime($entrada);
@@ -91,7 +90,7 @@ $crudHorario = new Horario_FuncionamentoCrud();
                             echo " { ";
 
                             echo "id: '".$reserva->id."',";
-                            echo "title: '".$nome."',";
+                            echo "title: '".$reserva->nome."',";
                             echo "color: '".$reserva->cor."',";
                             echo "start: '".$entrada."',";
                             echo "end: '".$data->format('Y-m-d H:i:s')."'";
@@ -254,6 +253,14 @@ $crudHorario = new Horario_FuncionamentoCrud();
                           <div class="form" style="display: none">
                               <form class="form-horizontal" method="post" action="ControlerReservas.php?acao=editar">
                                   <div class="form-group">
+                                      <?php if ($userlogado->getId() == $local->getIdUsuario() OR $userlogado->getTipuser() == 'admin'){?>
+                                          <div class="form-group">
+                                              <label for="inputEmail3" class="col-sm-2 control-label">Nome</label>
+                                              <div class="col-sm-10">
+                                                  <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome da Reservas">
+                                              </div>
+                                          </div>
+                                      <?php } ?>
                                       <label for="inputEmail3" class="col-sm-2 control-label">Cor</label>
                                       <div class="col-sm-10">
                                           <select name="cor" class="form-control" id="color">
@@ -304,6 +311,15 @@ $crudHorario = new Horario_FuncionamentoCrud();
                       </div>
                       <div class="modal-body">
                           <form class="form-horizontal" method="post" action="ControlerReservas.php?acao=cadastrar">
+                              <?php if ($userlogado->getId() == $local->getIdUsuario() OR $userlogado->getTipuser() == 'admin'){?>
+                                  <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-2 control-label">Nome</label>
+                                      <div class="col-sm-10">
+                                          <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome da Reservas">
+                                      </div>
+                                  </div>
+                              <?php } ?>
+
                               <div class="form-group">
                                   <label for="inputEmail3" class="col-sm-2 control-label">Cor</label>
                                   <div class="col-sm-10">

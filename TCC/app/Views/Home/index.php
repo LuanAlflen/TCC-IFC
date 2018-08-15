@@ -40,7 +40,7 @@
                     Menu <i class="fa fa-bars"></i>
                 </button>
                 <a class="navbar-brand page-scroll" href="#page-top">
-                    <span class="light"><b>ALPE</b></span>
+                    <span class="light"><b>Quadraki</b></span>
                 </a>
             </div>
 

@@ -9,12 +9,14 @@
 class Reserva
 {
     public $id;
+    public $nome;
     public $cor;
     public $entrada;
     public $id_local;
     public $id_user;
 
-    public function __construct($cor=null,$entrada=null,$idlocal=null,$iduser=null,$id=null){
+    public function __construct($nome=null,$cor=null,$entrada=null,$idlocal=null,$iduser=null,$id=null){
+        $this->nome = $nome;
         $this->cor = $cor;
         $this->entrada = $entrada;
         $this->id_local = $idlocal;
@@ -31,6 +33,17 @@ class Reserva
     {
         $this->id = $id;
     }
+
+    public function getNome()
+    {
+        return $this->nome;
+    }
+
+    public function setNome($nome)
+    {
+        $this->nome = $nome;
+    }
+
 
     public function getCor()
     {
