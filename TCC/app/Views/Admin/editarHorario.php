@@ -31,6 +31,10 @@
                 <input value="<?= $_GET['iduser']?>"  class="input" type="hidden" name="iduser" placeholder="Id_user" required>
             </div>
         </div>
+        <p>*Verde: Funcionando</p>
+        <p>*Vermelho: Fechado</p>
+        <p>Inicio: <i class="fa fa-sun-o"></i></p>
+        <p>Fim: <i class="fa fa-moon-o"></i></p>
         <div class="btn__form">
             <input class="btn__submit" type="reset" value="Limpar">
             <input class="btn__reset" type="submit" id="enviar" name="gravar" value="Salvar">

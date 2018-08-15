@@ -80,6 +80,7 @@
 
 
         </div>
+
         <?php
         if (@$_GET['erro'] == 1){?>
             <div class="error-text" style="color: red">Todos os campos devem ser preenchidos!</div>

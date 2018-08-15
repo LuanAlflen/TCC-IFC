@@ -83,6 +83,10 @@
                     <input id="businessHoursOutput1" name="horario" type="hidden">
                 </div>
             </div>
+            <p>*Verde: Funcionando</p>
+            <p>*Vermelho: Fechado</p>
+            <p>Inicio: <i class="fa fa-sun-o"></i></p>
+            <p>Fim: <i class="fa fa-moon-o"></i></p>
             <?php
             if (@$_GET['erro'] == 1){?>
                 <div class="error-text" style="color: red">Todos os campos devem ser preenchidos!</div>
