@@ -39,9 +39,7 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                     Menu <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand page-scroll" href="#page-top">
-                    <span class="light"><b>Quadraki</b></span>
-                </a>
+
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -51,15 +49,15 @@
                     <li class="hidden">
                         <a href="#page-top"></a>
                     </li>
-                    <li>
+                    <li class="move">
                         <a class="page-scroll" href="?acao=cadastrar"><b>Cadastro</b></a>
                     </li>
                     <li>
                         <a class="page-scroll" href="?acao=login" ><b>Login</b></a>
                     </li>
-                    <li>
-                        <a class="page-scroll" href="?acao=visitante" ><b>Entrar como visitante</b></a>
-                    </li>
+<!--                    <li>-->
+<!--                        <a class="page-scroll" href="?acao=visitante" ><b>Entrar como visitante</b></a>-->
+<!--                    </li>-->
                     <li>
                         <a class="page-scroll" href="?acao=contato"><b>Contato</b></a>
                     </li>
@@ -76,9 +74,6 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
-                        <h1 class="brand-heading">Bem-vindo</h1>
-                        <p class="intro-text">Conheça, reserve e pratique esportes!</p>
-                    </div>
                 </div>
             </div>
         </div>
