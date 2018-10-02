@@ -22,6 +22,7 @@
     <!-- Theme CSS -->
     <link href="../../assets/css/grayscale.min.css" rel="stylesheet">
     <link href="../../assets/css/grayscale.css" rel="stylesheet">
+    <link href="../../assets/css/style.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -43,13 +44,14 @@
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
-                <ul class="nav navbar-nav">
+            <div style="margin-left: 50%; width: 315px">
+            <div id="mover" class="collapse navbar-collapse navbar-main-collapse" style="margin-left: -150px">
+                <ul id="cor"  class="nav navbar-nav">
                     <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
                     <li class="hidden">
                         <a href="#page-top"></a>
                     </li>
-                    <li class="move">
+                    <li>
                         <a class="page-scroll" href="?acao=cadastrar"><b>Cadastro</b></a>
                     </li>
                     <li>
@@ -65,19 +67,20 @@
             </div>
             <!-- /.navbar-collapse -->
         </div>
+        </div>
         <!-- /.container -->
     </nav>
 
     <!-- Intro Header -->
-    <header class="intro">
-        <div class="intro-body">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2">
-                </div>
-            </div>
-        </div>
-    </header>
+<!--    <header class="intro">-->
+<!--        <div class="intro-body">-->
+<!--            <div class="container">-->
+<!--                <div class="row">-->
+<!--                    <div class="col-md-8 col-md-offset-2">-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </header>-->
 
 
 
