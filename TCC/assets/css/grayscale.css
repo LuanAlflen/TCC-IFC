@@ -14,6 +14,11 @@ html {
   width: 100%;
   height: 100%;
 }
+
+a:hover{
+  color: black;
+}
+
 h1,
 h2,
 h3,
@@ -77,8 +82,13 @@ a:focus {
   outline: none;
 }
 .navbar-custom a {
-  color: black;
+  color: white;
 }
+
+.navbar-custom a:hover{
+  color: black !important;
+}
+
 .navbar-custom .nav li a {
   -webkit-transition: background 0.3s ease-in-out;
   -moz-transition: background 0.3s ease-in-out;
@@ -119,20 +129,21 @@ a:focus {
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   }
 }
-.intro {
-  display: table;
-  width: 100%;
-  height: auto;
-  padding: 100px 0;
-  text-align: center;
-  color: #EEEE00;
-  text-shadow: black 0.2em 0.2em 0.4em;
-  background: url("../img/intro.jpg");
-  background-color: black;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  background-size: cover;
-  -o-background-size: cover;
+body {
+  /*display: table;*/
+  /*width: 100%;*/
+  /*padding: 100px 0;*/
+  /*text-align: center;*/
+  /*color: #EEEE00;*/
+  /*text-shadow: black 0.2em 0.2em 0.4em;*/
+  background: url("../img/fundo.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  /*background-color: black;*/
+  /*-webkit-background-size: cover;*/
+  /*-moz-background-size: cover;*/
+  /*background-size: cover;*/
+  /*-o-background-size: cover;*/
 }
 .intro .intro-body {
   display: table-cell;
@@ -227,7 +238,7 @@ a:focus {
   width: 100%;
   padding: 50px 0;
   color: white;
-  background: url(../img/downloads-bg.jpg) no-repeat center center scroll;
+  background: url(../img/fundo.png) no-repeat center center scroll;
   background-color: black;
   -webkit-background-size: cover;
   -moz-background-size: cover;
