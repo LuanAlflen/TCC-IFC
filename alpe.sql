@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.2
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 11-Ago-2018 às 22:00
--- Versão do servidor: 10.1.34-MariaDB
--- PHP Version: 7.2.7
+-- Generation Time: 04-Out-2018 às 03:52
+-- Versão do servidor: 10.1.29-MariaDB
+-- PHP Version: 7.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -5781,6 +5781,7 @@ INSERT INTO `municipios` (`id_municipio`, `nome`, `id_estado`) VALUES
 
 CREATE TABLE `reservas` (
   `id` int(11) NOT NULL,
+  `nome` varchar(300) NOT NULL,
   `cor` varchar(20) DEFAULT NULL,
   `entrada` datetime NOT NULL,
   `id_local` int(11) NOT NULL,
@@ -5791,9 +5792,11 @@ CREATE TABLE `reservas` (
 -- Extraindo dados da tabela `reservas`
 --
 
-INSERT INTO `reservas` (`id`, `cor`, `entrada`, `id_local`, `id_usuario`) VALUES
-(27, '#1C1C1C', '2018-08-17 17:00:00', 36, 35),
-(29, '#0071c5', '2018-08-15 11:00:00', 27, 34);
+INSERT INTO `reservas` (`id`, `nome`, `cor`, `entrada`, `id_local`, `id_usuario`) VALUES
+(27, '', '#1C1C1C', '2018-08-17 17:00:00', 36, 35),
+(30, 'Luan', '#8B4513', '2018-08-16 09:00:00', 27, 15),
+(32, 'Algum clienti', '#1C1C1C', '2018-08-16 08:00:00', 27, 24),
+(33, 'Luan', '#40E0D0', '2018-08-16 10:00:00', 27, 15);
 
 -- --------------------------------------------------------
 
@@ -5899,7 +5902,7 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT for table `comentarios`
 --
 ALTER TABLE `comentarios`
-  MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `estados`
@@ -5929,7 +5932,7 @@ ALTER TABLE `municipios`
 -- AUTO_INCREMENT for table `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `usuarios`
