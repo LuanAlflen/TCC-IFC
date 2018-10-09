@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="../../assets/css/style.css">
 
 
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -43,7 +44,9 @@ $user = $crudUser->getUsuarioId($iduserlogado);
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <a  class="navbar-brand" style="font-size: 20px; color: yellow" href="ControlerLocal.php?iduser=<?= $_GET['iduser'] ?>&pagina=0">Quadraki</a>
+            <a class="" href="ControlerLocal.php?iduser=<?= $_GET['iduser'] ?>&pagina=0">
+                <img src="../../assets/img/logo.png" id="logotipe">
+            </a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

@@ -55,7 +55,10 @@ if (empty($user->getId())){
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" style="font-size: 20px; color: yellow " href="ControlerLocal.php?iduser=<?= $_GET['iduser'] ?>&pagina=0">Quadraki</a>
+            <a class="" href="ControlerLocal.php?iduser=<?= $_GET['iduser'] ?>&pagina=0">
+                <img src="../../assets/img/logo.png" id="logotipe">
+
+            </a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

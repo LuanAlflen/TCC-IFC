@@ -42,7 +42,9 @@ $user = $crudUser->getUsuarioId($iduserlogado);
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <a class="navbar-brand" style="font-size: 20px" href="ControlerLocal.php?iduser=<?= $_GET['id'] ?>&pagina=0">Quadraki</a>
+            <a class="" href="ControlerLocal.php?iduser=<?= $_GET['id'] ?>&pagina=0">
+                <img src="../../assets/img/logo.png" id="logotipe">
+            </a>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
