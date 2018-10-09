@@ -70,17 +70,18 @@
         </div>
         <!-- /.container -->
     </nav>
+<!---->
+<!-- Intro Header -->
 
-    <!-- Intro Header -->
-<!--    <header class="intro">-->
-<!--        <div class="intro-body">-->
-<!--            <div class="container">-->
-<!--                <div class="row">-->
-<!--                    <div class="col-md-8 col-md-offset-2">-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </header>-->
+
+
+            <div class="container">
+                <div class="row" style="text-align: center; margin-top: 50%; margin-bottom: 50%">
+                    <form action="" method="get">
+                        <a href="?acao=visitante" style="padding: 18px; padding-left: 28px; padding-right: 28px; border-radius: 30%; background-color: #FFD700; color: black; font-size: 20px">Visitar</a>
+                    </form>
+                </div>
+            </div>
 
 
 
