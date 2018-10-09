@@ -76,9 +76,9 @@
 
 
             <div class="container">
-                <div class="row" style="text-align: center; margin-top: 50%; margin-bottom: 50%">
+                <div class="row" style="text-align: center; margin-top: 50%;">
                     <form action="" method="get">
-                        <a href="?acao=visitante" style="padding: 18px; padding-left: 28px; padding-right: 28px; border-radius: 30%; background-color: #FFD700; color: black; font-size: 20px">Visitar</a>
+                        <a id="botao1" href="?acao=visitante" >Visitar</a>
                     </form>
                 </div>
             </div>
