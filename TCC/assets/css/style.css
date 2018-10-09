@@ -42,3 +42,13 @@
 a{
     color: white;
 }
+
+#botao1{
+    padding: 18px;
+    padding-left: 28px;
+    padding-right: 28px;
+    border-radius: 30%;
+    background-color: #FFD700;
+    color: black;
+    font-size: 20px;
+}
