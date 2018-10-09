@@ -77,7 +77,7 @@
             </div>
             <br>
             <p style="text-align: center">Horário de Funcionamento:</p>
-            <div id="container" class="container">
+            <div id="container" class="">
                 <div>
                     <div id="businessHoursContainer3"></div>
                     <input id="businessHoursOutput1" name="horario" type="hidden">
