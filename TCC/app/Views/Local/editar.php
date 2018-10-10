@@ -23,7 +23,6 @@
     </div>
     <form class="form__reg"  method="post"  action="?acao=editar&idlocal=<?= $local->id_local ?>" enctype="multipart/form-data">
         <div class="etapa1">
-            <input value="<?= $local->id_usuario ?>"  class="input" type="hidden" name="iduser" placeholder="Id_user" required>
             <input value="<?= $local->foto?>"         class="input" type="file"  name="foto">
             <input value="<?= $local->nome ?>"        class="input" type="text" name="nome" required >
             <input value="<?= $local->email ?>"       class="input" type="email" name="email" required>

@@ -22,7 +22,7 @@
             <td><?= $reserva->nome ?> </td>
             <td><?= $nomeCor ?> </td>
             <td><?= $reserva->entrada?> </td>
-            <td><a href="ControlerLocal.php?acao=show&idlocal=<?= $reserva->id_local ?>&iduser=<?= $_SESSION['id'] ?>"><?= $nomeLocal?> </a></td>
+            <td><a href="ControlerLocal.php?acao=show&idlocal=<?= $reserva->id_local ?>&iduser=<?= $_SESSION['id'] ?>" style="color: black"><?= $nomeLocal?> </a></td>
         </tr>
 
 

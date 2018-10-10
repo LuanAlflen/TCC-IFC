@@ -42,7 +42,7 @@ $user = $crudUser->getUsuarioId($iduserlogado);
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <a class="" href="ControlerLocal.php?iduser=<?= $_GET['id'] ?>&pagina=0">
+            <a class="" href="ControlerLocal.php">
                 <img src="../../assets/img/logo.png" id="logotipe">
             </a>
         </div>

@@ -1,4 +1,6 @@
 <?php
+@session_start();
+
     require '../../app/Models/UsuarioCrud.php';
     require '../../app/Models/LocalCrud.php';
     require '../../app/Models/CategoriaCrud.php';
@@ -36,21 +38,22 @@ switch ($action) {
 
     case 'visitante':
 
-        $iduser = 1;
-        header("Location: ControlerLocal.php?iduser=$iduser&pagina=0");
+        $_SESSION['id'] = 1;
+        header("Location: ControlerLocal.php");
 
         break;
 
     case 'show':
 
 
-        $id = $_GET['iduser'];
-        session_start();
+        $id = $_SESSION['id'];
         $_SESSION['id'] = $id;
         $crud = new LocalCrud();
         @$locais = $crud->getLocalUser($id);
         if (!isset($locais)){
-            header("Location: ControlerLocal.php?iduser=$id&erro=1&pagina=0");
+            $_SESSION['erro'] = "<div style='margin-left: 20%; margin-right: 20%' class='alert alert-danger' role='alert'>Você não possui locais cadastrados no momento!
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";;
+            header("Location: ControlerLocal.php");
         }
         $cruduser = new UsuarioCrud();
         $user = $cruduser->getUsuarioId($id);
@@ -102,7 +105,8 @@ switch ($action) {
                 header("Location: ?acao=login&erro=1");
             } else {
                 $iduser = $user->getId();
-                header("Location: ControlerLocal.php?iduser=$iduser&pagina=0");
+                $_SESSION['id'] = $iduser;
+                header("Location: ControlerLocal.php");
             }
         }
             break;
@@ -111,14 +115,14 @@ switch ($action) {
 
         session_start();
         session_destroy();
-        header("Location: ControlerUsuario.php?acao=login");
+        header("Location: ControlerUsuario.php");
 
             break;
 
     case 'editar':
 
         if(!isset($_POST['gravar'])){ // vai para o form
-            $id = $_GET['id'];
+            $id = $_SESSION['id'];
             $crud= new UsuarioCrud();
             $usuario = $crud->getUsuarioId($id);
             include "../Views/Usuario/editar.php";
@@ -142,7 +146,9 @@ switch ($action) {
 
     case 'excluir':
 
-        $iduser = $_GET['id'];
+        session_start();
+        session_destroy();
+        $iduser = $_SESSION['id'];
         //EXCLUI LOCAIS, CASO TENHA
         $crudLocal = new LocalCrud();
         $crudLocal->deleteLocalUser($iduser);

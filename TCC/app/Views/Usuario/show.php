@@ -38,9 +38,9 @@
                 echo $categoria->nome;
                 ?>
             </td>
-            <td><a href="ControlerLocal.php?acao=show&idlocal=<?=$local->id_local?>&iduser=<?=  $local->id_usuario ?>">Ver</a> |
-                <a href="ControlerLocal.php?acao=editar&idlocal=<?=$local->id_local?>&iduser=<?=  $local->id_usuario ?>">Editar</a> |
-                <a href="ControlerLocal.php?acao=excluir&idlocal=<?=$local->id_local?>&iduser=<?=  $local->id_usuario ?>">Remover</a>
+            <td><a style="color: green" href="ControlerLocal.php?acao=show&idlocal=<?=$local->id_local?>">Ver</a> |
+                <a style="color: blue" href="ControlerLocal.php?acao=editar&idlocal=<?=$local->id_local?>">Editar</a> |
+                <a style="color: red" href="ControlerLocal.php?acao=excluir&idlocal=<?=$local->id_local?>">Remover</a>
 
             </td>
         </tr>

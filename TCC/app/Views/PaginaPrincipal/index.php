@@ -1,3 +1,7 @@
+<?php
+@session_start();
+//print_r($_SESSION);die;
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,6 +39,12 @@
 </head>
 
 <body>
+<?php
+if(isset($_SESSION['erro'])){
+    echo $_SESSION['erro'];
+    unset($_SESSION['erro']);
+}
+?>
 <!-- Navigation -->
 
 
@@ -115,7 +125,7 @@
                                     <div class="local <?= $local->id_categoria ?> <?= $local->id_estado ?> <?= $local->id_municipio ?> <?= $local->nome ?>">
                                             <div class="col-sm-4 col-lg-4 col-md-4">
                                                 <div class="thumbnail">
-                                                    <a href="ControlerLocal.php?acao=show&idlocal=<?= $local->id_local ?>&iduser=<?= $_SESSION['id'] ?>">
+                                                    <a href="ControlerLocal.php?acao=show&idlocal=<?= $local->id_local ?>">
                                                         <img src="../../assets/img/Local/<?= $local->foto ?>" style="width: 260px; height: 160px">
                                                     </a>
                                                     <div class="caption" style="margin-bottom: 4%;">

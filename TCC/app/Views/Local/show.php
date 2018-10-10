@@ -80,7 +80,7 @@ if (@$_GET['erro'] == 'naologado'){?>
                          <br>
                          <p style="text-align: center"><?= $local->getDescricao();?></p>
                          <div style="text-align: center">
-                            <br><a id="reservarQuadra" class="btn btn-success" href="ControlerReservas.php?acao=show&idlocal=<?= $local->id_local?>&iduser=<?= $_SESSION['id'] ?>">Reservar</a>
+                            <br><a id="reservarQuadra" class="btn btn-success" href="ControlerReservas.php?acao=show&idlocal=<?= $local->id_local?>">Reservar</a>
                          </div>
                          </div>
                      </div>
@@ -133,7 +133,7 @@ if (@$_GET['erro'] == 'naologado'){?>
                     <br>
                     <p style="margin-top: 2%">
                         <?= $comentario->texto ?>
-                        <a id="excluir"href="ControlerComentario.php?acao=excluir&idcomentario=<?= $comentario->id_comentario; ?>&idusercomentario=<?= $comentario->id_usuario ?>&iduserlogado=<?= $_GET['iduser'] ?>&idlocal=<?= $_GET['idlocal'] ?>"class="fa fa-trash"></a>
+                        <a style="color: red; text-decoration: none; margin-left: 1%" id="excluir" href="ControlerComentario.php?acao=excluir&idcomentario=<?= $comentario->id_comentario; ?>&idlocal=<?= $_GET['idlocal'] ?>"class="fa fa-trash"></a>
                     </p>
                 </div>
             <?php
@@ -141,12 +141,13 @@ if (@$_GET['erro'] == 'naologado'){?>
         }
         ?>
         <?php
-        if (@$_GET['erro'] == 1){?>
-            <div class="error-text" style="color: red">Só é possivel excluir seus prórios comentarios!</div>
-        <?php } ?>
+        if(isset($_SESSION['erro'])){
+            echo $_SESSION['erro'];
+            unset($_SESSION['erro']);
+        }
+        ?>
             <form method="post" action="ControlerComentario.php?acao=cadastrar">
                 <input type="text" name="texto" placeholder="Digite seu comentario">
-                <input type="hidden" name="iduser" value="<?= $_SESSION['id']; ?>">
                 <input type="hidden" name="idlocal" value="<?= $local->id_local; ?>">
                 <button type="submit" class="bnt btn-success">Comentar</button>
             </form>

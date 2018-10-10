@@ -1,5 +1,7 @@
 <?php
-
+if (!isset($_SESSION)) {
+    session_start();
+}
     require_once __DIR__."/../Models/LocalCrud.php";
     require_once __DIR__."/../Models/CategoriaCrud.php";
     require_once __DIR__."/../Models/UsuarioCrud.php";
@@ -36,9 +38,11 @@ switch ($action) {
     case 'index':
 
         //////////////////////////////////////////////////////BUSCA NÃO FUNCIONANDO////////////////////////////////////////////////////////////////////////////////
-        session_start();
-        $_SESSION['id'] = $_GET['iduser'];
         $id = $_SESSION['id'];
+        if (!isset($_GET['pagina'])){
+            $_GET['pagina'] = 0;
+        }
+
         //PARA EXIBIR TODOS OS LOCAIS COM LIMIT
         $resultado = 1;
         $crudLocal = new LocalCrud();
@@ -68,9 +72,7 @@ switch ($action) {
     case 'show':
 
         $idlocal = $_GET['idlocal'];
-        $iduser = $_GET['iduser'];
-        @session_start();
-        $_SESSION['id'] = $iduser;
+        $iduser = $_SESSION['id'];
         $crudLocal = new LocalCrud();
         $local = $crudLocal->getLocal($idlocal);
         include "../Models/restrito.php";
@@ -117,7 +119,7 @@ switch ($action) {
                     $_POST['estados'],
                     $_POST['municipios'],
                     $idcategoria,
-                    $_POST['iduser']);
+                    $_SESSION['id']);
 
 
                 $crudLocal = new LocalCrud();
@@ -146,7 +148,7 @@ switch ($action) {
                 $crudHorario = new Horario_FuncionamentoCrud();
                 $crudHorario->insertHorario($horario);
                 $id = $_POST['iduser'];
-                header("Location: ControlerLocal.php?acao=show&idlocal=$id_local&iduser=$id");
+                header("Location: ControlerLocal.php?acao=show&idlocal=$id_local");
 
         }
 
@@ -193,14 +195,14 @@ switch ($action) {
                     $_POST['estados'],
                     $_POST['municipios'],
                     $_POST['categoria'],
-                    $_POST['iduser'],
+                    $_SESSION['id'],
                     $_GET['idlocal']);
 
                 $crudLocal = new LocalCrud();
                 $crudLocal->updateLocal($local);
 
                 $id = $_POST['iduser'];
-                header("Location: ControlerUsuario.php?acao=show&iduser=$id");
+                header("Location: ControlerUsuario.php?acao=show");
 
         }
 
@@ -239,7 +241,7 @@ switch ($action) {
                 $crudHorario = new Horario_FuncionamentoCrud();
                 $crudHorario->updateHorario($horario);
                 $id = $_POST['iduser'];
-                header("Location: ControlerUsuario.php?acao=show&iduser=$id");
+                header("Location: ControlerUsuario.php?acao=show");
 
             }
 
@@ -250,10 +252,10 @@ switch ($action) {
 
         //VERIFICAR SE EXISTE COMENTARIOS, SE SIM, EXCLUIR
         $idlocal = $_GET['idlocal'];
-        $iduser = $_GET['iduser'];
+        $iduser = $_SESSION['id'];
         $crud = new LocalCrud();
         $crud->deleteLocal($idlocal);
-        header("Location: ControlerUsuario.php?acao=show&iduser=$iduser");
+        header("Location: ControlerUsuario.php?acao=show");
 
         break;
 

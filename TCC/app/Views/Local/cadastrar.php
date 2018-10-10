@@ -1,4 +1,6 @@
-
+<?php
+@session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,7 +31,6 @@
 		</div>		
 		<form class="form__reg"  method="post"  action="?acao=cadastrar" enctype="multipart/form-data">
             <div class="etapa1">
-            <input class="input" value="<?= $_GET['id'] ?>" type="hidden" name="iduser" placeholder="Id_user" required>
             <input class="input" type="file"  name="foto">
 			<input class="input" type="text"  name="nome"     placeholder="Nome"     required>
             <input class="input" type="email" name="email"    placeholder="Email"    required>

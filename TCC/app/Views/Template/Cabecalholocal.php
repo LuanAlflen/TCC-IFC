@@ -1,3 +1,8 @@
+<?php
+if (!isset($_SESSION)) {
+    session_start();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,7 +49,7 @@ $user = $crudUser->getUsuarioId($iduserlogado);
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <a class="" href="ControlerLocal.php?iduser=<?= $_GET['iduser'] ?>&pagina=0">
+            <a class="" href="ControlerLocal.php">
                 <img src="../../assets/img/logo.png" id="logotipe">
             </a>
         </div>
@@ -72,32 +77,32 @@ $user = $crudUser->getUsuarioId($iduserlogado);
                         $crud = new LocalCrud();
                         $local = $crud->getLocal($idlocal);
                         $iduserlocal = $local->id_usuario;
-                        $iduserlogado = $_GET['iduser'];
+                        $iduserlogado = $_SESSION['id'];
                         $crudUser = new UsuarioCrud();
                         $user = $crudUser->getUsuarioId($iduserlogado);
                         $tipuser = $user->getTipuser();
                         if ($tipuser == 'admin'){
-                            echo "<li><a href=\"ControlerAdmin.php?acao=editarLocal&idlocal=$idlocal&idAdm=$iduserlogado\">Editar quadra</a></li>";
-                            echo "<li><a href=\"ControlerAdmin.php?acao=excluirLocal&idlocal=$idlocal&idAdm=$iduserlogado\">Excluir quadra</a></li>";
+                            echo "<li><a href=\"ControlerAdmin.php?acao=editarLocal&idlocal=$idlocal\">Editar quadra</a></li>";
+                            echo "<li><a href=\"ControlerAdmin.php?acao=excluirLocal&idlocal=$idlocal\">Excluir quadra</a></li>";
                         }elseif ($iduserlocal == $iduserlogado){
-                            echo "<li><a href=\"ControlerLocal.php?acao=editar&idlocal=$idlocal&iduser=$iduserlogado\">Editar quadra</a></li>";
-                            echo "<li><a href=\"ControlerLocal.php?acao=excluir&idlocal=$idlocal&iduser=$iduserlogado\">Excluir quadra</a></li>";
+                            echo "<li><a href=\"ControlerLocal.php?acao=editar&idlocal=$idlocal\">Editar quadra</a></li>";
+                            echo "<li><a href=\"ControlerLocal.php?acao=excluir&idlocal=$idlocal\">Excluir quadra</a></li>";
                         }elseif ($tipuser == 'visitante'){
                             echo "<li><a href=\"ControlerUsuario.php?acao=login\">Entrar</a></li>";
                         }
                         ?>
                         <?php
                         if ($tipuser == 'admin'){
-                            echo "<li><a href=\"ControlerAdmin.php?id=$iduserlogado\">Área do admin</a></li>";
+                            echo "<li><a href=\"ControlerAdmin.php\">Área do admin</a></li>";
                         }elseif($tipuser != 'visitante'){
-                            echo "<li><a href=\"ControlerUsuario.php?acao=show&iduser=$iduserlogado\">Minhas quadras</a></li>";
-                            echo "<li><a href=\"ControlerReservas.php?acao=showUsuario&iduser=$iduserlogado\">Minhas reservas</a></li>";
+                            echo "<li><a href=\"ControlerUsuario.php?acao=show\">Minhas quadras</a></li>";
+                            echo "<li><a href=\"ControlerReservas.php?acao=showUsuario\">Minhas reservas</a></li>";
                         }
                         ?>
 
 
                         <li role="separator" class="divider"></li>
-                        <li><a href="ControlerUsuario.php">Sair</a></li>
+                        <li><a href="ControlerUsuario.php?acao=logout">Sair</a></li>
                     </ul>
 
 

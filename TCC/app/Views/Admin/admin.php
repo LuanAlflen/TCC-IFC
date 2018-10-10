@@ -10,6 +10,7 @@
             <th>Email</th>
             <th>CPF</th>
             <th>Tipo Usuario</th>
+            <th>Ações</th>
         </tr>
         </thead>
         <tbody>
@@ -23,8 +24,8 @@
                 <td><?= $usuario->email?> </td>
                 <td><?= $usuario->cpf ?> </td>
                 <td><?= $usuario->tipuser?> </td>
-                <td><a href="ControlerAdmin.php?acao=editarUsuario&id=<?=$usuario->id?>&idAdm=<?= $_SESSION['id'] ?>">Editar</a> |
-                    <a href="ControlerAdmin.php?acao=excluirUsuario&id=<?=$usuario->id?>&idAdm=<?= $_SESSION['id'] ?>">Remover</a>
+                <td><a style="color: blue" href="ControlerAdmin.php?acao=editarUsuario&id=<?=$usuario->id?>">Editar</a> |
+                    <a style="color: red" href="ControlerAdmin.php?acao=excluirUsuario&id=<?=$usuario->id?>">Remover</a>
 
                 </td>
             </tr>
@@ -54,6 +55,7 @@
             <th>Estado</th>
             <th>Municipio</th>
             <th>Dono</th>
+            <th>Ações</th>
         </tr>
         </thead>
         <tbody>
@@ -80,9 +82,9 @@
                 <td><?= $municipio->nome ?> </td>
                 <td><?= $user->getNome()?> </td>
                 <td>
-                    <a href="ControlerLocal.php?acao=show&iduser=<?=$_SESSION['id']?>&idlocal=<?= $local->id_local ?>">Ver</a> |
-                    <a href="ControlerAdmin.php?acao=editarLocal&idAdm=<?=$_SESSION['id']?>&idlocal=<?= $local->id_local ?>">Editar</a> |
-                    <a href="ControlerAdmin.php?acao=excluirLocal&idAdm=<?=$_SESSION['id']?>&idlocal=<?= $local->id_local ?>">Remover</a>
+                    <a style="color: green" href="ControlerLocal.php?acao=show&idlocal=<?= $local->id_local ?>">Ver</a> |
+                    <a style="color: blue" href="ControlerAdmin.php?acao=editarLocal&idlocal=<?= $local->id_local ?>">Editar</a> |
+                    <a style="color: red" href="ControlerAdmin.php?acao=excluirLocal&idlocal=<?= $local->id_local ?>">Remover</a>
                 </td>
             </tr>
 

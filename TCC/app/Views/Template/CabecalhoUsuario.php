@@ -55,7 +55,7 @@ if (empty($user->getId())){
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="" href="ControlerLocal.php?iduser=<?= $_GET['iduser'] ?>&pagina=0">
+            <a class="" href="ControlerLocal.php">
                 <img src="../../assets/img/logo.png" id="logotipe">
 
             </a>
@@ -81,22 +81,22 @@ if (empty($user->getId())){
                         ?>
                         <?php
                         if ($tipuser == 'admin'){
-                            echo "<li><a href=\"ControlerAdmin.php?id=$iduserlogado\">Área do admin</a></li>";
+                            echo "<li><a href=\"ControlerAdmin.php\">Área do admin</a></li>";
                         }elseif ($tipuser == 'visitante'){
                             echo "<li role='separator' class='divider'></li>";
                             echo "<li><a href=\"ControlerUsuario.php?acao=login\">Entrar</a></li>";
                         }else{
-                            echo "<li><a href=\"ControlerUsuario.php?acao=show&iduser=$iduserlogado\">Minhas quadras</a></li>";
+                            echo "<li><a href=\"ControlerUsuario.php?acao=show\">Minhas quadras</a></li>";
                         }
                         ?>
                         <?php
                         if($tipuser != 'visitante'){ ?>
-                            <li><a href="ControlerReservas.php?acao=showUsuario&iduser=<?= $_SESSION['id'] ?>">Minhas reservas</a></li>
-                            <li><a href="ControlerLocal.php?acao=cadastrar&id=<?= $_SESSION['id'] ?>">Cadastrar quadra</a></li>
-                            <li><a href="ControlerUsuario.php?acao=editar&id=<?= $_SESSION['id'] ?>">Editar</a></li>
-                            <li><a href="ControlerUsuario.php?acao=excluir&id=<?= $_SESSION['id'] ?>">Excluir conta</a></li>
+                            <li><a href="ControlerReservas.php?acao=showUsuario">Minhas reservas</a></li>
+                            <li><a href="ControlerLocal.php?acao=cadastrar">Cadastrar quadra</a></li>
+                            <li><a href="ControlerUsuario.php?acao=editar">Editar</a></li>
+                            <li><a href="ControlerUsuario.php?acao=excluir">Excluir conta</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="ControlerUsuario.php">Sair</a></li>
+                            <li><a href="ControlerUsuario.php?acao=logout">Sair</a></li>
                         <?php } ?>
                     </ul>
 

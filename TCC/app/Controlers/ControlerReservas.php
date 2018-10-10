@@ -1,10 +1,14 @@
 <?php
+if (!isset($_SESSION)) {
+    session_start();
+}
 require_once __DIR__."/../Models/LocalCrud.php";
 require_once __DIR__."/../Models/CategoriaCrud.php";
 require_once __DIR__."/../Models/UsuarioCrud.php";
 require_once __DIR__."/../Models/ComentarioCrud.php";
 require_once __DIR__."/../Models/ReservaCrud.php";
 require_once __DIR__."/../Models/Horario_FuncionamentoCrud.php";
+require_once __DIR__."/../Models/restrito.php";
 if (isset($_GET['acao'])){
     $action = $_GET['acao'];
 }else{
@@ -58,8 +62,6 @@ function getNomeCor($id){
 switch ($action) {
     case 'show':
         $idlocal = $_GET['idlocal'];
-        @session_start();
-        $_SESSION['id'] = $_GET['iduser'];
         $iduser = $_SESSION['id'];
         $crudLocal = new LocalCrud();
         $local = $crudLocal->getLocal($idlocal);
@@ -94,13 +96,14 @@ switch ($action) {
 
     case 'showUsuario':
 
-        $iduser = $_GET['iduser'];
-        session_start();
+        $iduser = $_SESSION['id'];
         $_SESSION['id'] = $iduser;
         $crudReserva = new ReservaCrud();
         @$reservas = $crudReserva->getReservasUsuario($iduser);
         if (!isset($reservas)){
-            header("Location: ControlerLocal.php?iduser=$iduser&pagina=0&erro=semReservas");
+            $_SESSION['erro'] = "<div style='margin-left: 20%; margin-right: 20%' class='alert alert-danger' role='alert'>Você não possui reservas no momento!
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+            header("Location: ControlerLocal.php");
         }
         include "../Views/Template/CabecalhoUsuario.php";
         include "../Views/CalendarioReservas/showUsuario.php";

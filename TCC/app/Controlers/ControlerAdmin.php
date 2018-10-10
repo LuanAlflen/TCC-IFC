@@ -1,5 +1,7 @@
 <?php
-
+if (!isset($_SESSION)) {
+    session_start();
+}
 require '../../app/Models/UsuarioCrud.php';
 require '../../app/Models/LocalCrud.php';
 require '../../app/Models/CategoriaCrud.php';
@@ -31,8 +33,6 @@ switch ($action){
 
         $crudUser = new UsuarioCrud();
         $usuarios = $crudUser->getUsuariosOrdem();
-        @session_start();
-        $_SESSION['id'] = $_GET['id'];
         $crudLocais = new LocalCrud();
         @$locais = $crudLocais->getLocaisOrdem();
         include "../Models/restrito.php";
@@ -61,8 +61,8 @@ switch ($action){
             $user = new Usuario($nome, $login, $senha, $email, $telefone, $cpf,  $tipuser, $id);
             $crud = new UsuarioCrud();
             $crud->updateUsuario($user);
-            $idAdm = $_GET['idAdm'];
-            header("Location: ControlerAdmin.php?id=$idAdm"); // chama o controlador
+            $idAdm = $_SESSION['id'];
+            header("Location: ControlerAdmin.php"); // chama o controlador
         }
 
         break;
@@ -70,7 +70,7 @@ switch ($action){
     case 'excluirUsuario':
 
         $iduser = $_GET['id'];
-        $idAdm = $_GET['idAdm'];
+        $idAdm = $_SESSION['id'];
         if ($idAdm == $iduser OR $iduser == 1){
             $_SESSION['msg'] = '<script>alert("Você não pode excluir esse usuario!")</script>';
             header("Location: ControlerAdmin.php?id=$idAdm");
@@ -81,7 +81,7 @@ switch ($action){
             //EXCLUI USUARIO
             $cruduser = new UsuarioCrud();
             $resultado = $cruduser->deleteUsuario($iduser);
-            header("Location: ControlerAdmin.php?id=$idAdm");
+            header("Location: ControlerAdmin.php");
         }
         break;
 
@@ -125,13 +125,13 @@ switch ($action){
                     $_POST['estados'],
                     $_POST['municipios'],
                     $_POST['categoria'],
-                    $_POST['iduser'],
+                    $_SESSION['id'],
                     $_GET['idlocal']);
                 $crudLocal = new LocalCrud();
                 $crudLocal->updateLocal($local);
 
                 $idAdm = $_GET['idAdm'];
-                header("Location: ControlerAdmin.php?id=$idAdm");
+                header("Location: ControlerAdmin.php");
 
         }
 
@@ -170,7 +170,7 @@ switch ($action){
             $crudHorario = new Horario_FuncionamentoCrud();
             $crudHorario->updateHorario($horario);
             $id = $_POST['iduser'];
-            header("Location: ControlerAdmin.php?id=$id");
+            header("Location: ControlerAdmin.php");
 
         }
 
@@ -181,10 +181,10 @@ switch ($action){
 
         //VERIFICAR SE EXISTE COMENTARIOS, SE SIM, EXCLUIR
         $idlocal = $_GET['idlocal'];
-        $idAdm = $_GET['idAdm'];
+        $idAdm = $_SESSION['id'];
         $crud = new LocalCrud();
         $crud->deleteLocal($idlocal);
-        header("Location: ControlerAdmin.php?id=$idAdm");
+        header("Location: ControlerAdmin.php");
 
         break;
 }
