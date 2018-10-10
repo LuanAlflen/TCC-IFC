@@ -112,14 +112,12 @@ switch ($action) {
         break;
 
     case 'cadastrar':
-        session_start();
         $idlocal = $_POST['idlocal'];
         @session_start();
-        $_SESSION['id'] = $_POST['iduser'];
         $iduser = $_SESSION['id'];
         $cor = $_POST['cor'];
         $entrada = $_POST['entrada'];
-        if (!empty($cor) AND !empty($entrada)){
+        if (!empty($_POST['nome']) AND !empty($cor) AND !empty($entrada)){
             //Converter a data e hora do formato brasileiro para o formato do Banco de Dados
             $data = explode(" ", $entrada);
             list($date, $hora) = $data;
@@ -167,12 +165,12 @@ switch ($action) {
             if(strtotime($hora_reserva) < strtotime($hora_inicio)) {
                 $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>O local não atende a esse horário!
                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
-                header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
+                header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal");
                 die;
             }elseif (strtotime($hora_reserva) > strtotime($hora_fim)){
                 $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>O local não atende a esse horário!
                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
-                header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
+                header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal");
                 die;
             }
             ////////////////////////////////VERIFICA SE A DATA ESCOLHIDA JA PASSOU//////////////////////////////////////////////////////////////////
@@ -185,13 +183,13 @@ switch ($action) {
             if(strtotime($data_reserva) < strtotime($data_atual)) {
                 $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>A data escolhida ja passou!
                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
-                header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
+                header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal");
                 die;
             }elseif (strtotime($data_reserva) == strtotime($data_atual)){
                 if(strtotime($hora_reserva) <= strtotime($hora_atual)){
                     $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>A data escolhida ja passou!
                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
-                    header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
+                    header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal");
                     die;
                 }
             }
@@ -217,12 +215,12 @@ switch ($action) {
                         if (strtotime($hora_reserva) >= strtotime($hora_inicio) AND strtotime($hora_reserva) < strtotime($hora_fim)){
                             $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>Já existe uma reserva neste horário!
                             <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
-                            header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
+                            header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal");
                             die;
                         }elseif (strtotime($hora_reserva) > strtotime($hora_antes) AND strtotime($hora_reserva) <= strtotime($hora_inicio)){
                             $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>Já existe uma reserva neste horário!
                         <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
-                            header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
+                            header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal");
                             die;
                         }
                     }
@@ -243,17 +241,16 @@ switch ($action) {
             $_SESSION['msg'] = "<div class='alert alert-success' role='alert'>Reserva cadastrada com sucesso
             <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
             $crudReserva->insereReserva($reserva);
-            header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
+            header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal");
         }else{
             $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>Todos os campos devem ser preenchidos
             <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
-            header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
+            header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal");
         }
         break;
     case 'editar':
         $idlocal = $_POST['idlocal'];
         @session_start();
-        $_SESSION['id'] = $_POST['iduser'];
         $iduser = $_SESSION['id'];
         $idreserva = $_POST['id'];
         $cor = $_POST['cor'];
@@ -300,12 +297,12 @@ switch ($action) {
             if(strtotime($hora_reserva) < strtotime($hora_inicio)) {
                 $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>O local não atende a esse horário!
                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
-                header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
+                header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal");
                 die;
             }elseif (strtotime($hora_reserva) > strtotime($hora_fim)){
                 $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>O local não atende a esse horário!
                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
-                header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
+                header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal");
                 die;
             }
             ////////////////////////////////VERIFICA SE A DATA ESCOLHIDA JA PASSOU//////////////////////////////////////////////////////////////////
@@ -318,13 +315,13 @@ switch ($action) {
             if(strtotime($data_reserva) < strtotime($data_atual)) {
                 $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>A data escolhida ja passou!
                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
-                header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
+                header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal");
                 die;
             }elseif (strtotime($data_reserva) == strtotime($data_atual)){
                 if(strtotime($hora_reserva) <= strtotime($hora_atual)){
                     $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>A data escolhida ja passou!
                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
-                    header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
+                    header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal");
                     die;
                 }
             }
@@ -351,12 +348,12 @@ switch ($action) {
                             if (strtotime($hora_reserva) >= strtotime($hora_inicio) AND strtotime($hora_reserva) < strtotime($hora_fim)) {
                                 $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>Já existe uma reserva neste horário!
                             <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
-                                header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
+                                header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal");
                                 die;
                             } elseif (strtotime($hora_reserva) > strtotime($hora_antes) AND strtotime($hora_reserva) <= strtotime($hora_inicio)) {
                                 $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>Já existe uma reserva neste horário!
                             <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
-                                header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
+                                header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal");
                                 die;
                             }
                         }
@@ -387,16 +384,16 @@ switch ($action) {
                 $_SESSION['msg'] = "<div class='alert alert-success' role='alert'>Alterações feitas com sucesso
                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
                 $crudReserva->updateReserva($reserva);
-                header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
+                header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal");
             }else {
                 $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>Só é possível editar suas próprias reservas!
                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
-                header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
+                header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal");
             }
         }else{
             $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>Todos os campos devem ser preenchidos
             <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
-            header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
+            header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal");
         }
         break;
     case 'excluir':
@@ -419,11 +416,11 @@ switch ($action) {
             $_SESSION['msg'] = "<div class='alert alert-success' role='alert'>Reserva excluida com sucesso
             <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
             $crudReserva->deleteReserva($idreserva);
-            header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
+            header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal");
         }else{
             $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>Só é possível excluir suas próprias reservas!
             <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
-            header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal&iduser=$iduser");
+            header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal");
         }
         break;
 }
