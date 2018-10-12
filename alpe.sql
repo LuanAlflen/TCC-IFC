@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 04-Out-2018 às 03:52
+-- Generation Time: 12-Out-2018 às 19:48
 -- Versão do servidor: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -5793,10 +5793,7 @@ CREATE TABLE `reservas` (
 --
 
 INSERT INTO `reservas` (`id`, `nome`, `cor`, `entrada`, `id_local`, `id_usuario`) VALUES
-(27, '', '#1C1C1C', '2018-08-17 17:00:00', 36, 35),
-(30, 'Luan', '#8B4513', '2018-08-16 09:00:00', 27, 15),
-(32, 'Algum clienti', '#1C1C1C', '2018-08-16 08:00:00', 27, 24),
-(33, 'Luan', '#40E0D0', '2018-08-16 10:00:00', 27, 15);
+(27, '', '#1C1C1C', '2018-08-17 17:00:00', 36, 35);
 
 -- --------------------------------------------------------
 
@@ -5821,10 +5818,11 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`id_usuario`, `nome`, `login`, `senha`, `telefone`, `email`, `cpf`, `tipuser`) VALUES
 (1, 'Visitante', '', '', '', '', '', 'visitante'),
-(15, 'Luan', 'LuanAlflen', '123', '2147483647', 'luan.alflen4@gmail.com', '2147483647', 'comum'),
-(24, 'teste', 'login', '12', '31256415', 'teste@mail.com.br', '1561515', 'comum'),
-(34, 'Administrador', 'Adm', '7967017457', '047 996000900', 'luan.alflen4@gmail.com', '09118737919', 'admin'),
-(35, 'Manaka', 'lolizinha', 'queijo', '22331140', 'nemuso@gmail.com', '11111111111', 'comum');
+(15, 'Luan', 'LuanAlflen', 'MTIz', '2147483647', 'luan.alflen4@gmail.com', '2147483647', 'comum'),
+(24, 'testee', 'login', 'MTI=', '31256415', 'teste@mail.com.br', '1561515', 'comum'),
+(34, 'Administrador', 'Adm', 'Nzk2NzAxNzQ1Nw==', '047 996000900', 'luan.alflen4@gmail.com', '09118737919', 'admin'),
+(35, 'Manaka', 'lolizinha', 'cXVlaWpv', '22331140', 'nemuso@gmail.com', '11111111111', 'comum'),
+(36, 'Luanteste', 'testebla', 'T2xhbXVuZG9v', '645', 'teste@mail.com', '19276838236', 'comum');
 
 --
 -- Indexes for dumped tables
@@ -5932,13 +5930,13 @@ ALTER TABLE `municipios`
 -- AUTO_INCREMENT for table `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- Constraints for dumped tables
