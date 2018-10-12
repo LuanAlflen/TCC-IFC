@@ -156,12 +156,12 @@ switch ($action) {
             $hora_fim->modify('-1 hour');
             $hora_fim = $hora_fim->format('H:i:s');
             /////////////////////////////////////SE O LOCAL NÃO ATENDER AO HORARIO ESCOLHIDO, RETORNA ERRO////////////////////////////////////
-            echo "data reserva: ".$hora_reserva;
-            echo "<br>";
-            echo "de : ".$hora_inicio;
-            echo "<br>";
-            echo "ate : ".$hora_fim;
-            echo "<br>";
+//            echo "data reserva: ".$hora_reserva;
+//            echo "<br>";
+//            echo "de : ".$hora_inicio;
+//            echo "<br>";
+//            echo "ate : ".$hora_fim;
+//            echo "<br>";
             if(strtotime($hora_reserva) < strtotime($hora_inicio)) {
                 $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>O local não atende a esse horário!
                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
@@ -193,6 +193,21 @@ switch ($action) {
                     die;
                 }
             }
+            ////////////////////////////VERIFICA SE FEZ A RESERVA COM UM DIA DE ANTECEDÊNCIA/////////////////////////////////////////
+            $atualdata= date('Y-m-d');
+            $data_inicio = substr($entrada_sem_barra, 0, 10);
+//            echo "data reserva: ".$data_inicio;
+//            echo "<br>";
+//            echo "data hj : ".$atualdata;
+//            echo "<br>";
+//            echo "<br>";
+            if(strtotime($atualdata) == strtotime($data_inicio)) {
+                $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>Só é possivel reservar com um dia de antecedência!
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+                header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal");
+                die;
+            }
+
             ////////////////////////////VERIFICA SE NAO EXISTE RESERVAS NO MESMO HORARIO QUE A RESERVA ESCOLHIDA /////////////////////////////////////////
             $crudReserva = new ReservaCrud();
             $resultado1 = $crudReserva->existeReservasLocal($idlocal);
@@ -324,6 +339,20 @@ switch ($action) {
                     header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal");
                     die;
                 }
+            }
+            ////////////////////////////VERIFICA SE FEZ A RESERVA COM UM DIA DE ANTECEDÊNCIA/////////////////////////////////////////
+            $atualdata= date('Y-m-d');
+            $data_inicio = substr($entrada_sem_barra, 0, 10);
+//            echo "data reserva: ".$data_inicio;
+//            echo "<br>";
+//            echo "data hj : ".$atualdata;
+//            echo "<br>";
+//            echo "<br>";
+            if(strtotime($atualdata) == strtotime($data_inicio)) {
+                $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>Só é possivel reservar com um dia de antecedência!
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+                header("Location: ControlerReservas.php?acao=show&idlocal=$idlocal");
+                die;
             }
             ////////////////////////////VERIFICA SE NAO EXISTE RESERVAS NO MESMO HORARIO QUE A RESERVA ESCOLHIDA /////////////////////////////////////////
             $crudReserva = new ReservaCrud();
