@@ -40,10 +40,17 @@ class UsuarioCrud
     }
 
     public function LoginUsuario(Usuario $user){
-        $sql = $this->conexao->prepare("SELECT login,senha FROM usuarios WHERE login = '{$user->getLogin()}' AND senha = '{$user->getSenha()}'");
+        $sql = $this->conexao->prepare("SELECT login FROM usuarios WHERE login = '{$user->getLogin()}'");
         $sql->execute();
         $resultado = $sql->rowCount();
        return $resultado;
+    }
+
+    public function senhaCriptografada($login){
+        $sql = "SELECT * FROM usuarios WHERE login = '{$login}'";
+        $resultado = $this->conexao->query($sql);
+        $resultado = $resultado->fetch(PDO::FETCH_ASSOC);
+        return $resultado;
     }
 
     public function getUsuario($login)

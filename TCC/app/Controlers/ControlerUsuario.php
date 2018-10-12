@@ -82,8 +82,9 @@ switch ($action) {
                 header("Location: ControlerUsuario.php?acao=cadastrar");
                 die;
             }
-
-            $user = new Usuario($_POST['nome'], $_POST['login'], $_POST['senha'], $_POST['email'], $_POST['telefone'], $_POST['cpf'], $_POST['tipuser']);
+            $senha = base64_encode($_POST['senha']);
+//            echo "senha é: ".$senha;die;
+            $user = new Usuario($_POST['nome'], $_POST['login'],$senha , $_POST['email'], $_POST['telefone'], $_POST['cpf'], $_POST['tipuser']);
             $crud = new UsuarioCrud();
             $crud->insertUsuario($user);
             header("Location: ?acao=login");
@@ -97,19 +98,28 @@ switch ($action) {
             include "../Views/Usuario/login.php";
         }else {
 
-            $user = new Usuario(null, $_POST['login'], $_POST['senha']);
+            $user = new Usuario(null, $_POST['login']);
             $crud = new UsuarioCrud();
             $resultado = $crud->LoginUsuario($user);
-            $login = $user->getLogin();
-            $user = $crud->getUsuario($login);
-            if ($resultado == 0) {
-                $_SESSION['erro'] = "<div class=\"error-text\" style=\"color: red\">Login incorreto. Por favor tente novamente</div>";
+            print_r($resultado);
+            if ($resultado == 0){
+                $_SESSION['erro'] = "<div class=\"error-text\" style=\"color: red\">Não existe login com este nome!</div>";
                 header("Location: ?acao=login");
-            } else {
-                $iduser = $user->getId();
+                die;
+            }
+            $senhacriptografada = $crud->senhaCriptografada($_POST['login']);
+            $login = $user->getLogin();
+            $senhadigitada = $_POST['senha'];
+            $senha = base64_decode($senhacriptografada['senha']);
+            if ($senhadigitada != $senha){
+                $_SESSION['erro'] = "<div class=\"error-text\" style=\"color: red\">Senha incorreta. Por favor tente novamente</div>";
+                header("Location: ?acao=login");
+            }else{
+                $iduser = $senhacriptografada['id_usuario'];
                 $_SESSION['id'] = $iduser;
                 header("Location: ControlerLocal.php");
             }
+            die;
         }
             break;
 
