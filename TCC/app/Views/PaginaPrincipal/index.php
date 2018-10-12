@@ -175,12 +175,12 @@ if(isset($_SESSION['erro'])){
             </div>
             <nav class="paginacao" aria-label="Page navigation example"style="text-align: center">
                 <ul class="pagination">
-                    <li class="page-item"><a class="page-link" href="ControlerLocal.php?iduser=<?=$_SESSION['id']?>&pagina=0">Previous</a></li>
+                    <li class="page-item"><a class="page-link" href="ControlerLocal.php">Previous</a></li>
                     <?php
                     for ($i=0; $i<$num_paginas; $i++){  ?>
-                    <li class="page-item"><a class="page-link" href="ControlerLocal.php?iduser=<?=$_SESSION['id']?>&pagina=<?= $i ?> "><?php echo $i+1; ?></a></li>
+                    <li class="page-item"><a class="page-link" href="ControlerLocal.php?pagina=<?= $i ?> "><?php echo $i+1; ?></a></li>
                     <?php } ?>
-                    <li class="page-item"><a class="page-link" href="ControlerLocal.php?iduser=<?=$_SESSION['id']?>&pagina=<?php echo $num_paginas-1;?>  ">Next</a></li>
+                    <li class="page-item"><a class="page-link" href="ControlerLocal.php?pagina=<?php echo $num_paginas-1;?>  ">Next</a></li>
                 </ul>
             </nav>
 

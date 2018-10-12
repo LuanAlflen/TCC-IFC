@@ -78,7 +78,8 @@ switch ($action) {
             $crud = new UsuarioCrud();
             $resultado = $crud->existeCPF($cpf);
             if ($resultado != 0){
-                header("Location: ControlerUsuario.php?acao=cadastrar&erro=existeCPF");
+                $_SESSION['erro'] = "<div class=\"error-text\" style=\"color: red\">CPF ja cadastrado, tente novamente.</div>";
+                header("Location: ControlerUsuario.php?acao=cadastrar");
                 die;
             }
 
@@ -102,7 +103,8 @@ switch ($action) {
             $login = $user->getLogin();
             $user = $crud->getUsuario($login);
             if ($resultado == 0) {
-                header("Location: ?acao=login&erro=1");
+                $_SESSION['erro'] = "<div class=\"error-text\" style=\"color: red\">Login incorreto. Por favor tente novamente</div>";
+                header("Location: ?acao=login");
             } else {
                 $iduser = $user->getId();
                 $_SESSION['id'] = $iduser;
@@ -139,7 +141,8 @@ switch ($action) {
             $crud = new UsuarioCrud();
             $crud->updateUsuario($user);
 
-            header("Location: ?acao=login&erro=3"); // chama o controlador
+            $_SESSION['erro'] = "<div class=\"error-text\" style=\"color: red\">Por favor, confirme suas alterações</div>";
+            header("Location: ?acao=login"); // chama o controlador
         }
 
         break;

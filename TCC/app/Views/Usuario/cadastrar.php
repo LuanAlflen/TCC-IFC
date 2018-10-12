@@ -5,6 +5,17 @@
 	<link rel="stylesheet" href="../../assets/css/main.css">
 
 	<title>Formulario</title>
+    <link href="../../assets/css/bootstrap.css" rel="stylesheet">
+
+
+    <!-- site de custumização do bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Custom CSS -->
+    <link href="../../assets/css/shop-homepage.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/abas.css">
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>
@@ -65,17 +76,17 @@
             // -- Less than 4 characters
             if (strPassword.length < 5)
             {
-                nScore += 5;
+                nScore += 6;
             }
             // -- 5 to 7 characters
             else if (strPassword.length > 4 && strPassword.length < 8)
             {
-                nScore += 10;
+                nScore += 12;
             }
             // -- 8 or more
             else if (strPassword.length > 7)
             {
-                nScore += 25;
+                nScore += 28;
             }
 
             // Letters
@@ -85,12 +96,12 @@
             // -- Letters are all lower case
             if (nUpperCount == 0 && nLowerCount != 0)
             {
-                nScore += 10;
+                nScore += 12;
             }
             // -- Letters are upper case and lower case
             else if (nUpperCount != 0 && nLowerCount != 0)
             {
-                nScore += 20;
+                nScore += 22;
             }
 
             // Numbers
@@ -98,12 +109,12 @@
             // -- 1 number
             if (nNumberCount == 1)
             {
-                nScore += 10;
+                nScore += 12;
             }
             // -- 3 or more numbers
             if (nNumberCount >= 3)
             {
-                nScore += 20;
+                nScore += 22;
             }
 
             // Characters
@@ -111,12 +122,12 @@
             // -- 1 character
             if (nCharacterCount == 1)
             {
-                nScore += 10;
+                nScore += 12;
             }
             // -- More than 1 character
             if (nCharacterCount > 1)
             {
-                nScore += 25;
+                nScore += 28;
             }
 
             // Bonus
@@ -128,16 +139,16 @@
             // -- Letters, numbers, and characters
             if (nNumberCount != 0 && nLowerUpperCount != 0 && nCharacterCount != 0)
             {
-                nScore += 3;
+                nScore += 4;
             }
             // -- Mixed case letters, numbers, and characters
             if (nNumberCount != 0 && nUpperCount != 0 && nLowerCount != 0 && nCharacterCount != 0)
             {
-                nScore += 5;
+                nScore += 6;
             }
 
 
-            //alert(nScore);
+            // alert(nScore);
             return nScore;
         }
 
@@ -174,19 +185,19 @@
             // ctlBar.style.width = (nScore*1.25>100)?100:nScore*1.25 + "%";
             // Color and text
             // -- Very Secure
-            if (nScore >= 58)
+            if (nScore >= 80)
             {
                 var strText = "Muito Forte";
                 var strColor = "#008000";
             }
             // -- Strong
-            else if (nScore >= 45)
+            else if (nScore >= 60)
             {
                 var strText = "Forte";
                 var strColor = "#006000";
             }
             // -- Average
-            else if (nScore >= 35)
+            else if (nScore >= 40)
             {
                 var strText = "Mediana";
                 var strColor = "#e3cb00";
@@ -200,24 +211,25 @@
             // -- Very Weak
             else
             {
-                var strText = "Muito Fraca";
+                var strText = "Péssima";
                 var strColor = "#e71a1a";
             }
 
-            alert(strText);
+            $("#progress-bar").css("width", nScore+ '%');
+            $("#progress-bar").css("background-color", strColor);
+            $("#progress-bar").text(strText)
 
 
-
-            if(strPassword.length == 0)
-            {
-                ctlBar.style.backgroundColor = "";
-                ctlText.innerHTML =  "";
-            }
-            else
-            {
-                ctlBar.style.backgroundColor = strColor;
-                ctlText.innerHTML =  strText;
-            }
+            // if(strPassword.length == 0)
+            // {
+            //     ctlBar.style.backgroundColor = "";
+            //     ctlText.innerHTML =  "";
+            // }
+            // else
+            // {
+            //     ctlBar.style.backgroundColor = strColor;
+            //     ctlText.innerHTML =  strText;
+            // }
         }
 
         // Checks a string for a list of characters
@@ -255,19 +267,23 @@
 			<input class="input" type="text"     name="nome"     placeholder="Nome"     required>
 			<input class="input" type="text"     name="login"    placeholder="Login"     required>
 			<input class="input" type="password" name="senha"    placeholder="Senha"   id="txtSenha" onKeyPress="runPassword()" required>
+            <div class="progress" style="width: 350px; margin-bottom: -0.1%; text-align: center">
+                <div class="progress-bar" id="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="color: black; text-align: center">
+
+                </div>
+            </div>
+<!--            <progress max="100" value="0" id="strength" style="width: 200px"></progress>-->
             <input class="input" type="email"    name="email"    placeholder="Email"    required>
             <input class="input" type="number"     name="telefone" placeholder="Telefone">
 			<input id="cpf" class="input" type="number"     name="cpf"      placeholder="CPF"      required>
             <div class="erroCPF" style="color: red">Informe um CPF válido</div>
             <input class="input" type="hidden"   name="tipuser" required>
             <?php
-            if (@$_GET['erro'] == 1){?>
-                <div class="error-text" style="color: red">Este login ja existe, tente novamente.</div>
-            <?php } ?>
-            <?php
-            if (@$_GET['erro'] == 'existeCPF'){?>
-                <div class="error-text" style="color: red">CPF ja cadastrado, tente novamente.</div>
-            <?php } ?>
+            if(isset($_SESSION['erro'])){
+                echo $_SESSION['erro'];
+                unset($_SESSION['erro']);
+            }
+            ?>
             <div class="btn__form">
 				<input class="btn__reset" type="reset" value="Limpar">
 			 	<input class="btn__submit" type="submit" name="gravar" value="Salvar" >

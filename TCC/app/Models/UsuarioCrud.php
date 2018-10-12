@@ -30,7 +30,8 @@ class UsuarioCrud
                     return $e->getMessage();
                 }
             }else{
-                header("Location: ?acao=cadastrar&erro=1");
+                $_SESSION['erro'] = "<div class=\"error-text\" style=\"color: red\">Este login ja existe, tente novamente.</div>";
+                header("Location: ?acao=cadastrar");
                 die();
             }
         }catch (PDOException $e){

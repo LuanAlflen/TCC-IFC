@@ -17,22 +17,16 @@
 			<input class="input" type="text"     name="login"  placeholder="&#128100;  Login" required>
             <input class="input" type="password" name="senha" placeholder="&#9993;  Senha"  required>
             <?php
+            if(isset($_SESSION['erro'])){
+                echo $_SESSION['erro'];
+                unset($_SESSION['erro']);
+            }
+            ?>
+            <?php
             if (@$_GET['erro'] == 'naologado'){
                 echo "<script>alert('Para acessar esta página é preciso estar logado!')</script>";
             }
             ?>
-            <?php
-            if (@$_GET['erro'] == 1){?>
-                <div class="error-text" style="color: red">Login incorreto. Por favor tente novamente</div>
-            <?php } ?>
-            <?php
-            if (@$_GET['erro'] == 2){?>
-                <div class="error-text" style="color: red">É preciso estar logado para acessar esta pagina!</div>
-            <?php } ?>
-            <?php
-            if (@$_GET['erro'] == 3){?>
-                <div class="error-text" style="color: red">Por favor, confirme suas alterações</div>
-            <?php } ?>
             <div class="btn__form">
                 <input class="btn__submit" type="reset" value="Limpar">
                 <input class="btn__reset" type="submit" name="gravar" value="Login">
