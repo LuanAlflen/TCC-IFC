@@ -142,6 +142,7 @@ switch ($action) {
             $nome = $_POST['nome'];
             $login = $_POST['login'];
             $senha= $_POST['senha'];
+            $senha = base64_encode($senha);
             $telefone= $_POST['telefone'];
             $email= $_POST['email'];
             $cpf= $_POST['cpf'];
