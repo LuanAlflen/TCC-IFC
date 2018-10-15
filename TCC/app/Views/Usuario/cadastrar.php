@@ -17,12 +17,22 @@
     <link rel="stylesheet" href="../../assets/css/style.css">
     <link rel="stylesheet" href="../../assets/css/abas.css">
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<!--    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
+    <script type="text/javascript" src="../../assets/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../../assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../assets/js/jquery.mask.min.js"></script>
     <script>
+        function apenasNumeros(string)
+        {
+            var numsStr = string.replace(/[^0-9]/g,'');
+            return parseInt(numsStr);
+        }
+
         function TestaCPF() {
             $(".erroCPF").hide();
 
             var strCPF = $("#cpf").val();
+            var strCPF = apenasNumeros(strCPF);
             var Soma;
             var Resto;
             Soma = 0;
@@ -61,7 +71,7 @@
         var m_strUpperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         var m_strLowerCase = "abcdefghijklmnopqrstuvwxyz";
         var m_strNumber = "0123456789";
-        var m_strCharacters = "!@#$%^&*?_~"
+        var m_strCharacters = "!@#$%^&*?_~";
 
         //Check password
 
@@ -251,6 +261,23 @@
 
     </script>
 
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#cpf").mask("000.000.000-00")
+            $("#telefone").mask("(00) 0000-0000")
+
+            $("#celular").mask("(00) 0000-00009")
+
+            $("#celular").blur(function(event){
+                if ($(this).val().length == 15){
+                    $("#celular").mask("(00) 00000-0009")
+                }else{
+                    $("#celular").mask("(00) 0000-00009")
+                }
+            })
+        })
+    </script>
+
 </head>
 <body>
 
@@ -274,8 +301,8 @@
             </div>
 <!--            <progress max="100" value="0" id="strength" style="width: 200px"></progress>-->
             <input class="input" type="email"    name="email"    placeholder="Email"    required>
-            <input class="input" type="number"     name="telefone" placeholder="Telefone">
-			<input id="cpf" class="input" type="number"     name="cpf"      placeholder="CPF"      required>
+            <input class="input" type="text"     name="telefone" id="celular" placeholder="Telefone ou celular">
+			<input id="cpf" class="input" type="text"     name="cpf"      placeholder="CPF"      required>
             <div class="erroCPF" style="color: red">Informe um CPF válido</div>
             <input class="input" type="hidden"   name="tipuser" required>
             <?php

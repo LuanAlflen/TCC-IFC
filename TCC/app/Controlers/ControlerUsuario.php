@@ -139,6 +139,17 @@ switch ($action) {
             $usuario = $crud->getUsuarioId($id);
             include "../Views/Usuario/editar.php";
         }else{ // já passou no form e fez submit
+            $cpf = $_POST['cpf'];
+            $crud = new UsuarioCrud();
+            $resultado = $crud->existeCPF($cpf);
+            $id = $_SESSION['id'];
+            $teste = $crud->getUsuarioId($id);
+            $cpfDoUsuario = $teste->getCpf();
+            if ($resultado != 0 AND $cpfDoUsuario != $cpf){
+                $_SESSION['erro'] = "<div class=\"error-text\" style=\"color: red\">CPF ja cadastrado, tente novamente.</div>";
+                header("Location: ControlerUsuario.php?acao=cadastrar");
+                die;
+            }
             $nome = $_POST['nome'];
             $login = $_POST['login'];
             $senha= $_POST['senha'];
