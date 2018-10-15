@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.2
--- https://www.phpmyadmin.net/
+-- version 4.5.4.1deb2ubuntu2
+-- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: 15-Out-2018 às 03:40
--- Versão do servidor: 10.1.34-MariaDB
--- PHP Version: 7.2.7
+-- Host: localhost
+-- Tempo de geração: 15/10/2018 às 14:28
+-- Versão do servidor: 5.7.21-0ubuntu0.16.04.1
+-- Versão do PHP: 7.0.22-0ubuntu0.16.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -19,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `alpe`
+-- Banco de dados: `alpe`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `categoria`
+-- Estrutura para tabela `categoria`
 --
 
 CREATE TABLE `categoria` (
@@ -34,7 +32,7 @@ CREATE TABLE `categoria` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `categoria`
+-- Fazendo dump de dados para tabela `categoria`
 --
 
 INSERT INTO `categoria` (`id_categoria`, `nome`) VALUES
@@ -48,7 +46,7 @@ INSERT INTO `categoria` (`id_categoria`, `nome`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `comentarios`
+-- Estrutura para tabela `comentarios`
 --
 
 CREATE TABLE `comentarios` (
@@ -60,7 +58,7 @@ CREATE TABLE `comentarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `comentarios`
+-- Fazendo dump de dados para tabela `comentarios`
 --
 
 INSERT INTO `comentarios` (`id_comentario`, `data`, `texto`, `id_usuario`, `id_local`) VALUES
@@ -76,7 +74,7 @@ INSERT INTO `comentarios` (`id_comentario`, `data`, `texto`, `id_usuario`, `id_l
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `estados`
+-- Estrutura para tabela `estados`
 --
 
 CREATE TABLE `estados` (
@@ -86,7 +84,7 @@ CREATE TABLE `estados` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `estados`
+-- Fazendo dump de dados para tabela `estados`
 --
 
 INSERT INTO `estados` (`id_estado`, `sigla`, `nome`) VALUES
@@ -121,7 +119,7 @@ INSERT INTO `estados` (`id_estado`, `sigla`, `nome`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `horario_funcionamento`
+-- Estrutura para tabela `horario_funcionamento`
 --
 
 CREATE TABLE `horario_funcionamento` (
@@ -144,7 +142,7 @@ CREATE TABLE `horario_funcionamento` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `horario_funcionamento`
+-- Fazendo dump de dados para tabela `horario_funcionamento`
 --
 
 INSERT INTO `horario_funcionamento` (`id`, `seg`, `seg1`, `ter`, `ter1`, `qua`, `qua1`, `qui`, `qui1`, `sex`, `sex1`, `sab`, `sab1`, `dom`, `dom1`, `id_local`) VALUES
@@ -173,7 +171,7 @@ INSERT INTO `horario_funcionamento` (`id`, `seg`, `seg1`, `ter`, `ter1`, `qua`, 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `locais`
+-- Estrutura para tabela `locais`
 --
 
 CREATE TABLE `locais` (
@@ -192,7 +190,7 @@ CREATE TABLE `locais` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `locais`
+-- Fazendo dump de dados para tabela `locais`
 --
 
 INSERT INTO `locais` (`id_local`, `foto`, `nome`, `email`, `endereco`, `numero`, `telefone`, `descricao`, `id_estado`, `id_municipio`, `id_categoria`, `id_usuario`) VALUES
@@ -215,7 +213,7 @@ INSERT INTO `locais` (`id_local`, `foto`, `nome`, `email`, `endereco`, `numero`,
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `municipios`
+-- Estrutura para tabela `municipios`
 --
 
 CREATE TABLE `municipios` (
@@ -225,7 +223,7 @@ CREATE TABLE `municipios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `municipios`
+-- Fazendo dump de dados para tabela `municipios`
 --
 
 INSERT INTO `municipios` (`id_municipio`, `nome`, `id_estado`) VALUES
@@ -5781,7 +5779,7 @@ INSERT INTO `municipios` (`id_municipio`, `nome`, `id_estado`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `reservas`
+-- Estrutura para tabela `reservas`
 --
 
 CREATE TABLE `reservas` (
@@ -5794,19 +5792,16 @@ CREATE TABLE `reservas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `reservas`
+-- Fazendo dump de dados para tabela `reservas`
 --
 
 INSERT INTO `reservas` (`id`, `nome`, `cor`, `entrada`, `id_local`, `id_usuario`) VALUES
-(27, '', '#1C1C1C', '2018-08-17 17:00:00', 36, 35),
-(30, 'Luan', '#8B4513', '2018-08-16 09:00:00', 27, 15),
-(32, 'Algum clienti', '#1C1C1C', '2018-08-16 08:00:00', 27, 24),
-(33, 'Luan', '#40E0D0', '2018-08-16 10:00:00', 27, 15);
+(27, '', '#1C1C1C', '2018-08-17 17:00:00', 36, 35);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `usuarios`
+-- Estrutura para tabela `usuarios`
 --
 
 CREATE TABLE `usuarios` (
@@ -5821,33 +5816,34 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `usuarios`
+-- Fazendo dump de dados para tabela `usuarios`
 --
 
 INSERT INTO `usuarios` (`id_usuario`, `nome`, `login`, `senha`, `telefone`, `email`, `cpf`, `tipuser`) VALUES
 (1, 'Visitante', '', '', '', '', '', 'visitante'),
-(15, 'Luan', 'LuanAlflen', '123', '2147483647', 'luan.alflen4@gmail.com', '2147483647', 'comum'),
-(24, 'teste', 'login', '12', '31256415', 'teste@mail.com.br', '1561515', 'comum'),
-(34, 'Administrador', 'Adm', '7967017457', '047 996000900', 'luan.alflen4@gmail.com', '09118737919', 'admin'),
-(35, 'Manaka', 'lolizinha', 'queijo', '22331140', 'nemuso@gmail.com', '11111111111', 'comum'),
-(36, 'Luiz Henrique ', 'Luizinho', 'jujuba1122', '1199337788', 'luiz@email.com', '95999916640', 'comum'),
-(37, 'Felipe Wilson', 'wilson', 'wilsinho22', '1122444557', 'felipe22@email.com', '31313763845', 'comum'),
-(38, 'Fernanda Souza', 'SFernanda', 'testeefacil12', '2233111133', 'souzafe@gmail.com', '68149683208', 'comum'),
-(39, 'AimÃª Hana', 'hanAi', 'animes2211', '4921234422', 'aiHana@email.com', '67387126348', 'comum'),
-(40, 'Ednaldo Perereira', 'Ednaldo11', 'pereiradj66', '8799225663', 'pereiraed@email.com', '81167369220', 'comum');
+(15, 'Luan', 'LuanAlflen', 'MTIz', '2147483647', 'luan.alflen4@gmail.com', '2147483647', 'comum'),
+(24, 'teste', 'login', 'MTI=', '(31) 2564-15684', 'teste@mail.com.br', '359.205.700-67', 'comum'),
+(34, 'Administrador', 'Adm', 'Nzk2NzAxNzQ1Nw==', '047 996000900', 'luan.alflen4@gmail.com', '09118737919', 'admin'),
+(35, 'Manaka', 'lolizinha', 'cXVlaWpv', '22331140', 'nemuso@gmail.com', '11111111111', 'comum'),
+(36, 'Luiz Henrique ', 'Luizinho', 'anVqdWJhMTEyMg==', '1199337788', 'luiz@email.com', '95999916640', 'comum'),
+(37, 'Felipe Wilson', 'wilson', 'd2lsc2luaG8yMg==', '1122444557', 'felipe22@email.com', '31313763845', 'comum'),
+(38, 'Fernanda Souza', 'SFernanda', 'dGVzdGVlZmFjaWwxMg==', '2233111133', 'souzafe@gmail.com', '68149683208', 'comum'),
+(39, 'AimÃª Hana', 'hanAi', 'YW5pbWVzMjIxMQ=', '4921234422', 'aiHana@email.com', '67387126348', 'comum'),
+(40, 'Ednaldo Perereira', 'Edinaldo11', 'cGVyZWlyYWRqNjY=', '8799225663', 'pereiraed@email.com', '81167369220', 'comum'),
+(41, 'Hugo', 'hugerson', 'MDIwMTA0NUhnaWlw', '343315174', 'hugo@yopmail.com', '09178209919', 'comum');
 
 --
--- Indexes for dumped tables
+-- Índices de tabelas apagadas
 --
 
 --
--- Indexes for table `categoria`
+-- Índices de tabela `categoria`
 --
 ALTER TABLE `categoria`
   ADD PRIMARY KEY (`id_categoria`);
 
 --
--- Indexes for table `comentarios`
+-- Índices de tabela `comentarios`
 --
 ALTER TABLE `comentarios`
   ADD PRIMARY KEY (`id_comentario`),
@@ -5855,20 +5851,20 @@ ALTER TABLE `comentarios`
   ADD KEY `id_local` (`id_local`);
 
 --
--- Indexes for table `estados`
+-- Índices de tabela `estados`
 --
 ALTER TABLE `estados`
   ADD PRIMARY KEY (`id_estado`);
 
 --
--- Indexes for table `horario_funcionamento`
+-- Índices de tabela `horario_funcionamento`
 --
 ALTER TABLE `horario_funcionamento`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_local` (`id_local`);
 
 --
--- Indexes for table `locais`
+-- Índices de tabela `locais`
 --
 ALTER TABLE `locais`
   ADD PRIMARY KEY (`id_local`),
@@ -5878,14 +5874,14 @@ ALTER TABLE `locais`
   ADD KEY `id_municipio` (`id_municipio`);
 
 --
--- Indexes for table `municipios`
+-- Índices de tabela `municipios`
 --
 ALTER TABLE `municipios`
   ADD PRIMARY KEY (`id_municipio`),
   ADD KEY `id_estado` (`id_estado`);
 
 --
--- Indexes for table `reservas`
+-- Índices de tabela `reservas`
 --
 ALTER TABLE `reservas`
   ADD PRIMARY KEY (`id`),
@@ -5893,82 +5889,74 @@ ALTER TABLE `reservas`
   ADD KEY `id_usuario` (`id_usuario`);
 
 --
--- Indexes for table `usuarios`
+-- Índices de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id_usuario`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de tabelas apagadas
 --
 
 --
--- AUTO_INCREMENT for table `categoria`
+-- AUTO_INCREMENT de tabela `categoria`
 --
 ALTER TABLE `categoria`
   MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
 --
--- AUTO_INCREMENT for table `comentarios`
+-- AUTO_INCREMENT de tabela `comentarios`
 --
 ALTER TABLE `comentarios`
   MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
 --
--- AUTO_INCREMENT for table `estados`
+-- AUTO_INCREMENT de tabela `estados`
 --
 ALTER TABLE `estados`
   MODIFY `id_estado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
-
 --
--- AUTO_INCREMENT for table `horario_funcionamento`
+-- AUTO_INCREMENT de tabela `horario_funcionamento`
 --
 ALTER TABLE `horario_funcionamento`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
-
 --
--- AUTO_INCREMENT for table `locais`
+-- AUTO_INCREMENT de tabela `locais`
 --
 ALTER TABLE `locais`
   MODIFY `id_local` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
-
 --
--- AUTO_INCREMENT for table `municipios`
+-- AUTO_INCREMENT de tabela `municipios`
 --
 ALTER TABLE `municipios`
   MODIFY `id_municipio` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5300109;
-
 --
--- AUTO_INCREMENT for table `reservas`
+-- AUTO_INCREMENT de tabela `reservas`
 --
 ALTER TABLE `reservas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
-
 --
--- AUTO_INCREMENT for table `usuarios`
+-- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+--
+-- Restrições para dumps de tabelas
+--
 
 --
--- Constraints for dumped tables
---
-
---
--- Limitadores para a tabela `comentarios`
+-- Restrições para tabelas `comentarios`
 --
 ALTER TABLE `comentarios`
   ADD CONSTRAINT `comentarios_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`),
   ADD CONSTRAINT `comentarios_ibfk_2` FOREIGN KEY (`id_local`) REFERENCES `locais` (`id_local`);
 
 --
--- Limitadores para a tabela `horario_funcionamento`
+-- Restrições para tabelas `horario_funcionamento`
 --
 ALTER TABLE `horario_funcionamento`
   ADD CONSTRAINT `horario_funcionamento_ibfk_1` FOREIGN KEY (`id_local`) REFERENCES `locais` (`id_local`);
 
 --
--- Limitadores para a tabela `locais`
+-- Restrições para tabelas `locais`
 --
 ALTER TABLE `locais`
   ADD CONSTRAINT `locais_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`),
@@ -5978,18 +5966,17 @@ ALTER TABLE `locais`
   ADD CONSTRAINT `locais_ibfk_5` FOREIGN KEY (`id_municipio`) REFERENCES `municipios` (`id_municipio`);
 
 --
--- Limitadores para a tabela `municipios`
+-- Restrições para tabelas `municipios`
 --
 ALTER TABLE `municipios`
   ADD CONSTRAINT `municipios_ibfk_1` FOREIGN KEY (`id_estado`) REFERENCES `estados` (`id_estado`);
 
 --
--- Limitadores para a tabela `reservas`
+-- Restrições para tabelas `reservas`
 --
 ALTER TABLE `reservas`
   ADD CONSTRAINT `reservas_ibfk_1` FOREIGN KEY (`id_local`) REFERENCES `locais` (`id_local`),
   ADD CONSTRAINT `reservas_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`);
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
