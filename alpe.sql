@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.8.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 12-Out-2018 às 19:48
--- Versão do servidor: 10.1.29-MariaDB
--- PHP Version: 7.2.0
+-- Generation Time: 15-Out-2018 às 03:40
+-- Versão do servidor: 10.1.34-MariaDB
+-- PHP Version: 7.2.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -70,7 +70,8 @@ INSERT INTO `comentarios` (`id_comentario`, `data`, `texto`, `id_usuario`, `id_l
 (6, '2018-08-11 19:08:24', 'PORCARIA DE TIME >:(', 35, 36),
 (7, '2018-08-11 19:09:01', 'ja fui assaltado', 35, 32),
 (8, '2018-08-11 19:10:53', 'kohnpromisso', 35, 27),
-(9, '2018-08-11 19:32:58', 'pa joga un folei', 35, 31);
+(9, '2018-08-11 19:32:58', 'pa joga un folei', 35, 31),
+(10, '2018-10-15 01:29:42', 'Muito show o lugar!!!', 39, 28);
 
 -- --------------------------------------------------------
 
@@ -165,7 +166,9 @@ INSERT INTO `horario_funcionamento` (`id`, `seg`, `seg1`, `ter`, `ter1`, `qua`, 
 (21, '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', NULL, NULL, NULL, NULL, 37),
 (23, '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', '08:00:00', '18:00:00', NULL, NULL, NULL, NULL, 42),
 (26, '09:00:00', '18:00:00', '09:00:00', '18:00:00', '09:00:00', '18:00:00', '09:00:00', '18:00:00', '09:00:00', '18:00:00', '09:00:00', '18:00:00', '09:00:00', '18:00:00', 57),
-(27, '09:00:00', '18:00:00', '09:00:00', '18:00:00', '09:00:00', '18:00:00', '09:00:00', '18:00:00', '09:00:00', '18:00:00', '09:00:00', '18:00:00', '09:00:00', '18:00:00', 58);
+(27, '09:00:00', '18:00:00', '09:00:00', '18:00:00', '09:00:00', '18:00:00', '09:00:00', '18:00:00', '09:00:00', '18:00:00', '09:00:00', '18:00:00', '09:00:00', '18:00:00', 58),
+(28, '09:00:00', '18:00:00', '09:00:00', '18:00:00', '09:00:00', '18:00:00', '09:00:00', '18:00:00', '09:00:00', '18:00:00', '09:00:00', '18:00:00', '09:00:00', '18:00:00', 59),
+(29, '17:00:00', '22:00:00', '17:00:00', '22:00:00', '17:00:00', '22:00:00', '17:00:00', '22:00:00', '17:00:00', '22:00:00', '16:00:00', '23:00:00', NULL, NULL, 60);
 
 -- --------------------------------------------------------
 
@@ -205,7 +208,9 @@ INSERT INTO `locais` (`id_local`, `foto`, `nome`, `email`, `endereco`, `numero`,
 (37, '30072018031109estdio-da-ressacada.jpg', 'Ressacada', 'o@k', 'Carianos', 88047400, 9899595, 'mancha azul', 42, 4205407, 1, 24),
 (42, '30072018075355Vila-Belmiro-Santos.jpg', 'Vila Belmiro', 'o@k', 'Rua Princesa Isabel', 501, 9899595, 'Agora quem da a bola Ã© o Santos', 35, 3548500, 1, 24),
 (57, '1108201809444209-03-2015-14-58-53-online-dsc-8710.jpg', 'Centreventos Cau Hansem', 'Centreventos@gmail.com', 'Av. JosÃ© Vieira', 315, 34367551, 'Lugar para todo tipo de esportes!', 42, 4209102, 2, 35),
-(58, '11082018095801arenajaguara03_ivanraupp_15.jpg', 'Arena Jaragua', 'arenajaragua@gmail.com', 'R. Gustavo Hagedorn', 636, 2147483647, 'Arena Jaragua', 42, 4208906, 6, 34);
+(58, '11082018095801arenajaguara03_ivanraupp_15.jpg', 'Arena Jaragua', 'arenajaragua@gmail.com', 'R. Gustavo Hagedorn', 636, 2147483647, 'Arena Jaragua', 42, 4208906, 6, 34),
+(59, '1210201807323906.jpg', 'NAa', 'hotma@jaak', 'Av SÃ£o Paulo', 88, 99993333, 'Loucura', 35, 3550308, 1, 24),
+(60, 'image.jpeg', 'Quadra Esportiva Adolfo Goerdert', 'naotem@email.com', ' R. Alagoas', 303, 2147483647, 'Um Bom local para praticar esportes e eventos!', 42, 4209102, 5, 39);
 
 -- --------------------------------------------------------
 
@@ -5793,7 +5798,10 @@ CREATE TABLE `reservas` (
 --
 
 INSERT INTO `reservas` (`id`, `nome`, `cor`, `entrada`, `id_local`, `id_usuario`) VALUES
-(27, '', '#1C1C1C', '2018-08-17 17:00:00', 36, 35);
+(27, '', '#1C1C1C', '2018-08-17 17:00:00', 36, 35),
+(30, 'Luan', '#8B4513', '2018-08-16 09:00:00', 27, 15),
+(32, 'Algum clienti', '#1C1C1C', '2018-08-16 08:00:00', 27, 24),
+(33, 'Luan', '#40E0D0', '2018-08-16 10:00:00', 27, 15);
 
 -- --------------------------------------------------------
 
@@ -5818,11 +5826,15 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`id_usuario`, `nome`, `login`, `senha`, `telefone`, `email`, `cpf`, `tipuser`) VALUES
 (1, 'Visitante', '', '', '', '', '', 'visitante'),
-(15, 'Luan', 'LuanAlflen', 'MTIz', '2147483647', 'luan.alflen4@gmail.com', '2147483647', 'comum'),
-(24, 'testee', 'login', 'MTI=', '31256415', 'teste@mail.com.br', '1561515', 'comum'),
-(34, 'Administrador', 'Adm', 'Nzk2NzAxNzQ1Nw==', '047 996000900', 'luan.alflen4@gmail.com', '09118737919', 'admin'),
-(35, 'Manaka', 'lolizinha', 'cXVlaWpv', '22331140', 'nemuso@gmail.com', '11111111111', 'comum'),
-(36, 'Luanteste', 'testebla', 'T2xhbXVuZG9v', '645', 'teste@mail.com', '19276838236', 'comum');
+(15, 'Luan', 'LuanAlflen', '123', '2147483647', 'luan.alflen4@gmail.com', '2147483647', 'comum'),
+(24, 'teste', 'login', '12', '31256415', 'teste@mail.com.br', '1561515', 'comum'),
+(34, 'Administrador', 'Adm', '7967017457', '047 996000900', 'luan.alflen4@gmail.com', '09118737919', 'admin'),
+(35, 'Manaka', 'lolizinha', 'queijo', '22331140', 'nemuso@gmail.com', '11111111111', 'comum'),
+(36, 'Luiz Henrique ', 'Luizinho', 'jujuba1122', '1199337788', 'luiz@email.com', '95999916640', 'comum'),
+(37, 'Felipe Wilson', 'wilson', 'wilsinho22', '1122444557', 'felipe22@email.com', '31313763845', 'comum'),
+(38, 'Fernanda Souza', 'SFernanda', 'testeefacil12', '2233111133', 'souzafe@gmail.com', '68149683208', 'comum'),
+(39, 'AimÃª Hana', 'hanAi', 'animes2211', '4921234422', 'aiHana@email.com', '67387126348', 'comum'),
+(40, 'Ednaldo Perereira', 'Ednaldo11', 'pereiradj66', '8799225663', 'pereiraed@email.com', '81167369220', 'comum');
 
 --
 -- Indexes for dumped tables
@@ -5900,7 +5912,7 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT for table `comentarios`
 --
 ALTER TABLE `comentarios`
-  MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `estados`
@@ -5912,13 +5924,13 @@ ALTER TABLE `estados`
 -- AUTO_INCREMENT for table `horario_funcionamento`
 --
 ALTER TABLE `horario_funcionamento`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `locais`
 --
 ALTER TABLE `locais`
-  MODIFY `id_local` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id_local` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT for table `municipios`
@@ -5930,13 +5942,13 @@ ALTER TABLE `municipios`
 -- AUTO_INCREMENT for table `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- Constraints for dumped tables
