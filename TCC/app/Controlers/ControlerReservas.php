@@ -117,7 +117,7 @@ switch ($action) {
         $iduser = $_SESSION['id'];
         $cor = $_POST['cor'];
         $entrada = $_POST['entrada'];
-        if (!empty($_POST['nome']) AND !empty($cor) AND !empty($entrada)){
+        if (!empty($cor) AND !empty($entrada)){
             //Converter a data e hora do formato brasileiro para o formato do Banco de Dados
             $data = explode(" ", $entrada);
             list($date, $hora) = $data;
