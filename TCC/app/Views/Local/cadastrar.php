@@ -23,18 +23,40 @@
     <script type="text/javascript" src="../../assets/js/cadastroLocal.js"></script>
     <link rel="stylesheet" type="text/css" href="../../assets/css/jquery.businessHours.css">
 
+    <!--    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
+    <script type="text/javascript" src="../../assets/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../../assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../assets/js/jquery.mask.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#cpf").mask("000.000.000-00")
+            $("#telefone").mask("(00) 0000-0000")
+
+            $("#celular").mask("(00) 0000-00009")
+
+            $("#celular").blur(function(event){
+                if ($(this).val().length == 15){
+                    $("#celular").mask("(00) 00000-0009")
+                }else{
+                    $("#celular").mask("(00) 0000-00009")
+                }
+            })
+        })
+    </script>
+
 </head>
 <body>
 	<div class="container">
 		<div class="form__top">
 			<h2>Cadastro  <span>Local</span></h2>
-		</div>		
+		</div>
 		<form class="form__reg"  method="post"  action="?acao=cadastrar" enctype="multipart/form-data">
             <div class="etapa1">
             <input class="input" type="file"  name="foto">
 			<input class="input" type="text"  name="nome"     placeholder="Nome"     required>
             <input class="input" type="email" name="email"    placeholder="Email"    required>
-            <input class="input" type="number"  name="telefone" placeholder="Telefone" required>
+            <input class="input" type="text"  id="celular" name="telefone" placeholder="Telefone" required>
             <br><textarea rows="5" cols="40" maxlength="500" name="descricao" placeholder="Descrição..."></textarea>
             <p>Categoria:</p>
             <select name="categoria" class="select">
