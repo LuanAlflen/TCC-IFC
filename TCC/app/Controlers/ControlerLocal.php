@@ -56,7 +56,12 @@ switch ($action) {
         $num_total_locais = $crudLocal->numeroTotalDeLocais();
         $num_paginas = ceil($num_total_locais / $locais_por_pagina);
         if ($pagina == 0){
-            @$locais = $crudLocal->getLocais();
+            if (isset($_GET['pesquisa']) OR !empty($_GET['pesquisa'])){
+                @$locais = $crudLocal->getLocaisPesquisa($_GET['pesquisa']);
+                $pagina = -1;
+            }else {
+                @$locais = $crudLocal->getLocais();
+            }
         }else {
             @$locais = $crudLocal->getLocaisLimit($locais_por_pagina, $inicio);
         }

@@ -172,19 +172,24 @@ if(isset($_SESSION['erro'])){
                                 <?php endforeach; ?>
                             <?php } ?>
                     </div>
+            <?php
+            if ($pagina < 0){
+                echo "";
+            }else{
+            ?>
             </div>
-            <nav class="paginacao" aria-label="Page navigation example"style="text-align: center">
-                <ul class="pagination">
-                    <li class="page-item"><a class="page-link" href="ControlerLocal.php">Previous</a></li>
-                    <?php
-                    for ($i=0; $i<$num_paginas; $i++){  ?>
-                    <li class="page-item"><a class="page-link" href="ControlerLocal.php?pagina=<?= $i ?> "><?php echo $i+1; ?></a></li>
-                    <?php } ?>
-                    <li class="page-item"><a class="page-link" href="ControlerLocal.php?pagina=<?php echo $num_paginas-1;?>  ">Next</a></li>
-                </ul>
-            </nav>
-
+                <nav class="paginacao" aria-label="Page navigation example"style="text-align: center">
+                    <ul class="pagination">
+                        <li class="page-item"><a class="page-link" href="ControlerLocal.php">Previous</a></li>
+                        <?php
+                        for ($i=0; $i<$num_paginas; $i++){  ?>
+                        <li class="page-item"><a class="page-link" href="ControlerLocal.php?pagina=<?= $i ?> "><?php echo $i+1; ?></a></li>
+                        <?php } ?>
+                        <li class="page-item"><a class="page-link" href="ControlerLocal.php?pagina=<?php echo $num_paginas-1;?>  ">Next</a></li>
+                    </ul>
+                </nav>
             </div>
+        <?php } ?>
 
         </div>
 

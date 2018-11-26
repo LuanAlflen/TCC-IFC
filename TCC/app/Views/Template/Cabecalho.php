@@ -64,12 +64,12 @@ if (empty($user->getId())){
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-<!--                <li>-->
-<!--                    <a href="#">Favoritos</a>-->
-<!--                </li>-->
-<!--                <li>-->
-<!--                    <a href="#">Em destaque</a>-->
-<!--                </li>-->
+                <!--                <li>-->
+                <!--                    <a href="#">Favoritos</a>-->
+                <!--                </li>-->
+                <!--                <li>-->
+                <!--                    <a href="#">Em destaque</a>-->
+                <!--                </li>-->
                 <li class="dropdown pull-right">
                     <a style="color: yellow" href="#" class="dropdown-toggle pull-right" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <!-- ícone do user --><?= $user->getNome() ?><span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -102,12 +102,14 @@ if (empty($user->getId())){
                     </ul>
                     <?php
                     if (@$_GET['acao'] != 'show' OR @$_GET['acao'] != 'showUsuario'){
-                    ?>
+                        ?>
                         <div class="navbar-form pull-right">
-                            <input type="text" class="form-control" placeholder="Buscar" name="busca" id="texto">
-                            <button type="submit" class="btn btn-default" id="botao">Pesquisar</button>
+                            <form action="?pesquisar=pesquisar" method="get">
+                                <input type="text" class="form-control" placeholder="Buscar" name="pesquisa" id="texto">
+                                <button type="submit" class="btn btn-default">Pesquisar</button>
+                            </form>
                         </div>
-                <?php } ?>
+                    <?php } ?>
 
             </ul>
         </div>
