@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.4.1deb2ubuntu2
--- http://www.phpmyadmin.net
+-- version 4.7.4
+-- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Tempo de geração: 15/10/2018 às 14:28
--- Versão do servidor: 5.7.21-0ubuntu0.16.04.1
--- Versão do PHP: 7.0.22-0ubuntu0.16.04.1
+-- Host: 127.0.0.1
+-- Generation Time: 26-Nov-2018 às 23:15
+-- Versão do servidor: 10.1.29-MariaDB
+-- PHP Version: 7.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -17,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `alpe`
+-- Database: `alpe`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `categoria`
+-- Estrutura da tabela `categoria`
 --
 
 CREATE TABLE `categoria` (
@@ -32,7 +34,7 @@ CREATE TABLE `categoria` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Fazendo dump de dados para tabela `categoria`
+-- Extraindo dados da tabela `categoria`
 --
 
 INSERT INTO `categoria` (`id_categoria`, `nome`) VALUES
@@ -46,7 +48,7 @@ INSERT INTO `categoria` (`id_categoria`, `nome`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `comentarios`
+-- Estrutura da tabela `comentarios`
 --
 
 CREATE TABLE `comentarios` (
@@ -58,7 +60,7 @@ CREATE TABLE `comentarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Fazendo dump de dados para tabela `comentarios`
+-- Extraindo dados da tabela `comentarios`
 --
 
 INSERT INTO `comentarios` (`id_comentario`, `data`, `texto`, `id_usuario`, `id_local`) VALUES
@@ -74,7 +76,7 @@ INSERT INTO `comentarios` (`id_comentario`, `data`, `texto`, `id_usuario`, `id_l
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `estados`
+-- Estrutura da tabela `estados`
 --
 
 CREATE TABLE `estados` (
@@ -84,7 +86,7 @@ CREATE TABLE `estados` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Fazendo dump de dados para tabela `estados`
+-- Extraindo dados da tabela `estados`
 --
 
 INSERT INTO `estados` (`id_estado`, `sigla`, `nome`) VALUES
@@ -119,7 +121,7 @@ INSERT INTO `estados` (`id_estado`, `sigla`, `nome`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `horario_funcionamento`
+-- Estrutura da tabela `horario_funcionamento`
 --
 
 CREATE TABLE `horario_funcionamento` (
@@ -142,7 +144,7 @@ CREATE TABLE `horario_funcionamento` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Fazendo dump de dados para tabela `horario_funcionamento`
+-- Extraindo dados da tabela `horario_funcionamento`
 --
 
 INSERT INTO `horario_funcionamento` (`id`, `seg`, `seg1`, `ter`, `ter1`, `qua`, `qua1`, `qui`, `qui1`, `sex`, `sex1`, `sab`, `sab1`, `dom`, `dom1`, `id_local`) VALUES
@@ -171,7 +173,7 @@ INSERT INTO `horario_funcionamento` (`id`, `seg`, `seg1`, `ter`, `ter1`, `qua`, 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `locais`
+-- Estrutura da tabela `locais`
 --
 
 CREATE TABLE `locais` (
@@ -181,7 +183,7 @@ CREATE TABLE `locais` (
   `email` varchar(150) NOT NULL,
   `endereco` varchar(150) NOT NULL,
   `numero` int(11) DEFAULT NULL,
-  `telefone` int(15) NOT NULL,
+  `telefone` varchar(150) NOT NULL,
   `descricao` varchar(300) NOT NULL,
   `id_estado` int(11) NOT NULL,
   `id_municipio` int(11) NOT NULL,
@@ -190,30 +192,30 @@ CREATE TABLE `locais` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Fazendo dump de dados para tabela `locais`
+-- Extraindo dados da tabela `locais`
 --
 
 INSERT INTO `locais` (`id_local`, `foto`, `nome`, `email`, `endereco`, `numero`, `telefone`, `descricao`, `id_estado`, `id_municipio`, `id_categoria`, `id_usuario`) VALUES
-(27, 'image.jpeg', 'Quadra IFC', 'ifc@ifc.edu.br', 'Rodovia BR 280, km 27 - CÃ¢mpus Araquari, Araquari - SC, 89245-000', 27, 87864684, 'CopÃ£o IFC', 42, 4201307, 6, 24),
-(28, '29072018033548miquelute.jpg', 'Miquelute', 'o@k', 'SC-418, Km 4', 6745, 4545, 'Miquelute materiais e construÃ§Ãµes', 42, 4201307, 5, 24),
-(29, '29072018033919granulado-para-campo-society-03.jpg', 'Porto Grande Futebol Society e Eventos', 'o@k', 'Rua Da Prosperidade', 95, 4545, 'PG', 42, 4201307, 5, 24),
-(30, '29072018034237allianz.jpg', 'Allianz Parque', 'o@k', 'Av. Francisco Matarazzo', 1705, 9899595, 'bando de palmeirenses', 35, 3550308, 1, 24),
-(31, '29072018034556ginasio-do-maracanazinho.jpg', 'MaracanÃ£zinho', 'o@k', 'Av. Pres. Castelo Branco', 3, 9899595, 'SeleÃ§Ã£o Feminina de VÃ´lei', 33, 3304557, 3, 24),
-(32, '29072018035001arena-corinthians.jpg', 'Arena Corinthians', 'o@k', 'Av. Miguel IgnÃ¡cio Curi', 111, 9899595, 'bando de loucos', 35, 3550308, 1, 24),
-(33, '29072018040431MaracanÃ£.jpg', 'MaracanÃ£', 'o@k', ' Av. Pres. Castelo Branco', 3, 9899595, 'Segue o vice!', 33, 3304557, 1, 24),
-(35, '29072018040937download.jpg', 'Arena Fonte Nova', 'o@k', ' Ladeira da Fonte das Pedras', 0, 4545, 'Bahia F.C.', 29, 2927408, 1, 24),
-(36, '30072018031057aa.jpg', 'Arena Joinville', 'o@k', 'R. InÃ¡cio Bastos', 89202, 9899595, 'serie D', 42, 4209102, 1, 24),
-(37, '30072018031109estdio-da-ressacada.jpg', 'Ressacada', 'o@k', 'Carianos', 88047400, 9899595, 'mancha azul', 42, 4205407, 1, 24),
-(42, '30072018075355Vila-Belmiro-Santos.jpg', 'Vila Belmiro', 'o@k', 'Rua Princesa Isabel', 501, 9899595, 'Agora quem da a bola Ã© o Santos', 35, 3548500, 1, 24),
-(57, '1108201809444209-03-2015-14-58-53-online-dsc-8710.jpg', 'Centreventos Cau Hansem', 'Centreventos@gmail.com', 'Av. JosÃ© Vieira', 315, 34367551, 'Lugar para todo tipo de esportes!', 42, 4209102, 2, 35),
-(58, '11082018095801arenajaguara03_ivanraupp_15.jpg', 'Arena Jaragua', 'arenajaragua@gmail.com', 'R. Gustavo Hagedorn', 636, 2147483647, 'Arena Jaragua', 42, 4208906, 6, 34),
-(59, '1210201807323906.jpg', 'NAa', 'hotma@jaak', 'Av SÃ£o Paulo', 88, 99993333, 'Loucura', 35, 3550308, 1, 24),
-(60, 'image.jpeg', 'Quadra Esportiva Adolfo Goerdert', 'naotem@email.com', ' R. Alagoas', 303, 2147483647, 'Um Bom local para praticar esportes e eventos!', 42, 4209102, 5, 39);
+(27, 'image.jpeg', 'Quadra IFC', 'ifc@ifc.edu.br', 'Rodovia BR 280, km 27 - CÃ¢mpus Araquari, Araquari - SC, 89245-000', 27, '87864684', 'CopÃ£o IFC', 42, 4201307, 6, 24),
+(28, '29072018033548miquelute.jpg', 'Miquelute', 'o@k', 'SC-418, Km 4', 6745, '4545', 'Miquelute materiais e construÃ§Ãµes', 42, 4201307, 5, 24),
+(29, '29072018033919granulado-para-campo-society-03.jpg', 'Porto Grande Futebol Society e Eventos', 'o@k', 'Rua Da Prosperidade', 95, '4545', 'PG', 42, 4201307, 5, 24),
+(30, '29072018034237allianz.jpg', 'Allianz Parque', 'o@k', 'Av. Francisco Matarazzo', 1705, '9899595', 'bando de palmeirenses', 35, 3550308, 1, 24),
+(31, '29072018034556ginasio-do-maracanazinho.jpg', 'MaracanÃ£zinho', 'o@k', 'Av. Pres. Castelo Branco', 3, '9899595', 'SeleÃ§Ã£o Feminina de VÃ´lei', 33, 3304557, 3, 24),
+(32, '29072018035001arena-corinthians.jpg', 'Arena Corinthians', 'o@k', 'Av. Miguel IgnÃ¡cio Curi', 111, '9899595', 'bando de loucos', 35, 3550308, 1, 24),
+(33, '29072018040431MaracanÃ£.jpg', 'MaracanÃ£', 'o@k', ' Av. Pres. Castelo Branco', 3, '9899595', 'Segue o vice!', 33, 3304557, 1, 24),
+(35, '29072018040937download.jpg', 'Arena Fonte Nova', 'o@k', ' Ladeira da Fonte das Pedras', 0, '4545', 'Bahia F.C.', 29, 2927408, 1, 24),
+(36, '30072018031057aa.jpg', 'Arena Joinville', 'o@k', 'R. InÃ¡cio Bastos', 89202, '9899595', 'serie D', 42, 4209102, 1, 24),
+(37, '30072018031109estdio-da-ressacada.jpg', 'Ressacada', 'o@k', 'Carianos', 88047400, '9899595', 'mancha azul', 42, 4205407, 1, 24),
+(42, '30072018075355Vila-Belmiro-Santos.jpg', 'Vila Belmiro', 'o@k', 'Rua Princesa Isabel', 501, '9899595', 'Agora quem da a bola Ã© o Santos', 35, 3548500, 1, 24),
+(57, '1108201809444209-03-2015-14-58-53-online-dsc-8710.jpg', 'Centreventos Cau Hansem', 'Centreventos@gmail.com', 'Av. JosÃ© Vieira', 315, '34367551', 'Lugar para todo tipo de esportes!', 42, 4209102, 2, 35),
+(58, '11082018095801arenajaguara03_ivanraupp_15.jpg', 'Arena Jaragua', 'arenajaragua@gmail.com', 'R. Gustavo Hagedorn', 636, '2147483647', 'Arena Jaragua', 42, 4208906, 6, 34),
+(59, '1210201807323906.jpg', 'NAa', 'hotma@jaak', 'Av SÃ£o Paulo', 88, '99993333', 'Loucura', 35, 3550308, 1, 24),
+(60, 'image.jpeg', 'Quadra Esportiva Adolfo Goerdert', 'naotem@email.com', ' R. Alagoas', 303, '2147483647', 'Um Bom local para praticar esportes e eventos!', 42, 4209102, 5, 39);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `municipios`
+-- Estrutura da tabela `municipios`
 --
 
 CREATE TABLE `municipios` (
@@ -223,7 +225,7 @@ CREATE TABLE `municipios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Fazendo dump de dados para tabela `municipios`
+-- Extraindo dados da tabela `municipios`
 --
 
 INSERT INTO `municipios` (`id_municipio`, `nome`, `id_estado`) VALUES
@@ -5779,7 +5781,7 @@ INSERT INTO `municipios` (`id_municipio`, `nome`, `id_estado`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `reservas`
+-- Estrutura da tabela `reservas`
 --
 
 CREATE TABLE `reservas` (
@@ -5792,7 +5794,7 @@ CREATE TABLE `reservas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Fazendo dump de dados para tabela `reservas`
+-- Extraindo dados da tabela `reservas`
 --
 
 INSERT INTO `reservas` (`id`, `nome`, `cor`, `entrada`, `id_local`, `id_usuario`) VALUES
@@ -5801,7 +5803,7 @@ INSERT INTO `reservas` (`id`, `nome`, `cor`, `entrada`, `id_local`, `id_usuario`
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `usuarios`
+-- Estrutura da tabela `usuarios`
 --
 
 CREATE TABLE `usuarios` (
@@ -5816,7 +5818,7 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Fazendo dump de dados para tabela `usuarios`
+-- Extraindo dados da tabela `usuarios`
 --
 
 INSERT INTO `usuarios` (`id_usuario`, `nome`, `login`, `senha`, `telefone`, `email`, `cpf`, `tipuser`) VALUES
@@ -5833,17 +5835,17 @@ INSERT INTO `usuarios` (`id_usuario`, `nome`, `login`, `senha`, `telefone`, `ema
 (41, 'Hugo', 'hugerson', 'MDIwMTA0NUhnaWlw', '343315174', 'hugo@yopmail.com', '09178209919', 'comum');
 
 --
--- Índices de tabelas apagadas
+-- Indexes for dumped tables
 --
 
 --
--- Índices de tabela `categoria`
+-- Indexes for table `categoria`
 --
 ALTER TABLE `categoria`
   ADD PRIMARY KEY (`id_categoria`);
 
 --
--- Índices de tabela `comentarios`
+-- Indexes for table `comentarios`
 --
 ALTER TABLE `comentarios`
   ADD PRIMARY KEY (`id_comentario`),
@@ -5851,20 +5853,20 @@ ALTER TABLE `comentarios`
   ADD KEY `id_local` (`id_local`);
 
 --
--- Índices de tabela `estados`
+-- Indexes for table `estados`
 --
 ALTER TABLE `estados`
   ADD PRIMARY KEY (`id_estado`);
 
 --
--- Índices de tabela `horario_funcionamento`
+-- Indexes for table `horario_funcionamento`
 --
 ALTER TABLE `horario_funcionamento`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_local` (`id_local`);
 
 --
--- Índices de tabela `locais`
+-- Indexes for table `locais`
 --
 ALTER TABLE `locais`
   ADD PRIMARY KEY (`id_local`),
@@ -5874,14 +5876,14 @@ ALTER TABLE `locais`
   ADD KEY `id_municipio` (`id_municipio`);
 
 --
--- Índices de tabela `municipios`
+-- Indexes for table `municipios`
 --
 ALTER TABLE `municipios`
   ADD PRIMARY KEY (`id_municipio`),
   ADD KEY `id_estado` (`id_estado`);
 
 --
--- Índices de tabela `reservas`
+-- Indexes for table `reservas`
 --
 ALTER TABLE `reservas`
   ADD PRIMARY KEY (`id`),
@@ -5889,74 +5891,82 @@ ALTER TABLE `reservas`
   ADD KEY `id_usuario` (`id_usuario`);
 
 --
--- Índices de tabela `usuarios`
+-- Indexes for table `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id_usuario`);
 
 --
--- AUTO_INCREMENT de tabelas apagadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de tabela `categoria`
+-- AUTO_INCREMENT for table `categoria`
 --
 ALTER TABLE `categoria`
   MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
--- AUTO_INCREMENT de tabela `comentarios`
+-- AUTO_INCREMENT for table `comentarios`
 --
 ALTER TABLE `comentarios`
   MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
 --
--- AUTO_INCREMENT de tabela `estados`
+-- AUTO_INCREMENT for table `estados`
 --
 ALTER TABLE `estados`
   MODIFY `id_estado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+
 --
--- AUTO_INCREMENT de tabela `horario_funcionamento`
+-- AUTO_INCREMENT for table `horario_funcionamento`
 --
 ALTER TABLE `horario_funcionamento`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
 --
--- AUTO_INCREMENT de tabela `locais`
+-- AUTO_INCREMENT for table `locais`
 --
 ALTER TABLE `locais`
   MODIFY `id_local` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+
 --
--- AUTO_INCREMENT de tabela `municipios`
+-- AUTO_INCREMENT for table `municipios`
 --
 ALTER TABLE `municipios`
   MODIFY `id_municipio` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5300109;
+
 --
--- AUTO_INCREMENT de tabela `reservas`
+-- AUTO_INCREMENT for table `reservas`
 --
 ALTER TABLE `reservas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+
 --
--- AUTO_INCREMENT de tabela `usuarios`
+-- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
   MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+
 --
--- Restrições para dumps de tabelas
+-- Constraints for dumped tables
 --
 
 --
--- Restrições para tabelas `comentarios`
+-- Limitadores para a tabela `comentarios`
 --
 ALTER TABLE `comentarios`
   ADD CONSTRAINT `comentarios_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`),
   ADD CONSTRAINT `comentarios_ibfk_2` FOREIGN KEY (`id_local`) REFERENCES `locais` (`id_local`);
 
 --
--- Restrições para tabelas `horario_funcionamento`
+-- Limitadores para a tabela `horario_funcionamento`
 --
 ALTER TABLE `horario_funcionamento`
   ADD CONSTRAINT `horario_funcionamento_ibfk_1` FOREIGN KEY (`id_local`) REFERENCES `locais` (`id_local`);
 
 --
--- Restrições para tabelas `locais`
+-- Limitadores para a tabela `locais`
 --
 ALTER TABLE `locais`
   ADD CONSTRAINT `locais_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`),
@@ -5966,17 +5976,18 @@ ALTER TABLE `locais`
   ADD CONSTRAINT `locais_ibfk_5` FOREIGN KEY (`id_municipio`) REFERENCES `municipios` (`id_municipio`);
 
 --
--- Restrições para tabelas `municipios`
+-- Limitadores para a tabela `municipios`
 --
 ALTER TABLE `municipios`
   ADD CONSTRAINT `municipios_ibfk_1` FOREIGN KEY (`id_estado`) REFERENCES `estados` (`id_estado`);
 
 --
--- Restrições para tabelas `reservas`
+-- Limitadores para a tabela `reservas`
 --
 ALTER TABLE `reservas`
   ADD CONSTRAINT `reservas_ibfk_1` FOREIGN KEY (`id_local`) REFERENCES `locais` (`id_local`),
   ADD CONSTRAINT `reservas_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
