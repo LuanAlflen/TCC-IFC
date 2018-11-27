@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.2
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 27-Nov-2018 às 00:11
--- Versão do servidor: 10.1.34-MariaDB
--- PHP Version: 7.2.7
+-- Generation Time: 27-Nov-2018 às 01:05
+-- Versão do servidor: 10.1.29-MariaDB
+-- PHP Version: 7.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -187,7 +187,7 @@ CREATE TABLE `locais` (
   `email` varchar(150) NOT NULL,
   `endereco` varchar(150) NOT NULL,
   `numero` int(11) DEFAULT NULL,
-  `telefone` int(15) NOT NULL,
+  `telefone` varchar(150) NOT NULL,
   `descricao` varchar(300) NOT NULL,
   `id_estado` int(11) NOT NULL,
   `id_municipio` int(11) NOT NULL,
@@ -200,23 +200,23 @@ CREATE TABLE `locais` (
 --
 
 INSERT INTO `locais` (`id_local`, `foto`, `nome`, `email`, `endereco`, `numero`, `telefone`, `descricao`, `id_estado`, `id_municipio`, `id_categoria`, `id_usuario`) VALUES
-(27, 'image.jpeg', 'Quadra IFC', 'ifc@ifc.edu.br', 'Rodovia BR 280, km 27 - CÃ¢mpus Araquari, Araquari - SC, 89245-000', 27, 87864684, 'CopÃ£o IFC', 42, 4201307, 6, 24),
-(28, '29072018033548miquelute.jpg', 'Miquelute', 'o@k', 'SC-418, Km 4', 6745, 4545, 'Miquelute materiais e construÃ§Ãµes', 42, 4201307, 5, 24),
-(29, '29072018033919granulado-para-campo-society-03.jpg', 'Porto Grande Futebol Society e Eventos', 'o@k', 'Rua Da Prosperidade', 95, 4545, 'PG', 42, 4201307, 5, 24),
-(30, '29072018034237allianz.jpg', 'Allianz Parque', 'o@k', 'Av. Francisco Matarazzo', 1705, 9899595, 'bando de palmeirenses', 35, 3550308, 1, 24),
-(31, '29072018034556ginasio-do-maracanazinho.jpg', 'MaracanÃ£zinho', 'o@k', 'Av. Pres. Castelo Branco', 3, 9899595, 'SeleÃ§Ã£o Feminina de VÃ´lei', 33, 3304557, 3, 24),
-(32, '29072018035001arena-corinthians.jpg', 'Arena Corinthians', 'o@k', 'Av. Miguel IgnÃ¡cio Curi', 111, 9899595, 'bando de loucos', 35, 3550308, 1, 24),
-(33, '29072018040431MaracanÃ£.jpg', 'MaracanÃ£', 'o@k', ' Av. Pres. Castelo Branco', 3, 9899595, 'Segue o vice!', 33, 3304557, 1, 24),
-(35, '29072018040937download.jpg', 'Arena Fonte Nova', 'o@k', ' Ladeira da Fonte das Pedras', 0, 4545, 'Bahia F.C.', 29, 2927408, 1, 24),
-(36, '30072018031057aa.jpg', 'Arena Joinville', 'o@k', 'R. InÃ¡cio Bastos', 89202, 9899595, 'serie D', 42, 4209102, 1, 24),
-(37, '30072018031109estdio-da-ressacada.jpg', 'Ressacada', 'o@k', 'Carianos', 88047400, 9899595, 'mancha azul', 42, 4205407, 1, 24),
-(42, '30072018075355Vila-Belmiro-Santos.jpg', 'Vila Belmiro', 'o@k', 'Rua Princesa Isabel', 501, 9899595, 'Agora quem da a bola Ã© o Santos', 35, 3548500, 1, 24),
-(57, '1108201809444209-03-2015-14-58-53-online-dsc-8710.jpg', 'Centreventos Cau Hansem', 'Centreventos@gmail.com', 'Av. JosÃ© Vieira', 315, 34367551, 'Lugar para todo tipo de esportes!', 42, 4209102, 2, 35),
-(58, '11082018095801arenajaguara03_ivanraupp_15.jpg', 'Arena Jaragua', 'arenajaragua@gmail.com', 'R. Gustavo Hagedorn', 636, 2147483647, 'Arena Jaragua', 42, 4208906, 6, 34),
-(59, '1210201807323906.jpg', 'NAa', 'hotma@jaak', 'Av SÃ£o Paulo', 88, 99993333, 'Loucura', 35, 3550308, 1, 24),
-(60, 'image.jpeg', 'Quadra Esportiva Adolfo Goerdert', 'naotem@email.com', ' R. Alagoas', 303, 2147483647, 'Um Bom local para praticar esportes e eventos!', 42, 4209102, 5, 39),
-(61, '2611201811095316115733333_ae87df40f8_b.jpg', 'Tenis do Jonilson', 'jonilson@hotmail.com', 'Av Getulho Vargas', 77, 2147483647, 'Melhor tenis da regiÃ£o !', 29, 2906873, 4, 37),
-(62, '26112018112602S_877972-MLB25828677041_082017-O.jpg', 'Quadra do Joaquim', 'joaqui@arroba.com', 'Agulhas Negras', 2316, 347771546, 'Venha se divertir com familia e amigos !', 43, 4317202, 2, 36);
+(27, 'image.jpeg', 'Quadra IFC', 'ifc@ifc.edu.br', 'Rodovia BR 280, km 27 - CÃ¢mpus Araquari, Araquari - SC, 89245-000', 27, '(87) 86468-4567', 'CopÃ£o IFC', 42, 4201307, 6, 34),
+(28, '29072018033548miquelute.jpg', 'Miquelute', 'o@k', 'SC-418, Km 4', 6745, '(45) 45345-3454', 'Miquelute materiais e construÃ§Ãµes', 42, 4201307, 5, 34),
+(29, '29072018033919granulado-para-campo-society-03.jpg', 'Porto Grande Futebol Society e Eventos', 'o@k', 'Rua Da Prosperidade', 95, '(45) 4534-3434', 'PG', 42, 4201307, 5, 34),
+(30, '29072018034237allianz.jpg', 'Allianz Parque', 'o@k', 'Av. Francisco Matarazzo', 1705, '(98) 99595-8945', 'bando de palmeirenses', 35, 3550308, 1, 34),
+(31, '29072018034556ginasio-do-maracanazinho.jpg', 'MaracanÃ£zinho', 'o@k', 'Av. Pres. Castelo Branco', 3, '(98) 99595-2323', 'SeleÃ§Ã£o Feminina de VÃ´lei', 33, 3304557, 3, 34),
+(32, '29072018035001arena-corinthians.jpg', 'Arena Corinthians', 'o@k', 'Av. Miguel IgnÃ¡cio Curi', 111, '(98) 99595-2323', 'bando de loucos', 35, 3550308, 1, 34),
+(33, '29072018040431MaracanÃ£.jpg', 'MaracanÃ£', 'o@k', ' Av. Pres. Castelo Branco', 3, '(98) 99595-2323', 'Segue o vice!', 33, 3304557, 1, 34),
+(35, '29072018040937download.jpg', 'Arena Fonte Nova', 'o@k', ' Ladeira da Fonte das Pedras', 0, '(45) 45321-4343', 'Bahia F.C.', 29, 2927408, 1, 34),
+(36, '30072018031057aa.jpg', 'Arena Joinville', 'o@k', 'R. InÃ¡cio Bastos', 89202, '(98) 99595-2323', 'serie D', 42, 4209102, 1, 34),
+(37, '30072018031109estdio-da-ressacada.jpg', 'Ressacada', 'o@k', 'Carianos', 88047400, '(98) 99595-6565', 'mancha azul', 42, 4205407, 1, 34),
+(42, '30072018075355Vila-Belmiro-Santos.jpg', 'Vila Belmiro', 'o@k', 'Rua Princesa Isabel', 501, '(98) 99595-6565', 'Agora quem da a bola Ã© o Santos', 35, 3548500, 1, 34),
+(57, '1108201809444209-03-2015-14-58-53-online-dsc-8710.jpg', 'Centreventos Cau Hansem', 'Centreventos@gmail.com', 'Av. JosÃ© Vieira', 315, '(34) 36755-1232', 'Lugar para todo tipo de esportes!', 42, 4209102, 2, 34),
+(58, '11082018095801arenajaguara03_ivanraupp_15.jpg', 'Arena Jaragua', 'arenajaragua@gmail.com', 'R. Gustavo Hagedorn', 636, '(21) 47483-6472', 'Arena Jaragua', 42, 4208906, 6, 34),
+(59, '1210201807323906.jpg', 'NAa', 'hotma@jaak', 'Av SÃ£o Paulo', 88, '(99) 99333-3343', 'Loucura', 35, 3550308, 1, 34),
+(60, 'image.jpeg', 'Quadra Esportiva Adolfo Goerdert', 'naotem@email.com', ' R. Alagoas', 303, '(21) 47483-6473', 'Um Bom local para praticar esportes e eventos!', 42, 4209102, 5, 34),
+(61, '2611201811095316115733333_ae87df40f8_b.jpg', 'Tenis do Jonilson', 'jonilson@hotmail.com', 'Av Getulho Vargas', 77, '(21) 47483-6475', 'Melhor tenis da regiÃ£o !', 29, 2906873, 4, 34),
+(62, '26112018112602S_877972-MLB25828677041_082017-O.jpg', 'Quadra do Joaquim', 'joaqui@arroba.com', 'Agulhas Negras', 2316, '(34) 77715-4634', 'Venha se divertir com familia e amigos !', 43, 4317202, 2, 34);
 
 -- --------------------------------------------------------
 
@@ -5812,7 +5812,10 @@ INSERT INTO `reservas` (`id`, `nome`, `cor`, `entrada`, `id_local`, `id_usuario`
 (38, 'Ivonir Leoncio', '#1C1C1C', '2018-11-28 17:00:00', 28, 47),
 (39, 'Leonardo Ademir', '#436EEE', '2018-11-27 10:00:00', 27, 46),
 (40, 'Mariana Luiza', '#228B22', '2018-11-27 16:00:00', 27, 42),
-(41, 'Gabriel Roberto', '#8B0000', '2018-11-27 12:00:00', 29, 44);
+(41, 'Gabriel Roberto', '#8B0000', '2018-11-27 12:00:00', 29, 44),
+(42, 'Luan Alflen', '#228B22', '2018-11-28 08:00:00', 27, 24),
+(43, 'Bryan', '#8B0000', '2018-11-28 09:00:00', 27, 24),
+(44, 'Matheus', '#FFD700', '2018-11-28 10:00:00', 27, 24);
 
 -- --------------------------------------------------------
 
@@ -5837,16 +5840,16 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`id_usuario`, `nome`, `login`, `senha`, `telefone`, `email`, `cpf`, `tipuser`) VALUES
 (1, 'Visitante', '', '', '', '', '', 'visitante'),
-(15, 'Luan', 'LuanAlflen', 'MTIz', '2147483647', 'luan.alflen4@gmail.com', '2147483647', 'comum'),
+(15, 'Luan', 'LuanAlflen', 'MTIz', '(21) 47483-6473', 'luan.alflen4@gmail.com', '214.748.364-7', 'comum'),
 (24, 'teste', 'login', 'MTI=', '(31) 2564-15684', 'teste@mail.com.br', '359.205.700-67', 'comum'),
-(34, 'Administrador', 'Adm', 'Nzk2NzAxNzQ1Nw==', '047 996000900', 'luan.alflen4@gmail.com', '09118737919', 'admin'),
-(35, 'Manaka', 'lolizinha', 'cXVlaWpv', '22331140', 'nemuso@gmail.com', '11111111111', 'comum'),
-(36, 'Luiz Henrique ', 'Luizinho', 'anVqdWJhMTEyMg==', '1199337788', 'luiz@email.com', '95999916640', 'comum'),
-(37, 'Felipe Wilson', 'wilson', 'd2lsc2luaG8yMg==', '1122444557', 'felipe22@email.com', '31313763845', 'comum'),
-(38, 'Fernanda Souza', 'SFernanda', 'dGVzdGVlZmFjaWwxMg==', '2233111133', 'souzafe@gmail.com', '68149683208', 'comum'),
-(39, 'AimÃª Hana', 'hanAi', 'YW5pbWVzMjIxMQ=', '4921234422', 'aiHana@email.com', '67387126348', 'comum'),
-(40, 'Ednaldo Perereira', 'Edinaldo11', 'cGVyZWlyYWRqNjY=', '8799225663', 'pereiraed@email.com', '81167369220', 'comum'),
-(41, 'Hugo', 'hugerson', 'MDIwMTA0NUhnaWlw', '343315174', 'hugo@yopmail.com', '09178209919', 'comum'),
+(34, 'Administrador', 'Adm', 'Nzk2NzAxNzQ1Nw==', '(04) 7996-00090', 'luan.alflen4@gmail.com', '091.187.379-18', 'admin'),
+(35, 'Manaka', 'lolizinha', 'cXVlaWpv', '(22) 3311-4033', 'nemuso@gmail.com', '111.111.111-11', 'comum'),
+(36, 'Luiz Henrique ', 'Luizinho', 'anVqdWJhMTEyMg==', '(11) 99337-7883', 'luiz@email.com', '959.999.166-40', 'comum'),
+(37, 'Felipe Wilson', 'wilson', 'd2lsc2luaG8yMg==', '(11) 22444-5573', 'felipe22@email.com', '313.137.638-45', 'comum'),
+(38, 'Fernanda Souza', 'SFernanda', 'dGVzdGVlZmFjaWwxMg==', '(22) 33111-1333', 'souzafe@gmail.com', '681.496.832-08', 'comum'),
+(39, 'AimÃª Hana', 'hanAi', 'YW5pbWVzMjIxMQ==', '(49) 21234-4226', 'aiHana@email.com', '673.871.263-48', 'comum'),
+(40, 'Ednaldo Perereira', 'Edinaldo11', 'cGVyZWlyYWRqNjY=', '(87) 99225-6634', 'pereiraed@email.com', '811.673.692-20', 'comum'),
+(41, 'Hugo', 'hugerson', 'MDIwMTA0NUhnaWlw', '(34) 33151-7433', 'hugo@yopmail.com', '091.782.099-19', 'comum'),
 (42, 'Mariana Luiza', 'Mari23', 'bWFyaWFuYTEyMw==', '(11) 3436-3399', 'marianal@gmail.com', '118.880.010-89', 'comum'),
 (43, 'Mauricio Junior', 'MauroJR', 'anVuaW9yMzIx', '(32) 8412-8890', 'jrmauricio@gmail.com', '184.643.380-07', 'comum'),
 (44, 'Gabriel Roberto', 'Gabs', 'cm9iZXJ0bzEyMw==', '(48) 99604-2505', 'rgabriel@outlook.com', '182.383.180-09', 'comum'),
@@ -5960,13 +5963,13 @@ ALTER TABLE `municipios`
 -- AUTO_INCREMENT for table `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- Constraints for dumped tables
