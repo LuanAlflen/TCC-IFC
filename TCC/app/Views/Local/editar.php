@@ -14,6 +14,27 @@
     <script type="text/javascript" src="../../assets/js/cadastroLocal.js"></script>
     <link rel="stylesheet" type="text/css" href="../../assets/css/jquery.businessHours.css">
 
+    <script type="text/javascript" src="../../assets/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../../assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../assets/js/jquery.mask.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#cpf").mask("000.000.000-00")
+            $("#telefone").mask("(00) 0000-0000")
+
+            $("#celular").mask("(00) 0000-00009")
+
+            $("#celular").blur(function(event){
+                if ($(this).val().length == 15){
+                    $("#celular").mask("(00) 00000-0009")
+                }else{
+                    $("#celular").mask("(00) 0000-00009")
+                }
+            })
+        })
+    </script>
+
 </head>
 <body>
 
@@ -26,7 +47,7 @@
             <input value="<?= $local->foto?>"         class="input" type="file"  name="foto">
             <input value="<?= $local->nome ?>"        class="input" type="text" name="nome" required >
             <input value="<?= $local->email ?>"       class="input" type="email" name="email" required>
-            <input value="<?= $local->telefone ?>"    class="input" type="number" name="telefone" required>
+            <input value="<?= $local->telefone ?>"    class="input" type="text" name="telefone" id="celular" required>
             <br><textarea rows="5" cols="40" maxlength="500" name="descricao"><?= $local->descricao ?></textarea>
             <p>Categoria:</p>
             <select name="categoria" class="select">

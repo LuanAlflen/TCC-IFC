@@ -274,7 +274,7 @@
 
 <div class="container">
 		<div class="form__top">
-			<h2>Formulario de <span>editar</span></h2>
+			<h2>Formulario de <span>editarr</span></h2>
 		</div>
 
 
